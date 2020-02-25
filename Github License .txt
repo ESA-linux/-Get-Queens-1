@@ -1,0 +1,4 @@
+Token API Cirkul Bitbuck
+c918053e17b380431eea19b47b3eec66049367eb
+circleci/aws-cli@0.1.19
+GitHub - CircleCI-Public/aws-cli-orb: Install and configure the AWS command-line interface (awscli)

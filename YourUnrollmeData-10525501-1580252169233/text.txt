@@ -1,0 +1,9 @@
+Amazon Web Services Sign-In
+Skapare: 
+Källa: https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fcodesuite%2Fcodecommit%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fcodesuite&forceMobileApp=0
+Sparades: 2020-02-08 13:05
+
+About Amazon.com Sign In 
+Amazon Web Services uses information from your Amazon.com account to identify you and allow access to Amazon Web Services. Your use of this site is governed by our Terms of Use and Privacy Policy linked below. Your use of Amazon Web Services products and services is governed by the AWS Customer Agreement linked below unless you have entered into a separate agreement with Amazon Web Services or an AWS Value Added Reseller to purchase these products and services. The AWS Customer Agreement was updated on March 31, 2017. For more information about these updates, see Recent Changes. 
+© 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.© 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved. Terms of Use | Privacy Policy | AWS Customer Agreement 
+

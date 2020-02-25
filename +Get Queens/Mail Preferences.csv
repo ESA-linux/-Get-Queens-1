@@ -1,0 +1,17 @@
+LeaveMessagesCheckBox,Y
+saveDeletedCheckBox,Y
+vacationFlag,N
+sentMsgFolder,Sent Messages
+fwdFlag,Y
+keepOnServer,Y
+SendUTF8Flag,N
+saveSentCheckBox,Y
+ReplyIncludeOrigCheckBox,Y
+IncludeSigCheckBox,N
+fwdAddress,f*****@protonmail.com
+vacationEndDate,null
+LoadImagesCheckbox,N
+vacationStartDate,null
+signatureTextField,
+delMsgFolder,Deleted Messages
+vacationMsg,

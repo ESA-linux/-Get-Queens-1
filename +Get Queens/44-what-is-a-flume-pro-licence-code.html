@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width,minimum-scale=1.0" name="viewport">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"89aa031aed",applicationID:"98031495"};window.NREUM||(NREUM={}),__nr_require=function(n,e,t){function r(t){if(!e[t]){var i=e[t]={exports:{}};n[t][0].call(i.exports,function(e){var i=n[t][1][e];return r(i||e)},i,i.exports)}return e[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(n,e,t){function r(){}function i(n,e,t){return function(){return o(n,[u.now()].concat(f(arguments)),e?null:this,t),e?void 0:this}}var o=n("handle"),a=n(4),f=n(5),c=n("ee").get("tracer"),u=n("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(n,e){s[e]=i(d+e,!0,"api")}),s.addPageAction=i(d+"addPageAction",!0),s.setCurrentRouteName=i(d+"routeName",!0),e.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(n,e){var t={},r=this,i="function"==typeof e;return o(l+"tracer",[u.now(),n,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return e.apply(this,arguments)}catch(n){throw c.emit("fn-err",[arguments,this,n],t),n}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(n,e){m[e]=i(l+e)}),newrelic.noticeError=function(n,e){"string"==typeof n&&(n=new Error(n)),o("err",[n,u.now(),!1,e])}},{}],2:[function(n,e,t){function r(n,e){var t=n.getEntries();t.forEach(function(n){"first-paint"===n.name?a("timing",["fp",Math.floor(n.startTime)]):"first-contentful-paint"===n.name&&a("timing",["fcp",Math.floor(n.startTime)])})}function i(n){if(n instanceof c&&!s){var e,t=Math.round(n.timeStamp);e=t>1e12?Date.now()-t:f.now()-t,s=!0,a("timing",["fi",t,{type:n.type,fid:e}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var o,a=n("handle"),f=n("loader"),c=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){o=new PerformanceObserver(r);try{o.observe({entryTypes:["paint"]})}catch(u){}}if("addEventListener"in document){var s=!1,p=["click","keydown","mousedown","pointerdown","touchstart"];p.forEach(function(n){document.addEventListener(n,i,!1)})}}},{}],3:[function(n,e,t){function r(n,e){if(!i)return!1;if(n!==i)return!1;if(!e)return!0;if(!o)return!1;for(var t=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}e.exports={agent:i,version:o,match:r}},{}],4:[function(n,e,t){function r(n,e){var t=[],r="",o=0;for(r in n)i.call(n,r)&&(t[o]=e(r,n[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],5:[function(n,e,t){function r(n,e,t){e||(e=0),"undefined"==typeof t&&(t=n?n.length:0);for(var r=-1,i=t-e||0,o=Array(i<0?0:i);++r<i;)o[r]=n[e+r];return o}e.exports=r},{}],6:[function(n,e,t){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(n,e,t){function r(){}function i(n){function e(n){return n&&n instanceof r?n:n?c(n,f,o):o()}function t(t,r,i,o){if(!d.aborted||o){n&&n(t,r,i);for(var a=e(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(n,e){h[n]=v(n).concat(e)}function m(n,e){var t=h[n];if(t)for(var r=0;r<t.length;r++)t[r]===e&&t.splice(r,1)}function v(n){return h[n]||[]}function g(n){return p[n]=p[n]||i(t)}function w(n,e){u(n,function(n,t){e=e||"feature",y[t]=e,e in s||(s[e]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:e,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var f="nr@context",c=n("gos"),u=n(4),s={},p={},d=e.exports=i();d.backlog=s},{}],gos:[function(n,e,t){function r(n,e,t){if(i.call(n,e))return n[e];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(n,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return n[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(n,e,t){function r(n,e,t,r){i.buffer([n],r),i.emit(n,e,t)}var i=n("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(n,e,t){function r(n){var e=typeof n;return!n||"object"!==e&&"function"!==e?-1:n===window?0:a(n,o,function(){return i++})}var i=1,o="nr@id",a=n("gos");e.exports=r},{}],loader:[function(n,e,t){function r(){if(!x++){var n=E.info=NREUM.info,e=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(n&&n.licenseKey&&n.applicationID&&e))return s.abort();u(y,function(e,t){n[e]||(n[e]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=l.createElement("script");t.src="https://"+n.agent,e.parentNode.insertBefore(t,e)}}function i(){"complete"===l.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=n("handle"),u=n(4),s=n("ee"),p=n(3),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1158.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=e.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};n(1),n(2),l[m]?(l[m]("DOMContentLoaded",o,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",i),d[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=n(6)},{}],"wrap-function":[function(n,e,t){function r(n){return!(n&&n instanceof Function&&n.apply&&!n[a])}var i=n("ee"),o=n(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;e.exports=function(n,e){function t(n,e,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){d([u,"",[r,a,i],f])}s(e+"start",[r,a,i],f);try{return c=n.apply(a,r)}catch(p){throw s(e+"err",[r,a,p],f),p}finally{s(e+"end",[r,a,c],f)}}return r(n)?n:(e||(e=""),nrWrapper[a]=n,p(n,nrWrapper),nrWrapper)}function u(n,e,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<e.length;c++)f=e[c],a=n[f],r(a)||(n[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||e){var o=c;c=!0;try{n.emit(t,r,i,e)}catch(a){d([a,t,r,i])}c=o}}function p(n,e){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(n);return t.forEach(function(t){Object.defineProperty(e,t,{get:function(){return n[t]},set:function(e){return n[t]=e,e}})}),e}catch(r){d([r])}for(var i in n)f.call(n,i)&&(e[i]=n[i]);return e}function d(e){try{n.emit("internal-error",e)}catch(t){}}return n||(n=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+	
+	<title>What is a Flume Pro licence code? - Flume Support Portal</title>
+
+			<meta name="title" content="What is a Flume Pro licence code?">
+	<meta name="description" content="Direct VersionAccess to Flume Pro features are unlocked through a
+Flume Pro licence code, which can ...">
+	<meta name="author" content="Flume Support">
+	<meta property="og:type" content="article" />
+	<meta property="og:site_name" content="Flume Support" />
+	<meta property="og:title" content="What is a Flume Pro licence code?" />
+	<meta property="og:description" content="Direct VersionAccess to Flume Pro features are unlocked through a
+Flume Pro licence code, which can ..." />
+	<meta property="og:url" content="https://support.flumeapp.com/article/44-what-is-a-flume-pro-licence-code" />
+	<meta property="article:published_time" content="2018-01-14T13:02:29+00:00">
+		<meta http-equiv="Content-Security-Policy" content="font-src * data:">
+
+	<link rel="icon" type="image/png" href="https://support.flumeapp.com/api/v1/favicon/render?1537720274" sizes="16x16">
+	<link rel="icon" type="image/png" href="https://support.flumeapp.com/api/v1/favicon/render?size=32&1537720274" sizes="32x32">
+	<link rel="icon" type="image/png" href="https://support.flumeapp.com/api/v1/favicon/render?size=96&1537720274" sizes="96x96">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:300,400,600|Source+Sans+Pro:300,400,400i,600" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" media="all" href="https://assets.kayako.com/helpcenter/stylesheet/app.css?version=22ddb041"/>
+    
+			<link rel="stylesheet" type="text/css" media="all" href="https://support.flumeapp.com/HelpCenter/Stylesheet/Version/1537720274"/>
+	
+	
+	<script language="Javascript" type="text/javascript">
+		var _Payload = {"url":"https:\/\/support.flumeapp.com\/","portalpath":"https:\/\/support.flumeapp.com\/","path":"https:\/\/support.flumeapp.com\/","ip":"94.191.128.47","version":"5.0.00","portaltype":40,"portal":"primary","sessionid":"28HsKMyI6f8CLi0279cce4bef5cc8ff26c7a8c614195c9bb952a86Qr5eOTRKLH4RP7n10PRPobOMvDFf","timestamp":"2020-01-01T19:04:41+0000","request":"\/HelpCenter\/Article\/Index\/44-what-is-a-flume-pro-licence-code","helpcenter_id":"1","brand_id":"1","activelocale":"en-us","defaultlocale":"en-us","instancelocale":"en-us","is_localized":false,"realtime_url":"wss:\/\/kre.kayako.net\/socket","brand_name":"Flume Support Portal"};
+		var _CookieConsent = {
+			"message": "This site uses cookies to ensure you get the best experience on our website. Declining to use cookies, may render the site unusable. To clear cookies on your device, please update your browser settings. For more information on cookies, please read our ",
+			"dismiss": "I Agree",
+			"deny": "I Decline",
+			"policy": "Privacy Policy"
+		};
+		var _RegistrationConsent = {
+			"message" : "I consent for Flume Support to process my data and agree to the terms of the ",
+			"dismiss" : "I consent",
+			"policy" : "Privacy Policy"
+		}
+	</script>
+
+			<!-- Start Google Analytics Code -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+								(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-3131051-4', 'auto');
+
+			<!-- Adding dimension for sending category and section name alogn with page view -->
+			 ga('set', 'dimension1', 'Products'); 			 ga('set', 'dimension2', 'Flume Pro'); 
+			ga('send', 'pageview');
+
+		</script>
+		<!-- End Google Analytics Code -->
+	
+	<link rel="stylesheet" type="text/css" href="https://staging.flumeapp.com/assets/css/kayako.css"/>
+</head>
+<body class="body">
+
+		<header class="header ">
+		<div class="header__top">
+			<div class="header__top__wrapper wrap">
+				<header id="header" class="header">
+                    <div class="inner">
+                    <nav class="menu" id="menu">
+	                    <span class="logo"><a href="https://support.flumeapp.com/"><img src="https://flumeapp.com/assets/images/logo.svg" alt="Flume" width="80" height="30" /></a></span>
+	<ul class="navigation">
+		<li><a href="https://flumeapp.com/">App</a></li>
+		<!--<li><a href="https://flumeapp.com/new-tab/">Extension</a></li>-->
+		<li><a href="https://flumeapp.com/blog/">Blog</a></li>
+		<li class="desktop">
+			<a class="label active" id="support-menu">Support</a>
+			<ul id="support-menu-popover">
+				<li><a href="https://flumeapp.com/help/">Help Docs</a></li>
+				<li class="active"><a href="https://flumeapp.com/support/">Support Portal</a></li>
+				<li><a href="https://flumeapp.com/suggestions/">Suggest a Feature</a></li>
+			</ul> 
+		</li>
+		<li class="mobile"><a href="https://flumeapp.com/help/">Help Docs</a></li>
+		<li class="mobile active"><a href="https://flumeapp.com/support/">Support Portal</a></li>
+		<li class="mobile"><a href="https://flumeapp.com/suggestions/">Feedback</a></li>
+		<li><a href="https://instagram.com/flumeapp/"><img src="https://flumeapp.com/assets/images/icon-instagram.svg" alt="Instagram" width="20" height="20" /></a></li>
+		<li><a href="https://twitter.com/flumeapp/"><img src="https://flumeapp.com/assets/images/icon-twitter.svg" alt="Twitter" width="20" height="20" /></a></li>
+	</ul>
+</nav>
+			</div>
+		</div>
+		<div class="search-wrapmobile mobile-search">
+			<div class="search search--mobile u-realtive" id="mobile-search" data-ui-component="search">
+				<i class="icon icon-search"></i>
+				<form class="inputaddon" method="get" action="https://support.flumeapp.com/search/all" accept-charset="UTF-8">
+					<input name="utf8" type="hidden" value="&#x2713;"/>
+					<input class="inputaddon__field js-search-input js-mobile-search" id="search--mobile" type="text" placeholder="How can we help you?" name="query" autocomplete="off">
+				</form>
+			</div>
+		</div>
+
+		<div class="sm-lg-plus-hide lg-plus-hide wrap--body u-mtop u-mbottom">
+			<a class="button" href="https://support.flumeapp.com/conversation/new">Start a conversation</a>
+		</div>
+
+		<script type="text/template" id="tpl-search-autocomplete--mob">
+		    <div class="autocomplete__item js-ac-item">
+			    <% if (original.resource_type === "article") { %>
+						<a class="u-mzero u-block search-result--header" href="<%= link %>">
+							<i class="icon icon-book"></i>
+							<span class="u-faded u-textbold u-flex search-result__description">
+								<span class="u-texttruncate"><%= (_.findWhere(original.section.category.titles, { locale: _Payload.is_localized ? _Payload.activelocale : _Payload.defaultlocale }) || original.section.category.titles).translation %></span>
+								<span class="u-inlineflex">
+									<i class="icon icon-arrow-right u-no-margin"></i>
+								</span>
+								<span class="u-texttruncate"><%= (_.findWhere(original.section.titles, { locale: _Payload.is_localized ? _Payload.activelocale : _Payload.defaultlocale }) || original.section.titles[0]).translation %></span>
+							</span>
+							<span class="search-result__title">
+								<span class="autocomplete__text"><%= title.replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(new RegExp("(" + $("#search").val().replace(/\<|\>|\(|\)/g, '') + ")", "i") ,"<b>$1</b>") %></span>
+							</span>
+						</a>
+					<% }
+					else if (original.resource_type === "conversation") { %>
+						<a class="u-mzero u-block u-textbold search-result--header" href="<%= link %>"><i class="icon icon-discuss"></i>
+							<span class="u-faded u-textbold search-result__description">
+								<span class="u-faded u-flex">Conversation <i class="icon icon-arrow-right u-no-margin"></i> #<%= original.id %></span>
+							</span>
+							<span class="search-result__title">
+								<span class="autocomplete__text"><%= title.replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(new RegExp("(" + $("#search").val().replace(/\<|\>|\(|\)/g, '') + ")", "i") ,"<b>$1</b>") %></span>
+							</span>
+						</a>
+		    	<% } %>
+		    </div>
+		</script>
+		<script type="text/template" id="tpl-all-results">
+			<a href="https://support.flumeapp.com/search/all?query=<%= term.replace(/</g, '&lt;').replace(/"/g, '&quot;') %>" class="autocomplete__see-all u-block u-textcenter u-textgray js-ac-item js-show-all">
+				See more results (<%= totalCount %>)
+			</a>
+		</script>
+		<script type="text/template" id="tpl-autocomplete-loader">
+			<div class="loader-overlay">
+				<ul class="loader">
+					<li class="loader__bar"></li><li class="loader__bar"></li><li class="loader__bar"></li>
+				</ul>
+				<span class="no-results__msg u-block u-textsmall u-textcenter u-faded">
+											No results found. You can <a href="https://support.flumeapp.com/conversation/new">ask us</a> instead.
+									</span>
+			</div>
+		</script>
+		<script type="text/template" id="tpl-search-error">
+				<span class="search__error-msg u-block u-textcenter">
+					<%= errorMessage || 'Something went wrong.' %>
+				</span>
+		</script>
+	</header>
+
+	
+
+	<div class="container">
+		<div id="article">
+
+	
+
+	<div class="wrap wrap--body wrap--article article-44">
+
+		<ol class="breadcrumb">
+			<li><a href="https://support.flumeapp.com">Flume Support</a></li>
+			<li><a href="https://support.flumeapp.com/category/3-products">Products</a></li>
+				<li><a href="https://support.flumeapp.com/section/10-flume-pro">Flume Pro</a></li>
+	
+		</ol>
+
+		<div class="layout">
+			<main class="layout__item md-lg-7/12 lg-plus-8/12">
+				<article class="article u-mtop">
+					<h1 id="display--heading">What is a Flume Pro licence code?</h1>
+
+					<div class="article__content color--texthead u-mbottombig" id="display--description"><p><strong>Direct Version</strong></p><p>Access to<span>&nbsp;</span><a href="https://support.flumeapp.com/article/41-what-is-flume-pro">Flume Pro features</a><span>&nbsp;</span>are unlocked through a Flume Pro licence code, which can be purchased <a href="https://flumeapp.com/" rel="nofollow">through our website.</a></p><ul><li>Flume Pro licence codes<span>&nbsp;</span><strong>do not expire.</strong> When you purchase a Flume Pro upgrade, the licence is issued in your name and your email address. Please ensure these are correct, as you will not be able to<span>&nbsp;</span><a href="https://support.flumeapp.com/article/40-i-lost-didn-t-receive-my-licence-code">recover your licence code</a><span>&nbsp;</span>in the future without <a href="https://flumeapp.com/email/" rel="nofollow">contacting us.</a></li><li>To unlock Flume Pro features,<span>&nbsp;</span><strong>you must activate your licence code for each Mac you own</strong><span>&nbsp;</span>(up to a maximum of 5 Macs). Instructions on how to do this are included in your Flume Pro licence code email, as well as in the<span>&nbsp;</span><a href="https://help.flumeapp.com/preferences/flumepro.html#activating-flume-pro" rel="nofollow">help documentation.</a></li><li>If you purchased Flume Pro as an in-app purchase from the Mac App Store, <strong>this is not your licence code.</strong> You must convert and follow the instructions to <a href="https://flumeapp.com/appstore/" rel="nofollow">migrate your purchase</a> from Apple, in order to receive a Flume Pro licence code.</li><li>Flume Pro licence codes are not tied to or associated with your Instagram account. While Flume Pro unlocks the ability to add more than one account to Flume, this doesn't tie your licence with a specific Instagram account.</li></ul><p><br></p><p><strong>Setapp Version</strong></p><p>If you use Flume for Mac via <a href="https://go.setapp.com/stp154" rel="nofollow">Setapp</a>, this version already includes Flume Pro's features, and no upgrade is necessary. Your Setapp monthly subscription covers the cost of Flume Pro.</p><ul><li>If you are on a paid plan, you can<span>&nbsp;</span><a href="https://support.setapp.com/hc/en-us/articles/213269889-Can-I-use-my-subscription-on-another-Mac-" rel="nofollow">use your Setapp subscription on multiple Macs.</a></li><li>If you<span>&nbsp;</span><a href="https://support.setapp.com/hc/en-us/articles/213812465-What-happens-when-I-cancel-my-subscription-" rel="nofollow">cancel your Setapp subscription</a>, you will be unable to launch Flume once your billing cycle ends.</li></ul><p>For all other Setapp related questions, please refer to<span>&nbsp;</span><a href="https://support.setapp.com/hc/en-us" rel="nofollow">Setapp's support website.</a></p></div>
+					<div class="dz-area dz-area--large u-muted u-clickable u-hidden" id="files-input">
+	<div class="dz-message">
+		<span class="button u-textsmall u-inlineblock u-mright">Choose files</span>
+		<span class="dz-area__msg">or drag and drop files</span>
+	</div>
+</div>
+<div class="dropzone-previews" id="dz-preview-container"></div>
+
+					<div class="article__tags u-mtopbig u-mbottombig">
+						<div class="text-core u-mbottom js-tags">
+			<div class="text-button text-button--readonly">license</div>
+	</div>
+<div class="u-hidden" id="tags-editor">
+	<label class="u-mtop u-mbottomsmall u-textregular">Tags:</label>
+	<input class="textfield textfield--tags" id="artcle-tags" type="text" name="tags">
+</div>
+					</div>
+
+					<div id="comments-meta">
+						<div class="u-clear color--textpale" id="vote-view">
+							<div class="article__vote u-textcenter u-mtopxbig u-mbottomxbig">
+	<div class="article__vote__options" id="vote-options">
+		<div class="u-inlineblock u-mright u-vmiddle">Was this article helpful?</div>
+		<div class="article__vote__option u-inlineblock u-clickable js-vote-option" data-value="helpful">
+			<span class="article__vote__tip">Yes</span>
+			<i class="icon icon-thumbs-up"></i>
+		</div>
+		<div class="article__vote__option u-inlineblock u-clickable js-vote-option" data-value="nothelpful">
+			<span class="article__vote__tip">No</span>
+			<i class="icon icon-thumbs-down"></i>
+		</div>
+	</div>
+	<div class="article__vote__msg" id="vote-msg"></div>
+  <input type="hidden" id="is-loggedin" value="0">
+</div>
+<script type="text/template" id="tpl-vote-msg">
+	<% if(msgType == 'success') %>
+	Thank you for your feedback.
+	<% else %>
+					Please <a href='https://support.flumeapp.com/login?return=/article/44-what-is-a-flume-pro-licence-code'>sign in</a> to vote
+	</script>
+						</div>
+
+						<div class="pagination">
+							<!-- TODO: mobile version a select menu? -->
+
+						</div>
+					</div>
+				</article>
+			</main>
+		</div>
+	</div>
+
+</div>
+	</div>
+
+	<footer class="footer">
+        			<script defer="defer" type="text/javascript" src="https://assets.kayako.com/helpcenter/js/app.js?version=a8e6f969"></script>
+		
+		<div class="inner">
+		<ul class="links">
+			<li>
+				<ul>
+					<li class="label">Flume</li>
+					<li><a href="https://flumeapp.com/">App</a></li>
+					<!--<li><a href="https://flumeapp.com/new-tab/">Extension</a></li>-->
+					<li><a href="https://flumeapp.com/blog/">Blog</a></li>
+					<li><a href="https://flumeapp.com/refer-a-friend/">Refer-a-Friend</a></li>
+					<li><a href="https://flumeapp.com/team/">Team</a></li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li class="label">Support</li>
+					<li><a href="https://flumeapp.com/help/">Help Docs</a></li>
+					<li><a href="https://flumeapp.com/support/">Support Portal</a></li>
+					<li><a href="https://flumeapp.com/suggestions/">Suggest a Feature</a></li>
+					<li><a href="https://flumeapp.com/pro/lost/">Recover Licence</a></li>
+					<li><a href="https://flumeapp.com/appstore/">Mac App Store Transition</a></li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li class="label">Legal</li>
+					<li><a href="https://flumeapp.com/legal/">Legal Notice</a></li>
+					<li><a href="https://flumeapp.com/privacy/">Privacy Policy</a></li>
+					<li><a href="https://flumeapp.com/terms/">Terms of Use</a></li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li class="label">Social</li>
+					<li><a href="https://instagram.com/flumeapp/">Instagram</a></li>
+					<li><a href="https://twitter.com/flumeapp/">Twitter</a></li>
+				</ul>
+			</li>
+		</ul>
+		<p class="notes">Made with <img src="https://flumeapp.com/assets/images/made-with-love.png" width="16" height="10" alt="love" /> in Berlin</p>
+	</div>
+
+		
+				<input id="csrftoken" type="hidden" value="dHHaM5xuBoSTu4voxpXaXRvVEwwAvOUIrkZ5xb1IuGT71Q1GueLUn2o8TgdzoNkkJE6aVobbvTqy7Lr0icJcvFHvcAdpfgG5vnF9">
+	</footer>
+
+	
+	
+
+			
+	
+			
+	<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"89aa031aed","applicationID":"98031495","transactionName":"bwQEZEFQXkFXAkwKWVZOJUVARV9fGSBKF19bDQMfel9UV04=","queueTime":0,"applicationTime":226,"atts":"Q0MHEglKTU8=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

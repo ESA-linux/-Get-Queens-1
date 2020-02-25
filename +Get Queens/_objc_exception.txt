@@ -1,0 +1,4 @@
+The app was terminated due to an Objective-C exception. Details below:
+
+2019-12-23 17:47:49.210624
+CALayer position contains NaN: [160 nan]. Layer: <CALayer:0x280ec2260; position = CGPoint (160 652.25); bounds = CGRect (0 0; 288 0.5); delegate = <_UICollectionViewListSeparatorView: 0x11125c0d0; frame = (16 652; 288 0.5); hidden = YES; layer = <CALayer: 0x280ec2260>>; sublayers = (<CALayer: 0x280ec2660>); hidden = YES; opaque = YES; allowsGroupOpacity = YES; >

@@ -1,0 +1,17 @@
+Automatically load plugins from package.json (#3624)
+
+* Automatically load plugins from package.json
+
+* Fix build by adding json extension
+
+* Fixup misuse of options argument
+
+* Rewire graceful-fs to fs
+
+* Document graceful-fs issue
+
+* Alias graceful-fs to fs in Rollup
+
+
+https://github.com/ESA-Security-Group/prettier/commit/e5d6a4704f2427cdf3baa0a1c941dd797c513993
+

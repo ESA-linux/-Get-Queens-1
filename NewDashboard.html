@@ -1,0 +1,2074 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="google" content="notranslate" />
+    <title>Cloud Supervisor: Dashboard</title>
+
+    <link href="/Content/kendo/2016.2.714/kendo.common.min.css" rel="stylesheet" />
+    <link href="/Content/kendo/2016.2.714/kendo.default.min.css" rel="stylesheet" />
+    <link href="/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/kendo/2016.2.714/kendo.material.min.css" rel="stylesheet" />
+    <link href="/Content/kendo/2016.2.714/kendo.rtl.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/sidebar-menu.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/theme_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/hover-min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/css/CostingStyle.css" />
+    <link rel="stylesheet" type="text/css" href="/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+
+
+    <script src="/Scripts/sweetalert.min.js"></script>
+    <script src="/js/ViewMorejquery.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    
+    <script src="/Scripts/kendo/2016.2.714/jquery.min.js"></script>
+    <script src="/Scripts/kendo/2016.2.714/kendo.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/jszip.min.js"></script>
+    <script src="/Scripts/kendo/2016.2.714/kendo.aspnetmvc.min.js"></script>
+    
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/js/ContainerDashboardJS.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="/Scripts/kendo/2016.2.714/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+    <script src="/js/App.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angucomplete-alt/2.5.0/angucomplete-alt.min.js"></script>
+    <link rel="stylesheet" href="/css/angucomplete-alt.css" />
+    <script src="/js/dirPagination.js"></script>
+    <link rel="shortcut icon" href="/Images/cloudsupervisor.png" />
+    <script src="/js/bootstrap.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="/js/jquery.floatThead.min.js"></script>
+    <script>
+
+        function btnsearch_click() {
+            var fn = $("#btn1").val();
+
+            if (fn == "") {
+
+            }
+
+            else {
+                var Svalue = $("#btn1").val();
+                window.location.href = '/Dashboard/SearchResult/?data=' + Svalue;
+            }
+        }
+
+        $(document).ready(function () {
+            var $table = $('table#tbl_body_scroll');
+            $table.floatThead({
+                scrollContainer: function ($table) {
+                    return $table.closest('.fhtblwrapper');
+                }
+            });
+
+            $("#btnLicenseKey").click(function () {
+                $("#btnLicenseKey").hide();
+                $("#btnActivate").show();
+                $("#txtLicense").show();
+            });
+            $('#btn1').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    btnsearch_click()
+                }
+                else {
+                    return ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode == 8 || e.keyCode >= 97 && e.keyCode <= 122)
+                }
+            });
+        });
+
+        //$(document).ready(function () {
+        //    var currentpage = (location.pathname + location.search).substring((location.pathname + location.search).lastIndexOf("/") + 1);
+
+        //    $('#nav-col').find('a').each(function (i, val) {
+        //        var menuitem = val.href.substring(val.href.lastIndexOf("/") + 1);
+        //        if (menuitem.toLowerCase() == currentpage.toLowerCase()) {
+        //            $(this).closest('li').closest('ul').closest('li').addClass('active');
+        //            $(this).closest('li').addClass('sidebar-active-subli');
+        //            return;
+        //        }
+        //        else {
+
+        //        }
+        //    });
+        //});
+        //$(function () {
+        //    $('input, select, textarea').attr('disabled', 'disabled');
+        //});
+        $(document).ready(function () {
+            debugger;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('data=');
+            $("#btn1").val(hashes[1]);
+            var currentpage = (location.pathname + location.search).substring((location.pathname + location.search).lastIndexOf("/") + 1);
+            var flag = false;
+            $('#nav-col').find('a').each(function (i, val) {
+                var menuitem = val.href.substring(val.href.lastIndexOf("/") + 1);
+                if (menuitem.toLowerCase() == currentpage.toLowerCase()) {
+                    $(this).closest('li').closest('ul').closest('li').addClass('active');
+                    $(this).closest('li').addClass('sidebar-active-subli');
+                    flag = true;
+                    return;
+                }
+                else {
+
+                }
+            });
+            if (flag == false) {
+                var subCurrentPage = (location.pathname + location.search).substring((location.pathname + location.search).indexOf("/") + 1, (location.pathname + location.search).lastIndexOf("/"));
+                $('#nav-col').find('a').each(function (i, val) {
+                    var substringVal = val.href.substring(val.href.indexOf("/") + 1, val.href.lastIndexOf("/"));
+                    var menuitem = substringVal.substring(substringVal.lastIndexOf("/") + 1);
+                    if (menuitem.toLowerCase() == subCurrentPage.toLowerCase()) {
+                        $(this).closest('li').closest('ul').closest('li').addClass('active');
+                        flag = true;
+                        return;
+                    }
+                    else {
+
+                    }
+                });
+            }
+        });
+
+        //new javascript starts here
+        function ConfirmDropDown() {
+
+            var ask = window.confirm("Please select a subscription");
+            if (ask) {
+                document.location.href = "SubscriptionList.aspx";
+
+            }
+        }
+
+
+        //new javascript starts here
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").slideDown(5000);
+            });
+            $("#stop").click(function () {
+                $("#panel").stop();
+            });
+            //$(".k-widget k-dropdown k-header").click(function () {
+            //    $(".k-animation-container").attr("top","1400px");
+            //});
+            //$(".k-grid-filter k-state-border-down").load(function () {
+
+            //    $(".k-animation-container").attr("top", "140px");
+
+            //});
+            $("dropdownlist").click(function () {
+                alert('sdff');
+            });
+        });
+
+    </script>
+
+    <style type="text/css">
+        .or {
+            background: #1f6fb3;
+            position: absolute;
+            top: 18px;
+            left: -15px;
+            font-size: 14px;
+            color: #fff;
+            height: 30px;
+            width: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            / -webkit-border-radius: 50%;
+            / -moz-border-radius: 50%;
+        }
+
+        #pageloaddiv {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: url('Images/Loading.gif') no-repeat center center;
+        }
+        .trywithlivedata1 {
+            display: table-cell;
+            vertical-align: middle;
+            padding-right: 15px;
+            padding-top: 6px;
+        }
+        .modal-backdrop {
+            z-index: 999 !important; bottom:0px;
+        }
+        .padding15{ padding:15px !important;}
+    </style>
+
+</head>
+<body ng-app="myModule">
+
+    <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 0.7;display:none" id="divloader">
+
+        <img id="imgUpdateProgress" src="/Images/Spinner.gif" style="padding: 10px; position: fixed; top: 45%; left: 50%;" />
+    </div>
+    <div id="theme-wrapper">
+        <div class="lftPanel_toggleBtn">
+            <header class="navbar" id="header-navbar">
+                <div class="row">
+                    <div class="pull-left nopadding" style="display:flex;">
+
+                        <a href="#" class="menubar" id="sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                        <a href="/Dashboard/NewDashboard" id="logo">
+                            <img src="/Images/CloudSupervisorLogo.png" />
+                        </a>
+                        <div class="nav-no-collapse fixdropdown " style="padding-left: 0px;">
+                            <ul class="nav navbar-nav">
+
+                                <li class="dropdown  spdrop hidden-xs" style="margin-top: 21px;">
+                                    <label>
+
+                                        <select Title="12345678-5c41-41e7-9f39-e138c21c7ea1" classs="form-control" id="SubscriptionId" name="SubscriptionId" onchange="chageSubscription(this.value);"><option selected="selected" value="12345678-5c41-41e7-9f39-e138c21c7ea1">Contosa 3</option>
+</select>
+
+<script>
+    function chageSubscription(value)
+    {
+        $.ajax({
+            url: '/Subscriptions/SetSubscription',
+            type: 'POST',
+            data: { id: value },
+            success: function (response) {
+
+                window.location.reload();
+
+
+                //location.reload();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("[id*=SubscriptionId] option").each(function (i) {
+            if (i > 0) {
+                var title = "Subscription ID: " + $(this).val();
+                $(this).attr("title", title);
+            }
+        });
+    });
+</script>  
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="search-width-animate">
+
+                            <input type="search" placeholder="Search..." id="btn1" />
+                            <i class="fa fa-search" aria-hidden="true" onclick="btnsearch_click()"></i>
+                        </div>
+                    </div>
+
+                    <div class="pull-right" style="">
+
+                        <div class="hdr-ryt">
+
+                                <div class="trywithlivedata1" id="support1">
+
+                                    <div>
+                                            <a style="font-size:12px;" id="lnkContactUS" href="#" onclick="openLicenseModal()" class="btn btn-success btnLink"><span style="font-size:12px;" id="spnLicenseActivate"></span>Already have a License?</a>
+                                    </div>
+                                    
+                                </div>
+
+                            <div ng-controller="getMaxInventoryDate" style="color:white; text-align:right; display: table-cell;
+    vertical-align: middle; font-size: 13px;padding-right: 14px; padding-top: 7px;">
+
+                                Last Update<br />
+
+
+
+                                <img src="/Images/small.gif" ng-show="loading" /><strong class="line_brk" ng-show="isComplete"> {{d.date}}</strong>
+
+
+
+                            </div>
+                            <style>
+                                .dropbtn {
+                                    background-color: #4CAF50;
+                                    color: white;
+                                    padding: 16px;
+                                    font-size: 16px;
+                                    border: none;
+                                }
+
+                                .dropdown {
+                                    position: relative;
+                                    display: inline-block;
+                                }
+
+                                .dropdown-content {
+                                    display: none;
+                                    position: absolute;
+                                    background-color: #f1f1f1;
+                                    min-width: 160px;
+                                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                                    z-index: 1;
+                                }
+
+                                    .dropdown-content a {
+                                        color: black;
+                                        padding: 12px 16px;
+                                        text-decoration: none;
+                                        display: block;
+                                    }
+
+                                        .dropdown-content a:hover {
+                                            background-color: #ddd;
+                                        }
+
+                                .dropdown:hover .dropdown-content {
+                                    display: block;
+                                }
+
+                                .dropdown:hover .dropbtn {
+                                    background-color: #3e8e41;
+                                }
+                            </style>
+
+
+
+                            <div class="userinfo" ng-controller="getUserSubscriptionDetails">
+                                <div class="nav-no-collapse" id="header-nav">
+
+                                    <ul class="nav navbar-nav">
+
+                                        <li class="dropdown user-dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                                <img src="/Images/support.png" alt="" id="supimg" />
+                                                <span class="hidden-xs"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="userdrop" style="z-index: 1;display:none" id="userdrop">
+                                        <img src="/Images/Loading.gif" ng-show="loading" style="height:30px" />
+                                        <table class="table1 table2">
+                                            <tr>
+                                                <td><i class="fa fa-calendar" aria-hidden="true"></i> Billing Period</td>
+                                                <td>{{(subList[0].startdate | date:  DateFormat) + '-'+ (subList[0].enddate | date:  DateFormat)}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-dollar"></i>Spending Limit ($)</td>
+                                                <td>{{(subList[0].budgetamount )| number : 2}}</td>
+                                            </tr>
+                                            <tr ng-if="DisplayStatus==1"><td><i class="fa fa-battery-half"></i>Available Credits ($)</td><td>{{(subList[0].budgetamount - subList[0].Cost)<0?0:subList[0].budgetamount - subList[0].Cost| number : 2}}</td></tr>
+                                            <tr ng-if="DisplayStatus==1"><td><i class="fa fa-tags" aria-hidden="true"></i> Tags</td><td><div ng-bind-html="subList[0].tag"></div></td></tr>
+                                            <tr ng-controller="getMaxInventoryDate">
+                                                <td>
+                                                    Cost Updated date
+                                                </td>
+                                                <td>
+
+                                                    <img src="/Images/small.gif" ng-show="loading" /><strong class="line_brk" style="color:#000" ng-show="isComplete"> {{d.date}}</strong>
+
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <ul class="nav navbar-nav" ng-controller="myController">
+                                <li class="dropdown">
+                                    
+                                    <div id="Notification" class="dropdown-toggle notifctn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" style="color: #FFFFFF; margin-top: 2px;">
+                                            <i aria-hidden="true"></i>
+                                            <span class="fa fa-bell fa-2x"></span>
+                                            <span class="badge badge-notify">
+                                                <label id="lblNotification">{{count}}</label>
+                                                
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <!--notification dropdown code start here-->
+                                    <ul class="dropdown-menu notify-drop" ng-show="hasNotification">
+                                        <li style="text-align:center" ng-show="loading"><img src="/Images/loadergrid.gif" height="50" /></li>
+                                        <div class="drop-content">
+                                            <li ng-repeat="data in dataList">
+                                                <div class="col-md-12 col-sm-12 col-xs-12 pd-l0 col-lg-12 subs-name-box-notify">
+                                                    <a ng-href="/Subscriptions/NotificationDetails?id={{data.SubscriptionId}}" style="padding:5px">{{data.subscriptionName}}</a>({{data.Tot}}) <a href="" class="rIcon"></a>
+                                                </div>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="emailuser">
+                                <div class="nav-no-collapse" id="header-nav">
+                                    <ul class="nav navbar-nav" style="">
+
+                                        <li class="dropdown profile-dropdown">
+                                            <a style="" href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+
+                                                <span id="lblUserName">protection@firewicca.com</span>
+                                                <img src="/Images/userImg.png" alt="" id="supimg" />
+                                                <span class="hidden-xs"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+<div class="logoutdrop" style="z-index: 1;display:none" id="logoutdrop">
+
+
+                                            <input type="button" class="btn btn-info" value="Logout" onclick="location.href='/Subscriptions/Logout'" style="width: 60%;float: right;" />
+
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+        </div>
+        <div class="outerContainer">
+            <div class="col-md-3 col-lg-2 col-sm-3 col-xs-5  sidebarcontainer" style="height: 100%; padding: 0px;">
+                <div id="nav-col" style="position: fixed; width: 15.5% !important; padding:5px 7px; margin-left:5px;">
+                    <section style="width: 100%;">
+                        <ul class="sidebar-menu">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                                <ul class="sidebar-submenu menu-open">
+                                    <li><a href="/Dashboard/NewDashboard"><i class="fa fa-desktop" aria-hidden="true"></i>Main Dashboard<span></span></a></li>
+                                    <li><a href="/Dashboard/ComplianceDashboard"><i class="fa fa-users" aria-hidden="true"></i>Compliance</a></li>
+
+                                        <li><a href="/Dashboard/FocuseBaseLineDashboard"><i class="fa fa-tachometer" aria-hidden="true"></i>Focus Baseline</a></li>
+                                        <li><a href="/Dashboard/UsageAnalyticsDashBoard"><i class="fa fa-line-chart" aria-hidden="true"></i>Usage Analytics</a></li>
+                                        <li><a href="/Dashboard/BillingAnalyticsDashBoard"><i class="fa fa-money" aria-hidden="true"></i>Billing Analytics</a></li>
+                                        <li><a href="/Dashboard/SecurityAnalysisnew"><i class="fa fa-shield" aria-hidden="true"></i>Security Analytics</a></li>
+                                        <li><a href="/Dashboard/CostingDashBoardNew"><i class="fa fa-usd" aria-hidden="true"></i>Costing Analytics</a></li>
+                                        <li><a href="/Dashboard/AdvisorAnalysis"><i class="fa fa-user-secret" aria-hidden="true"></i>Advisor Analytics</a></li>
+                                        <li><a href="/Dashboard/GDPRServiceTypeMapping"><i class="fa fa-lock" aria-hidden="true"></i>GDPR Dashboard</a></li>
+                                        <li><a href="/DashboardV2/ComplianceStateDetail"><i class="fa fa-file-text-o" aria-hidden="true"></i>Subscription Status</a></li>
+                                                                        <li><a href="/Dashboard/AzurebestPracticesV2"><i class="fa fa-file-text-o" aria-hidden="true"></i>Azure Best Practice</a></li>
+                                    <li><a href="/HistoryDetails/HistoryV3"><i class="fa fa-file-text-o" aria-hidden="true"></i>History Dashboard</a></li>
+                                    <li><a href="/Dashboard/UserRolesData"><i class="fa fa-lock" aria-hidden="true"></i>User Roles</a></li>
+                                    <li><a href="/SecurityAndCompliance/GetServiceMapping"><i class="fa fa-shield" aria-hidden="true"></i>Service Mapping Report</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-pie-chart"></i>
+                                    <span>Cost & Utilization</span>
+                                </a>
+                                <ul class="sidebar-submenu menu-open">
+                                    <li><a href="/CostAndUtilization/VMUtilizationDetails"><i class="fa fa-file-text-o" aria-hidden="true"></i>Virtual Machine Utilization</a></li>
+                                    <li><a href="/CostAndUtilization/SQLUtilizationDetails"><i class="fa fa-file-text-o" aria-hidden="true"></i>SQL Azure Utilization</a></li>
+                                    
+                                    
+                                    <li><a href="/CostAndUtilization/SubscriptionCostDetails"><i class="fa fa-file-text-o" aria-hidden="true"></i>Subscription Cost </a></li>
+
+                                    <li><a href="/CostAndUtilization/SubscriptionWiseCostlyResourceDetails"><i class="fa fa-file-text-o" aria-hidden="true"></i>Costly Resources</a></li>
+                                    <li><a href="/CostAndUtilization/CategoryWise_Cost"><i class="fa fa-file-text-o" aria-hidden="true"></i>Service Category Cost Summary</a></li>
+                                    
+                                    
+                                    <li><a href="/ServicePerformance/PerformanceData"><i class="fa fa-file-text-o" aria-hidden="true"></i>Performance Data</a></li>
+                                    <li><a href="/RIRecommendation/RiCom"><i class="fa fa-file-text-o" aria-hidden="true"></i>RI & Hybrid Recommendation</a></li>
+                                    <li><a href="/RIRecommendation/DbAssessment"><i class="fa fa-file-text-o" aria-hidden="true"></i>Database Recommendation</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-lock"></i>
+                                    <span>Security & Compliance</span>
+                                </a>
+                                <ul class="sidebar-submenu menu-open">
+                                    <li><a href="/SecurityAndCompliance/MonitorAlerts"><i class="fa fa-file-text-o" aria-hidden="true"></i>Monitor Alerts</a></li>
+                                    
+                                    <li><a href="/SecurityAndCompliance/ResourceGroupSummary"><i class="fa fa-users" aria-hidden="true"></i>Resource Group Summary</a></li>
+                                        <li><a href="/SecurityAndCompliance/AuditLogs"><i class="fa fa-file-text-o" aria-hidden="true"></i>Audit Logs</a></li>
+                                    <li id="liNonComplainceReport"><a href="/SecurityAndCompliance/NonComplianceReport"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>NonCompliance Report</a></li>
+                                </ul>
+                            </li>
+                            <li style="display:none">
+                                <a href="#">
+                                    <i class="fa fa-leaf"></i>
+                                    <span>Container Security</span>
+                                </a>
+                                <ul class="sidebar-submenu menu-open">
+                                    <li id="liContainerSecurity"><a href="/Container/ContainerDashboardV2"><i class="fa fa-globe" aria-hidden="true"></i>Dashboard</a></li>
+                                    <li id="liContainerList"><a href="/Container/ContainerList"><i class="fa fa-users" aria-hidden="true"></i>Containers</a></li>
+                                    <li id="liImages"><a href="/Container/ImageList"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Images</a></li>
+                                    <li id="liAuditLogs"><a href="/Container/ContainerAuditLogs"><i class="fa fa-file-text-o" aria-hidden="true"></i>Audit Logs</a></li>
+                                    <li id="liHost"><a href="/Container/ContainerHost"><i class="fa fa-file-text-o" aria-hidden="true"></i>Host</a></li>
+                                </ul>
+                            </li>
+                                                    </ul>
+                    </section>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-lg-10 col-sm-9 col-xs-7 mainmetro">
+                <div id="page-wrapper" class="container">
+                    <div id="content-wrapper" class="content_metro">
+
+                        
+
+
+<style>
+    a,
+    a label {
+        cursor: pointer;
+    }
+
+    th {
+        text-align: left;
+    }
+    #TermConditionModel .modal-dialog {
+        width: 75%;
+    }
+
+    #TermConditionModel .modal-body {
+        height: 300px;
+    }
+</style>
+
+
+<script>
+
+    //function GetMonthlyTrend() {
+    //    $.ajax({
+    //        URL: '/Dashboard/_GetMontholyTrendChart',
+    //            type:'GET',
+    //                beforeSend:function() {
+    //                    $("#divloader").css("display", "block");
+    //                },
+    //        success:function (response) {
+    //            $("#divloader").css("display", "none");
+    //            $("#trendbody").html(response);
+    //            $("#myModal").addClass('in animated fadeInDown ');
+    //            $("#myModal").css('display', 'block');
+    //        }
+    //    });
+
+    //}
+    function GetTrend() {
+        $("#iframeloading").css("display", "block");
+        createChart();
+    }
+    function createChart() {
+        $("#trendbody").kendoChart({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/Dashboard/_GetMontholyTrendChart",
+                        dataType: "json",
+                        success: function () {
+                            $("#iframeloading").css("display", "none");
+                        }
+                    },
+
+                }
+            },
+            legend: {
+                position: "top"
+            },
+            seriesDefaults: {
+                type: "column"
+            },
+            series:
+                [{
+                    field: "Cost",
+                    categoryField: "MonthYear",
+                    name: "Cost",
+                    gap: 10,
+                    color: "#5b9a12",
+                    label: { visible: true }
+                }],
+            categoryAxis: {
+                labels: {
+                    rotation: 45
+                },
+                majorGridLines: {
+                    visible: false
+                },
+                Title: "Cost($)",
+
+            },
+            valueAxis: {
+                line: {
+                    visible: false
+                },
+                majorGridLines: {
+                    visible: false
+                },
+                Title: "Month",
+            },
+            render: onRenderCheck,
+            requestStart: function () {
+                kendo.ui.progress($("#loading"), true);
+            },
+            requestEnd: function () {
+                kendo.ui.progress($("#loading"), false);
+
+            },
+            tooltip: {
+                visible: true,
+                template: "#= FormatValue(dataItem.Cost) #"
+            }
+        });
+        $("#myModal").addClass('in animated fadeInDown ');
+        $("#myModal").css('display', 'block');
+    }
+    function onRenderCheck(e) {
+        if (e.sender.dataSource._total > 0) {
+            $("#iframeloading").css("display", "none");
+        }
+        else {
+            $("#iframeloading").css("display", "none");
+            $("#iframeloading").html('<lable>Cost not found</label>');
+        }
+    }
+    $(document).ready(function () {
+        $("#close").click(function () {
+            $("#myModal").removeClass('in');
+            $("#myModal").css('display', 'none');
+        });
+    });
+    //this js written for displaying menu div
+    $(document).ready(function () {
+        if (true == false) {
+            $("#TermConditionModel").addClass('modal fade animated fadeInDown in');
+            $("#TermConditionModel").css("display", "block");
+        }
+        $("#open-catg-menu").click(function () {
+
+            $(".floating-catg-menu").toggle().addClass("animated fadeInRight");
+            //$("#open-catg-menu").css("display", "none");
+
+            $("#open-catg-menu").fadeOut(100)
+
+            //$("#lastdiv").addClass("lastdiv");
+            $(".floating-catg-menu").css("display", "block");
+
+            AdjustScreen();
+        });
+        $("#TermConditionModelclose").click(function () {
+            $("#TermConditionModel").removeClass('modal fade animated fadeInDown in');
+            $("#TermConditionModel").css("display", "none");
+        });
+
+
+        $(".targetdiv").click(function () {
+            $(".Data-main-box").each(function () {
+                $(this).find('.abc').removeClass("scroll-top-selected-box");
+            });
+            var category = $(this).attr("href");
+            var divid = category.replace(' ', '_');
+            var divid2 = divid.replace('+', '_')
+            $(divid2).addClass(" scroll-top-selected-box");
+            // $("#lastdiv").addClass("lastdiv");
+            $("#lastdiv").attr("class", "lastdiv");
+            $("#lastdiv").css("display", "block");
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 500);
+        });
+
+    });
+    //this js written for hiding menu div
+    function closeDiv() {
+
+        // $("#open-catg-menu").css("display", "block");
+        $("#open-catg-menu").show(400)
+        //$(".floating-catg-menu").css("display", "none");
+        $(".floating-catg-menu").hide(500);
+        $(".floating-catg-menu").css("z-index", "1");
+        // $("#lastdiv").removeClass("lastdiv");
+        //$(".abc").removeClass("scroll-top-selected-box");
+
+
+    }
+
+
+    // $(window).scroll(function (event) {
+    //  var scroll = $(window).scrollTop();
+    // $('#top-chart').toggleClass('displayNone',
+    //add 'ok' class when div position match or exceeds else remove the 'ok' class.
+    // scroll >= ($('.Data-main-box').offset().top - 100)
+    // );
+    //});
+
+    $(document).click(function (event) {
+        // alert('doci');
+
+        var id = event.target.id;
+        if (!id.includes('floating-menu')) {
+            if (!id.includes('open-catg-menu')) {
+                if (!id.includes('rpttest')) {
+                    if (!id.includes('lbltext')) {
+
+                        closeDiv();
+
+                    }
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        AdjustScreen();
+    });
+
+    function AdjustScreen() {
+        // var pageheight = $(".outerContainer").css("height");
+        var pageheight = screen.height;
+        var divheight = $("#floating-menu").css("height");
+        // var restheight = (pageheight.replace("px", "") - divheight.replace("px", "")) / 2;
+        var restheight = (pageheight - divheight.replace("px", "")) / 2;
+        $("#floating-menu").css("top", restheight);
+    }
+
+
+
+</script>
+
+<div id="content-wrapper-overwrite">
+
+    <div id="top-chart" class="top-chart col-lg-10 col-md-10">
+        <div class="row">
+            <div class="col-lg-12" style="padding: 4px 15px 12px;">
+                    <span style="font-size: 2rem; font-weight: 600; color: #000;">
+                        Main Dashboard
+
+                    </span>
+                    <div class="export_btn pull-right">
+                        
+<form action="/Dashboard/Main_Export" enctype="multipart/form-data" method="post">                                <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Report </button>
+</form>                    </div>
+                    <span class="panel-hdng-text-right-multiple" style=""> Billing Cycle - <strong>01/02/2020 - 29/02/2020</strong></span>
+            </div>
+        </div>
+        <div class="topchartbox">
+
+            <a href="/Dashboard/Details?type=OnlySubsCount">
+                <h4><span class="tct-hdng">No. of Subscriptions</span></h4>
+                <span class="icon_img hvr-bounce-in"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <span class="count_all">
+                    <span id="lblSubscriptions" style="font-size:smaller;">1</span>
+                </span>
+            </a>
+        </div>
+        <div class="topchartbox">
+            <a href="/Dashboard/Details?filter=resources">
+                <h4><span class="tct-hdng">Total Services</span></h4>
+                <span class="icon_img hvr-bounce-in"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                <span class="count_all">
+                    <span id="lblResources" style="font-size:smaller;">26</span>
+                </span>
+            </a>
+        </div>
+        
+            <div class="topchartbox">
+                <a href="/Dashboard/Details?type=Gr8Jb82meyDJ6fuCduou0Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=rUEYLXlH%2FS2DREL5NtnRDw%3D%3D">
+                    <h4><span class="tct-hdng">Storage Account </span></h4>
+                    <span class="icon_img hvr-bounce-in">
+                        <img src='/Images/ServiceLogob/StorageAccount.png' class="srvc-sml-log" />
+                    </span><span class="count_all">
+                        <span id="lblServiceCounts" style="font-size:smaller;">5</span>
+                    </span>
+                </a>
+            </div>
+            <div class="topchartbox">
+                <a href="/Dashboard/Details?type=dUh%2Bf0NtLkdfricgI%2FKD86YoGq7CZ7J3bYKBZdp2imY%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=%2B%2BcT%2Bu0tWDM9TU%2BjB3DQhDWio4TNB6Dtqsa6KfgCzLM%3D">
+                    <h4><span class="tct-hdng">Virtual Machines </span></h4>
+                    <span class="icon_img hvr-bounce-in">
+                        <img src='/Images/ServiceLogob/VirtualMachineRM.png' class="srvc-sml-log" />
+                    </span><span class="count_all">
+                        <span id="lblServiceCounts" style="font-size:smaller;">3</span>
+                    </span>
+                </a>
+            </div>
+            <div class="topchartbox">
+                <a href="/Dashboard/Details?type=oWJ81mmWrXpHcYIlWlo%2Blqj%2FSqydP8KgMIEUVStUKxg%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=arl69z34A5nNw8ZUUQk1H%2BUJ2Oel%2FS%2BL2XbwY1NsXoE%3D">
+                    <h4><span class="tct-hdng">Network Interfaces </span></h4>
+                    <span class="icon_img hvr-bounce-in">
+                        <img src='/Images/ServiceLogob/NetworkInterfaces.png' class="srvc-sml-log" />
+                    </span><span class="count_all">
+                        <span id="lblServiceCounts" style="font-size:smaller;">3</span>
+                    </span>
+                </a>
+            </div>
+            <div class="topchartbox">
+                <a href="/Dashboard/Details?type=TFEztDIUPB7YcEUyCWr3D0fqRFq5BZtU%2FmUfBhNI7YM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=VsoP4ZUGYN70Szi0JMpvDVJTbBtKlIiJRjtjda7%2BgR8%3D">
+                    <h4><span class="tct-hdng">Network Security Groups </span></h4>
+                    <span class="icon_img hvr-bounce-in">
+                        <img src='/Images/ServiceLogob/NetworkSecurityGroup.png' class="srvc-sml-log" />
+                    </span><span class="count_all">
+                        <span id="lblServiceCounts" style="font-size:smaller;">3</span>
+                    </span>
+                </a>
+            </div>
+            <div class="topchartbox">
+                <a href="/Dashboard/Details?type=%2FRv8T7TAb7Cjv6n3SGL5bJvcjGa01CcJQj2mbDMZlz8%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=oUxhDQP3E3CyGG%2FKO40R2xc14IEFFAdMCE6oAJN8EVU%3D">
+                    <h4><span class="tct-hdng">Public IP addresses </span></h4>
+                    <span class="icon_img hvr-bounce-in">
+                        <img src='/Images/ServiceLogob/PublicIPAddresses.png' class="srvc-sml-log" />
+                    </span><span class="count_all">
+                        <span id="lblServiceCounts" style="font-size:smaller;">3</span>
+                    </span>
+                </a>
+            </div>
+        
+        <div class="topchartbox">
+            <h4><span class="tct-hdng">Monthly Trend</span></h4>
+            <div class="monthlyTrand-inner hvr-bounce-in">
+                <a href="#" id="monthlyTrand" onclick="GetTrend();">
+                    <img src="/Images/monthtrend.PNG" alt="" width="130" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="Data-main-box clearfix">
+
+
+        <style>
+            .subscription-details-grid-wise {
+            }
+
+            .subscription-details-grid-header {
+                background-color: #216b99;
+                color: #fff;
+                padding: 5px;
+                border-radius: 3px;
+            }
+
+            .grid-subscription-details {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+        </style>
+
+
+        <div class="service_header_blank"></div>
+        
+
+            <div class="col-lg-12 bgwhite" id='Compute'>
+                <div class="col-lg-12 nopadding">
+                    <div class="">
+                        <p class="service_header">
+                            <a name='Compute' class="scroll-tap-gap">
+                                <span id="lblHeader">Compute</span>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+
+                
+
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/WebsiteClassic.png' />
+                                    <span id="lblServicetype">App Service</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=7QHjpnjVY9JeRDfsbWPx7Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=c2JwC9JZUQ%2BaLrSe29iUnw%3D%3D">
+                                        1
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=7QHjpnjVY9JeRDfsbWPx7Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=c2JwC9JZUQ%2BaLrSe29iUnw%3D%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=7QHjpnjVY9JeRDfsbWPx7Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=c2JwC9JZUQ%2BaLrSe29iUnw%3D%3D" class="">
+                                        1
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/AppServicePlanDetail.png' />
+                                    <span id="lblServicetype">App Service Plan</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=5%2BINlyj3sM1iY2wW8PfRv1kg45h0fzoHbTuB4Yu01eA%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=iTe%2BsVZJluRvtKZL9BCns8fFA5%2Bl8ZiLfZXPX5ha5dk%3D">
+                                        1
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=5%2BINlyj3sM1iY2wW8PfRv1kg45h0fzoHbTuB4Yu01eA%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=iTe%2BsVZJluRvtKZL9BCns8fFA5%2Bl8ZiLfZXPX5ha5dk%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=5%2BINlyj3sM1iY2wW8PfRv1kg45h0fzoHbTuB4Yu01eA%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=iTe%2BsVZJluRvtKZL9BCns8fFA5%2Bl8ZiLfZXPX5ha5dk%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/VirtualMachineRM.png' />
+                                    <span id="lblServicetype">Virtual Machines</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=dUh%2Bf0NtLkdfricgI%2FKD86YoGq7CZ7J3bYKBZdp2imY%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=%2B%2BcT%2Bu0tWDM9TU%2BjB3DQhDWio4TNB6Dtqsa6KfgCzLM%3D">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=dUh%2Bf0NtLkdfricgI%2FKD86YoGq7CZ7J3bYKBZdp2imY%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=%2B%2BcT%2Bu0tWDM9TU%2BjB3DQhDWio4TNB6Dtqsa6KfgCzLM%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=dUh%2Bf0NtLkdfricgI%2FKD86YoGq7CZ7J3bYKBZdp2imY%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=%2B%2BcT%2Bu0tWDM9TU%2BjB3DQhDWio4TNB6Dtqsa6KfgCzLM%3D" class="">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                
+            </div>
+            <div class="col-lg-12 bgwhite" id='Networking'>
+                <div class="col-lg-12 nopadding">
+                    <div class="">
+                        <p class="service_header">
+                            <a name='Networking' class="scroll-tap-gap">
+                                <span id="lblHeader">Networking</span>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+
+                
+
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/NetworkInterfaces.png' />
+                                    <span id="lblServicetype">Network Interfaces</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=oWJ81mmWrXpHcYIlWlo%2Blqj%2FSqydP8KgMIEUVStUKxg%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=arl69z34A5nNw8ZUUQk1H%2BUJ2Oel%2FS%2BL2XbwY1NsXoE%3D">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=oWJ81mmWrXpHcYIlWlo%2Blqj%2FSqydP8KgMIEUVStUKxg%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=arl69z34A5nNw8ZUUQk1H%2BUJ2Oel%2FS%2BL2XbwY1NsXoE%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=oWJ81mmWrXpHcYIlWlo%2Blqj%2FSqydP8KgMIEUVStUKxg%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=arl69z34A5nNw8ZUUQk1H%2BUJ2Oel%2FS%2BL2XbwY1NsXoE%3D" class="">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/NetworkSecurityGroup.png' />
+                                    <span id="lblServicetype">Network Security Groups</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=TFEztDIUPB7YcEUyCWr3D0fqRFq5BZtU%2FmUfBhNI7YM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=VsoP4ZUGYN70Szi0JMpvDVJTbBtKlIiJRjtjda7%2BgR8%3D">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=TFEztDIUPB7YcEUyCWr3D0fqRFq5BZtU%2FmUfBhNI7YM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=VsoP4ZUGYN70Szi0JMpvDVJTbBtKlIiJRjtjda7%2BgR8%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=TFEztDIUPB7YcEUyCWr3D0fqRFq5BZtU%2FmUfBhNI7YM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=VsoP4ZUGYN70Szi0JMpvDVJTbBtKlIiJRjtjda7%2BgR8%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/PublicIPAddresses.png' />
+                                    <span id="lblServicetype">Public IP addresses</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=%2FRv8T7TAb7Cjv6n3SGL5bJvcjGa01CcJQj2mbDMZlz8%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=oUxhDQP3E3CyGG%2FKO40R2xc14IEFFAdMCE6oAJN8EVU%3D">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=%2FRv8T7TAb7Cjv6n3SGL5bJvcjGa01CcJQj2mbDMZlz8%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=oUxhDQP3E3CyGG%2FKO40R2xc14IEFFAdMCE6oAJN8EVU%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=%2FRv8T7TAb7Cjv6n3SGL5bJvcjGa01CcJQj2mbDMZlz8%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=oUxhDQP3E3CyGG%2FKO40R2xc14IEFFAdMCE6oAJN8EVU%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/VirtualNetworkPreview.png' />
+                                    <span id="lblServicetype">Virtual Network</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=NNrmC7or1GzD9Taghns%2F2g%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=3JsX6iG%2F%2BEfvMA2vPh2L4JgAWayhWFHJdNrb6IPDCl4%3D">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=NNrmC7or1GzD9Taghns%2F2g%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=3JsX6iG%2F%2BEfvMA2vPh2L4JgAWayhWFHJdNrb6IPDCl4%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=NNrmC7or1GzD9Taghns%2F2g%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=3JsX6iG%2F%2BEfvMA2vPh2L4JgAWayhWFHJdNrb6IPDCl4%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                
+            </div>
+            <div class="col-lg-12 bgwhite" id='Storage'>
+                <div class="col-lg-12 nopadding">
+                    <div class="">
+                        <p class="service_header">
+                            <a name='Storage' class="scroll-tap-gap">
+                                <span id="lblHeader">Storage</span>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+
+                
+
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/Disks.png' />
+                                    <span id="lblServicetype">Disks</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=98J5%2Fg5tN0kWlTUjNYGjMw%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=98J5%2Fg5tN0kWlTUjNYGjMw%3D%3D">
+                                        3
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=98J5%2Fg5tN0kWlTUjNYGjMw%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=98J5%2Fg5tN0kWlTUjNYGjMw%3D%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=98J5%2Fg5tN0kWlTUjNYGjMw%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=98J5%2Fg5tN0kWlTUjNYGjMw%3D%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/StorageAccount.png' />
+                                    <span id="lblServicetype">Storage Account</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=Gr8Jb82meyDJ6fuCduou0Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=rUEYLXlH%2FS2DREL5NtnRDw%3D%3D">
+                                        5
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=Gr8Jb82meyDJ6fuCduou0Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=rUEYLXlH%2FS2DREL5NtnRDw%3D%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=Gr8Jb82meyDJ6fuCduou0Q%3D%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=rUEYLXlH%2FS2DREL5NtnRDw%3D%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                
+            </div>
+            <div class="col-lg-12 bgwhite" id='Containers'>
+                <div class="col-lg-12 nopadding">
+                    <div class="">
+                        <p class="service_header">
+                            <a name='Containers' class="scroll-tap-gap">
+                                <span id="lblHeader">Containers</span>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+
+                
+
+                <div class="col-lg-2 mlg-20per col-md-3 col-sm-4 half-padding">
+
+
+
+                    
+
+
+                    <table class="table table-bordered" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr class="catg-hdr">
+                                <th colspan="4">
+                                    <img class="imgicon_new" src='/Images/ServiceLogo/AzureContainerRegistry.png' />
+                                    <span id="lblServicetype">Azure Container Registry</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+                                <td class="" title="Number of Resources">Resources</td>
+                                <td>
+                                    <a href="/Dashboard/Details?type=MhmHwcTOlM9I%2BtvAHrAnEDQbaVxwE%2BYRWDlaqIoYOZM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=kNrJZ1yHVemGXfkJHgF6cfGn9fvK76j2uFY8bHYomus%3D">
+                                        1
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Cost per month">Cost /month</td>
+                                <td>
+                                    <a href='/Dashboard/CostDetails?type=MhmHwcTOlM9I%2BtvAHrAnEDQbaVxwE%2BYRWDlaqIoYOZM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=kNrJZ1yHVemGXfkJHgF6cfGn9fvK76j2uFY8bHYomus%3D' class="hvr-bounce-in">
+                                        $
+0.00                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Baseline Mismatch">Baseline Mismatch</td>
+                                <td>
+                                    <a href="/SecurityAndCompliance/NonComplianceReport?type=MhmHwcTOlM9I%2BtvAHrAnEDQbaVxwE%2BYRWDlaqIoYOZM%3D&amp;baseline=7Clw78KQAVvWjOffKjkJmg%3D%3D&amp;icn=kNrJZ1yHVemGXfkJHgF6cfGn9fvK76j2uFY8bHYomus%3D" class="">
+                                        0
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="" title="Security Issue">Security Issue</td>
+                                <td style="background-color: rgba(255, 228, 228, 0.7);">
+                                        <a class="hvr-bounce-in" href="#">0 </a>
+                                </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+                
+            </div>
+
+        <div class="floating-catg-menu" id="floating-menu" style="display: none;">
+            <div class="closediv_catg" id="floating-menu2" onclick="closeDiv();"><i class="fa fa-angle-double-right" id="floating-menu1" aria-hidden="true"></i></div>
+
+                <a href='#Compute' id="rpttest_a" class="hvr-bounce-to-left targetdiv">
+                    <span id="lbltext1">Compute</span>
+                </a>
+                <a href='#Networking' id="rpttest_a" class="hvr-bounce-to-left targetdiv">
+                    <span id="lbltext2">Networking</span>
+                </a>
+                <a href='#Storage' id="rpttest_a" class="hvr-bounce-to-left targetdiv">
+                    <span id="lbltext3">Storage</span>
+                </a>
+                <a href='#Containers' id="rpttest_a" class="hvr-bounce-to-left targetdiv">
+                    <span id="lbltext4">Containers</span>
+                </a>
+        </div>
+        <div class="btn btn-danger hvr-bounce-in" id="open-catg-menu">
+            <i class="fa fa-angle-double-left" id="open-catg-menu1" aria-hidden="true"></i>
+        </div>
+        
+        <div id="lastdiv" style="display: none"></div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Monthly Trend For Last 6 month ($)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="k-content">
+                    <div id="iframeloading" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%;z-index: 9999999; height: 100%; transform: translate(-6%, -30%);">
+                        <img src="/images/Loading.gif" alt="loading" style="top: 50%; position: relative; left: 50%;" />
+                    </div>
+                    <div class="chart-loading" id="trendbody">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+        <div id="TermConditionModel" class="modal fade" role="dialog" style="width: 100% !important;">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title">Terms and Conditions</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <iframe style="width: 100% !important;height:100%" src="/Terms-and-Conditions-UnifyCloud-LLC.html"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <p style="text-align:center">
+                            
+                            <a href="/Subscriptions/TermsAndCondition?UserId=demo@contosa3.com&TenantId=d70cb4db-69c4-4a49-aaf3-f1e7ac277689&response=Accept" class="btn btn-info" style="color:#fff;" aria-hidden="true"> Accept </a>
+                            <a href="/Subscriptions/TermsAndCondition/?UserId=demo@contosa3.com&TenantId=d70cb4db-69c4-4a49-aaf3-f1e7ac277689&response=Decline" class="btn btn-danger" style="color:#fff;"> Decline</a>
+                            
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+       
+    
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="">
+                <footer id="footer-bar" class="row">
+                    <p id="footer-copyright" class="col-xs-12">Powered by The Unifycloud Pvt.Ltd</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="/dist/sidebar-menu.js"></script>
+    <script>
+        $.sidebarMenu($('.sidebar-menu'))
+
+    </script>
+    <script type="text/javascript">
+        var url = window.location.pathname;
+        var myPageName = url.substring(url.lastIndexOf('/') + 1);
+        if (myPageName == 'NewDashboard.aspx') {
+            $(".sidebar-menu").closest('li').addClass('Active');
+        }
+
+        //  alert(myPageName);
+    </script>
+    
+    <script src="/js/demo-skin-changer.js"></script>
+    <script src="/js/jquery.nanoscroller.min.js"></script>
+    <script src="/js/ServiceDetails.js"></script>
+    <script type="text/javascript">
+        function SearchTextInGridviewControl(phrase, _id) {
+            var words = phrase.value.toLowerCase().split(" ");
+            var table = document.getElementById(_id);
+            var ele;
+            for (var r = 1; r < table.rows.length; r++) {
+                ele = table.rows[r].innerHTML.replace(/<[^>]+>/g, "");
+                var displayStyle = 'none';
+                for (var i = 0; i < words.length; i++) {
+                    if (ele.toLowerCase().indexOf(words[i]) >= 0)
+                        displayStyle = '';
+                    else {
+                        displayStyle = 'none';
+                        break;
+                    }
+                }
+                table.rows[r].style.display = displayStyle;
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            function setHeight() {
+                windowHeight = $(window).innerHeight() - 50;
+                $('#nav-col').css('height', windowHeight);
+            };
+
+            $("#sidebar").click(function () {
+                $(".sidebarcontainer").toggleClass("main");
+                $(".mainmetro").toggleClass("pushright");
+                $("#nav-col").toggleClass("removefixed");
+                //$("#nav-col").animation();
+
+            });
+
+            setHeight();
+
+            $(window).resize(function () {
+                setHeight();
+            });
+            $("#sidebar").click(function () {
+                $(".top-chart").toggleClass("top-chart-full-page");
+
+            });
+            $('body').click(function (res) {
+
+                if (res.target.id == "supimg" || res.target.id == "lblUserName") {
+
+                }
+                else {
+
+                    logoutdrop.style.display = "none";
+                    userdrop.style.display = "none";
+
+                }
+            });
+            $(".profile-dropdown").click(function () {
+                var logoutdrop = document.getElementById("logoutdrop");
+                if (logoutdrop.style.display === "none") {
+                    logoutdrop.style.display = "block";
+                } else {
+                    logoutdrop.style.display = "none";
+                }
+                var userdrop = document.getElementById("userdrop");
+                if (userdrop.style.display === "block") {
+                    userdrop.style.display = "none";
+                }
+            });
+            $(".user-dropdown").click(function () {
+                var userdrop = document.getElementById("userdrop");
+                if (userdrop.style.display === "none") {
+                    userdrop.style.display = "block";
+                } else {
+                    userdrop.style.display = "none";
+                }
+                var logoutdrop = document.getElementById("logoutdrop");
+                if (logoutdrop.style.display === "block") {
+                    logoutdrop.style.display = "none";
+                }
+
+            });
+        });
+        function FormatValue(value) {
+
+            if (value == 0) {
+                return 0;
+            }
+            if (value <= 999) {
+                var val5 = (value / 1).toFixed(2);
+                return val5.toString();
+            }
+            if (value >= 1000 && value <= 999999) {
+                var val = (value / 1000).toFixed(2);
+                return (val + 'K').toString();
+            }
+            if (value >= 1000000 && value <= 999999999) {
+                var val1 = (value / 1000000).toFixed(2);
+                return (val1 + 'M').toString();
+            }
+            if (value >= 1000000000 && value <= 999999999999) {
+                var val2 = (value / 1000000000).toFixed(2);
+                return val2 + 'B';
+            }
+            return value;
+        }
+        function FormatValueYaxis(value) {
+
+            if (value == 0) {
+                return 0;
+            }
+            if (value <= 999) {
+                var val5 = (value / 1).toFixed();
+                return val5.toString();
+            }
+            if (value >= 1000 && value <= 999999) {
+                var val = (value / 1000).toFixed(1);
+                return (val + 'K').toString();
+            }
+            if (value >= 1000000 && value <= 999999999) {
+                var val1 = (value / 1000000).toFixed(1);
+                return (val1 + 'M').toString();
+            }
+            if (value >= 1000000000 && value <= 999999999999) {
+                var val2 = (value / 1000000000).toFixed(1);
+                return val2 + 'B';
+            }
+            return value;
+        }
+        function onRender(e) {
+            var loading = $(".chart-loading", e.sender.element.parent());
+            kendo.ui.progress(loading, false);
+            $(".k-loading-mask").css("display", "none");
+        }
+
+        $(document).ready(function () {
+            kendo.ui.progress($(".chart-loading"), true);
+        });
+        function SearchTextInGridviewControl(phrase, _id) {
+            var words = phrase.value.toLowerCase().split(" ");
+            var table = document.getElementById(_id);
+            var ele;
+            for (var r = 1; r < table.rows.length; r++) {
+                ele = table.rows[r].innerHTML.replace(/<[^>]+>/g, "");
+                var displayStyle = 'none';
+                for (var i = 0; i < words.length; i++) {
+                    if (ele.toLowerCase().indexOf(words[i]) >= 0)
+                        displayStyle = '';
+                    else {
+                        displayStyle = 'none';
+                        break;
+                    }
+                }
+                table.rows[r].style.display = displayStyle;
+            }
+        }
+
+        function RaiseExeption(settingname, recommendedvalue, currentvalue) {
+            debugger; 
+            $("#cp1_lblSetting").html(settingname);
+            $("#cp1_lblCurrent").html(currentvalue);
+            $("#cp1_lblRecommended").html(recommendedvalue);
+            $('#raiseException').modal('show');
+        }
+        function dataBound(arg) {
+            //debugger;
+            if (arg.sender._data.length <= 0) {
+                arg.sender.element[0].parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(arg.sender.element[0].parentNode.parentNode.parentNode.parentNode);
+                return;
+            }
+            var servicename = $("#hdnSrvName").val();
+            var SubId = $("#hdnsubscriptionID").val();
+            arg.sender.tbody.find("tr[role='row']").each(function () {
+                rowData = arg.sender.dataItem(this);
+                var currentRow = $(this).closest("tr");
+                var BaseValue = rowData.BaseValue.replace(/\s/g, '').trim().toLowerCase();;
+                var CurrentValue = rowData.CurrentValue.replace(/\s/g, '').trim().toLowerCase();;
+                var MsitRecommendedValue = rowData.MSITRecommendedValue.replace(/\s/g, '').trim().toLowerCase();
+                var ServiceType = rowData.ServiceType;
+                var settingName = rowData.SettingName;
+                debugger;
+                if (rowData.RecommendedUrl == '#' || rowData.MSITRecommendedValue == "Not Applicable") {
+                    currentRow.find("td").eq(6).children("a").hide();
+                }
+                if (BaseValue != null && CurrentValue != null && MsitRecommendedValue != null) {
+                    if (BaseValue == CurrentValue && CurrentValue == MsitRecommendedValue) {
+                        var firstTDValue = currentRow.find("td").eq(5).children("button").hide();
+                        var link = currentRow.find("td").eq(5).children("a").hide();
+                    }
+                    else {
+                        if (CurrentValue == MsitRecommendedValue || MsitRecommendedValue == "notapplicable") {
+                            var firstTDValue = currentRow.find("td").eq(5).children("button").hide();
+                            var link = currentRow.find("td").eq(6).children("a").hide();
+                        }
+                        else {
+                            if (settingName != null || settingName != '' || settingName != 'undefined') {
+
+                                $.ajax({
+                                    url: '/AzureServicesSetting/ApprovedRejectedDetailsApplication',
+                                    type: 'Get',
+                                    data: { subscriptionID: SubId, settingName: settingName, ServiceType: ServiceType, ServiceName: servicename },
+                                    success: function (response) {
+                                        if (response.type == "Approved") {
+                                            debugger;
+
+                                            var firstTDValue = currentRow.find("td").eq(5).children("button").hide();
+                                            var nextElement = currentRow.find("td").eq(5).children("label").html(response.text).css("display", "block");
+                                        }
+                                        else if (response.type == "Rejected") {
+                                            var firstTDValue = currentRow.find("td").eq(5).children("button").hide();
+                                            var nextElement = currentRow.find("td").eq(5).children("label").html(response.text).css("display", "block");
+                                        }
+                                        else if (response.type == "Pending") {
+
+                                            var firstTDValue = currentRow.find("td").eq(5).children("button").hide();
+                                            var nextElement = currentRow.find("td").eq(5).children("label").html(response.text).css("display", "block");
+                                        }
+                                        else {
+
+                                            var firstTDValue = currentRow.find("td").eq(5).children("button").show();
+                                            var nextElement = currentRow.find("td").eq(5).children("label").html(response.text).css("display", "none");
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+
+                    }
+
+                }
+
+            });
+            if ($('#chkExcludeNotAvailable').is(':checked')) {
+                //var $rowsNo = $('#grdServiceSettings table tbody tr').filter(function () {
+                //    return $.trim($(this).find('td').eq(3).text()) === "Not Applicable"
+                //}).hide();
+                $('#content-wrapper').find('.k-grid').each(function () {
+                    debugger;
+                    $id = this;
+                    var $rowsNo = $('#' + this.id + ' table tbody tr').filter(function () {
+                        return $.trim($(this).find('td').eq(3).text()) === "Not Applicable"
+                    }).hide();
+                });
+            }
+            if (!arg.sender.dataSource.view().length) {
+                var colspan = e.sender.thead.find("th:visible").length, emptyRow = '<tr><td colspan="' + colspan + '">No Records Found</td></tr>';
+                e.sender.tbody.parent().width(e.sender.thead.width()).end().html(emptyRow);
+            }
+        }
+        function ExcludeProperties() {
+            //var $rowsNo = $('#grdServiceSettings table tbody tr').filter(function () {
+            //    return $.trim($(this).find('td').eq(3).text()) === "Not Applicable"
+            //}).toggle();
+
+            $('#content-wrapper').find('.k-grid').each(function () {
+                $id = this;
+                var $rowsNo = $('#' + this.id + ' table tbody tr').filter(function () {
+                    return $.trim($(this).find('td').eq(3).text()) === "Not Applicable"
+                }).toggle();
+            });
+        }
+
+        function CheckChartData(arg) {
+            debugger;
+            if (arg.sender.dataSource._data.length <= 0) {
+                arg.sender.element.context.parentNode.nextElementSibling.innerHTML = "<p>No Data Available</p>";
+                arg.sender.element.context.parentNode.nextElementSibling.classList.add('inner-box');
+                //arg.sender.element.context.parentNode.parentNode.parentNode.parentNode.style = "display:none";
+                arg.sender.element.context.id.style = "display:none";
+               
+            }
+        }
+     
+        function SetDynamicGap(id) {
+            var length = $("#" + id).data("kendoChart").dataSource._data.length;
+            if (length >= 5)
+                return 2;
+            else if (length == 3 || length == 4)
+                return 3;
+            else if (length < 4)
+                return 13;
+        }
+        $(document).ajaxStop(function () {
+            var i = 0;
+            $(".k-chart").each(function () {
+                if ($(".k-chart").parent()[i].localName == "div") {
+                    var id = this.id;
+                    var chart = $("#" + id).data("kendoChart"),
+                        firstSeries = chart.options.series;
+                    firstSeries[0].gap = parseFloat(SetDynamicGap(id));
+                    chart.redraw();
+                }
+                i++;
+            })
+        });
+        function removeDoubleLables(value) {
+            var text = value;
+            if (value % 1 !== 0) {
+                text = "";
+            }
+            return text;
+        }
+
+    </script>
+    <script src="/js/jquery-ui.min.js"></script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="raiseException" role="dialog" style="margin-top:12%">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+
+                                <tr>
+                                    <td style="margin: 5px; padding: 15px;">Setting Name:</td>
+                                    <td class="auto-style1">
+                                        <span id="cp1_lblSetting" style="font-weight:bold;"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td style="margin: 5px; padding: 15px;">Current Value:</td>
+                                    <td class="auto-style1">
+                                        <span id="cp1_lblCurrent" style="font-weight:bold;"></span>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td style="margin: 5px; padding: 15px;">Recommended Value:</td>
+                                    <td class="auto-style1">
+                                        <span id="cp1_lblRecommended" class="breakword" style="display:inline-block;font-weight:bold;width:350px;"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="margin: 5px; padding: 15px;">Description:</td>
+                                    <td class="auto-style1">
+                                        <textarea name="txtDescription" rows="2" cols="20" id="txtDescription" style="width:350px;"></textarea><br />
+                                        <span id="msg" style="color:red;"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <input type="submit" name="btnSave" value="Submit" id="btnSave" class="btn btn-info " style="width:140px;margin-left: 10px;">
+                        <input type="submit" name="btnCancel" value="Cancel" id="btnCancel" class="btn btn-info " style="width:140px;">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="licenseActivateModal">
+        <div class="modal-dialog" style="width:570px;">
+            <div class="modal-content">
+                <div class="clearfix overlay_inner" id="divLicenseLoader" style="display:none;">
+                    <div class="loader" style="height:120px; position:absolute; top:47%; left:47%"></div>
+                </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="display:inline-block;">License Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" style="color: #fff; opacity: 1;">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body clearfix" style="padding:0px !important;">
+                    <div class="col-sm-8 text-center padding15" style="border-right: 1px solid #dedede; background: aliceblue;">
+                        <a id="btnLicenseKey" href="#" class="btn btn-info" style="color:white">Enter License Key</a>
+                        <input type="text" id="txtLicense" placeholder="Enter License Key" class="form-control" style="max-width: 315px;" />
+                    </div>
+                    <div class="col-sm-4 text-center padding15" style="position:relative;"><div class="or">or</div><a target="_blank" href="https://www.cloudatlasinc.com/contact/" class="btn btn-info" style="color:white">Contact Us</a></div>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="btnActivate" type="button" class="btn btn-info" style="display:none;" onclick="fnValidateLicenceKey('protection@firewicca.com')">Activate</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ajaxComplete(function () {
+            $("#lblCountNotification").text("(" + $("#lblNotification").text() + ")");
+        });
+        $("#btnSave").click(function () {
+            $('#raiseException').css('display', 'none');
+            window.location.reload();
+
+        });
+        function openLicenseModal() {
+            $("#btnActivate").hide();
+            $("#txtLicense").hide();
+            $("#btnLicenseKey").show();
+            $("#txtLicense").val('');
+            $('#licenseActivateModal').modal({
+                backdrop: 'static',
+                keyboard: false,
+                show: true
+            });
+        }
+        
+        function fnValidateLicenceKey(user) {
+            var licencekey = $("#txtLicense").val();
+            if (licencekey == '') {
+                alert('Please Enter Licence Key')
+            }
+            else {
+                var user1 = user;
+                $.ajax({
+                    url: '/Subscriptions/fnValidateLicence',
+                    type: 'POST',
+                    data: { LicenceKey: licencekey, userid:user },
+                    dataType: 'json',
+                    success: function (response) {
+                        debugger;
+                        if (response == "true") { window.location.href = '/Subscriptions/Index?Type=ForTrial'; }
+                        else {
+                            alert("Licence Not Valid");
+                            window.location.href = '/Dashboard/NewDashboard';
+                        }
+                    },
+                    error: function (error) {
+
+                    }
+                });
+            }
+    }
+    </script>
+</body>
+
+</html>
