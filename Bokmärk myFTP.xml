@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Servers>
+	<Server>
+		<Name>http://webdav@192.168.1.65:8080</Name>
+		<Icon>3</Icon>
+		<Host>http://webdav@192.168.1.65:8080</Host>
+		<Type>0</Type>
+		<User></User>
+		<Password></Password>
+		<Timeout>0</Timeout>
+		<Encoding>0</Encoding>
+		<ForceIp>0</ForceIp>
+		<PasvMode></PasvMode>
+	</Server>
+</Servers>
