@@ -1,0 +1,238 @@
+# Toggle navigation  
+* [App](https://cocoapods.org/app)
+* [About](https://cocoapods.org/about)
+* [Guides](https://guides.cocoapods.org)
+* [Blog](https://blog.cocoapods.org)
+
+# The Podfile
+
+## [<](#what-is-a-podfile) What is a Podfile?
+
+The Podfile is a specification that describes the dependencies of the targets of one or more Xcode projects. The file should simply be named `Podfile`. All the examples in the guides are based on CocoaPods version 1.0 and onwards.
+
+> A Podfile can be very simple, this adds Alamofire to a single target:
+
+```
+target 'MyApp' do
+  use_frameworks!
+  pod 'Alamofire', '~> 3.0'
+end
+```
+
+> An example of a more complex Podfile linking an app and its test bundle:
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Artsy/Specs.git'
+
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+target 'MyApp' do
+  pod 'GoogleAnalytics', '~> 3.1'
+
+  # Has its own copy of OCMock
+  # and has access to GoogleAnalytics via the app
+  # that hosts the test target
+
+  target 'MyAppTests' do
+    inherit! :search_paths
+    pod 'OCMock', '~> 2.0.1'
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    puts target.name
+  end
+end
+```
+
+> If you want multiple targets to share the same pods, use an `abstract_target`.
+
+```
+# There are no targets called "Shows" in any Xcode projects
+abstract_target 'Shows' do
+  pod 'ShowsKit'
+  pod 'Fabric'
+
+  # Has its own copy of ShowsKit + ShowWebAuth
+  target 'ShowsiOS' do
+    pod 'ShowWebAuth'
+  end
+
+  # Has its own copy of ShowsKit + ShowTVAuth
+  target 'ShowsTV' do
+    pod 'ShowTVAuth'
+  end
+end
+```
+
+There is implicit abstract target at the root of the Podfile, so you could write the above example as:
+
+```
+pod 'ShowsKit'
+pod 'Fabric'
+
+# Has its own copy of ShowsKit + ShowWebAuth
+target 'ShowsiOS' do
+  pod 'ShowWebAuth'
+end
+
+# Has its own copy of ShowsKit + ShowTVAuth
+target 'ShowsTV' do
+  pod 'ShowTVAuth'
+end
+```
+
+### [<](#migrating-from-x-to-) Migrating from 0.x to 1.0
+
+We have a [blog post](http://blog.cocoapods.org/CocoaPods-1.0/) explaining the changes in depth.
+
+### [<](#specifying-pod-versions) Specifying pod versions
+
+> When starting out with a project it is likely that you will want to use the latest version of a Pod. If this is the case, simply omit the version requirements.
+
+```
+pod 'SSZipArchive'
+```
+
+> Later on in the project you may want to freeze to a specific version of a Pod, in which case you can specify that version number.
+
+```
+pod 'Objection', '0.9'
+```
+
+Besides no version, or a specific one, it is also possible to use logical operators:
+
+* `'> 0.1'` Any version higher than 0.1
+* `'>= 0.1'` Version 0.1 and any higher version
+* `'< 0.1'` Any version lower than 0.1
+* `'<= 0.1'` Version 0.1 and any lower version
+
+In addition to the logic operators CocoaPods has an optimistic operator `~>`:
+
+* `'~> 0.1.2'` Version 0.1.2 and the versions up to 0.2, not including 0.2 and higher
+* `'~> 0.1'` Version 0.1 and the versions up to 1.0, not including 1.0 and higher
+* `'~> 0'` Version 0 and higher, this is basically the same as not having it.
+
+For more information, regarding versioning policy, see:
+
+* [Semantic Versioning](http://semver.org)
+* [RubyGems Versioning Policies](http://guides.rubygems.org/patterns/#semantic-versioning)
+* There's a great video from Google about how this works: ["CocoaPods and the Case of the Squiggly Arrow (Route 85)"](https://www.youtube.com/watch?v=x4ARXyovvPc).
+
+## [<](#using-the-files-from-a-folder-local-to-the-machine) Using the files from a folder local to the machine.
+
+> If you would like to develop a Pod in tandem with its client project you can use `:path`.
+
+```
+pod 'Alamofire', :path => '~/Documents/Alamofire'
+```
+
+Using this option CocoaPods will assume the given folder to be the root of the Pod and will link the files directly from there in the Pods project. This means that your edits will persist between CocoaPods installations. The referenced folder can be a checkout of your favourite SCM or even a git submodule of the current repo.
+
+Note that the `podspec` of the Pod file is expected to be in that the designated folder.
+
+### [<](#from-a-podspec-in-the-root-of-a-library-repo) From a podspec in the root of a library repo.
+
+Sometimes you may want to use the bleeding edge version of a Pod, a specific revision or your own fork. If this is the case, you can specify that with your pod declaration.
+
+> To use the `master` branch of the repo:
+
+```
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
+```
+
+> To use a different branch of the repo:
+
+```
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'dev'
+```
+
+> To use a tag of the repo:
+
+```
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '3.1.1'
+```
+
+> Or specify a commit:
+
+```
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :commit => '0f506b1c45'
+```
+
+It is important to note, though, that this means that the version will have to satisfy any other dependencies on the Pod by other Pods.
+
+The `podspec` file is expected to be in the root of the repo, if this library does not have a `podspec` file in its repo yet, you will have to use one of the approaches outlined in the sections below.
+
+## [<](#external-resources) [<](#external-resources) External resources
+
+* [Non-trivial Podfile in Artsy/Eigen](https://github.com/artsy/eigen/blob/master/Podfile)
+* [Podfile for a Swift project in Artsy/Eidolon](https://github.com/artsy/eidolon/blob/master/Podfile)
+
+  
+
+* [Home](../index.html)
+* [Using CocoaPods](index.html)
+* The Podfile
+
+### [Using CocoaPods](index.html)
+
+* [Getting Started](getting-started.html)
+* [pod install vs. pod update](pod-install-vs-update.html)
+* [Using CocoaPods](using-cocoapods.html)
+* [The Podfile](the-podfile.html)
+* [Troubleshooting](troubleshooting.html)
+* [F.A.Q](faq.html)
+* [Testing with CocoaPods](test-specs.html)
+* [Using a Gemfile](a-gemfile.html)
+
+### [Build with CocoaPods](../making/index.html)
+
+* [Making a CocoaPod](../making/making-a-cocoapod.html)
+* [Using Pod Lib Create](../making/using-pod-lib-create.html)
+* [Getting setup with Trunk](../making/getting-setup-with-trunk.html)
+* [Private Pods](../making/private-cocoapods.html)
+* [Specs and the Specs Repo](../making/specs-and-specs-repo.html)
+
+### [Contributing](../contributing/index.html)
+
+* [How to Contribute](../contributing/contribute-to-cocoapods.html)
+* [Core Components](../contributing/components.html)
+* [Setting up for Development](../contributing/dev-environment.html)
+* [Release Process](../contributing/release-process.html)
+* [Ticket handling](../contributing/tickets-handling.html)
+
+### [Plugins](../plugins/index.html)
+
+* [How to use CocoaPods plugins](../plugins/setting-up-plugins.html)
+* [Keeping Secrets](../plugins/environment-vars.html)
+* [Pre-compiling dependencies](../plugins/pre-compiling-dependencies.html)
+* [Optimise CI](../plugins/optimising-ci-times.html)
+* [Packaging Closed Source SDKs](../plugins/using-pods-for-closed-source-libs.html)
+
+### [Reference](/reference.html)
+
+* [Podfile Syntax](/syntax/podfile.html)
+* [Podspec Syntax](/syntax/podspec.html)
+* [Command-line Reference](/terminal/commands.html)
+
+#### CocoaPods is a project from
+
+[Dimitris Koutsogiorgas](https://twitter.com/dnkoutso), [Danielle Tomlinson](http://dantoml.com), [Orta Therox](http://orta.io), [Paul Beusterien](https://github.com/paulb777), [Samuel Giddins](http://segiddins.me), and [The CocoaPods Dev Team](https://cocoapods.org/about#team) with contributions from [many, many others](https://github.com/CocoaPods/Specs/graphs/contributors).
+
+#### Lovingly sponsored by
+
+[Artsy](https://artsy.net), [Button](http://www.usebutton.com), [Capital One](http://www.capitalone.io), [CircleCI](https://circleci.com), [Discontinuity](http://discontinuity.eu), [Fingertips](http://www.fngtps.com), [Google](https://developers.google.com), [Heroku](https://www.heroku.com), [Realm](https://realm.io), [RubyMotion](http://www.rubymotion.com), [Sauspiel](https://www.sauspiel.de), [Slack](https://www.slack.com), [SoundCloud](https://www.soundcloud.com), [Stripe](https://www.stripe.com), [Square](https://www.squareup.com), and [Technology Astronauts](http://www.technologyastronauts.ch).
+
+  
+
+* [Support](https://guides.cocoapods.org/using/troubleshooting.html)
+* [GitHub Repo](https://github.com/CocoaPods/CocoaPods)
+* [Web Properties Status](https://status.cocoapods.org)
+* [@CocoaPods](https://twitter.com/CocoaPods)
+* [Mailing List](https://groups.google.com/group/cocoapods)
+* [CocoaPods Dev Team](https://cocoapods.org/about)
+* [Podfile Docsumentation](https://guides.cocoapods.org/syntax/podfile.html)
+* [Legal / Conduct](https://cocoapods.org/legal)
