@@ -1,0 +1,280 @@
+#!python3
+'''
+This widget script shows a grid of shortcut buttons that launch URLs when tapped.
+
+The shortcut titles/URLs and the grid layout can be configured with the SHORTCUTS, COLS, ROWS variables.
+'''
+
+import appex, ui
+import os
+from math import ceil, floor
+
+# NOTE: The ROWS variable determines the number of rows in "compact" mode. In expanded mode, the widget shows all shortcuts.
+COLS = 3
+ROWS = 2
+
+# Each shortcut should be a dict with at least a 'title' and 'url' key. 'color' and 'icon' are optional. If set, 'icon' should be the name of a built-in image.
+SHORTCUTS = [
+	{
+		'title': 'New Email',
+		'url': 'mailto:',
+		'color': '#5e96ff',
+		'icon': 'iow:email_24'
+	},
+	{
+		'title': 'New Message',
+		'url': 'sms://',
+		'color': '#5ec0ff',
+		'icon': 'iow:chatbox_24'
+	},
+	{
+		'title': 'Pythonista',
+		'url': 'pythonista3://',
+		'color': '#45d3e8',
+		'icon': 'iow:chevron_right_24'
+	},
+	{
+		'title': 'Forum',
+		'url': 'http://forum.omz-software.com',
+		'color': '#4dd19d'
+	},
+	{
+		'title': 'Google',
+		'url': 'http://google.com',
+		'color': '#a9de31'
+	},
+	{
+		'title': 'DuckDuckGo',
+		'url': 'http://duckduckgo.com',
+		'color': '#ffd026'
+	},
+	{
+		'title': 'Amazon',
+		'url': 'http://amazon.com',
+		'color': '#ff8e13'
+	},
+	{
+		'title': 'eBay',
+		'url': 'http://ebay.com',
+		'color': '#ff4a09'
+	},
+]
+
+
+class LauncherView(ui.View):
+	def __init__(self, shortcuts, *args, **kwargs):
+		row_height = 110 / ROWS
+		super().__init__(
+			self,
+			frame=(0, 0, 300, ceil(len(shortcuts) / COLS) * row_height),
+			*args,
+			**kwargs
+		)
+		self.buttons = []
+		for s in shortcuts:
+			btn = ui.Button(
+				title=' ' + s['title'],
+				image=ui.Image(s.get('icon', 'iow:compass_24')),
+				name=s['url'],
+				action=self.button_action,
+				bg_color=s.get('color', '#55bcff'),
+				tint_color='#fff',
+				corner_radius=9
+			)
+			self.add_subview(btn)
+			self.buttons.append(btn)
+
+	def layout(self):
+		bw = self.width / COLS
+		bh = floor(self.height / ROWS) if self.height <= 130 else floor(110 / ROWS)
+		for i, btn in enumerate(self.buttons):
+			btn.frame = ui.Rect(i % COLS * bw, i // COLS * bh, bw, bh).inset(2, 2)
+			btn.alpha = 1 if btn.frame.max_y < self.height else 0
+
+	def button_action(self, sender):
+		import webbrowser
+		webbrowser.open(sender.name)
+
+
+def main():
+	widget_name = __file__ + str(os.stat(__file__).st_mtime)
+	v = appex.get_widget_view()
+	# Optimization: Don't create a new view if the widget already shows the launcher.
+	if v is None or v.name != widget_name:
+		v = LauncherView(SHORTCUTS)
+		v.name = widget_name
+		appex.set_widget_view(v)
+
+
+if __name__ == '__main__':
+	main(<p>JavaScript is disabled on your browser.</p>
+<br>
+<p>  Skip navigation links</p>
+<p>   </p>
+<br>
+<ul><li>Overview
+</li><li>Package
+</li><li>Class
+</li><li>Use
+</li><li>Tree
+</li><li>Deprecated
+</li><li>Index
+</li><li>Help
+</li></ul>
+<br>
+<ul><li>Prev Class
+</li><li>Next Class
+</li></ul>
+<br>
+<ul><li>Frames
+</li><li>No Frames
+</li></ul>
+<br>
+<ul><li>All Classes
+</li></ul>
+<br>
+<ul><li>Summary:
+</li><li>Nested |
+</li><li>Field |
+</li><li>Constr |
+</li><li>Method
+</li></ul>
+<br>
+<ul><li>Detail:
+</li><li>Field |
+</li><li>Constr |
+</li><li>Method
+</li></ul>
+<br>
+<p> </p>
+<p>ij.plugin</p>
+<p>Class Commands</p>
+<br>
+<ul><li>java.lang.Object
+<ul><li>	ij.plugin.Commands
+</li></ul>
+</li></ul>
+<br>
+<ul><li>	All Implemented Interfaces:
+</li><li>	PlugIn
+</li></ul>
+<hr>
+<br>
+<br>
+<p>public class Commands</p>
+<p>extends java.lang.Object</p>
+<p>implements PlugIn</p>
+<br>
+<br>
+<p>Runs miscellaneous File and Window menu commands.</p>
+<br>
+<ul><li>	
+</li></ul>
+<br>
+<p>Constructor Summary</p>
+<br>
+<p>Constructors   Constructor and Description   <a href="../../ij/plugin/Commands.html#Commands--">Commands</a> ()    </p>
+<ul><li>	
+</li></ul>
+<br>
+<p>Method Summary</p>
+<br>
+<p>All Methods Static Methods Instance Methods Concrete Methods   Modifier and Type Method and Description   static boolean <a href="../../ij/plugin/Commands.html#closeAll--">closeAll</a> () Closes all image windows, or returns 'false' if the user cancels the unsaved changes dialog box.</p>
+<p>void <a href="../../ij/plugin/Commands.html#run-java.lang.String-">run</a> (java.lang.String cmd) This method is called when the plugin is loaded.</p>
+<ul><li>		
+</li></ul>
+<br>
+<p>Methods inherited from class java.lang.Object</p>
+<br>
+<p>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</p>
+<br>
+<ul><li>	
+</li></ul>
+<br>
+<p>Constructor Detail</p>
+<br>
+<p>   </p>
+<br>
+<p>Commands</p>
+<br>
+<br>
+<p>public Commands()</p>
+<br>
+<br>
+<ul><li>	
+</li></ul>
+<br>
+<p>Method Detail</p>
+<br>
+<p>   </p>
+<br>
+<p>run</p>
+<br>
+<br>
+<p>public void run(java.lang.String cmd)</p>
+<br>
+<br>
+<p>Description copied from interface: <a href="../../ij/plugin/PlugIn.html#run-java.lang.String-">PlugIn</a></p>
+<p>This method is called when the plugin is loaded. 'arg', which may be blank, is the argument specified for this plugin in IJ_Props.txt.</p>
+<ul><li>			Specified by:
+</li><li>			<a href="../../ij/plugin/PlugIn.html#run-java.lang.String-">run</a> in interface <a href="../../ij/plugin/PlugIn.html">PlugIn</a>
+</li></ul>
+<br>
+<p>   </p>
+<br>
+<p>closeAll</p>
+<br>
+<br>
+<p>public static boolean closeAll(True)</p>
+<br>
+<br>
+<p>Closes all image windows, or returns 'false' if the user cancels the unsaved changes dialog box.</p>
+<br>
+<p>  Skip navigation links</p>
+<p>   </p>
+<br>
+<ul><li>Overview
+</li><li>Package
+</li><li>Class
+</li><li>Use
+</li><li>Tree
+</li><li>Deprecated
+</li><li>Index
+</li><li>Help
+</li></ul>
+<br>
+<ul><li>Prev Class
+</li><li>Next Class
+</li></ul>
+<br>
+<ul><li>Frames
+</li><li>No Frames
+</li></ul>
+<br>
+<ul><li>All Classes
+</li></ul>
+<br>
+<ul><li>Summary:
+</li><li>Nested |
+</li><li>Field |
+</li><li>Constr |
+</li><li>Method
+</li></ul>
+<br>
+<ul><li>Detail:
+</li><li>Field |
+</li><li>Constr |
+</li><li>Method
+</li></ul>
+<br>
+<p> </p>
+<hr>
+<p><a href='files/Dangerfile'>Dangerfile</a></p>
+<br>
+<p><a href='files/Dangerfile%202'>Dangerfile 2</a></p>
+<p><a href='files/pythontex.pdf'>pythontex.pdf</a></p>
+<p><a href='files/LICENSE-CODE'>LICENSE-CODE</a></p>
+<p><a href='files/Dangerfile%203'>Dangerfile 3</a></p>
+<p><a href='files/2019%20Alexa%20Developer%20Year%20in%20Review:%20New%20Products%20and%20Features%20to%20Help%20You%20Build%20More%20with%20Alexa.html'>2019 Alexa Developer Year in Review: New Products and Features to Help You Build More with Alexa.html</a></p>
+<p><a href='files/AnalogClock.py'>AnalogClock.py</a></p>)
+https://web.archive.org/save/https://www.verajohn.se/
