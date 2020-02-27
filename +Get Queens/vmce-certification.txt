@@ -1,0 +1,617 @@
+# vmce-certification
+https://login.veeam.com/en/oauth?client_id=nXojRrypJ8&redirect_uri=https%3A%2F%2Fwww.veeam.com%2Fservices%2Fauthentication%2Fredirect_url&response_type=code&scope=profile&state=eyJmaW5hbFJlZGlyZWN0TG9jYXRpb24iOiJodHRwczovL3d3dy52ZWVhbS5jb20vdm1jZS1jZXJ0aWZpY2F0aW9uLmh0bWwifQ
+
+     
+1-800-691-1991 | 9am - 8pm ET
+
+[Contact Sales](/salesinc.html?ad=top-sub-menu) [Downloads](/downloads.html?ad=top-sub-menu) [Support](/support.html?ad=top-sub-menu) [Forums](https://forums.veeam.com/?ad=top-sub-menu) 
+
+EN
+* Localized Websites
+
+* Resource Pages
+	* [中文（繁體）](/tc)
+	* [한국어](/ko)
+
+  
+[Sign in]()       
+* [My Account](https://my.veeam.com/)
+* [My Cases](https://my.veeam.com/#/my-cases)
+* [Sign out](https://www.veeam.com/en/signout?redirect_uri=%2Fservices%2Fauthentication%2Flogout%3Fredirect_uri%3D%2Fen)
+
+    
+
+* Products
+
+	* [Why Veeam](/why-veeam.html?ad=menu-products)
+
+BACKUP + RECOVERY
+
+	* [Veeam Availability Platform](/availability-platform.html?ad=menu-products)
+	* [Veeam Availability Suite](/data-center-availability-suite.html?ad=menu-products)
+	* [Veeam Backup & Replication](/vm-backup-recovery-replication-software.html?ad=menu-products)
+
+*Workloads*
+
+Virtual   [VMware](/vmware-esx-backup.html?ad=menu-products)  |  [Hyper-V](/hyperv-backup-solution.html?ad=menu-products)  |  [AHV](/availability-nutanix-ahv.html?ad=menu-products)
+Cloud   [AWS](/aws-backup.html?ad=menu-products)  |  [Azure](/backup-azure.html?ad=menu-products)  |  [IBM](/ibm-cloud-solutions.html?ad=menu-products)  
+SaaS   [Microsoft Office 365](/backup-microsoft-office-365.html?ad=menu-products)
+Physical   [Windows](/windows-cloud-server-backup-agent.html?ad=menu-products)  |  [Linux](/linux-cloud-server-backup-agent.html?ad=menu-products)  |  [UNIX](/ibm-aix-oracle-solaris-backup.html?ad=menu-products)
+Applications   [Oracle](/oracle-backup-recovery-explorer.html?ad=menu-products)  |  [SAP](/backup-sap-hana-plugin.html?ad=menu-products)  |  [Microsoft](/application-availability-solutions.html?ad=menu-products)
+
+ORCHESTRATION & BC/DR
+
+	* [Veeam Availability Orchestrator](/availability-orchestrator.html?ad=menu-products)
+
+MONITORING & ANALYTICS
+
+	* [Veeam ONE](/virtualization-management-one-solution.html?ad=menu-products)
+	* [Veeam Management Pack for System Center](/system-center-management-pack-vmware-hyperv.html?ad=menu-products)
+
+SERVICE PROVIDERS PRODUCTS
+
+	* [Veeam Availability Console Free](/availability-console.html?ad=menu-products)
+	* [Veeam Cloud Connect for Service Providers](/cloud-connect-service-providers.html?ad=menu-products)
+
+	* [Product List](/vmware-esxi-vsphere-virtualization-tools-hyper-v-products.html?ad=menu-products)
+
+BACKUP FOR SMALL BUSINESS
+
+	* [Veeam Backup Essentials](/smb-vmware-hyper-v-essentials.html?ad=menu-products)
+
+FREE TOOLS
+
+	* [Veeam Backup & Replication Community Edition](/virtual-machine-backup-solution-free.html?ad=menu-products)
+	* [Veeam Agent for Microsoft Windows Free](/windows-endpoint-server-backup-free.html?ad=menu-products)
+	* [Veeam Backup for Microsoft Office 365 Community Edition](/free-backup-microsoft-office-365.html?ad=menu-products)
+	* [All Free Tools](/free-virtualization-software-vmware-hyper-v.html?ad=menu-products)
+
+* Solutions
+
+	* [Cloud Data Management](/cloud-data-management.html?ad=menu-solutions)
+
+CUSTOMER USE CASES
+
+	* [Modernizing Backup](/modern-backup-data-protection-solution.html?ad=menu-solutions)
+	* [Business Continuity & Disaster Recovery](/business-continuity.html?ad=menu-solutions)
+	* [Remote and Branch Offices](/remote-office-backup-recovery-solutions.html?ad=menu-solutions)
+	* [BaaS and DRaaS](/cloud-service-providers.html?ad=menu-solutions)
+
+SERVICE PROVIDER USE CASES
+
+	* [Infrastructure Protection](/solutions-service-providers.html?ad=menu-solutions#infrastructure-protection)
+	* [Off-Site Backup and Disaster Recovery](/solutions-service-providers.html?ad=menu-solutions#off-site-backup-and-dr)
+	* [Public Cloud Data Protection](/solutions-service-providers.html?ad=menu-solutions#public-cloud-data-protection)
+
+Cloud Solutions
+
+	* [Multi-Cloud Data Protection](/multi-cloud-enterprise.html?ad=menu-solutions)
+	* [Cloud Backup & DRaaS](/cloud-backup-solutions.html?ad=menu-solutions)
+	* [Cloud Data Retention](/cloud-data-retention-object-storage-integration.html?ad=menu-solutions)
+	* [Cloud Mobility](/cloud-mobility-restore.html?ad=menu-solutions)
+
+BUSINESS TYPE & INDUSTRIES
+
+	* [Healthcare](/healthcare-data-availability-solutions.html?ad=menu-solutions)
+	* [Federal Government (FED)](/federal.html?ad=menu-solutions)
+	* [State & Local Government/Education (SLED)](/sled.html?ad=menu-solutions)
+
+Partner Solutions
+
+	* [HPE + Veeam](/hpe-storage-solutions.html?ad=menu-solutions)
+	* [Microsoft + Veeam](/microsoft-cloud-solutions.html?ad=menu-solutions)
+	* [AWS + Veeam](/aws-backup-solutions.html?ad=menu-solutions)
+	* [Cisco + Veeam](/cisco-storage-solutions.html?ad=menu-solutions)
+	* [Dell EMC + Veeam](/dell-storage-solutions.html?ad=menu-solutions)
+	* [ExaGrid + Veeam](/exagrid-storage-solutions.html?ad=menu-solutions)
+	* [IBM + Veeam](/ibm-storage-solutions.html?ad=menu-solutions)
+	* [Lenovo + Veeam](/lenovo-storage-solution.html?ad=menu-solutions)
+	* [NetApp + Veeam](/netapp-storage-solutions.html?ad=menu-solutions)
+	* [Nutanix + Veeam](/nutanix-backup-solution.html?ad=menu-solutions)
+	* [Pure Storage + Veeam](/purestorage-flash-solutions.html?ad=menu-solutions)
+	* [Quantum + Veeam](/quantum-storage-solutions.html?ad=menu-solutions)
+
+* Resources             Training and Education
+
+	* [How to Videos](/how-to-videos.html?ad=menu-resources)
+	* [Free Online Training](/veeam-free-online-training.html?ad=menu-resources)
+	* [Course and Certifications](/vmce-training.html?ad=menu-resources)
+
+On-demand content
+
+	* [Analyst Reports](/resources-analysts-reports.html?ad=menu-resources)
+	* [White Papers](/whitepapers.html?ad=menu-resources)
+	* [Webinars](/videos.html?ad=menu-resources)
+
+	* [All Content](/resource-library.html?ad=menu-resources)
+
+Join Community
+
+	* [Veeam Community Forums](https://forums.veeam.com/?ad=menu-resources)
+	* [Veeam Blog](/blog/?ad=menu-resources)
+	* [Veeam User Group](https://go.veeam.com/user-groups?ad=menu-resources)
+
+Live Events
+
+	* [VeeamLive Show](/veeamlive.html?ad=menu-resources)
+	* [Experts Webinars](/webinars.html?ad=menu-resources)
+	* [Product Demos](/product-demo.html?ad=menu-resources)
+
+For Veeam Customers
+
+	* [Technical Documentation](/documentation-guides-datasheets.html?ad=menu-resources)
+	* [Knowledge Base](/kb_search_results.html?ad=menu-resources)
+	* [FAQs](/faq.html?ad=menu-resources)
+
+Customer Stories
+
+	* [Hard Rock Hotel & Casino](/success-stories/hard-rock-hotel-and-casino-success-story.html?ad=menu-resources)
+	* [Volvo](/success-stories/volvo-dealers-cruise-to-high-availability-with-simac-and-veeam.html?ad=menu-resources)
+	* [WWF](/success-stories/wwf-australia.html?ad=menu-resources)
+	* [View all](/success-stories.html?ad=menu-resources)
+
+* Partners
+
+* Become a Partner
+
+	* [Service Providers](/service-providers.html?ad=menu-partners)
+	* [Resellers](/propartner.html?ad=menu-partners)
+	* [Distributors](/veeam-distributors.html?ad=menu-partners)
+	* [Technology Alliance Partners](/alliance-partner-program.html?ad=menu-partners)
+	* [Global Systems Integrators](/global-systems-integrators.html?ad=menu-partners)
+
+Find a partner
+
+	* [Find a Service Provider](/find-a-veeam-cloud-provider.html?ad=menu-partners)
+	* [Find a Reseller](/buy-veeam-products-pricing.html?ad=menu-partners#find_a_reseller)
+	* [Find a Veeam Accredited Service Partner](/find-a-veeam-accredited-service-partner.html?ad=menu-partners)
+	* [Find a Veeam-Ready solution](/ready.html?ad=menu-partners)
+
+Already a Partner?
+
+	* [Log in to ProPartner Portal](https://propartner.veeam.com?ad=menu-partners)
+
+* Company
+
+* Company
+
+	* [About Veeam](/company/about.html?ad=menu-company)
+	* [Our Vision](/timeline.html?ad=menu-company)
+	* [Leadership Team](/management-team.html?ad=menu-company)
+	* [Careers](https://careers.veeam.com/?ad=menu-company)
+	* [Contacts](/contacts.html?ad=menu-company)
+
+Media
+
+	* [Press Releases](/news.html?ad=menu-company)
+	* [Awards](/awards.html?ad=menu-company)
+	* [Executive blog](/executive-blog/?ad=menu-company)
+	* [Press Kit](/newsroom.html?ad=menu-company)
+
+Community Experts
+
+	* [vExperts at Veeam](/vexperts.html?ad=menu-company)
+	* [MVPs at Veeam](/mvps.html?ad=menu-company)
+	* [Veeam Vanguards](/vanguard.html?ad=menu-company)
+
+Events
+
+	* [Industry Events](/events.html?ad=menu-company)
+	* [VeeamON](/veeamon?ad=menu-company)
+	* [VeeamON Virtual](/veeamon-virtual.html?ad=menu-company)
+
+* How To Buy            Need information?
+
+	* [How to buy](/buy-veeam-products-pricing.html?ad=menu-buy)
+	* [Veeam Universal License](/universal-licensing.html?ad=menu-buy)
+	* [Licensing FAQs](/licensing-policy.html?ad=menu-buy)
+	* [Special Offers](/veeam-special-offers.html?ad=menu-buy)
+
+Ready to buy?
+
+	* [Find a Reseller](/buy-veeam-products-pricing.html?ad=menu-buy#find_a_reseller)
+	* [Find Veeam-powered Services](/find-a-veeam-cloud-provider.html?ad=menu-buy)
+	* [Find a Veeam Accredited Service Partner](/find-a-veeam-accredited-service-partner.html?ad=menu-buy)
+	* [Renew Veeam Support](/renewal.html?ad=menu-buy)
+
+                    
+
+[FREE TRIAL](/data-center-availability-suite.html?ad=free_trial_sticky) 
+
+* Products      [Products]()
+
+	* [Why Veeam](/why-veeam.html?ad=menu-products)
+	* BACKUP + RECOVERY
+
+		* [Veeam Availability Platform](/availability-platform.html?ad=menu-products)
+		* [Veeam Availability Suite](/data-center-availability-suite.html?ad=menu-products)
+		* [Veeam Backup & Replication](/vm-backup-recovery-replication-software.html?ad=menu-products)
+
+	* ORCHESTRATION & BC/DR
+
+		* [Veeam Availability Orchestrator](/availability-orchestrator.html?ad=menu-products)
+
+	* BACKUP FOR SMALL BUSINESS
+
+		* [Veeam Backup Essentials](/smb-vmware-hyper-v-essentials.html?ad=menu-products)
+
+	* MONITORING & ANALYTICS
+
+		* [Veeam ONE](/virtualization-management-one-solution.html?ad=menu-products)
+		* [Veeam Management Pack for System Center](/system-center-management-pack-vmware-hyperv.html?ad=menu-products)
+
+	* SERVICE PROVIDERS PRODUCTS
+
+		* [Veeam Availability Console Free](/availability-console.html?ad=menu-products)
+		* [Veeam Cloud Connect for Service Providers](/cloud-connect-service-providers.html?ad=menu-products)
+
+	* FREE TOOLS
+
+		* [Veeam Backup & Replication Community Edition](/virtual-machine-backup-solution-free.html?ad=menu-products)
+		* [Veeam Agent for Microsoft Windows Free](/windows-endpoint-server-backup-free.html?ad=menu-products)
+		* [Veeam Backup for Microsoft Office 365 Community Edition](/free-backup-microsoft-office-365.html?ad=menu-products)
+		* [All Free Tools](/free-virtualization-software-vmware-hyper-v.html?ad=menu-products)
+
+	* [Product List](/vmware-esxi-vsphere-virtualization-tools-hyper-v-products.html?ad=menu-products)
+
+* Solutions      [Solutions]()
+
+	* [Cloud Data Management](/cloud-data-management.html?ad=menu-solutions)
+	* CUSTOMER USE CASES
+
+		* [Modernizing Backup](/modern-backup-data-protection-solution.html?ad=menu-solutions)
+		* [Business Continuity & Disaster Recovery](/business-continuity.html?ad=menu-solutions)
+		* [Remote and Branch Offices](/remote-office-backup-recovery-solutions.html?ad=menu-solutions)
+		* [BaaS and DRaaS](/cloud-service-providers.html?ad=menu-solutions)
+
+	* SERVICE PROVIDER USE CASES
+
+		* [Infrastructure Protection](/solutions-service-providers.html?ad=menu-solutions#infrastructure-protection)
+		* [Off-Site Backup and Disaster Recovery](/solutions-service-providers.html?ad=menu-solutions#off-site-backup-and-dr)
+		* [Public Cloud Data Protection](/solutions-service-providers.html?ad=menu-solutions#public-cloud-data-protection)
+
+	* Cloud Solutions
+
+		* [Multi-Cloud Data Protection](/multi-cloud-enterprise.html?ad=menu-solutions)
+		* [Cloud Backup & DRaaS](/cloud-backup-solutions.html?ad=menu-solutions)
+		* [Cloud Data Retention](/cloud-data-retention-object-storage-integration.html?ad=menu-solutions)
+		* [Cloud Mobility](/cloud-mobility-restore.html?ad=menu-solutions)
+
+	* BUSINESS TYPE & INDUSTRIES
+
+		* [Healthcare](/healthcare-data-availability-solutions.html?ad=menu-solutions)
+		* [Federal Government (FED)](/federal.html?ad=menu-solutions)
+		* [State & Local Government/Education (SLED)](/sled.html?ad=menu-solutions)
+
+	* Partner Solutions
+
+		* [HPE + Veeam](/hpe-storage-solutions.html?ad=menu-solutions)
+		* [Microsoft + Veeam](/microsoft-cloud-solutions.html?ad=menu-solutions)
+		* [AWS + Veeam](/aws-backup-solutions.html?ad=menu-solutions)
+		* [Cisco + Veeam](/cisco-storage-solutions.html?ad=menu-solutions)
+		* [Dell EMC + Veeam](/dell-storage-solutions.html?ad=menu-solutions)
+		* [ExaGrid + Veeam](/exagrid-storage-solutions.html?ad=menu-solutions)
+		* [IBM + Veeam](/ibm-storage-solutions.html?ad=menu-solutions)
+		* [Lenovo + Veeam](/lenovo-storage-solution.html?ad=menu-solutions)
+		* [NetApp + Veeam](/netapp-storage-solutions.html?ad=menu-solutions)
+		* [Nutanix + Veeam](/nutanix-backup-solution.html?ad=menu-solutions)
+		* [Pure Storage + Veeam](/purestorage-flash-solutions.html?ad=menu-solutions)
+		* [Quantum + Veeam](/quantum-storage-solutions.html?ad=menu-solutions)
+
+* Resources      [Resources]()
+
+	* Training and Education
+
+		* [How to Videos](/how-to-videos.html?ad=menu-resources)
+		* [Free Online Training](/veeam-free-online-training.html?ad=menu-resources)
+		* [Course and Certifications](/vmce-training.html?ad=menu-resources)
+
+	* On-demand content
+
+		* [Analyst Reports](/resources-analysts-reports.html?ad=menu-resources)
+		* [White Papers](/whitepapers.html?ad=menu-resources)
+		* [Webinars](/videos.html?ad=menu-resources)
+
+	* Join Community
+
+		* [Veeam Community Forums](https://forums.veeam.com/?ad=menu-resources)
+		* [Veeam Blog](/blog/?ad=menu-resources)
+		* [Veeam User Group](https://go.veeam.com/user-groups?ad=menu-resources)
+
+	* Live Events
+
+		* [VeeamLive Show](/veeamlive.html?ad=menu-resources)
+		* [Experts Webinars](/webinars.html?ad=menu-resources)
+		* [Product Demos](/product-demo.html?ad=menu-resources)
+
+	* For Veeam Customers
+
+		* [Technical Documentation](/documentation-guides-datasheets.html?ad=menu-resources)
+		* [Knowledge Base](/kb_search_results.html?ad=menu-resources)
+		* [FAQs](/faq.html?ad=menu-resources)
+
+	* Customer Stories
+
+		* [Hard Rock Hotel & Casino](/success-stories/hard-rock-hotel-and-casino-success-story.html?ad=menu-resources)
+		* [Volvo](/success-stories/volvo-dealers-cruise-to-high-availability-with-simac-and-veeam.html?ad=menu-resources)
+		* [WWF](/success-stories/wwf-australia.html?ad=menu-resources)
+		* [View all](/success-stories.html?ad=menu-resources)
+
+	* [All Content](/resource-library.html?ad=menu-resources)
+
+* Partners      [Partners]()
+
+	* Become a Partner
+
+		* [Service Providers](/service-providers.html?ad=menu-partners)
+		* [Resellers](/propartner.html?ad=menu-partners)
+		* [Distributors](/veeam-distributors.html?ad=menu-partners)
+		* [Technology Alliance Partners](/alliance-partner-program.html?ad=menu-partners)
+		* [Global Systems Integrators](/global-systems-integrators.html?ad=menu-partners)
+
+	* Find a partner
+
+		* [Find a Service Provider](/find-a-veeam-cloud-provider.html?ad=menu-partners)
+		* [Find a Reseller](/buy-veeam-products-pricing.html?ad=menu-partners#find_a_reseller)
+		* [Find a Veeam Accredited Service Partner](/find-a-veeam-accredited-service-partner.html?ad=menu-partners)
+		* [Find a Veeam-Ready solution](/ready.html?ad=menu-partners)
+
+	* Already a Partner?
+
+		* [Log in to ProPartner Portal](https://propartner.veeam.com?ad=menu-partners)
+
+* Company      [Company]()
+
+	* Company
+
+		* [About Veeam](/company/about.html?ad=menu-company)
+		* [Our Vision](/timeline.html?ad=menu-company)
+		* [Leadership Team](/management-team.html?ad=menu-company)
+		* [Careers](https://careers.veeam.com/?ad=menu-company)
+		* [Contacts](/contacts.html?ad=menu-company)
+
+	* Media
+
+		* [Press Releases](/news.html?ad=menu-company)
+		* [Awards](/awards.html?ad=menu-company)
+		* [Executive blog](/executive-blog/?ad=menu-company)
+		* [Press Kit](/newsroom.html?ad=menu-company)
+
+	* Community Experts
+
+		* [vExperts at Veeam](/vexperts.html?ad=menu-company)
+		* [MVPs at Veeam](/mvps.html?ad=menu-company)
+		* [Veeam Vanguards](/vanguard.html?ad=menu-company)
+
+	* Events
+
+		* [Industry Events](/events.html?ad=menu-company)
+		* [VeeamON](/veeamon?ad=menu-company)
+		* [VeeamON Virtual](/veeamon-virtual.html?ad=menu-company)
+
+* How To Buy      [How To Buy]()
+
+	* Need information?
+
+		* [How to buy](/buy-veeam-products-pricing.html?ad=menu-buy)
+		* [Veeam Universal License](/universal-licensing.html?ad=menu-buy)
+		* [Licensing FAQs](/licensing-policy.html?ad=menu-buy)
+		* [Special Offers](/veeam-special-offers.html?ad=menu-buy)
+
+	* Ready to buy?
+
+		* [Find a Reseller](/buy-veeam-products-pricing.html?ad=menu-buy#find_a_reseller)
+		* [Find Veeam-powered Services](/find-a-veeam-cloud-provider.html?ad=menu-buy)
+		* [Find a Veeam Accredited Service Partner](/find-a-veeam-accredited-service-partner.html?ad=menu-buy)
+		* [Renew Veeam Support](/renewal.html?ad=menu-buy)
+
+* [Downloads](/downloads.html?ad=top-sub-menu)
+* [Contact Sales](/salesinc.html?ad=top-sub-menu)
+* [Support](/support.html?ad=top-sub-menu)
+* [Forums](https://forums.veeam.com/?ad=top-sub-menu)
+* 
+
+* [Sign in]()
+* [My Account](https://my.veeam.com/)
+* [My Cases](https://my.veeam.com/#/my-cases)
+* [Sign out](https://www.veeam.com/en/signout?redirect_uri=%2Fservices%2Fauthentication%2Flogout%3Fredirect_uri%3D%2Fen)
+
+* English      [English]()
+
+	* Localized Websites
+	* Resource Pages
+
+		* [中文（繁體）](/tc)
+		* [한국어](/ko)
+
+          
+    
+
+* [Contact Sales](/salesinc.html?ad=top-sub-menu)
+* [Downloads](/downloads.html?ad=top-sub-menu)
+* [Support](/support.html?ad=top-sub-menu)
+* [Forums](https://forums.veeam.com/?ad=top-sub-menu)
+
+* [Sign in]()
+
+* [My Account](https://my.veeam.com/)
+* [My Cases](https://my.veeam.com/#/my-cases)
+* [Sign out](https://www.veeam.com/en/signout?redirect_uri=%2Fservices%2Fauthentication%2Flogout%3Fredirect_uri%3D%2Fen)
+
+  
+
+# Veeam Training and Certification
+
+Veeam Training
+
+* [Veeam Training Overview](/vmce-training.html)
+* Veeam Certification
+* [FAQ](/vmce-training-faq.html)
+* [My certification](/my-vmce-certification.html)
+
+* [Veeam Training and Education](/edservices.html)
+* Veeam Certification
+
+## Veeam Certification
+
+Veeam certifications do not demonstrate an individual’s ability to memorize and replicate training course content. Veeam exams test an individual’s capability to successfully perform a role in the real world.
+
+It is strongly recommended that before sitting an exam, an individual reviews the training course content, release notes, user guides, product demos, videos, etc.
+
+### Veeam Certified Engineer (VMCE)
+
+The VMCE certification is documented proof that an administrator or engineer has the necessary level of expertise to deploy, configure and manage Veeam Availability Suite.
+
+The exam tests knowledge provided in the [Veeam Certified Engineer training course](/vmce-training.html?ad=in-text-link#Veeam-Certified-Engineer), product release notes and user guides. It is recommended that exam takers have a minimum of six months professional experience prior to sitting the exam.
+
+Attending the [Veeam Certified Engineer training course](/vmce-training.html?ad=in-text-link#Veeam-Certified-Engineer) is required prior to sitting the VMCE exam.
+
+[Schedule Exam](/my-vmce-certification.html?ad=in-text-link) 
+
+### Veeam Certified Engineer-Advanced Design & Optimization (VMCE-ADO)
+
+The VMCE-ADO certification is documented proof that an administrator, engineer or architect has the necessary skills to design, deploy and optimize Veeam Availability Suite either in enterprise environments or in a professional services capacity.
+
+The exam tests knowledge provided in the [Veeam Certified Engineer-Advanced Design & Optimization training course](/vmce-training.html?ad=in-text-link#Veeam-Certified-Engineer-Advanced), product release notes and user guides. It is recommended that exam takers have extensive experience designing and deploying Veeam Availability Suite in a wide variety of environments prior to sitting the exam.
+
+Attending the [Veeam Certified Engineer-Advanced Design & Optimization training course](/vmce-training.html?ad=in-text-link#Veeam-Certified-Engineer-Advanced) is required prior to sitting the exam.
+
+[Schedule Exam](/my-vmce-certification.html?ad=in-text-link) 
+
+### Veeam Certified Architect (VMCA)
+
+The VMCA certification is documented proof that an individual has the necessary skills to manage all stages of a Veeam Availability Suite installation.
+
+It can only be achieved by possessing both the VMCE and VMCE-ADO certifications.
+
+### You can find additional resources at these links:
+
+[Documentation](/documentation-guides-datasheets.html?ad=in-text-link)
+
+Find answers to your questions with Veeam's technical documentation
+
+[Webinars](/webinars.html?ad=in-text-link)
+
+Check out our live recorded webinars for all products
+
+[Product demos](/product-demo.html?ad=in-text-link)
+
+See how our products work in real action to achieve the Always On Enterprise
+
+[Veeam Comunity Forum](https://forums.veeam.com/?ad=in-text-link)
+
+Get help for Veeam products and software
+
+How can we assist you today?
+
+### How can we assist you today?
+
+### Happy Holidays!
+
+Chat is offline now. Please fill out the form and we will call you back.
+
+#### Technical
+
+#### General and Licensing
+
+#### Renewal
+
+#### Sales
+
+#### Partnership
+
+Do you have an issue or need *post-sales* technical assistance?
+/*if you need help choosing the right product, please select "Sales" chat/
+
+Do you need guidance on the website, upgrade hints or help with your licenses/accounts?
+
+Questions regarding your Veeam contract renewal? Contact us and learn how you can maximize your savings
+
+Do you need additional license, pricing details, product information or have any other sales-related question?
+
+Would you like to become our partner or do you need assistance as our existing partner?
+
+[Open a case](https://my.veeam.com/#/my-cases) 
+[Start chat](#) 
+
+We apologize, but this chat is not available at the moment
+
+[Start chat](#) 
+
+We apologize, but this chat is not available at the moment
+
+[Start chat](#) 
+
+We apologize, but this chat is not available at the moment
+
+[Start chat](#) 
+
+We apologize, but this chat is not available at the moment
+
+*Privacy Notice.* By submitting your personal information it is subject to the [Veeam Privacy Policy](https://www.veeam.com/privacy-policy.html). 
+
+*Privacy Notice.* By submitting your personal information it is subject to the [Veeam Privacy Policy](https://www.veeam.com/privacy-policy.html).  
+
+[Technical Open a case](https://my.veeam.com/#/my-cases) [General and Licensing Start chat](#) [Renewal Start chat](#) [Sales Start chat](#) [Partnership Start chat](#) 
+
+[Back]()  
+
+### Please leave a message
+
+Sales Hotline will be out of service from 11 - 16 January. Please note that your request will be processed after the 17th of January.
+Full name
+You are  Customer Partner
+
+Phone number
+E-mail
+
+Message
+
+[Send](#) 
+
+### Thank you for your request!
+
+Veeam representative will get back to you shortly.
+
+  
+
+[Contact us   new message](#) 
+
+          
+Subscribe
+
+By subscribing I agree to receive product news and updates from Veeam and Veeam partners.
+By submitting your personal information it is subject to the [Veeam Privacy Policy](https://www.veeam.com/privacy-policy.html?ad=footer).  
+ [Company](/company/about.html?ad=footer)
+
+ [Products](/vmware-esxi-vsphere-virtualization-tools-hyper-v-products.html?ad=footer)
+
+ [Resources](/resource-library.html?ad=footer)
+
+ [Training and Education](/edservices.html?ad=footer)
+
+ [Partners](/propartner.html?ad=footer)
+
+ [Customer Stories](/success-stories.html?ad=footer)
+
+[Contact Veeam Sales](/salesinc.html?ad=footer)
+
+[Buy Veeam Products](/buy-veeam-products-pricing.html?ad=footer)
+
+[Renewals](/renewal.html?ad=footer)
+
+[License Management](https://my.veeam.com/?ad=footer#/licenses/production)
+
+[Support](https://my.veeam.com/?ad=footer#/my-cases)
+
+[Technical Documentation](/documentation-guides-datasheets.html?ad=footer)
+
+[Knowledge Base](/kb_search_results.html?ad=footer)
+
+                  
+©2020 Veeam® Software | [Privacy Policy & Cookies](/privacy-policy.html?ad=footer)  | [EULA](/eula.html?ad=footer)  | [Licensing Policy](/licensing-policy.html?ad=footer)
+
+*Our website uses cookies!*
+By continuing to use our website, you agree with our use of cookies in accordance with our [Cookie Policy](/privacy-policy.html?ad=cookie#cookie). You can reject cookies by changing your browser settings.
+
+OK, GOT IT
