@@ -1,0 +1,74 @@
+-AMB-RI-EL-: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Alexa-LED-Animation-Files-for-AVS-2: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Alexa-LED-Animation-Files-for-AVS: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+-Get-Queens-1: Fetch received nothing.
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (2)
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (3)
+
+Downloads: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+bitbucket: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+aledlexa-led-animation-files: Fetch received nothing.
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (4)
+
+-AMB-RI-EL-: Fetch received nothing.
+
+Alexa-LED-Animation-Files-for-AVS: Fetch received nothing.
+
+Alexa-LED-Animation-Files-for-AVS-2: Fetch received nothing.
+
+Downloads: Fetch received nothing.
+
+bitbucket: Fetch received nothing.
+
+bootstrap: No more authentication methods.
+
+The operation couldn’t be completed. (Git error -7.)
+Interpreting last error as: SSH connection rejected. Make sure SSH key is valid on bitbucket.org.
+azure-repos-vscode-clones-: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+-Get-Queens: Fetch received nothing.
+
+get-queens-2: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+GCDWebServer: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+mslearn-build-a-web-app-with-mean-on-a-linux-vm: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+starsfield: Doing password authentication for ESA-Security-Group
+
+azure-repos-vscode-clones-: Fetch received nothing.
+
+starsfield: Doing password authentication for ESA-Security-Group (2. time)
+
+GCDWebServer: Fetch received nothing.
+
+starsfield: Doing password authentication for ESA-Security-Group (3. time)
+
+get-queens: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+mslearn-build-a-web-app-with-mean-on-a-linux-vm: Fetch received nothing.
+
+fire: Fetch received nothing.
+
+webdaw: Fetch received nothing.
+
+starsfield: Doing password authentication for ESA-Security-Group (4. time)
+
+user rejected certificate for github.com
+Interpreting last error as: No way to authenticate with github.com
+get-queens: Fetch received nothing.
+
+get-queens-2: Fetch received nothing.
+
+failed to connect to 192.168.201.40: The operation couldn’t be completed. Operation timed out: 
+Interpreting last error as: The request timed out.
