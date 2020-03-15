@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>CBS.com Login</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/assets/build/css/oauth/v1/base-7d7aac7f82.min.css" />
+
+        
+        <script type="text/javascript" src="/assets/build/js/core-6bcf474d5af08953dd68.min.js"></script>
+        <script type="text/javascript" src="/assets/build/js/oauth-078ff1ae86fe014aa76c.min.js"></script>
+
+    </head>
+    <body>
+
+    <div id="body">
+        <header>
+            <a id="aa-logo">CBS All Access</a>
+        </header>
+
+        <div class="ext-auth login">
+
+    <section class="signup-aa hidden">
+        <h2>Sign up for CBS All Access</h2>
+        <a href="http://www.cbs.com/all-access/?cbscidmt=nfl&ftag=AAM-00-10acf7j" class="button btn-signup-aa" target="_blank" id="js-signup-aa">Try It FREE</a>
+    </section>
+
+    <section class="with-email">
+        <form id="js-oauth-login-form" method="post" enctype="application/x-www-form-urlencoded" data-redirect="/oauth/v1/client/authorize/?client_id=abROOUKm6SnPJGX9HqTL7wSfHTtZ2w3b&redirect_uri=https://clients3.google.com/cast/auth/3p/cbs/callback&response_type=code&scope=defaultScope&state=AOq5c5a9I-vN0bB5VYRn_UpBKAM5VOjrYxXz7ibrJ6sBBELy8duNCYlMEOVVuBQGVneJUZeL3zty3f6-ouDiI_AsgRy-6Ajdakl7_HXqv_MlxjPZ8xrP-sudHyHnEtYe9JgGX2jcNEx2DieXmJJ9BLFBmXgKYMFFDMcW58s03HRZOR2UrKsVtztWhwdgCfMJ7cizr82BWF0ihQArkqk2Wv8zuWHES5y9yiMJ5tQm5h2NwsIjPhBei0YN2tgNPcfedQRwUuGI7Shfn45_-oPNmgz4-1P6fOXRkm9u5zmLHLbeNrrtPkDN3MFbrFLZwJJ2ZRLcpmHGrsEQRAO2nu55beHKoFqinNywK4_yA-MiJhJ0Lo6BzFriW9F-_jvJ-fbhYGup10mZ2DZLpRXF3EKQwTjxv1SC">
+
+            <fieldset>
+
+                <legend>Login to CBS.com</legend>
+
+                <div class="">
+
+                    <div class="form-error hide"></div>
+
+                    <div>
+                        <input class="width284px" type="text" maxlength="80" id="j_username" name="j_username"
+                               placeholder="Email Address"/>
+                    </div>
+                    <div>
+                        <input class="width284px" type="password" maxlength="80" id="j_password" name="j_password"
+                               placeholder="Password"/>
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+            <input type="hidden" name="tk_trp" id="tk_trp" value="cWY5Nkc3d2w2cHZmd1NML1NnandhNlVqZ0VCc1V1SjZDUEhNTTZIVkJsVT0=">
+            <input type="button" class="btn-login" value="Login" id="js-submit-btn"/>
+
+            <a href="https://www.cbs.com/all-access/user/forgot-password/" target="_blank" class="forgot-password">Forgot Password?</a>
+
+        </form>
+
+    </section>
+
+</div>
+
+
+
+
+
+    </div>
+
+    </body>
+
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: {families: ['Lato:400,300,100:latin']}
+        };
+        if (typeof WebFontActiveCallbacks !== 'undefined') {
+            WebFontConfig.active = function() {
+                for (var i = 0; i < WebFontActiveCallbacks.length; i++) {
+                    WebFontActiveCallbacks[i]();
+                }
+            }
+        }
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+
+    </script>
+</html>
+
