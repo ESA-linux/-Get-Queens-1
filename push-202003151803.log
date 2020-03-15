@@ -1,0 +1,13 @@
+Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (2)
+
+Resolving deltas:   0% (0/5)
+Resolving deltas:  80% (4/5)
+Resolving deltas: 100% (5/5)
+Resolving deltas: 100% (5/5), done.
+
+error: GH007: Your push would publish a private email address.
+You can make your email public or disable this protection by visiting:
+http://github.com/settings/emails
+
