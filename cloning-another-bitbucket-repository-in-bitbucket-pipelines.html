@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<title>Cloning another Bitbucket repository in Bitbucket Pipelines - Bitbucket</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v13.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+<link rel="canonical" href="https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Cloning another Bitbucket repository in Bitbucket Pipelines - Bitbucket" />
+<meta property="og:description" content="This post was written by Bitbucket user Ayush Sharma.  I recently had a use-case where I wanted to clone another Bitbucket&hellip;" />
+<meta property="og:url" content="https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" />
+<meta property="og:site_name" content="Bitbucket" />
+<meta property="article:section" content="Community Writing" />
+<meta property="article:published_time" content="2020-03-06T18:57:52+00:00" />
+<meta property="article:modified_time" content="2020-03-06T18:58:24+00:00" />
+<meta property="og:updated_time" content="2020-03-06T18:58:24+00:00" />
+<meta property="og:image" content="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-1.png" />
+<meta property="og:image:secure_url" content="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-1.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This post was written by Bitbucket user Ayush Sharma.  I recently had a use-case where I wanted to clone another Bitbucket&hellip;" />
+<meta name="twitter:title" content="Cloning another Bitbucket repository in Bitbucket Pipelines - Bitbucket" />
+<meta name="twitter:image" content="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-1.png" />
+<script type='application/ld+json' class='yoast-schema-graph yoast-schema-graph--main'>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bitbucket.org/blog/#website","url":"https://bitbucket.org/blog/","name":"Bitbucket","inLanguage":"en-US","description":"The Git solution for professional teams. Collaborate on code in the cloud or on your servers.","potentialAction":{"@type":"SearchAction","target":"https://bitbucket.org/blog/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines#primaryimage","inLanguage":"en-US","url":"https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-1.png"},{"@type":"WebPage","@id":"https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines#webpage","url":"https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines","name":"Cloning another Bitbucket repository in Bitbucket Pipelines - Bitbucket","isPartOf":{"@id":"https://bitbucket.org/blog/#website"},"inLanguage":"en-US","primaryImageOfPage":{"@id":"https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines#primaryimage"},"datePublished":"2020-03-06T18:57:52+00:00","dateModified":"2020-03-06T18:58:24+00:00","author":{"@id":"https://bitbucket.org/blog/#/schema/person/67f0d5d3f733eaeee79f7e54667f64b8"}},{"@type":["Person"],"@id":"https://bitbucket.org/blog/#/schema/person/67f0d5d3f733eaeee79f7e54667f64b8","name":"Ayush Sharma","image":{"@type":"ImageObject","@id":"https://bitbucket.org/blog/#authorlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/b402e6ea3609d77fab2c878bb1e29e8b?s=96&d=mm&r=g","caption":"Ayush Sharma"},"sameAs":[]}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//atl-global.atlassian.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Bitbucket &raquo; Feed" href="https://bitbucket.org/blog/feed" />
+<link rel="alternate" type="application/rss+xml" title="Bitbucket &raquo; Comments Feed" href="https://bitbucket.org/blog/comments/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/bitbucket.wpengine.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.3"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-includes/css/dist/block-library/style.min.css?ver=5.2.3' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='bitbucket_blocks-cgb-style-css-css'  href='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/atlassian-components/dist/blocks.style.build.css?ver=5.2.3' type='text/css' media='all' />
+<link rel='stylesheet' id='prism-css-css'  href='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/syntax-highlighter-block/dist/prism/prism.css?ver=0.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='bitbucket-style-css'  href='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/themes/bitbucket/style.css?ver=1.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/jetpack/css/jetpack.css?ver=8.2.3' type='text/css' media='all' />
+<link rel='stylesheet' id='lbp_style-css'  href='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/lightbox-plus/css/shadowed/colorbox.min.css?ver=1.6.3' type='text/css' media='screen' />
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20191011'></script>
+<link rel='https://api.w.org/' href='https://bitbucket.org/blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://bitbucket.wpengine.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://bitbucket.org/blog/?p=4608' />
+<link rel="alternate" type="application/json+oembed" href="https://bitbucket.org/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbitbucket.org%2Fblog%2Fcloning-another-bitbucket-repository-in-bitbucket-pipelines" />
+<link rel="alternate" type="text/xml+oembed" href="https://bitbucket.org/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbitbucket.org%2Fblog%2Fcloning-another-bitbucket-repository-in-bitbucket-pipelines&#038;format=xml" />
+		<!-- OneTrust Cookies Consent Notice start -->
+		<script src="https://cdn.cookielaw.org/consent/ecf1dcec-418c-4be5-9466-f9cdc3bb91d1.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+			function OptanonWrapper() { }
+		</script>
+		<!-- OneTrust Cookies Consent Notice end -->
+			<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<link rel="icon" href="https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/cropped-android-chrome-512-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/cropped-android-chrome-512-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/cropped-android-chrome-512-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/cropped-android-chrome-512-1-270x270.png" />
+</head>
+
+<body class="post-template-default single single-post postid-4608 single-format-standard group-blog">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="container">
+			<div class="site-header__row row align-items-center no-gutters">
+				<div class="site-branding col-5 col-sm-4 col-md-6">
+											<p class="site-title">
+							<a href="https://bitbucket.org/blog/" rel="home"><span class="screen-reader-text">Bitbucket</span></a>
+						</p>
+									</div><!-- .site-branding -->
+
+				<div class="site-header-meta col col-sm-8 col-md-6">
+					<div class="row align-items-center justify-content-end no-gutters">
+						<div class="header-search">
+							<form role="search" method="get" class="search-form" action="https://bitbucket.org/blog/">
+	<div class="row no-gutters">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input type="text" class="search-field" name="s" id="search" placeholder="Search" value="" />
+		</label>
+		<button type="submit" class="search-submit">
+			<span class="screen-reader-text">Search</span>
+		</button>
+	</div>
+</form>
+						</div>
+						
+<div class="sharing">
+	<ul class="social">
+				<li class="social__item">
+			<a class="facebook" href="https://www.facebook.com/Atlassian/" title="Bitbucket on Facebook"></a>
+		</li>
+				<li class="social__item">
+			<a class="twitter" href="https://twitter.com/Bitbucket" title="Follow Bitbucket on Twitter"></a>
+		</li>
+				<li class="social__item">
+			<a class="youtube" href="https://www.youtube.com/user/GoAtlassian" title="Atlassian on YouTube"></a>
+		</li>
+			</ul>
+</div>					</div>
+				</div>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	
+	<div id="content" class="site-content">
+
+	<div class="container">
+		<div id="primary" class="content-area">
+			<main id="main" class="site-main" role="main">
+				
+<article id="post-4608" class="post-4608 post type-post status-publish format-standard hentry category-cloud category-community-writing">
+	<div class="row no-gutters justify-content-center">
+		<header class="entry-header post__header col-md-8">
+			<h1 class="entry-title">Cloning another Bitbucket repository in Bitbucket Pipelines</h1>
+			<div class="entry-meta">
+					<div class="author-card">
+		<div class="row">
+			<div class="author-card__image">
+				<a href="https://bitbucket.org/blog/author/a-sharma">
+					<img src="https://secure.gravatar.com/avatar/b402e6ea3609d77fab2c878bb1e29e8b?s=96&amp;d=mm&amp;r=g" alt="Ayush Sharma">
+				</a>
+			</div>
+			<div class="author-card__meta">
+				<a href="https://bitbucket.org/blog/author/a-sharma" class="author-card__name">Ayush Sharma</a>
+									<span class="post__date">March 06, 2020</span>
+											<span class="span-reading-time rt-reading-time"><span class="rt-label rt-prefix"></span> <span class="rt-time"> 2</span> <span class="rt-label rt-postfix">min read</span></span>												</div>
+		</div>
+	</div>
+				</div><!-- .entry-meta -->
+		</header><!-- .entry-header -->
+
+		<div class="post__thumbnail col-md-12">
+					</div>
+		<!-- /.post__featured-image -->
+
+		<div class="col-md-12">
+			<div class="row">
+				<div class="post__share col-md-2">
+					<div class="post__share-sticky position-sticky">
+						<p class="share-title">Share</p>
+							<ul class="social-share ">
+		<li class="social-share__item">
+			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" title="Share to Facebook" class="facebook"></a>
+		</li>
+		<li class="social-share__item">
+			<a target="_blank" href="http://twitter.com/share?text=Cloning%20another%20Bitbucket%20repository%20in%20Bitbucket%20Pipelines&#038;url=https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" title="Share to Twitter" class="twitter"></a>
+		</li>
+		<li class="social-share__item">
+			<a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&#038;title=Cloning%20another%20Bitbucket%20repository%20in%20Bitbucket%20Pipelines&#038;url=https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" title="Share to LinkedIn" class="linkedin"></a>
+		</li>
+	</ul>
+					</div>
+				</div>
+				<div class="post__content entry-content col-md-8">
+					<hr class="wp-block-separator"/><p style="text-align:center">
+  <em>This post was written by Bitbucket user Ayush Sharma. </em>
+</p>
+
+
+
+<hr class="wp-block-separator"/><p>I recently had a use-case where I wanted to clone another Bitbucket repository during a Pipelines execution. Doing this is very simple, but there is a lot of conflicting information online, so I thought I would document the steps here.</p>
+
+
+
+<p>Imagine a very simple Pipeline that looks like this:</p>
+
+
+
+<pre class="wp-block-code">
+  <code>pipelines:
+  default:
+    - step:
+        script:
+          - git clone git@bitbucket.org:ayushsharma/my-submodules.git
+</code>
+</pre>
+
+
+
+<p>The repository that triggers the Pipeline will need permission to clone <code>my-submodules</code>.</p>
+
+
+
+<h2 id="create-ssh-keys-for-the-main-repository">Create SSH keys for the main repository</h2>
+
+
+
+<p>In Bitbucket, go to the repository SSH keys page under <code>Settings &gt; Pipelines &gt; SSH keys</code>.</p>
+
+
+
+<figure class="wp-block-image">
+  <img src="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-1.png" alt="Cloning another Bitbucket repository in Bitbucket Pipelines - Settings &gt; Pipelines &gt; SSH keys"/>
+</figure><p>Next, click on <code>Generate keys</code> to let Bitbucket auto-generate a random, secure SSH key-pair. You can also upload a custom key-pair if you want.</p>
+
+
+
+<figure class="wp-block-image">
+  <img src="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-2.png" alt="Cloning another Bitbucket repository in Bitbucket Pipelines - Generate keys"/>
+</figure><p>Once completed, click <code>Copy public key</code>. We will need to paste this in the next step.</p>
+
+
+
+<h2 id="add-ssh-public-key-in-the-target-repository">Add SSH public key in the target repository</h2>
+
+
+
+<p>Go to the <code>my-submodules</code> repository. Under <code>Settings &gt; General &gt; Access keys</code>, you should see the option to add SSH public keys to gain read-only access.</p>
+
+
+
+<figure class="wp-block-image">
+  <img src="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-3.png" alt="Cloning another Bitbucket repository in Bitbucket Pipelines - Settings &gt; General &gt; Access keys"/>
+</figure><p>Click <code>Add key</code>, enter a label, and paste the public key we copied in the previous step.</p>
+
+
+
+<figure class="wp-block-image">
+  <img src="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-4.png" alt="Cloning another Bitbucket repository in Bitbucket Pipelines - Add key"/>
+</figure><p>Our main repository now has read-only permissions to clone <code>my-submodules</code> from within its Pipelines. After the above configuration, executing a build for the repository will show all-green.</p>
+
+
+
+<figure class="wp-block-image">
+  <img src="https://notes.ayushsharma.in/static/images/cloning-another-bitbucket-repo-5.png" alt="Cloning another Bitbucket repository in Bitbucket Pipelines - Successful deployment!"/>
+</figure><p>
+  <em><strong>Author bio:</strong> Ayush Sharma is a software engineer specializing in infrastructure and automation. In his free time he enjoys hot tea and a good book.</em>
+</p>
+
+
+
+<p>
+  <em>This post was originally posted in <a href="https://notes.ayushsharma.in/2019/05/automating-aws-lambda-deployments-using-bitbucket-pipelines-bitbucket-pipes">Ayush Sharma's Notes</a>.</em>
+</p>
+
+
+
+<p>Love sharing your technical expertise? Learn more about the <a href="https://bitbucket.org/product/write?utm_source=blog&amp;utm_medium=post&amp;utm_campaign=bottom-post">Bitbucket writing program</a>.</p>
+
+
+
+<div class="wp-block-bitbucket-cta bitbucket-cta text-center">
+  <a href="https://bitbucket.org/account/signup/" class="btn btn-primary">Get started, it’s free</a>
+</div>
+
+
+
+<p style="text-align:center">
+  <a href="https://bitbucket.org/account/admin/plans/">
+    <em>Looking to upgrade your Bitbucket Cloud plan?</em>
+  </a>
+</p>				</div><!-- .entry-content -->
+			</div>
+			<!-- /.row -->
+		</div>
+
+		<footer class="post__footer col-md-8">
+			<div class="pt-5 pb-1 text-center">
+					<ul class="social-share social-share--inline">
+		<li class="social-share__item">
+			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" title="Share to Facebook" class="facebook"></a>
+		</li>
+		<li class="social-share__item">
+			<a target="_blank" href="http://twitter.com/share?text=Cloning%20another%20Bitbucket%20repository%20in%20Bitbucket%20Pipelines&#038;url=https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" title="Share to Twitter" class="twitter"></a>
+		</li>
+		<li class="social-share__item">
+			<a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&#038;title=Cloning%20another%20Bitbucket%20repository%20in%20Bitbucket%20Pipelines&#038;url=https://bitbucket.org/blog/cloning-another-bitbucket-repository-in-bitbucket-pipelines" title="Share to LinkedIn" class="linkedin"></a>
+		</li>
+	</ul>
+			</div>
+
+			<div class="post__author">
+					<div class="author-card">
+		<div class="row">
+			<div class="author-card__image">
+				<a href="https://bitbucket.org/blog/author/a-sharma">
+					<img src="https://secure.gravatar.com/avatar/b402e6ea3609d77fab2c878bb1e29e8b?s=96&amp;d=mm&amp;r=g" alt="Ayush Sharma">
+				</a>
+			</div>
+			<div class="author-card__meta">
+				<a href="https://bitbucket.org/blog/author/a-sharma" class="author-card__name">Ayush Sharma</a>
+																</div>
+		</div>
+	</div>
+				</div>
+			<!-- /.post__author -->
+		</footer>
+
+		<div class="related-posts">
+					<div class="card-deck">
+					<div class="card related-post">
+				<div class="card-body">
+					<h2 class="post__title">
+						<a href="https://bitbucket.org/blog/continuous-delivery-for-django-projects-with-bitbucket-pipelines-and-ansible">
+							Continuous Delivery for Django projects with Bitbucket Pipelines and Ansible						</a>
+					</h2>
+
+					<div class="post__excerpt">
+						This post was written by Bitbucket user Augusto Destrero Introduction Ansible is a powerful tool for the automation of your server&hellip;					</div>
+
+						<div class="author-card">
+		<div class="row">
+			<div class="author-card__image">
+				<a href="https://bitbucket.org/blog/author/a-destrero">
+					<img src="https://secure.gravatar.com/avatar/5617ea64de89c39e1cbc5b124bb7d326?s=96&amp;d=mm&amp;r=g" alt="Augusto Destrero">
+				</a>
+			</div>
+			<div class="author-card__meta">
+				<a href="https://bitbucket.org/blog/author/a-destrero" class="author-card__name">Augusto Destrero</a>
+									<span class="post__date">December 23, 2019</span>
+											<span class="span-reading-time rt-reading-time"><span class="rt-label rt-prefix"></span> <span class="rt-time"> 2</span> <span class="rt-label rt-postfix">min read</span></span>												</div>
+		</div>
+	</div>
+					</div>
+			</div>
+						<div class="card related-post">
+				<div class="card-body">
+					<h2 class="post__title">
+						<a href="https://bitbucket.org/blog/deploying-an-angular-app-on-a-google-vm-using-bitbucket-pipelines">
+							Deploying an Angular app on a Google VM Using Bitbucket Pipelines						</a>
+					</h2>
+
+					<div class="post__excerpt">
+						Though Angular builds are easy, developers face issues when configuring deployments and setting up CI/CD pipelines. This post outlines the steps required...					</div>
+
+						<div class="author-card">
+		<div class="row">
+			<div class="author-card__image">
+				<a href="https://bitbucket.org/blog/author/amoosa">
+					<img src="https://secure.gravatar.com/avatar/e02075d2ac9aef8a4b0f23937e5759f5?s=96&amp;d=mm&amp;r=g" alt="Ash Moosa">
+				</a>
+			</div>
+			<div class="author-card__meta">
+				<a href="https://bitbucket.org/blog/author/amoosa" class="author-card__name">Ash Moosa</a>
+									<span class="post__date">April 30, 2019</span>
+											<span class="span-reading-time rt-reading-time"><span class="rt-label rt-prefix"></span> <span class="rt-time"> 2</span> <span class="rt-label rt-postfix">min read</span></span>												</div>
+		</div>
+	</div>
+					</div>
+			</div>
+						<div class="card related-post">
+				<div class="card-body">
+					<h2 class="post__title">
+						<a href="https://bitbucket.org/blog/bringing-speed-power-flexibility-12-new-features-bitbucket-pipelines">
+							Bringing you speed, power and flexibility with 12 new features in Bitbucket Pipelines.						</a>
+					</h2>
+
+					<div class="post__excerpt">
+						We launched Bitbucket Pipelines less than a year ago as a fully hosted CI/CD service that lives next to your code. By having&hellip;					</div>
+
+						<div class="author-card">
+		<div class="row">
+			<div class="author-card__image">
+				<a href="https://bitbucket.org/blog/author/cmaynard">
+					<img src="https://secure.gravatar.com/avatar/933e719a92ef6fea42123f9050580811?s=96&amp;d=mm&amp;r=g" alt="Claire Maynard">
+				</a>
+			</div>
+			<div class="author-card__meta">
+				<a href="https://bitbucket.org/blog/author/cmaynard" class="author-card__name">Claire Maynard</a>
+									<span class="post__date">August 22, 2017</span>
+											<span class="span-reading-time rt-reading-time"><span class="rt-label rt-prefix"></span> <span class="rt-time"> 2</span> <span class="rt-label rt-postfix">min read</span></span>												</div>
+		</div>
+	</div>
+					</div>
+			</div>
+					</div>
+				</div>
+	</div>
+	<!-- /.row -->
+</article><!-- #post-4608 -->
+
+			</main><!-- #main -->
+		</div><!-- #primary -->
+	</div>
+	<!-- /.container -->
+
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="container">
+			<div class="row">
+								<div class="col-md-3">
+					<div class="footer-primary-top">
+						<h5 class="footer-heading">Bitbucket</h5>
+						<div class="footer-menu footer-menu-primary"><ul id="menu-footer-primary" class="menu"><li id="menu-item-3774" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3774"><a href="https://bitbucket.org/">Bitbucket.org</a></li>
+<li id="menu-item-3775" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3775"><a href="https://developer.atlassian.com/bitbucket">API</a></li>
+<li id="menu-item-3776" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3776"><a href="http://status.bitbucket.org">Site status</a></li>
+</ul></div>					</div>
+				</div>
+				
+								<div class="col-md-3">
+					<div class="footer-primary-top">
+						<h5 class="footer-heading">Resources</h5>
+						<div class="footer-menu footer-menu-primary"><ul id="menu-footer-primary-right" class="menu"><li id="menu-item-3777" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3777"><a href="https://support.atlassian.com/help">Technical Support</a></li>
+<li id="menu-item-3778" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3778"><a href="https://confluence.atlassian.com/display/BITBUCKET">Documentation</a></li>
+<li id="menu-item-3779" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3779"><a href="https://bitbucket.org/product/pricing">Plans &#038; pricing</a></li>
+<li id="menu-item-3780" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3780"><a href="https://bitbucket.org/product/version-control-software">What is Version Control?</a></li>
+<li id="menu-item-3968" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3968"><a href="https://bitbucket.org/product/write">Bitbucket writing program</a></li>
+</ul></div>					</div>
+				</div>
+				
+				<div class="col-md-6">
+					
+<div class="sharing">
+	<ul class="social">
+				<li class="social__item">
+			<a class="facebook" href="https://www.facebook.com/Atlassian/" title="Bitbucket on Facebook"></a>
+		</li>
+				<li class="social__item">
+			<a class="twitter" href="https://twitter.com/Bitbucket" title="Follow Bitbucket on Twitter"></a>
+		</li>
+				<li class="social__item">
+			<a class="youtube" href="https://www.youtube.com/user/GoAtlassian" title="Atlassian on YouTube"></a>
+		</li>
+			</ul>
+</div>				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-md-8">
+					<div class="footer-logo">
+						<span class="screen-reader-text">Atlassian</span>
+					</div>
+					<div class="footer-menu footer-menu-secondary"><ul id="menu-footer-secondary" class="menu"><li id="menu-item-3781" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3781"><a href="http://www.atlassian.com/legal/privacy-policy">Privacy</a></li>
+<li id="menu-item-3782" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3782"><a href="http://www.atlassian.com/legal/customer-agreement">Terms of use</a></li>
+<li id="menu-item-3783" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3783"><a href="https://www.atlassian.com/trust">Trust</a></li>
+<li class="menu-item copyright">&copy; Copyright 2020</li></ul></div>				</div>
+				<div class="col-md-4 text-md-right">
+					<div class="footer-menu footer-menu-secondary"><ul id="menu-footer-secondary-right" class="menu"><li id="menu-item-3784" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3784"><a href="http://www.atlassian.com/software">View all Atlassian Products</a></li>
+</ul></div>				</div>
+			</div>
+		</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<div class="bitbucket-modal-wrap modal fade" id="bitbucket-modal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="icon-close"></i></span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				
+				<div id="consenthub-form-wrapper">
+					<div class="subscribe-body text-center">
+						<form method="post" enctype="multipart/form-data" id="consenthub-form">
+
+							<input type="hidden" name="action" value="atlassian_blog_process_consenthub" />
+
+							<header class="form-heading">
+								<h3 class="form-description">Subscribe to the Developer Newsletter</h3>
+							</header>
+
+							<div id="consenthub_error_msg"></div>
+
+							<div class="form-group">
+								<label class="sr-only" for="consenthub_email" >Email<span class="gfield_required">*</span></label>
+								<div class="form-controlform-input-container form-input-container-email">
+									<input name="consenthub_email" id="consenthub_email" type="text" value="" class="form-control large" tabindex="5" placeholder="Email Address" aria-required="true" aria-invalid="false" />
+								</div>
+							</div>
+
+							<div class="subscribe-footer">
+								<input type="hidden" id="consenthub_key" value="atlassian.developerEcosystemNewsletter" />
+								<input type="hidden" id="consenthub_success_msg" value="We know your inbox is protected space, so we promise to send only the good stuff, twice a month." />
+								<input type="submit" id="consenthub_form_submit" class="btn btn-success" value="Subscribe" tabindex="6" />
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+					</div>
+	</div>
+</div>
+
+	<div style="display:none">
+	</div>
+<!-- Lightbox Plus Colorbox v2.8/1.6.3 - 2013.01.24 - Message: 0-->
+<script type="text/javascript">
+jQuery(document).ready(function($){$("a[rel*=lightbox]").colorbox({initialWidth:"30%",initialHeight:"30%",maxWidth:"90%",maxHeight:"90%",opacity:0.8});function resizeColorBox()
+{if(jQuery('#cboxOverlay').is(':visible')){jQuery.colorbox.resize({width:'100%',height:'100%'})}}
+jQuery(window).resize(resizeColorBox);window.addEventListener("orientationchange",resizeColorBox,false);});</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var consenthub_settings = {"ajaxurl":"https:\/\/bitbucket.wpengine.com\/wp-admin\/admin-ajax.php","error_msg":"Please enter a valid email address","fail_msg":"An error occurred when submitting your information. Please try again later.","configurl":"https:\/\/preferences.atlassian.com\/rest\/forms\/config","formurl":"https:\/\/bitbucket.org\/blog\/cloning-another-bitbucket-repository-in-bitbucket-pipelines"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/atlassian-components//assets/dist/scripts.min.js?ver=1.0.1'></script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/syntax-highlighter-block/dist/prism/prism.min.js?ver=0.0.1'></script>
+<script type='text/javascript' src='https://secure.gravatar.com/js/gprofiles.js?ver=2020Maraa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/plugins/jetpack/modules/wpgroho.js?ver=5.2.3'></script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/themes/bitbucket/assets/dist/vendor/bootstrap.bundle.min.js?ver=5.2.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var bitbucket_banner_cookie = "";
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-content/themes/bitbucket/assets/dist/scripts.min.js?ver=0.0.1'></script>
+<script type='text/javascript' src='https://atl-global.atlassian.com/js/atl-global.min.js?ver=5.2.3'></script>
+<script type='text/javascript'>
+ace.analytics.Initializer.initWithPageAnalytics('9YrCDTjmflFzEw14CZleWhV8BIF1lqt9');
+</script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.3/jquery.colorbox-min.js?ver=1.6.3'></script>
+<script type='text/javascript' src='https://rlmr51w5rw3n7zek1m7tizzg-wpengine.netdna-ssl.com/wp-includes/js/wp-embed.min.js?ver=5.2.3'></script>
+		<script type="text/javascript">
+		var loadExternalJS = function(url, location, callback){
+			var scriptTag = document.createElement('script');
+			scriptTag.src = url;
+			scriptTag.type = 'text/javascript';
+			// Then bind the event to the callback function.
+			// There are several events for cross browser compatibility.
+			scriptTag.onreadystatechange = callback;
+			scriptTag.onload = callback;
+			// Fire the loading
+			location.appendChild(scriptTag);
+		};
+		function initializeATLAnalytics() {
+			if (typeof ace !== 'undefined') {
+				console.log('ATL analytics initialization started');
+				ace.analytics.Initializer.initWithPageAnalytics('9YrCDTjmflFzEw14CZleWhV8BIF1lqt9');
+			}
+		}
+		</script>
+		<script type="text/plain" class="optanon-category-2">
+			loadExternalJS( "https://atl-global.atlassian.com/js/atl-global.min.js", document.body, initializeATLAnalytics);
+		</script>
+	
+</body>
+</html>
