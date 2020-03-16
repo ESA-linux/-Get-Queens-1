@@ -1,0 +1,31 @@
+## Template parameters:
+## messages
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <%= $js.i18nStringHtml("upm.message.update.app.license.warning.header") %>
+        </h2>
+    </header>
+
+    <div class="aui-dialog2-content">
+        <p>
+            <span class="connect-update-intro">
+            	<%= $js.i18nStringHtml("upm.message.update.app.license.warning.explain") %>
+            </span>
+        </p>
+        <ul>
+            <!-- does not work with foreach -->
+            <% for (var i = 0; i < messages.length; i++) { %>
+               <li><%- messages[i] %></li>
+            <% } %>
+        </ul>
+    </div>
+
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.message.update.app.license.warning.action.accept")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.message.update.app.license.warning.action.reject")</button>
+        </div>
+    </footer>
+</section>

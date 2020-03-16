@@ -1,0 +1,37 @@
+## Template parameters:
+## plugin - the addon model
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.manage.uninstall.confirm.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <% if (plugin.atlassianConnect) { %>
+            <%
+                var pacResponse = plugin.pacResponse,
+                    privacyUrl = pacResponse &&
+                        ((pacResponse.versionDetails && pacResponse.versionDetails.privacyUrl) ||
+                         (pacResponse.links && pacResponse.links.privacy)),
+                    vendorName = plugin.vendor ? plugin.vendor.name : "$i18n.getText("upm.text.unknown")";
+            %>
+            <%= formats.format($js.i18nStringHtml("upm.manage.uninstall.remote.confirm"),
+                    formats.htmlEncode(plugin.name),
+                    formats.htmlEncode(environment.getApplicationName()),
+                    formats.htmlEncode(vendorName),
+                    privacyUrl ?
+                        formats.format($js.i18nStringHtml("upm.manage.uninstall.remote.data.privacy"),
+                            formats.htmlEncode(vendorName), privacyUrl) :
+                        '') %>
+        <% } else { %>
+            <%- formats.format($js.i18nStringHtml("upm.manage.uninstall.confirm"), environment.getApplicationName()) %>
+        <% } %>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.manage.uninstall.confirm.action")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.confirm.cancel")</button>
+        </div>
+    </footer>
+</section>

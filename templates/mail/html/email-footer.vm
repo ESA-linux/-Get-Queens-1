@@ -1,0 +1,11 @@
+#parse("templates/mail/html/email-resources.vm")
+#set($emailFooterHtml = $i18n.getText("upm.email.html.footer.notification", "$applicationProperties.getDisplayName()", "$userSettingsLink"))
+            </td>
+        </tr>
+        <tr valign="top">
+            <td style="color:${textSubtleColour};font-family:${textFontFamily};font-size:10px;line-height:14px;padding: 0 16px 16px 16px;text-align:center;">
+                $emailFooterHtml
+            </td>
+        </tr>
+    </table><!-- End #email-wrap -->
+</div><!-- End #email-body -->

@@ -1,0 +1,10 @@
+## Template parameters:
+## location:  "find" or "manage" (if it's neither, the link is omitted)
+
+<% if (location === 'find') { %>
+	<a href="<%- environment.getResourceUrl('marketplace') %>"
+	   class="back-breadcrumb">&#171; $i18n.getText("upm.goBack.find")</a>
+<% } else if (location === 'manage') { %>
+	<a href="<%- environment.getResourceUrl('manage') %>"
+	   class="back-breadcrumb">&#171; $i18n.getText("upm.goBack.manage")</a>
+<% } %>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>$i18n.getText("upm.purchased.addons.title")</title>
+    <meta name="decorator" content="atl.admin">
+    <meta name="admin.active.section" content="admin_plugins_menu/upm_section"/>
+    <meta name="admin.active.tab" content="upm-purchased-addons-link"/>
+    #parse("upm-macros.vm")
+    #baseWebResources("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-marketplace-resources")
+    $webResourceManager.requireResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-purchased-addons")
+    <content tag="selectedWebItem">confluence-upm-purchased-addons-menu</content>
+</head>
+<body>
+    #set($pageTitle = $i18n.getText("upm.purchased.addons.title"))
+    #set($marketplaceDescriptionWithHtml = $i18n.getText("upm.purchased.addons.description"))
+    #set($licenseCheckDescriptionWithHtml = $i18n.getText('upm.purchased.addons.check.description'))
+    #set($incompatiblePluginsFooterWithHtml = $i18n.getText('upm.purchased.addons.incompatible.footer', '$applicationProperties.getDisplayName()'))
+    #set($upmContainerClasses = "upm-marketplace upm-purchased-addons")
+
+    #parse("upm-resources.vm")
+    
+    <div id="upm-container" class="upm-$applicationProperties.getDisplayName().toLowerCase() $upmContainerClasses">
+
+        #if ($applicationProperties.getDisplayName().toLowerCase() != "confluence")
+        <h2>
+            <span id="upm-title">$pageTitle</span>
+        </h2>
+        #end
+
+        <div id="upm-messages" class="messages">
+            #if($nonProdLicenseTypeKey)
+                <div class="upm-purchased-addons-warning-notice aui-message warning">
+                    <p class="title">
+                        <span class="aui-icon icon-warning"></span>
+                        <strong>$i18n.getText("upm.purchased.addons.nonprod.title")</strong>
+                    </p>
+                    <p>$i18n.getText("$nonProdLicenseTypeKey")</p>
+                </div>
+            #elseif($genericWarningMessageKey)
+                <div class="upm-purchased-addons-warning-notice aui-message warning">
+                    <p class="title">
+                        <span class="aui-icon icon-warning"></span>
+                        <strong>$i18n.getText("upm.purchased.addons.unavailable.title")</strong>
+                    </p>
+                    #set($purchasedAddonsUnavailableWithHtml = $i18n.getText($genericWarningMessageKey))
+                    <p>$purchasedAddonsUnavailableWithHtml</p>
+                </div>
+            #end
+        </div>
+
+        <div id="upm-purchased-addons-header-default" class="hidden">
+            <p class="upm-description">
+                $marketplaceDescriptionWithHtml
+            </p>
+
+            <button class="aui-button aui-button-primary" id="upm-check-available-licenses">$i18n.getText('upm.purchased.addons.check.button')</button>
+        </div>
+
+        #upmPendingTaskStatus            
+
+        #upmSafeModeStatus
+
+        #upmMpacAvailabilityStatus
+
+        #upmBaseUrlStatus
+
+        <div id="upm-purchases-none" class="aui-message info hidden">
+            <p>
+                $i18n.getText("upm.purchased.addons.check.none", "$applicationProperties.getDisplayName()")
+            </p>
+        </div>
+        
+        <div id="upm-purchases-none-new" class="aui-message info hidden">
+            <p>
+                $i18n.getText("upm.purchased.addons.check.none.new", "$applicationProperties.getDisplayName()")
+            </p>
+        </div>
+        
+        <div id="upm-content"
+        	#if($nonProdLicenseTypeKey || $genericWarningMessageKey)
+        		class="hidden"
+        	#end>
+
+            <div id="upm-panel-install" class="upm-panel upm-selected">
+                <div id="upm-install-type">
+                    <input type="hidden" name="filter" id="filter" value="purchased" class="filter-input">
+                </div>
+            
+                <div id="upm-install-container-purchases" class="upm-install-type">
+                    <div id="upm-install-purchases" class="upm-install-plugin-list upm-plugin-list-container">
+                        <div class="upm-plugin-list install"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <form id="upm-mac-available-licenses-form" action="" method="post" class="hidden">
+        </form>
+        
+        <div id="upm-footer">
+            <p>$upmVersionTextWithHtml</p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+#macro( emailGreetings $profile )
+$i18n.getText("upm.email.body.greeting", "#getDisplayName($profile)")
+#end
+
+#macro (emailUserDisplay $profile)#getDisplayName($profile) ($profile.getEmail())#end
+
+#macro ( getDisplayName $profile)
+#if($profile.getFullName())$profile.getFullName()#else$profile.getUsername()#end
+#end
+
+#macro (getAppDisplay $instanceName)#if($instanceName)$applicationProperties.getDisplayName() ($instanceName)#else$applicationProperties.getDisplayName()#end#end
+
+#macro( emailClosing)
+$i18n.getText("upm.email.body.closing")
+
+$i18n.getText("upm.marketplace.title", "#getAppDisplay($instanceName)")
+#end
+

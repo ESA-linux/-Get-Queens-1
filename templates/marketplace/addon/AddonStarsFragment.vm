@@ -1,0 +1,16 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the stars/rating count element
+
+## Template parameters:
+## plugin - plugin representation, with "rating" and "ratingCount" properties
+
+#set($ratingTitleFormat = $esc.javascript($i18n.getText("upm.plugin.rating")))
+
+<div class="upm-plugin-rating-details">
+	<span class="upm-plugin-rating-container">
+	    <span class="upm-plugin-rating"
+	          style="width:<%-(plugin.rating * 15)%>px"
+	          title="<%- formats.format("$ratingTitleFormat", (plugin.rating + '').substr(0, 3), 4) %>"></span>
+	</span>
+	<span class="upm-plugin-rating-count">(<%- plugin.ratingCount %>)</span>
+</div>

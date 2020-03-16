@@ -1,0 +1,34 @@
+## Defaults for html email templates
+#set ($textFontFamily = "Arial,FreeSans,Helvetica,sans-serif")
+#set ($textSize = "12px")
+#set ($textColour = "#000000")
+#set ($textSubtleColour = "#505050")
+#set ($borderColour = "#bbbbbb")
+
+#macro( emailGreetings $profile )
+#set($greetingHtml = $i18n.getText("upm.email.body.greeting", "#getDisplayName($profile)"))
+$greetingHtml
+#end
+
+#macro (emailUserDisplay $profile)
+#set($nameHtml = "#getDisplayName($profile) ($profile.getEmail())") $nameHtml
+#end
+
+#macro ( getDisplayName $profile)
+#if($profile.getFullName())$profile.getFullName()#else$profile.getUsername()#end
+#end
+
+#macro (getAppDisplay $instanceName)
+#if($instanceName)
+$applicationProperties.getDisplayName() ($instanceName)
+#else
+$applicationProperties.getDisplayName()
+#end
+#end
+
+#macro( emailClosingHtml)
+$i18n.getText("upm.email.body.closing")
+<br><br>
+$i18n.getText("upm.marketplace.title", "#getAppDisplay($instanceName)")
+#end
+

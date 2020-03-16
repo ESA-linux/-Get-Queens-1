@@ -1,0 +1,168 @@
+#upm-panel-log {
+    padding: 15px 0;
+}
+
+.upm-audit-log-feed img {
+    margin: 0 2px -2px 2px;
+    vertical-align: top;
+}
+
+#upm-audit-log {
+    margin: 0 0 45px 0;
+}
+
+a.upm-audit-log-refresh {
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAgCAYAAAAbifjMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAY5JREFUeNrslLFLw1AQxpO2QxEpInVQOig4iDg4uuhf4OwsggRdHKQOgpOIiIgIisaAOAl2U4Tuzi5CqzgIDkKWIlJKqaKJ38n34PU1rUNGe/BLIO/d9+7dXc4Ow9CKYyl5OI4TtZYB/SAN6qDCd5Mlfd83v/WBBbADtsEKWATT4AM8gy+1OWE4Z8E+OAJD4BSsggKYBJdgA/Q0XUGzBpin4yZ41Q7aY1TrQMI+VAKyGADJpk3k/lVNWNYfwBIY47VuwIty/uZGVZJqm6RLRMdgGEyo0EItCl3EtF6+Rxj5jLrCGhgAebDFU2RzzRCoaeIB9+fl5F1wy9K8gZMIZ2W2llQRsVUZS5IQJinXxjljiCRFSAmI8wEYZZLGjR7JMdLQEAn0PjgDg6zzFLgGZSZtlpk/Z7NVohqpzua5Z+vOMZmf4I4RXID3lp/J6MQCmyTLlm0wuS294bquZcf9nRNWTEt5nmd1KNuf8yAqApkHy6AInsAjq3HFxKY7CXTnQXce/Md58HuXuPPgR4ABAESPoxorhujEAAAAAElFTkSuQmCC) 0 -16px no-repeat;
+    display: inline;
+    float: right;
+    height: 16px;
+    margin: 0;
+    width: 16px;
+}
+
+a.upm-audit-log-feed {
+    float: right;
+    margin-right: 5px;
+}
+
+a.upm-audit-log-refresh:hover {
+    background-position: 0 0;
+}
+
+a.upm-audit-log-refresh span {
+    display: none;
+}
+
+#upm-log-page td.date {
+    white-space: nowrap;
+}
+
+/* audit log pagination */
+
+#upm-audit-log-pagination {
+    margin-bottom: 0.5em;
+}
+
+#upm-audit-log-pagination a {
+    background: transparent url(data:image/gif;base64,R0lGODlhRQAqAMQVAN3d3c/PztHSz/H14jMzM9fY0tTV0e7y4OHj2PT45Nze1ezv3/P44+Hk2dnb1Obp3Ons3ZmZmQAAAMzMzGZmZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABUALAAAAABFACoAAAX/YCWOZGmeaKqubOu+MEmRQBRXdRsB9y6LM1Et+Bq2KD4YkgdsViaUKAwqZUUpE2U0WwlShlcXuLq6Ll3mnTdiJqrGZFU7WU6v2y24OzVn1q9sQHBibGFWgH5/S14iVHsrjkdbWlhOREYwmGV0aHSMIzkxoSucLpyPN6mqq6ytrq+wsbKpEjQ2orekiaaJtRW+OBTAYsItEl8xx36+vhESzzDO0CzPErnGz7fMAMLVxNXDKeDI2M9fzATg4SgA6eDlzwS7KOrTEu7eLO3q8PfzJ/W2dZumb+A6gNXIUUsIgJkIaQdTQCx3baE1EQ6FFMu0cYWyZAozCqmYh+SJUjp6rM1aybKly5cwY97gIoKBghs2WyhgcGMnCS40Dwig6UIo0RQTBByIkXRpo6cVEEyYCkMqVRZTJyCYMnXrk0YDCmQ9miLs2BZjCwxwkXYA0ABjyZ6AAPcs1rEBIKDF+zZuiwd1s+7NGuDB4KlwwRqwy2LAYsF3pxpYe3gyUBENILvIfBXS1AZcJ4D+SrrCgqExTss1kXQBUwGuoRJN4OAG7RYOEtzI/VOm79+uQgAAOw==) 0 0 no-repeat;
+    display: inline;
+    float: left;
+    height: 14px;
+    margin: 0 0.3em 0 0.3em;
+    width: 14px;
+}
+
+#upm-audit-log-pagination a.disabled {
+    cursor: default;
+}
+
+#upm-audit-log-pagination a span {
+    display: none;
+}
+
+#upm-audit-log-pagination a.first-log-page {
+    background-position: 0 0;
+}
+
+#upm-audit-log-pagination a.first-log-page:hover {
+    background-position: 0 -14px;
+}
+
+#upm-audit-log-pagination a.first-log-page.disabled {
+    background-position: 0 -28px;
+}
+
+#upm-audit-log-pagination a.previous-log-page {
+    background-position: -20px 0;
+}
+
+#upm-audit-log-pagination a.previous-log-page:hover {
+    background-position: -20px -14px;
+}
+
+#upm-audit-log-pagination a.previous-log-page.disabled {
+    background-position: -20px -28px;
+}
+
+#upm-audit-log-pagination a.next-log-page {
+    background-position: -40px 0;
+}
+
+#upm-audit-log-pagination a.next-log-page:hover {
+    background-position: -40px -14px;
+}
+
+#upm-audit-log-pagination a.next-log-page.disabled {
+    background-position: -40px -28px;
+}
+
+#upm-audit-log-pagination a.last-log-page {
+    background-position: -60px 0;
+}
+
+#upm-audit-log-pagination a.last-log-page:hover {
+    background-position: -60px -14px;
+}
+
+#upm-audit-log-pagination a.last-log-page.disabled {
+    background-position: -60px -28px;
+}
+
+.upm-audit-log-count {
+    display: inline;
+    float: left;
+    font-size: 0.95em;
+}
+
+/* Audit Log configuration */
+
+.upm-log-policy {
+    margin-bottom: 10px
+}
+
+.upm-purge-options h3 {
+    margin-top: 20px;
+}
+
+.upm-purge-options form {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: block;
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.upm-purge-options > form.aui .field-group {
+    padding-left: 145px;
+}
+
+.upm-purge-options > form.aui .field-group label {
+    left: auto;
+}
+
+.upm-purge-options form.aui > .buttons-container {
+    border: none;
+}
+
+#upm-container div.upm-purge-options > form.aui > div.buttons-container > div.buttons {
+    padding: 0
+}
+
+.upm-log-configuration-days {
+    margin: 0 0.2em 0 0.2em;
+    width: 3em;
+}
+
+.upm-purge-options form.aui .aui-message {
+    margin-bottom: 10px;
+}
+
+.upm-purge-options form.aui .error {
+    background-color: #d04437;
+    border-color: #d04437;
+}
+
+.upm-purge-options form.aui .error p {
+    color: #FFF;
+    font-size: 14px;
+}

@@ -1,0 +1,74 @@
+## Template parameters:
+## type - must be "user-installed", "system", "paid-via-atlassian", "applications", or "action-required"
+
+<%
+    var headings = {
+            "action-required": $js.i18nStringHtml("upm.manage.action.required"),
+            "applications": $js.i18nStringHtml("upm.manage.applications"),
+            "paid-via-atlassian": $js.i18nStringHtml("upm.manage.paid.via.atlassian"),
+            "system": $js.i18nStringHtml("upm.manage.system"),
+            "user-installed": $js.i18nStringHtml("upm.manage.user.installed")
+        },
+        descriptions = {
+            "action-required": $js.i18nStringHtml("upm.manage.action.required.description"),
+            "applications": environment.pathToManageApplicationsPage() ?
+                    $js.i18nStringHtml("upm.manage.applications.description.server.sysadmin") :
+                    $js.i18nStringHtml("upm.manage.applications.description.server.admin"),
+            "paid-via-atlassian": $js.i18nStringHtml("upm.manage.paid.via.atlassian.description"),
+            "system": $js.i18nStringHtml("upm.manage.system.description.server")
+        },
+        emptyMessages = {
+            "action-required": $js.i18nStringHtml("upm.plugins.notFoundActionRequired"),
+            "applications": $js.i18nStringHtml("upm.plugins.notFoundApplications"),
+            "paid-via-atlassian": $js.i18nStringHtml("upm.plugins.notFoundMarketplace"),
+            "user-installed": $js.i18nStringHtml("upm.plugins.notFoundManageUserInstalled")
+        };
+%>
+
+<div class="upm-plugin-list-container" id="upm-manage-plugins-<%- type %>">
+    <h3><%- headings[type] %></h3>
+    <div>
+        <% if (type === 'action-required') { %>
+            <div class="upm-plugin-actions hidden upm-toolbar" id="upm-update-all-container">
+                <div class="toolbar-group">
+                    <a class="aui-button<% if (environment.isSafeMode()) { %> disabled<% } %>"
+                       id="upm-update-all" href="#"
+                       <% if (environment.isSafeMode()) { %> aria-disabled="true"<% } %>>
+                        $i18n.getText("upm.update.update.all")
+                    </a>
+                </div>
+            </div>
+        <% } %>
+        <% if (descriptions[type]) { %>
+            <%
+                var desc = formats.format(descriptions[type], environment.getApplicationName(),
+                    environment.pathToManageApplicationsPage());
+            %>
+            <% if (type === 'system' || type === 'applications') { %>
+                <div class="aui-message warning upm-bundled-summary">
+                    <span class="aui-icon icon-warning"></span>
+                    <div><%= desc %></div>
+                </div>
+            <% } else { %>
+                <p class="upm-section-description">
+                    <%= desc %>
+                </p>
+            <% } %>
+        <% } %>
+        <div class="upm-manage-plugin-list">
+            <div class="upm-plugin-list expandable"></div>
+        </div>
+        <div class="empty-filtered-list-message upm-plugin-list hidden">
+            <p class="upm-info filter-info">
+                $i18n.getText("upm.plugins.notFoundFilter")
+            </p>
+        </div>
+        <div class="empty-list-message hidden">
+            <% if (emptyMessages[type]) { %>
+                <p class="upm-info">
+                    <%- formats.format(emptyMessages[type], environment.getApplicationName()) %>
+                </p>
+            <% } %>
+        </div>
+    </div>
+</div>

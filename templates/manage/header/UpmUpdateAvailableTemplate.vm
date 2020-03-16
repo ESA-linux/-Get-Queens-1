@@ -1,0 +1,6 @@
+
+#set($selfUpdateWithHtml = $i18n.getText("upm.update.self.update"))
+
+<div id="upm-self-update-msg" class="upm-update-msg">
+    <p>$selfUpdateWithHtml</p>
+</div>

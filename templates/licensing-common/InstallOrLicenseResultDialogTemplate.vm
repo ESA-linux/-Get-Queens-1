@@ -1,0 +1,141 @@
+## Template parameters:
+## plugin - the plugin representation
+## errorHtml - error message, if any
+## newLicense - license that has just been installed, if any
+## isInstall - true if we were installing an add-on
+## isUpdate - true if we were updating an already-installed add-on
+## nextAction - what kind of action button to provide, if any:  must be "new-license", "manage-license", or "get-started"
+## updateForDisabledPlugin - true if this is an update and the add-on was enabled prior to the update, but isn't now
+
+#set($unrecognizedModuleTypesHtml = $i18n.getText("upm.messages.install.unrecognisedModuleTypes"))
+
+<section role="dialog" id="upm-plugin-status-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (errorHtml) { %>
+                $i18n.getText("upm.plugin.license.error.heading")
+            <% } else { %>
+                <% if (plugin.incompatible) { %>
+                    <% if (environment.isDataCenter() && !plugin.statusDataCenterCompatible) { %>
+                        $i18n.getText("upm.messages.install.success.but.datacenter.incompatible.heading")
+                    <% } else { %>
+                        $i18n.getText("upm.messages.install.success.but.incompatible.heading")
+                    <% } %>
+                <% } else if (isUpdate) { %>
+                    $i18n.getText("upm.messages.update.success.heading")
+                <% } else if (newLicense && newLicense.evaluation) { %>
+                    $i18n.getText("upm.messages.install.eval.heading")
+                <% } else if (isInstall) { %>
+                    $i18n.getText("upm.messages.install.success.heading")
+                <% } else { %>
+                    $i18n.getText("upm.messages.install.purchased.heading")
+                <% } %>
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        #parse("templates/common/AddonBrandingFragment.vm")
+        <div class="message">
+            <p>
+                <% if (errorHtml) { %>
+                    <%= errorHtml %>
+                <% } else if (nextAction === 'new-license') { %>
+                    <%- formats.format(plugin.atlassianConnect ? $js.i18nStringHtml("upm.messages.update.licensing.required.remotable") : 
+                            $js.i18nStringHtml("upm.messages.update.licensing.required"),
+                            plugin.name, plugin.version) %>
+                <% } else if (nextAction === 'manage-license') { %>
+                    $i18n.getText("upm.messages.install.licensing.required")                
+                <% } else if (plugin.incompatible) { %>
+                    <% if (environment.isDataCenter() && !plugin.statusDataCenterCompatible) { %>
+                        <%- formats.format($js.i18nStringHtml("upm.messages.install.success.but.datacenter.incompatible"), environment.getApplicationName()) %>
+                        <% if (plugin.links['request-update']) { %>
+                            <%= formats.format(
+                                    $js.i18nStringHtml("upm.messages.install.success.but.datacenter.incompatible.2"),
+                                    formats.htmlEncode(plugin.key)) %>
+                        <% } %>
+                    <% } else { %>
+                        <%- formats.format($js.i18nStringHtml("upm.messages.install.success.but.incompatible"), environment.getApplicationName()) %>
+                    <% } %>
+                <% } else if (!plugin.enabledByDefault && !newLicense) { %>
+                    $i18n.getText("upm.messages.install.notEnabledByDefault")
+                <% } else if (updateForDisabledPlugin) { %>
+                    $i18n.getText("upm.messages.install.notEnabled")
+                <% } else if (isInstall && plugin.licenseDetails && !newLicense) { %>
+                    <% if (plugin.licenseDetails.evaluation) { %>
+                        <% if (nextAction === 'get-started') { %>
+                            $i18n.getText('upm.messages.install.success.already.evaluating.nextstep')
+                        <% } else { %>
+                            $i18n.getText('upm.messages.install.success.already.evaluating')
+                        <% } %>
+                    <% } else { %>
+                        <% if (nextAction === 'get-started') { %>
+                            $i18n.getText('upm.messages.install.success.already.purchased.nextstep')
+                        <% } else { %>
+                            $i18n.getText('upm.messages.install.success.already.purchased')
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    <%
+                        var formatStr;
+                        /* so many possible variations on the message... sigh */
+                        if (nextAction === 'get-started') {
+                            if (isUpdate) {
+                                formatStr = plugin.atlassianConnect ?
+                                    $js.i18nStringHtml("upm.messages.update.success.nextstep.remotable") :
+                                    $js.i18nStringHtml("upm.messages.update.success.nextstep")
+                            } else {
+                                if (newLicense && newLicense.evaluation) {
+                                    formatStr = $js.i18nStringHtml("upm.messages.install.eval.nextstep");
+                                } else {
+                                    formatStr = newLicense ?
+                                        $js.i18nStringHtml("upm.messages.install.purchased.nextstep") :
+                                        $js.i18nStringHtml("upm.messages.install.success.nextstep");
+                                }
+                            }                            
+                        } else {
+                            if (isUpdate) {
+                                formatStr = plugin.atlassianConnect ?
+                                    $js.i18nStringHtml("upm.messages.update.success.finished.remotable") :
+                                    $js.i18nStringHtml("upm.messages.update.success.finished")
+                            } else {
+                                if (newLicense && newLicense.evaluation) {
+                                    formatStr = $js.i18nStringHtml("upm.messages.install.eval.finished");
+                                } else {
+                                    formatStr = newLicense ?
+                                        $js.i18nStringHtml("upm.messages.install.purchased.finished") :
+                                        $js.i18nStringHtml("upm.messages.install.success.finished");
+                                }
+                            }                            
+                        }
+                    %>
+                    <%= formats.format(formatStr, formats.htmlEncode(plugin.name), formats.htmlEncode(plugin.version)) %>
+                <% } %>
+            </p>
+            <% if (plugin.unrecognisedModuleTypes && !updateForDisabledPlugin) { %>
+                <p>
+                    $unrecognizedModuleTypesHtml
+                </p>
+            <% } %>
+        </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <% if (nextAction) { %>
+                <button class="aui-button confirm">
+                    <% if (nextAction === 'new-license') { %>
+                        $i18n.getText("upm.messages.install.licensing.followup.button")
+                    <% } else if (nextAction === 'manage-license') { %>
+                        $i18n.getText("upm.messages.manage.license")
+                    <% } else if (nextAction === 'get-started') { %>
+                        <% if (isUpdate) { %>
+                            $i18n.getText("upm.messages.update.success.nextstep.button")
+                        <% } else { %>
+                            $i18n.getText("upm.messages.install.success.nextstep.button")
+                        <% } %>
+                    <% } %>
+                </button>
+            <% } %>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</div>

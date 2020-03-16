@@ -1,0 +1,13 @@
+## Template parameters:
+## plugin
+
+<%
+    var marketplaceUrl = (plugin.pacResponse && plugin.pacResponse.links && plugin.pacResponse.links.details) ||
+            (plugin.links && plugin.links.details);
+%>
+<% if (marketplaceUrl) { %>
+    <%= formats.format($js.i18nStringHtml("upm.messages.watch.submit.error"),
+            marketplaceUrl, formats.htmlEncode(plugin.name)) %>
+<% } else { %>
+    $i18n.getText("upm.error.unknown")
+<% } %>

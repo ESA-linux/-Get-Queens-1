@@ -1,0 +1,45 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the support label element for an addon
+
+## Template parameters:
+## plugin
+
+#set($topVendorTooltipFormat = $esc.javascript($i18n.getText("upm.plugin.support.tooltip.top.vendor")))
+
+<%
+   var supportTypeKey;
+   var vendor = plugin.vendor;
+   var versionDetails = plugin.pacResponse ? plugin.pacResponse.versionDetails : plugin.versionDetails;
+   var supportType = plugin.supportType;
+   var supportTooltip = '';
+
+   if (plugin.vendor && plugin.vendor.topVendor) {
+       supportTypeKey = 'top-vendor';
+       supportTooltip = formats.format("$topVendorTooltipFormat", plugin.vendor.name);
+   } else {
+       supportTypeKey = (versionDetails && versionDetails.supportType) || supportType;
+   }
+   var supportTypeNames = {
+       unsupported: "$i18n.getText("upm.plugin.support.type.unsupported")",
+       vendor: "$i18n.getText("upm.plugin.support.type.vendor")",
+       atlassian: "$i18n.getText("upm.plugin.support.type.atlassian")",
+       'top-vendor': "$i18n.getText("upm.plugin.support.type.top.vendor")"
+   };
+%>
+<span class="upm-plugin-support">
+    <% if (supportTypeKey) { %>
+        <% if (plugin.links.support) { %>
+            <a href="<%- plugin.links.support %>" target="_blank"
+               class="<%- supportTypeKey %>"
+               title="<%- supportTooltip %>"
+               ><span><%- supportTypeNames[supportTypeKey] %></span></a>
+        <% } else { %>
+            <span class="<%- supportTypeKey %>"
+                  title="<%- supportTooltip %>"
+                  ><span><%- supportTypeNames[supportTypeKey] %></span></span>
+        <% } %>
+    <% } %>
+</span>
+<% if (plugin.statusDataCenterCompatible && environment.isDataCenter()) { %>
+    <span class="upm-data-center-compatible"> &#8226; $i18n.getText("upm.plugin.data.center")</span>
+<% } %>

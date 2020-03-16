@@ -1,0 +1,44 @@
+## Template parameters:
+## plugin
+
+<section role="dialog" id="upm-install-consent-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.messages.install.consent.header")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <span>
+            <% if (plugin.links.eula && plugin.links.privacy) { %>
+                <p class="connect-install-links">
+                    <%= formats.format($js.i18nStringHtml("upm.messages.install.consent.eula.and.privacy"),
+                            formats.htmlEncode(plugin.vendor.name), plugin.links.eula, plugin.links.privacy) %>
+                </p>
+            <% } else if (plugin.links.eula) { %>
+                <p class="connect-install-links">
+                    <%= formats.format($js.i18nStringHtml("upm.messages.install.consent.eula"),
+                            formats.htmlEncode(plugin.vendor.name), plugin.links.eula) %>
+                </p>
+            <% } else if (plugin.links.privacy) { %>
+                <p class="connect-install-links">
+                    <%= formats.format($js.i18nStringHtml("upm.messages.install.consent.privacy"),
+                            formats.htmlEncode(plugin.vendor.name), plugin.links.privacy) %>
+                </p>
+            <% } else { %>
+                <p class="connect-install-links">
+                    <%= formats.format($js.i18nStringHtml("upm.messages.install.consent.none")) %>
+                </p>
+            <% } %>
+        </span>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">
+                $i18n.getText("upm.messages.install.consent.action.accept")
+            </button>
+            <button class="aui-button aui-button-link cancel">
+                $i18n.getText("upm.messages.install.consent.action.reject")
+            </button>
+        </div>
+    </footer>
+</section>

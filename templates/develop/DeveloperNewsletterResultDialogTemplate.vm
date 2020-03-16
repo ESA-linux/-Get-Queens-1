@@ -1,0 +1,28 @@
+## Template parameters:
+## success:  true if successful
+
+<section role="dialog" id="upm-info-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (success) { %>
+                $i18n.getText("upm.dac.newsletter.signup.success.title")
+            <% } else { %>
+                $i18n.getText("upm.dac.newsletter.signup.failure.title")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <p>
+            <% if (success) { %>
+                $i18n.getText("upm.dac.newsletter.signup.success")
+            <% } else { %>
+                $i18n.getText("upm.dac.newsletter.signup.failure")
+            <% } %>
+        </p>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

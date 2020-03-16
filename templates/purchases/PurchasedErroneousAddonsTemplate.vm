@@ -1,0 +1,43 @@
+## Template parameters:
+## incompatible:  true if add-ons are known to be incompatible
+## mpacAvailable:  true if MPAC connection is active
+## addons:  list of addon representations
+
+<div class="aui-message shadowed warning
+            <% if (incompatible) { %>incompatible-addons<% } else { %>unknown-addons<% } %>">
+    <p class="title">
+        <% if (incompatible) { %>
+            $i18n.getText("upm.purchased.addons.incompatible.title")
+        <% } else { %>
+            $i18n.getText("upm.purchased.addons.unknown.title")
+        <% } %>
+    </p>
+    <span class="aui-icon aui-icon-small icon-warning"></span>
+    <div class="upm-message-text">
+        <p>
+            <% if (!mpacAvailable) { %>
+                $i18n.getText("upm.purchased.addons.unknown.no.mpac.header")
+            <% } else if (incompatible) { %>
+                <%= formats.format($js.i18nStringHtml('upm.purchased.addons.incompatible.header'), environment.getApplicationName()) %>
+            <% } else { %>
+                $i18n.getText("upm.purchased.addons.unknown.header")
+            <% } %>
+        </p>
+        <ul>
+            <% addons.each(function(addon) { %>
+                <li>
+                    <a href="$uriBuilder.buildUpmUri()#manage/<%= addon.getKey() %>"><%= addon.getName() || addon.getKey() %></a>
+                </li>
+            <% }); %>
+        </ul>
+        <% if (mpacAvailable) { %>
+            <p>
+                <% if (incompatible) { %>
+                    <%= formats.format($js.i18nStringHtml('upm.purchased.addons.incompatible.footer'), environment.getApplicationName()) %>
+                <% } else { %>
+                    $i18n.getText("upm.purchased.addons.unknown.footer")
+                <% } %>
+            </p>
+        <% } %>
+    </div>
+</div>

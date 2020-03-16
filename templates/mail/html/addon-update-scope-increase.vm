@@ -1,0 +1,19 @@
+#parse("templates/mail/html/email-resources.vm")
+#parse("templates/mail/html/email-header.vm")
+
+#set($updatePermissionHtml = $i18n.getText("upm.email.addon.update.permission.html", "$pluginName"))
+#set($updateReviewHtml = $i18n.getText("upm.email.addon.update.review.html", "#getAppDisplay($instanceName)", "$managePluginLink"))
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="padding:16px;width:600px;background-color:#ffffff;border:1px solid #bbbbbb">
+    <tbody>
+    <tr>
+        <td>
+            <p>#emailGreetings($recipient)</p>
+            <p>$updatePermissionHtml</p>
+            <p>$updateReviewHtml</p>
+            <p>#emailClosingHtml()</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#parse("templates/mail/html/email-footer.vm")

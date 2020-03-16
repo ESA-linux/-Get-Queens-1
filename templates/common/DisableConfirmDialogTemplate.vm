@@ -1,0 +1,19 @@
+## Template parameters:
+## plugin
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.messages.disable.confirm.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+		<%= formats.format($js.i18nStringHtml("upm.messages.disable.confirm"), environment.getApplicationName()) %>
+	</div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.messages.disable.confirm.action")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.confirm.cancel")</button>
+        </div>
+    </footer>
+</section>

@@ -1,0 +1,21 @@
+## Template parameters:
+## canExitSafeMode
+
+#set($safeModeMessageFormat = $esc.javascript($i18n.getText("upm.manage.safeMode")))
+#set($safeModeContactSupportMessageFormatHtml = $esc.javascript($i18n.getText("upm.manage.safeMode.contact")))
+
+<div id="upm-safe-mode-off" class="aui-message info">
+    <div>
+        <strong id="safe-mode-message">
+            <%= formats.format(canExitSafeMode ? "$safeModeMessageFormat" : "$safeModeContactSupportMessageFormatHtml",
+                environment.getApplicationName()) %>
+        </strong>
+    </div>
+    <% if (canExitSafeMode) { %>
+        <p id="upm-safe-mode-exit-links">
+            <a href="#" id="upm-safe-mode-restore">$i18n.getText("upm.manage.safeMode.restore")</a>
+            <span class="pipe">|</span>
+            <a href="#" id="upm-safe-mode-keep-state">$i18n.getText("upm.manage.safeMode.keepState")</a>
+        </p>
+    <% } %>
+</div>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>$i18n.getText("upm.log.title")</title>
+    <meta name="decorator" content="atl.admin">
+    <meta name="admin.active.section" content="admin_plugins_menu/upm_section"/>
+    <meta name="admin.active.tab" content="upm-audit-link"/>
+    #parse("upm-macros.vm")
+    #baseWebResources("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-audit-log")
+    <content tag="selectedWebItem">confluence-upm-audit-menu</content>
+</head>
+<body>
+    #parse("upm-resources.vm")
+
+    #set($purgePolicyInputWithHtml = $i18n.getText("upm.log.purgeAfter"))
+    
+    <div id="upm-container" class="upm-$applicationProperties.getDisplayName().toLowerCase() loading">
+        <div id="upm-log-page">
+            <a class="back-breadcrumb" alt=""></a>
+            <div id="upm-panel-log">
+                #if ($applicationProperties.getDisplayName().toLowerCase() != "confluence")
+                    <h2>
+                        <span id="upm-title">$i18n.getText("upm.log.title")</span>
+                    </h2>
+                #end
+
+                <div id="upm-messages"></div>
+
+                <div id="upm-audit-log-container">
+                    <h3 class="upm-log-policy"></h3>
+                    <div id="upm-audit-log-pagination">
+                        <a href="#" class="first-log-page" title="$i18n.getText("upm.log.first")"><span>$i18n.getText("upm.log.first")</span></a>
+                        <a href="#" class="previous-log-page" title="$i18n.getText("upm.log.previous")"><span>$i18n.getText("upm.log.previous")</span></a>
+                        <span class="upm-audit-log-count">$i18n.getText("upm.log.emptyLog")</span>
+                        <a href="#" class="next-log-page" title="$i18n.getText("upm.log.next")"><span>$i18n.getText("upm.log.next")</span></a>
+                        <a href="#" class="last-log-page" title="$i18n.getText("upm.log.last")"><span>$i18n.getText("upm.log.last")</span></a>
+                        <div class="clearer"></div>
+                        <input id="upm-audit-log-first-url" type="hidden" value="">
+                        <input id="upm-audit-log-previous-url" type="hidden" value="">
+                        <input id="upm-audit-log-next-url" type="hidden" value="">
+                        <input id="upm-audit-log-last-url" type="hidden" value="">
+                    </div>
+                    <table class="aui upm-audit-log-table">
+                        <thead>
+                        <tr>
+                            <th id="auditLogMessage">$i18n.getText("upm.log.table.logMessage")</th>
+                            <th id="auditLogUsername">$i18n.getText("upm.log.table.by")</th>
+                            <th id="auditLogDate">$i18n.getText("upm.log.table.date")
+                                <a href="#" class="upm-audit-log-refresh" title="$i18n.getText("upm.log.refresh")">
+                                    <span>$i18n.getText("upm.log.refresh")</span>
+                                </a>
+                                <a href="$i18n.getText("upmUriAuditLog")" title="$i18n.getText("upm.log.feed")" class="upm-audit-log-feed" target="_blank">
+                                    <img src="$webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources", "images/feedicon.png")" alt="$i18n.getText("upm.log.feed")" height="16" width="16">
+                                </a>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="upm-purge-options hidden">
+                    <h3>$i18n.getText("upm.log.configure")</h3>
+                    <form action="" method="put" class="aui ajs-dirty-warning-exempt ajs-dirty-warning-exempt">
+                        <div class="messages"></div>
+                        <fieldset>
+                            <div class="field-group">
+                                $purgePolicyInputWithHtml
+                            </div>
+                        </fieldset>
+
+                        <div class="buttons-container">
+                            <div class="buttons">
+                                <input type="submit" value="$i18n.getText("upm.log.confirm")"   class="button submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="upm-footer">
+                <p>$upmVersionTextWithHtml</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-template" id="upm-log-table-template">
+        <tr>
+            <td class="message"><%= title %></td>
+            <td class="username">
+            <%
+            if (authorUri) {
+                %>
+                <a href="<%= authorUri %>"><%= authorName %></a>
+                <%
+            } else {
+                %>
+                <%= authorName %>
+                <%
+            }
+            %>
+            </td>
+            <td class="date"><%= dateUpdated %></td>
+        </tr>
+    </script>
+</body>
+</html>

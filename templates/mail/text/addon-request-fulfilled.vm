@@ -1,0 +1,16 @@
+#parse("templates/mail/text/email-resources.vm")
+#parse("templates/mail/text/email-header.vm")
+
+#set($greetingsHtml = "#emailGreetings($recipient)")
+$greetingsHtml
+
+
+$i18n.getText("upm.email.addon.request.fulfilled.text", "#emailUserDisplay($sender)", "$pluginName", "#getAppDisplay($instanceName)")
+
+$singlePluginViewLink
+
+$i18n.getText("upm.email.addon.request.fulfilled.get.started.text")
+
+#emailClosing()
+
+#parse("templates/mail/text/email-footer.vm")

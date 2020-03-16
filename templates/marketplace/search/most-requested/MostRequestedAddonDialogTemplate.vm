@@ -1,0 +1,44 @@
+## Template parameters:
+
+## success - true if the request succeeded
+## hasAddons - true if there are any suggested add-ons
+
+<section role="dialog" id="upm-others-requested-dialog" class="aui-layer aui-dialog2
+         <% if (hasAddons) { %>aui-dialog2-medium<% } else { %>aui-dialog2-small<% } %>" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (hasAddons) { %>
+                $i18n.getText("upm.messages.request.most.title")
+            <% } else if (success) { %>
+                $i18n.getText("upm.messages.request.success.title")
+            <% } else { %>
+                $i18n.getText("upm.messages.request.heading")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <% if (hasAddons) { %>
+        	<% if (success) { %>
+    	    	<div class="aui-message success">
+    	    		$i18n.getText("upm.messages.request.success")
+    	    	</div>
+        	<% } else { %>
+    	    	<div class="aui-message success">
+    	    		$i18n.getText("upm.messages.request.failure")
+    	    	</div>
+        	<% } %>
+    	    <div class="upm-dialog-most-requested-addons upm-plugin-list"></div>
+        <% } else { %>
+            <% if (success) { %>
+                $i18n.getText("upm.messages.request.success")
+            <% } else { %>
+                $i18n.getText("upm.messages.request.failure")
+            <% } %>
+        <% } %>
+	</div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

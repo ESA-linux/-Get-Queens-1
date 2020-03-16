@@ -1,0 +1,131 @@
+## Template parameters:
+
+## plugin - the plugin representation
+## requestsHtml - pre-rendered request messages, if this is the Most Requested view
+
+#set($licenseFormat = $esc.javascript($i18n.getText("upm.plugin.license.type")))
+#set($screenshotSingleLabelFormat = $esc.javascript($i18n.getText("upm.plugin.details.screenshot")))
+#set($screenshotMultipleLabelFormat = $esc.javascript($i18n.getText("upm.plugin.details.screenshots")))
+
+<div>
+    <div class="upm-message-container">
+        #parse("templates/common/AddonBillingNotificationFragment.vm")
+        <% if (requestsHtml) { %>
+            <div class="aui-message info">
+                <%= requestsHtml %>
+            </div>
+        <% } %>
+    </div>
+    <div class="upm-plugin-main">
+        <div class="upm-plugin-sidebar">
+            <% if (plugin.versionDetails && plugin.versionDetails.youtubeId) { %>
+                <div class="upm-plugin-video">
+                    <a title="$i18n.getText("upm.plugin.details.video.play")">
+                        <img class="upm-plugin-video-screenshot" height="139" width="185"
+                             src="//img.youtube.com/vi/<%- plugin.versionDetails.youtubeId %>/0.jpg">
+                        <span class="upm-plugin-video-label">$i18n.getText("upm.plugin.details.video")</span>
+                        <span class="overlay"></span>
+                    </a>
+                    <hr>
+                </div>
+            <% } %>
+
+            <div class="screenshots-container"></div>
+
+            <ul class="upm-plugin-version-details">
+                <% if (!plugin.atlassianConnect) { %>
+                    <li class="upm-plugin-available-version">
+                        v. <%- plugin.version %>
+                    </li>
+                <% } %>
+                <% if (plugin.license) { %>
+                    <li class="upm-plugin-license">
+                        <%- formats.format("$licenseFormat", plugin.license) %>
+                    </li>
+                <% } %>
+                <% if (plugin.permissions && plugin.permissions.length) { %>
+                    <li class="upm-plugin-scopes">
+                        $i18n.getText("upm.plugin.details.scopes")
+                        <ul>
+                            <% for (var i = 0; i < plugin.permissions.length; i++) { %>
+                                <li class="upm-plugin-scope" title="<%- plugin.permissions[i].description %>">
+                                    <%- plugin.permissions[i].name %>
+                                </li>
+                            <% } %>
+                        </ul>
+                        <a href="https://confluence.atlassian.com/x/uwGJGg" target="_blank">$i18n.getText("upm.plugin.details.scopes.more")</a>
+                    </li>
+                <% } %>
+            </ul>
+
+            <hr>
+
+            <ul class="upm-plugin-links">
+                <% if (plugin.links.releaseNotes) { %>
+                    <li><a href="<%- plugin.links.releaseNotes %>" class="upm-plugin-release-notes-link" target="_blank">$i18n.getText("upm.plugin.action.releaseNotes")</a></li>
+                <% } %>
+                <% if (plugin.links.support) { %>
+                    <li><a href="<%- plugin.links.support %>" class="upm-plugin-support-link" target="_blank">$i18n.getText("upm.plugin.support.issues")</a></li>
+                <% } %>
+                <% if (plugin.links.reviews) { %>
+                    <li><a href="<%- plugin.links.reviews %>" class="upm-plugin-reviews-link" target="_blank">$i18n.getText("upm.plugin.reviews")</a></li>
+                <% } %>
+                <% if (plugin.links['pricing-page']) { %>
+                    <li><a href="<%- plugin.links['pricing-page'] %>" class="upm-plugin-pricing-link" target="_blank">$i18n.getText("upm.plugin.full.pricing")</a></li>
+                <% } %>
+                <% if (plugin.links.documentation) { %>
+                    <li><a href="<%- plugin.links.documentation %>" class="upm-plugin-documentation-link" target="_blank">$i18n.getText("upm.plugin.documentation")</a></li>
+                <% } %>
+                <% if (plugin.links.eula) { %>
+                    <li><a href="<%- plugin.links.eula %>" class="upm-plugin-eula-link" target="_blank">$i18n.getText("upm.plugin.eula")</a></li>
+                <% } %>
+                <% if (plugin.links.privacy) { %>
+                    <li><a href="<%- plugin.links.privacy %>" class="upm-plugin-privacy-link" target="_blank">$i18n.getText("upm.plugin.data.privacy")</a></li>
+                <% } %>
+                <% if (plugin.versionDetails && plugin.versionDetails.licenseUrl) { %>
+                    <li><a href="<%- plugin.versionDetails.licenseUrl %>" class="upm-plugin-license-link" target="_blank">$i18n.getText("upm.plugin.license.details")</a></li>
+                <% } %>
+                <% if (plugin.links.details) { %>
+                    <li><a href="<%- plugin.links.details %>" class="upm-plugin-marketplace-link" target="_blank">$i18n.getText("upm.plugin.marketplace.listing")</a></li>
+                <% } %>
+            </ul>
+        </div>
+
+        <div class="upm-plugin-description
+            <% if (!plugin.description && !(plugin.versionDetails && plugin.versionDetails.highlights)) { %> upm-no-description-text<% } %>"
+        >
+            <% if (plugin.versionDetails && plugin.versionDetails.highlights) { %>
+                <% for (var h = 0; h < plugin.versionDetails.highlights.length; h++) { %>
+                    <% var hi = plugin.versionDetails.highlights[h]; %>
+                    <div class="highlight-title">
+                        <%- hi.title %>
+                    </div>
+                    <div class="highlight-text">
+                        <%= formats.sanitizeHtmlAndSetLinksToNewWindow(hi.text) %>
+                    </div>
+                <% } %>
+            <% } %>
+            <% if (plugin.description) { %>
+                <% if (plugin.versionDetails && plugin.versionDetails.highlights) { %>
+                    <div class="highlight-title">
+                        $i18n.getText("upm.plugin.details.more")
+                    </div>
+                <% } %>
+                <div class="highlight-text">
+                    <%= formats.sanitizeHtmlAndSetLinksToNewWindow(plugin.description) %>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="upm-plugin-recommendations-container hidden">
+            <h4 class='recommendations-header'>$i18n.getText('upm.plugin.marketplace.recommendations')</h4>
+            <div class="upm-plugin-recommendations"></div>
+        </div>
+    </div>
+
+    <div class="clearer"></div>
+
+    <input type="hidden" class="upm-plugin-binary" value="<%- plugin.links.binary %>">
+    <input type="hidden" class="upm-plugin-homepage" value="<%- plugin.links.details %>">
+    <input type="hidden" class="upm-plugin-version" value="">
+</div>

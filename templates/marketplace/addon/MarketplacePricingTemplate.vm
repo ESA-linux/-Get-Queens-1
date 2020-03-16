@@ -1,0 +1,31 @@
+## Template parameters:
+## plugin - the plugin representation
+## loading - true if we're waiting for pricing data
+## unavailable - true if a Marketplace error makes us unable to show pricing
+## pricingDescHtml - pre-rendered description of pricing
+## roleBased - true if there are role-based pricing tiers
+
+<div class="upm-plugin-price">
+	<% if (loading) { %>
+		<div class="loading"></div>
+	<% } else if (unavailable) { %>
+		$i18n.getText("upm.plugin.pricing.marketplacePaid")
+	<% } else if (plugin.cloudFreeUsers) { %>
+		<span class="subtle-green">
+			<%- formats.format($js.i18nStringHtml("upm.plugin.pricing.cloudFreeUsers"),
+				    plugin.cloudFreeUsers) %>
+		</span>
+	<% } else if (roleBased) { %>
+		<a class="pricing-tier-display">
+			<span class="subtle-green"><%= pricingDescHtml %></span>
+		</a>
+	<% } else if (pricingDescHtml) { %>
+		<span class="subtle-green"><%= pricingDescHtml %></span>
+	<% } else if (plugin.paidViaAtlassian) { %>
+		$i18n.getText("upm.plugin.pricing.marketplacePaid")
+	<% } else if (plugin.paidViaVendor) { %>
+		$i18n.getText("upm.plugin.pricing.paid")
+	<% } else { %>
+		$i18n.getText("upm.plugin.pricing.free")
+	<% } %>
+</div>

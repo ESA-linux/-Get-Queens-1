@@ -1,0 +1,15 @@
+#parse("templates/mail/text/email-resources.vm")
+#parse("templates/mail/text/email-header.vm")
+
+#emailGreetings($recipient)
+
+
+$i18n.getText("upm.email.addon.request.dismissed.text", "#emailUserDisplay($sender)", "$pluginName")
+
+$singlePluginViewLink
+
+$i18n.getText("upm.email.addon.request.dismissed.check.them.out.text")
+
+#emailClosing()
+
+#parse("templates/mail/text/email-footer.vm")

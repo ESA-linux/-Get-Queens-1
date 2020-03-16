@@ -1,0 +1,31 @@
+## Template parameters:
+## highlights
+## screenshots
+
+<% if ((screenshots && screenshots.length) || (highlights && highlights.length)) { %>
+    <div class="upm-plugin-screenshots">
+        <a href="#" title="$i18n.getText("upm.plugin.details.screenshots.view")">
+            <% if (highlights && highlights.length) { %>
+                <img class="upm-plugin-top-screenshot" width="185"
+                     src="<%- highlights[0].thumbnailImageUri %>">
+            <% } else { %>
+                <img class="upm-plugin-top-screenshot"
+                    <% if (screenshots[0].width < screenshots[0].height) { %>
+                        height="185"
+                    <% } else { %>
+                        width="185"
+                    <% } %>
+                    src="<%- screenshots[0].link %>">
+            <% } %>
+            <span class="upm-plugin-screenshots-label">
+                <%- formats.formatSingularOrPlural($js.i18nStringHtml("upm.plugin.details.screenshot"),
+                        $js.i18nStringHtml("upm.plugin.details.screenshots"),
+                        (screenshots ? screenshots.length : 0) + (highlights ? highlights.length : 0)) %>
+            </span>
+        </a>
+    </div>
+<% } else { %>
+    <span class="upm-no-screenshots">
+        $i18n.getText("upm.plugin.details.screenshots.none")
+    </span>
+<% } %>

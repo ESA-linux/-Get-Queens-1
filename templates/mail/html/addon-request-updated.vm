@@ -1,0 +1,25 @@
+#parse("templates/mail/html/email-resources.vm")
+#parse("templates/mail/html/email-header.vm")
+
+#set($requestUpdatedLine1Html = $i18n.getText("upm.email.addon.request.updated.html", "#emailUserDisplay($sender)", "$pluginName", "$singlePluginViewLink"))
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="padding:16px;width:600px;background-color:#ffffff;border:1px solid #bbbbbb">
+    <tbody>
+    <tr>
+        <td>
+            <p>#emailGreetings($recipient)</p>
+            <p>$requestUpdatedLine1Html</p>
+            #if($requestMessage.isDefined())
+                <p>$i18n.getText("upm.email.addon.requested.they.said")</p>
+                <p>
+                <div style="background-color:#edf5ff;padding:12px;border:1px solid #dddddd">
+                    $requestMessage.get()
+                </div>
+                </p>
+            #end
+            <p>#emailClosingHtml()</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#parse("templates/mail/html/email-footer.vm")

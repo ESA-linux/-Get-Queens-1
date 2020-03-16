@@ -1,0 +1,42 @@
+## Template parameters:
+## plugin - the plugin representation
+
+#set($logoSize = 72)
+
+<div
+    #parse("templates/marketplace/addon/AddonAttributesFragment.vm")
+>
+    <div class="upm-plugin-row">
+        <div class="upm-plugin-header">
+            <span class="upm-plugin-logo-container">
+                #parse("templates/common/AddonLogoFragment.vm")
+            </span>
+            <div class="upm-section upm-wide">
+                <h4 class="upm-plugin-name">
+                    #parse("templates/common/AddonNameFragment.vm")
+                </h4>
+                <div>
+                    #parse("templates/marketplace/addon/AddonVendorFragment.vm")
+                    &#8226;
+                    #parse("templates/marketplace/addon/AddonSupportLabelFragment.vm")
+                </div>
+                #parse("templates/marketplace/addon/AddonCategoriesFragment.vm")
+            </div>
+            <div class="upm-section upm-semi-wide">
+                #parse("templates/marketplace/addon/AddonStarsFragment.vm")
+                #parse("templates/marketplace/addon/AddonInstallCountFragment.vm")
+                <div class="pricing">
+                </div>
+            </div>
+            <div class="upm-plugin-actions">
+                #parse("templates/marketplace/addon/AddonActionsRequestCountFragment.vm")
+            </div>
+            <div class="clearer"></div>
+        </div>
+        #parse("templates/common/AddonSummaryFragment.vm")
+    </div>
+    <div class="upm-details"></div>
+    <div class="upm-plugin-loading-container">
+        <span class="upm-plugin-loading-text">$i18n.getText("upm.plugin.loading")</span>
+    </div>
+</div>

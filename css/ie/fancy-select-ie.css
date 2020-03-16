@@ -1,0 +1,14 @@
+.fancy-select {
+    height: 27px;
+    *width: 150px;
+}
+
+.fancy-select .selected-value li {
+    *margin-left: -17px;
+}
+
+.fancy-select,
+.fancy-select .selected-value {
+	*display: inline;
+    zoom: 1;
+}

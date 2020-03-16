@@ -1,0 +1,27 @@
+## Template parameters:
+## id - unique element ID
+## plugin - the plugin representation
+
+#set($logoSize = 16)
+
+<div
+    class="upm-plugin
+           <% if (!plugin.enabled) { %>disabled<% } %>
+          "
+    data-key="<%- plugin.key %>"
+>
+    <div class="upm-plugin-row">
+        <span class="expander"></span>
+        <span class="upm-plugin-icon-container">
+            #parse("templates/common/AddonIconFragment.vm")
+        </span>
+        <h4 class="upm-plugin-name"><%- plugin.name %></h4>
+        <div class="upm-plugin-actions"></div>
+        <div class="clearer"></div>
+    </div>
+    <input type="hidden" class="upm-plugin-key" name="plugin-key" value="<%- plugin.key %>">
+    <div class="upm-details"></div>
+    <div class="upm-plugin-loading-container">
+        <span class="upm-plugin-loading-text">$i18n.getText("upm.plugin.loading")</span>
+    </div>
+</div>

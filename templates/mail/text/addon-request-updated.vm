@@ -1,0 +1,19 @@
+#parse("templates/mail/text/email-resources.vm")
+#parse("templates/mail/text/email-header.vm")
+
+#emailGreetings($recipient)
+
+
+$i18n.getText("upm.email.addon.request.updated.text", "#emailUserDisplay($sender)", "$pluginName")
+
+$singlePluginViewLink
+
+#if($requestMessage.isDefined())
+$i18n.getText("upm.email.addon.requested.they.said")
+
+"$requestMessage.get()"
+#end
+
+#emailClosing()
+
+#parse("templates/mail/text/email-footer.vm")

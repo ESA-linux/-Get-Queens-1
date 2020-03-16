@@ -1,0 +1,20 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Template parameters:
+## plugin - the plugin representation which may have either a "logo" property or "links.plugin-logo"
+## $logoSize (Velocity parameter, must set this before including the fragment) - desired size in pixels
+
+#set($defaultLogoPath = $webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources", "images/plugin-logo-default.png"))
+
+<%
+	var logoUrl = plugin.logo ? plugin.logo.link : (plugin.links && plugin.links['plugin-logo']);
+%>
+<% if (logoUrl) { %>
+    <img src="<%- logoUrl %>"
+        <% if (plugin.logo && (plugin.logo.width < plugin.logo.height)) { %>
+            height="${logoSize}"
+        <% } else { %>
+            width="${logoSize}"
+        <% } %> >
+<% } else { %>
+    <img src="$defaultLogoPath" width="${logoSize}">
+<% } %>

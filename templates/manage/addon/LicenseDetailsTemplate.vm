@@ -1,0 +1,84 @@
+## Template parameters:
+## id - unique element ID
+## plugin - the plugin representation
+## license - the license details
+## readOnly - true if the license is only for display
+## description - the license description
+## status - the license status description
+## unlicensed - true if there is no active license
+
+<div class="upm-license-details <% if (unlicensed) { %>no-license edit-license<% } %>"
+     data-evaluation="<%- license && license.evaluation %>"
+>
+
+    <div class="upm-plugin-license-info-div field-group">
+        <label class="upm-plugin-license-info-label">
+            $i18n.getText("upm.plugin.license.info"):
+        </label>
+        <div class="upm-plugin-license-info upm-plugin-detail">
+            <%- description %>
+        </div>
+    </div>
+
+    <div class="upm-plugin-license-status-div field-group">
+        <label class="upm-plugin-license-status-label">
+            $i18n.getText("upm.plugin.license.status"):
+        </label>
+        <div class="upm-plugin-license-status upm-plugin-detail">
+            <%= status %>
+        </div>
+    </div>
+
+    <div class="upm-plugin-license-sen-div field-group">
+        <label class="upm-plugin-license-sen-label">
+            $i18n.getText("upm.plugin.license.sen"):
+        </label>
+        <div class="upm-plugin-license-sen upm-plugin-detail">
+            <% if (!license || !license.supportEntitlementNumber) { %>
+                $i18n.getText("upm.plugin.license.sen.unknown")
+            <% } else { %>
+                <%- license && license.supportEntitlementNumber %>                
+            <% } %>
+        </div>
+    </div>
+
+    <% if (readOnly) { %>
+        <div class="field-group">
+            <label>
+                $i18n.getText("upm.plugin.license.raw"):
+            </label>
+            <div class="upm-plugin-license-readonly-admin upm-plugin-detail">
+                <% if (plugin.enabled && plugin.links['license-admin']) { %>
+                    <%= formats.format($js.i18nStringHtml("upm.plugin.license.readonly"), plugin.links['license-admin']) %>
+                <% } else { %>
+                    $i18n.getText("upm.plugin.license.readonly.nolink")
+                <% } %>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="upm-plugin-license-key-div field-group">
+            <label class="upm-plugin-license-key-label upm-plugin-license-editable">
+                $i18n.getText("upm.plugin.license.raw"):
+            </label>
+            <div class="upm-plugin-license-key upm-plugin-detail">
+                <% if (license && license.rawLicense) { %>
+                    <a href="#" class="upm-plugin-license-truncated" title="$i18n.getText("upm.plugin.license.view.full")"><%- license.rawLicense.substr(0, 10) %>...</a>
+                <% } %>
+                <span class="upm-plugin-license-raw hidden"><%- license ? license.rawLicense : '' %></span>
+                <a href="#" class="upm-plugin-license-edit aui-icon aui-icon-small aui-iconfont-edit" title="$i18n.getText("upm.plugin.license.edit")"><span>$i18n.getText("upm.plugin.license.edit")</span></a>
+            </div>
+        </div>
+        <div class="upm-license-form upm-plugin-license-editable field-group">
+            <label>
+                $i18n.getText("upm.plugin.license.raw"):
+            </label>
+            <textarea class="edit-license-key textarea long-field" cols="35" rows="6"><%- license ? license.rawLicense : '' %></textarea>
+            <div class="edit-actions">
+                <input name="submit" class="submit submit-license aui-button" type="submit" value="$i18n.getText("upm.plugin.license.save")" disabled="disabled">
+                <a href="#" class="upm-license-cancel aui-button aui-button-link">$i18n.getText("upm.plugin.license.cancel")</a>
+                <span class="loading hidden"></span>
+            </div>
+        </div>
+    <% } %>
+    <div class="clearer"></div>
+</div>

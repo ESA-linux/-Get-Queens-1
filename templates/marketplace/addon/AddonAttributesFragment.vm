@@ -1,0 +1,11 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the attributes for the enclosing <div> of a plugin row
+
+## Template parameters:
+## plugin
+
+  class="upm-plugin
+       <% if (plugin.atlassianConnect) { %> upm-remotable <% } %>
+       <% if (plugin.restartState) { %> installed-but-requires-restart <% } %>
+      "
+  data-key="<%- plugin.key %>"

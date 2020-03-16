@@ -1,0 +1,19 @@
+#parse("templates/mail/html/email-resources.vm")
+#parse("templates/mail/html/email-header.vm")
+
+#set($dismissedLine1Html = $i18n.getText("upm.email.addon.request.dismissed.html", "#emailUserDisplay($sender)", "$pluginName", "$singlePluginViewLink"))
+#set($checkThemOutHtml = $i18n.getText("upm.email.addon.request.dismissed.check.them.out.html"))
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="padding:16px;width:600px;background-color:#ffffff;border:1px solid #bbbbbb">
+    <tbody>
+    <tr>
+        <td>
+            <p>#emailGreetings($recipient)</p>
+            <p>$dismissedLine1Html</p>
+            <p>$checkThemOutHtml</p>
+            <p>#emailClosingHtml()</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#parse("templates/mail/html/email-footer.vm")

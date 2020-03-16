@@ -1,0 +1,19 @@
+## Template parameters:
+## plugin
+
+<section role="dialog" id="upm-plugin-status-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.progress.eval.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+		$i18n.getText("upm.messages.eval.redirect")
+	</div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.messages.install.licensing.followup.button")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

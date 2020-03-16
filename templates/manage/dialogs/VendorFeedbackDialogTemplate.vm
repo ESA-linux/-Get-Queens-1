@@ -1,0 +1,67 @@
+## Template parameters:
+## plugin - the plugin representation
+## action - "UNINSTALL" or "DISABLE"
+
+<section role="dialog" id="upm-feedback-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.feedback.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <form id="upm-vendor-feedback-dialog-container" class="aui ajs-dirty-warning-exempt">
+            <fieldset>
+                <p class="description vendor-feedback-text">
+                    <% if (action === 'UNINSTALL') { %>
+                        $i18n.getText("upm.feedback.descriptionUninstall")
+                    <% } else { %>
+                        $i18n.getText("upm.feedback.descriptionDisable")
+                    <% } %>
+                </p>
+                <div id="reason-error" class="aui-message error hidden">
+                    <span class="aui-icon icon-error"></span>
+                    $i18n.getText('upm.feedback.select.error')
+                </div>
+                <div class="field-group">
+                    <label for="option-reason">$i18n.getText("upm.feedback.reason")</label>
+                    <select id="option-reason" name="option-reason" class="select">
+                        <option value="upm.feedback.select.reason">$i18n.getText("upm.feedback.select.reason")</option>
+                        <option value="upm.feedback.bugs">$i18n.getText("upm.feedback.bugs")</option>
+                        <option value="upm.feedback.interface">$i18n.getText("upm.feedback.interface")</option>
+                        <option value="upm.feedback.functionality">$i18n.getText("upm.feedback.functionality")</option>
+                        <option value="upm.feedback.usefulness">$i18n.getText("upm.feedback.usefulness")</option>
+                        <option value="upm.feedback.cost">$i18n.getText("upm.feedback.cost")</option>
+                        <% if (action !== 'DISABLE') { %>
+                            <option value="upm.feedback.reinstalling">$i18n.getText("upm.feedback.reinstalling")</option>
+                        <% } %>
+                        <% if (action !== 'UNINSTALL') { %>
+                            <option value="upm.feedback.reenabling">$i18n.getText("upm.feedback.reenabling")</option>
+                        <% } %>
+                        <option value="upm.feedback.other"">$i18n.getText("upm.feedback.other")</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label for="text-reason" class="description">$i18n.getText("upm.feedback.notes")</label>
+                    <textarea rows="3" cols="50" id="text-reason" name="text-reason" class="textarea long-field"></textarea>
+                </div>
+                <% if (environment.isLoggedInUser()) { %>
+                    <div class="group">
+                        <legend><span></span></legend>
+                        <div>
+                            <input type="checkbox" id="upm-feedback-share" checked>
+                            <label for="upm-feedback-share">$i18n.getText("upm.feedback.share.description")</label>
+                        </div>
+                    </div>
+                <% } %>
+            </fieldset>
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button confirm">
+                $i18n.getText("upm.feedback.save")
+            </button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.feedback.no.save")</button>
+        </div>
+    </footer>
+</div>

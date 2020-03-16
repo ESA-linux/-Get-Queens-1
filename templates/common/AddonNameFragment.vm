@@ -1,0 +1,13 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the plugin name, which may include a "beta" label
+
+## Template parameters:
+## plugin
+
+#set($nameWithBetaLabelFormat = $esc.javascript($i18n.getText("upm.plugin.beta")))
+
+<% if (plugin.stable) { %>
+	<%- plugin.name %>
+<% } else { %>
+	<%- formats.format("$nameWithBetaLabelFormat", plugin.name) %>
+<% } %>

@@ -1,0 +1,19 @@
+## Template parameters:
+## bundle - the bundle representation
+
+<div class="upm-plugin expandable
+       <% if (bundle.state && (bundle.state != 'ACTIVE')) { %> disabled <% } %>
+       "
+       data-key="<%- bundle.symbolicName %>"
+>
+    <div class="upm-plugin-row">
+        <span class="expander"></span>
+        <span class="upm-plugin-icon-container"></span>
+        <h4 class="upm-plugin-name"><%- bundle.id %> - <%- bundle.name || bundle.symbolicName %></h4>
+        <div class="clearer"></div>
+    </div>
+    <div class="upm-details"></div>
+    <div class="upm-plugin-loading-container">
+        <span class="upm-plugin-loading-text">$i18n.getText("upm.osgi.bundle.loading")</span>
+    </div>
+</div>

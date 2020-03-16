@@ -1,0 +1,4 @@
+<div class="upm-no-matching-plugins">
+	<%= formats.format($js.i18nStringHtml("upm.dac.build.your.own"), environment.getApplicationName(),
+					   "$uriBuilder.buildUpmDacLandingPageUri('find')") %>
+</div>

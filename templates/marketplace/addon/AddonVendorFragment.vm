@@ -1,0 +1,13 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the plugin vendor element
+
+## Template parameters:
+## plugin - plugin representation
+
+<span class="upm-plugin-vendor">
+    <% if (plugin.vendor && plugin.vendor.marketplaceLink) { %>
+        <a href="<%- plugin.vendor.marketplaceLink %>" target="_blank"><%- plugin.vendor.name %></a>
+    <% } else { %>
+        <%- plugin.vendor && plugin.vendor.name %>
+    <% } %>
+</span>

@@ -1,0 +1,11 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the plugin summary/description, which may contain sanitized HTML
+
+## Template parameters:
+## plugin
+
+<p class="upm-plugin-summary">
+	<% if (plugin.summary || plugin.description) { %>
+		<%= formats.sanitizeHtmlAndRemoveLinks(plugin.summary || plugin.description) %>
+	<% } %>
+</p>

@@ -1,0 +1,61 @@
+#set($addonInstructionsHtml = $i18n.getText("upm.upload.instructions"))
+#set($developerInstructionsHtml = $i18n.getText("upm.upload.instructions.developer"))
+#set($applicationInstructionsHtml = $i18n.getText("upm.applications.dialog.upload.instructions"))
+
+<section role="dialog" id="upm-upload-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (uploadApplication) { %>
+                $i18n.getText("upm.applications.dialog.upload.header")
+            <% } else { %>
+                $i18n.getText("upm.upload.uploadPlugin")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <form id="upm-upload-form" class="ajs-dirty-warning-exempt aui" target="upm-upload-target" action="" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <div class="instructions">
+                    <% if (uploadApplication) { %>
+                        $applicationInstructionsHtml
+                    <% } else { %>
+                        $addonInstructionsHtml
+                    <% } %>
+                </div>
+                <% if (environment.hasPermissionFor('install-file')) { %>
+                    <div class="field-group" id="upm-upload-file-fancy-container">
+                        <label for="upm-upload-file">$i18n.getText("upm.upload.fromMyComputer")</label>
+
+                        ## This unfortunate bit of markup branching is due to the lack of "fancy file input" in AUI versions
+                        ## below 5.6. In this particular case, we are branching the markup based on whether the dialog is being
+                        ## prompted from the UPM or from ManageApps - in which case, we know that ManageApps only exists in
+                        ## JIRA 7+ which includes AUI 5.7 - while the UPM will get the native browser file input
+
+                        <% if (uploadApplication) { %>
+                            <label class="ffi medium-long-field is-active" data-ffi-button-text="Browse">
+                                <span class="selected-file"></span>
+                                <input class="upfile" type="file" id="upm-upload-file" name="plugin">
+                            </label>
+                        <% } else { %>
+                            <input class="upfile" type="file" id="upm-upload-file" name="plugin">
+                        <% } %>
+
+                    </div>
+                <% } %>
+                <div class="field-group">
+                    <label for="upm-upload-url">$i18n.getText("upm.upload.fromThisLocation")</label>
+                    <input type="text" class="text medium-long-field" value="" id="upm-upload-url" name="url">
+                </div>
+                <p>
+                    $i18n.getText("upm.upload.instructions.consent.message")
+                </p>
+            </fieldset>
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.upload.upload")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.upload.cancel")</button>
+        </div>
+    </footer>
+</section>

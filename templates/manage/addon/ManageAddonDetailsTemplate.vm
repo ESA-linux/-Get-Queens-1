@@ -1,0 +1,289 @@
+## Template parameters:
+
+## plugin - the plugin representation
+## hostLicenseDescription
+## primaryMessageType - from ManageAddonDetailsView._getPrimaryMessageType
+## pricingDescriptionHtml
+
+<%
+    var pacResponse = plugin.pacResponse,
+        pacLinks = pacResponse ? pacResponse.links : {},
+        update = pacResponse && pacResponse.update,
+        supportType = pacResponse && pacResponse.versionDetails && pacResponse.versionDetails.supportType,
+        license = plugin.licenseDetails;
+%>
+<div <% if (plugin.restartState) { %>class="upm-plugin-requires-restart"<% } %>>
+    <div class="upm-message-container">
+        <% if (environment.isDataCenter() && plugin.incompatible && !plugin.statusDataCenterCompatible) { %>
+            <div class="aui-message warning">
+                <div class="upm-message-text">
+                <% if (plugin.dataCenterCompatible) { %>
+                    <% if (update && update.statusDataCenterCompatible) { %>
+                    <%= formats.format($js.i18nStringHtml("upm.messages.nondatacenter.warning.summary.update.available")) %>
+                    <% } else { %>
+                    <%= formats.format($js.i18nStringHtml("upm.messages.deprecated.datacenter.warning.summary")) %>
+                    <% } %>
+                <% } else { %>
+                    <%= formats.format($js.i18nStringHtml("upm.messages.nondatacenter.warning.summary")) %>
+                <% } %>
+                </div>
+            </div>
+        <% } %>
+        ## Show a warning that license is expiring when we're using a legacy Server license in a DC product and app.
+        <% if (environment.isDataCenter() && plugin.statusDataCenterCompatible && license && license.crossgradeable) { %>
+            <% if (license.renewable || license.upgradable || license.error === 'TYPE_MISMATCH') { %>
+                <div class="aui-message warning">
+            <% } else { %>
+                <div class="aui-message info">
+            <% } %>
+                <div class="upm-message-text">
+                    <% if (license.maintenanceExpired) { %>
+                        <%= formats.format(
+                                $js.i18nStringHtml("upm.messages.license.legacy.nondatacenter.expired"),
+                                license.maintenanceExpiryDateString
+                            ) %>
+                    <% } else if (license.error === 'USER_MISMATCH' || license.error === 'EDITION_MISMATCH') { %>
+                        <%= formats.format($js.i18nStringHtml("upm.messages.license.legacy.nondatacenter.usermismatch")) %>
+                    <% } else if (license.error === 'TYPE_MISMATCH' && license.purchasePastServerCutoffDate) { %>
+                        <p class="title"><%= formats.format($js.i18nStringHtml("upm.messages.license.legacy.nondatacenter.past.cutoff.title")) %></p>
+                        <p><%= formats.format($js.i18nStringHtml("upm.messages.license.legacy.nondatacenter.past.cutoff")) %></p>
+                    <% } else { %>
+                        <%= formats.format(
+                                $js.i18nStringHtml("upm.messages.license.legacy.nondatacenter.expiration"),
+                                license.maintenanceExpiryDateString
+                            ) %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+        <% if (license && license.active && license.dataCenter && (!environment.isDataCenter() || !plugin.statusDataCenterCompatible)) { %>
+            <div class="aui-message warning">
+                <div class="upm-message-text"><%- formats.format($js.i18nStringHtml("upm.messages.license.datacenter.app.license.mismatch"), environment.getApplicationName()) %></div>
+            </div>
+        <% } %>
+        <% if (plugin.updatableToPaid) { %>
+            <div class="aui-message warning">
+                <div class="upm-message-text">$i18n.getText("upm.messages.plugin.updatable.to.paid")</div>
+            </div>
+        <% } %>
+        <% if (update && !update.licenseCompatible) { %>
+            <div class="aui-message info">
+                <div class="upm-message-text">
+                    <% if (plugin.links.renew) { %>
+                        $i18n.getText("upm.plugin.license.cannot.update.before.renew")
+                    <% } else { %>
+                        $i18n.getText("upm.plugin.license.cannot.update.before.buy")
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+        #parse("templates/common/AddonBillingNotificationFragment.vm")
+        <% if (plugin.restartState) { %>
+            <div class="aui-message info">
+                <div class="upm-message-text">
+                    <% if (plugin.restartState === 'install') { %>
+                        $i18n.getText("upm.messages.install.requiresRestart")
+                    <% } else if (plugin.restartState === 'remove') { %>
+                        $i18n.getText("upm.messages.uninstall.requiresRestart")
+                    <% } else if (plugin.restartState === 'upgrade' || plugin.restartState === 'update') { %>
+                        $i18n.getText("upm.messages.update.requiresRestart")
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+        <% if (plugin.unloadable && !plugin.restartState) { %>
+            <div class="aui-message warning">
+                <div class="upm-message-text">$i18n.getText("upm.messages.plugin.unloadable")</div>
+            </div>
+        <% } else if (license && (license.error === 'ROLE_UNDEFINED')) { %>
+            <div class="aui-message warning">
+                <div class="upm-message-text">
+                    <%= formats.format(
+                            plugin.enabled ? $js.i18nStringHtml("upm.messages.license.role.undefined.enabled") :
+                                $js.i18nStringHtml("upm.messages.license.role.undefined.disabled"),
+                            formats.htmlEncode(license.typeI18nSingular),
+                            environment.getApplicationName(),
+                            plugin.vendor.link,
+                            formats.htmlEncode(plugin.vendor.name)
+                        ) %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <p class="upm-plugin-summary">
+        <% if (plugin.description) { %>
+            <%= formats.sanitizeHtmlAndSetLinksToNewWindow(plugin.description) %>
+        <% } else if (plugin.summary) { %>
+            <%= formats.sanitizeHtmlAndRemoveLinks(plugin.summary) %>
+        <% } %>
+    </p>
+
+    <% if (primaryMessageType) { %>
+        #parse("templates/manage/addon/AddonPrimaryMessageFragment.vm")
+    <% } %>
+
+    <% if (update) { %>
+        <div class="upm-plugin-update-details">
+            <div class="upm-plugin-update-version">
+                <% if (plugin.atlassianConnect) { %>
+                    $i18n.getText("upm.plugin.action.whyUpdateTo.remotable")
+                <% } else { %>
+                    <%- formats.format($js.i18nStringHtml("upm.plugin.action.whyUpdateTo"), update.version) %>
+                <% } %>
+            </div>
+            <div class="upm-plugin-update-release-notes">
+                <% if (update.versionDetails.releaseNotes) { %>
+                    <%= formats.limitElementCount(
+                          formats.sanitizeHtmlAndSetLinksToNewWindow(update.versionDetails.releaseNotes),
+                          10) %>
+                <% } else { %>
+                    <%- update.summary %>
+                <% } %>
+            </div>
+            <a class="upm-plugin-update-release-url"
+               href="<%- update.versionDetails.releaseNotesUrl || update.links.details %>"
+               target="_blank">
+                <% if (plugin.atlassianConnect) { %>
+                    $i18n.getText("upm.plugin.action.fullReleaseNotes.remotable")
+                <% } else { %>
+                    <%- formats.format($js.i18nStringHtml("upm.plugin.action.fullReleaseNotes"), update.version) %>
+                <% } %>
+            </a>
+        </div>
+    <% } %>
+
+    <div class="upm-plugin-actions"></div>
+
+    <div class="upm-plugin-info">
+        <div class="upm-plugin-info-divider"></div>
+
+        <div class="upm-column">
+            <div class="upm-section screenshots-container">
+                <div class="loading-from-pac">$i18n.getText("upm.plugin.details.screenshots.loading")</div>
+            </div>
+        </div>
+        
+        <div class="upm-column upm-main-column">
+            <div class="upm-section">
+                <form class="aui upm-plugin-details ajs-dirty-warning-exempt">
+
+                    <div class="field-group">
+                        <label class="upm-plugin-installed-version-label">
+                            <% if (update) { %>
+                                $i18n.getText("upm.plugin.installedVersion"):
+                            <% } else { %>
+                                $i18n.getText("upm.plugin.version"):
+                            <% } %>
+                        </label>
+                        <div class="upm-plugin-installed-version upm-plugin-detail">
+                            <% if (plugin.version) { %><%- plugin.version %><% } else { %>$i18n.getText("upm.unknown")<% } %>
+                        </div>
+                    </div>
+
+                    <% if (update && update.version) { %>
+                        <div class="field-group upm-plugin-available-version-container">
+                            <label class="upm-plugin-available-version-label">
+                                $i18n.getText("upm.plugin.updateVersion"):
+                            </label>
+                            <div class="upm-plugin-available-version upm-plugin-detail">
+                                <%- update.version %>
+                            </div>
+                        </div>
+                    <% } %>
+
+                    <div class="field-group">
+                        <label>
+                            $i18n.getText("upm.plugin.developer"):
+                        </label>
+                        <div class="upm-plugin-developer upm-plugin-detail">
+                            <% if (plugin.vendor && plugin.vendor.marketplaceLink) { %>
+                                <a href="<%- plugin.vendor.marketplaceLink %>" target="_blank"><%- plugin.vendor.name %></a>
+                            <% } else { %>
+                                <% if (plugin.vendor) { %><%- plugin.vendor.name %><% } else { %>$i18n.getText("upm.unknown")<% } %>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <% if (supportType != null) { %>
+                    <div class="field-group">
+                      <label>
+                        $i18n.getText("upm.plugin.support"):
+                      </label>
+                      <div class="upm-plugin-developer upm-plugin-detail">
+                          #parse("templates/marketplace/addon/AddonSupportLabelFragment.vm")
+                      </div>
+                    </div>
+                    <% } %>
+
+                    <div class="field-group upm-plugin-key-container">
+                        <label>
+                            $i18n.getText("upm.plugin.key"):
+                        </label>
+                        <div class="upm-plugin-key upm-plugin-detail" title="<%- plugin.key %>">
+                            <% if (plugin.key) { %><%- plugin.key %><% } else { %>$i18n.getText("upm.unknown")<% } %>
+                        </div>
+                    </div>
+
+                    <div class="upm-plugin-license-container"></div>
+                </form>
+            </div>
+        </div>
+
+        <div class="upm-column">
+            <div class="upm-section upm-plugin-details-links">
+                <ul class="upm-plugin-pac-links">
+                    <% if (!plugin.applicationPluginType) { %>
+                        <% if (pacLinks.details) { %>
+                            <li><a href="<%- pacLinks.details %>" class="upm-marketplace-listing-link" target="_blank">$i18n.getText("upm.plugin.marketplace.listing")</a></li>
+                        <% } %>
+                        <% if (pacResponse && pacResponse.links['pricing-page']) { %>
+                            <li><a href="<%- pacResponse.links['pricing-page'] %>" class="upm-plugin-pricing-link" target="_blank">$i18n.getText("upm.plugin.full.pricing")</a></li>
+                        <% } %>
+                        <% if (pacLinks.releaseNotes) { %>
+                            <li><a href="<%- pacLinks.releaseNotes %>" class="upm-plugin-release-notes-link" target="_blank">$i18n.getText("upm.plugin.action.releaseNotes")</a></li>
+                        <% } %>
+                        <% if (pacLinks.documentation) { %>
+                            <li><a href="<%- pacLinks.documentation %>" class="upm-plugin-documentation-link" target="_blank">$i18n.getText("upm.plugin.documentation")</a></li>
+                        <% } %>
+                        <% if (pacLinks.eula) { %>
+                            <li><a href="<%- pacLinks.eula %>" class="upm-plugin-eula-link" target="_blank">$i18n.getText("upm.plugin.eula")</a></li>
+                        <% } %>
+                        <% if (pacLinks.privacy) { %>
+                            <li><a href="<%- pacLinks.privacy %>" class="upm-plugin-privacy-link" target="_blank">$i18n.getText("upm.plugin.data.privacy")</a></li>
+                        <% } %>
+                        <% if (pacLinks.support) { %>
+                            <li><a href="<%- pacLinks.support %>" class="upm-plugin-support-link" target="_blank">$i18n.getText("upm.plugin.support.issues")</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (!plugin.atlassianConnect) { %>
+                        <% if (plugin.modules && plugin.modules.length) { %>
+                            <li class="upm-module-present">
+                                <a class="upm-module-toggle" href="#">
+                                    <span class="upm-toggle-icon"></span> <span class="upm-count-enabled"></span>
+                                    <span class="upm-modules-broken aui-icon aui-icon-error" title="$i18n.getText("upm.plugin.modules.broken")">Error</span>
+                                </a>
+                            </li>
+                        <% } else { %>
+                            <li class="upm-module-none">$i18n.getText("upm.plugin.modules.none.available")</li>
+                        <% } %>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+
+        <div class="clearer"></div>
+    </div>
+
+    <div class="clearer"></div>
+
+    <% if (!plugin.atlassianConnect) { %>
+        <div class="upm-plugin-modules">
+            <div class="upm-module-container"></div>
+        </div>
+    <% } %>
+
+    <input type="hidden" class="upm-plugin-binary" value="<%- update && update.links.binary %>">
+    <input type="hidden" class="upm-plugin-update-descriptor" value="<%- update && update.links['update-descriptor'] %>">
+    <input type="hidden" class="upm-plugin-homepage" value="<%- update && update.links.details %>">
+</div>

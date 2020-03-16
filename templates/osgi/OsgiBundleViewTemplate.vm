@@ -1,0 +1,25 @@
+## Template parameters:
+## plugin - the plugin representation (actually a bundle)
+
+#set($defaultIconPath = $webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources", "images/plugin-icon-default.png"))
+
+<div class="upm-plugin
+       <% if (plugin.state && (plugin.state != 'ACTIVE')) { %> disabled <% } %>
+       "
+>
+    <div class="upm-plugin-row">
+        <span class="expander"></span>
+        <span class="upm-plugin-icon-container">
+            <img src="$defaultIconPath" alt="" class="upm-plugin-icon" width="16">
+        </span>
+        <h4 class="upm-plugin-name"><%- plugin.id %> - <%- plugin.name || plugin.symbolicName %></h4>
+        <div class="upm-plugin-actions">
+
+        </div>
+        <div class="clearer"></div>
+    </div>
+    <div class="upm-details"></div>
+    <div class="upm-plugin-loading-container">
+        <span class="upm-plugin-loading-text">$i18n.getText("upm.plugin.loading")</span>
+    </div>
+</div>

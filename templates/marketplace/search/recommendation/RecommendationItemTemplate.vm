@@ -1,0 +1,16 @@
+## Template parameters:
+## plugin
+
+#set($logoSize = 56)
+
+<a href="<%- plugin.links.singlePluginViewLink %>" class="push-state">
+    <div class="recommendation">
+        <div class="recommendation-logo-container">
+            #parse("templates/common/AddonLogoFragment.vm")
+        </div>
+        <div class="recommendation-name-container">
+            <h1 class="recommendation-name"><%- plugin.name %></h1>
+        </div>
+        #parse("templates/marketplace/addon/AddonStarsFragment.vm")
+    </div>
+</a>

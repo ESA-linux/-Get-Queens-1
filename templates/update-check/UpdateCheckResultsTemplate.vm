@@ -1,0 +1,86 @@
+## Template parameters (all from UpdateCheckResultsModel):
+##
+## targetVersion - the application version we're checking compatibility with
+## recentVersion - true if the target version is a recent product release
+## compatible, incompatible, updateRequired, updateRequiredAfterProductUpdate, unknown - lists of plugins
+
+#set($compatibleDescriptionFormat = $esc.javascript($i18n.getText("upm.check.compatible.description")))
+#set($incompatibleDescriptionFormatHtml = $esc.javascript($i18n.getText("upm.check.incompatible.description")))
+#set($needUpdateDescriptionFormat = $esc.javascript($i18n.getText("upm.check.needUpdate.description")))
+#set($needProductUpdateTitleFormat = $esc.javascript($i18n.getText("upm.check.needProductUpdate")))
+#set($needProductUpdateDescriptionFormat = $esc.javascript($i18n.getText("upm.check.needProductUpdate.description")))
+#set($unknownDescriptionFormat = $esc.javascript($i18n.getText("upm.check.unknown.description")))
+#set($recentProductReleaseFormat = $esc.javascript($i18n.getText("upm.check.recentProductRelease")))
+
+<% if (recentVersion) { %>
+    <div id="upm-recent-product-release-container" class="aui-message info">
+        <span class="upm-recent-product-release">
+            <%- formats.format("$recentProductReleaseFormat", environment.getApplicationName(), targetVersion) %>
+        </span>
+    </div>
+<% } %>
+
+<% if ((!incompatible || !incompatible.length) &&
+       (!updateRequired || !updateRequired.length) &&
+       (!updateRequiredAfterProductUpdate || !updateRequiredAfterProductUpdate.length) &&
+       (!compatible || !compatible.length) &&
+       (!unknown || !unknown.length)) { %>
+
+    <div id="upm-no-userinstalled" class="upm-no-userinstalled">
+        <p>
+            $i18n.getText("upm.check.no.plugins.installed")
+        </p>
+    </div>
+
+<% } else { %>
+
+    <% if (incompatible && incompatible.length) { %>
+        <div id="upm-incompatible-plugins" class="upm-compatibility-category">
+            <h3>$i18n.getText("upm.check.incompatible")</h3>
+            <p class="upm-section-description">
+                <%= formats.format("$incompatibleDescriptionFormatHtml", formats.htmlEncode(environment.getApplicationName()), formats.htmlEncode(targetVersion)) %>
+            </p>
+            <div class="upm-plugin-list-container"></div>
+        </div>
+    <% } %>
+
+    <% if (updateRequired && updateRequired.length) { %>
+        <div id="upm-need-update-plugins" class="upm-compatibility-category">
+            <h3>$i18n.getText("upm.check.needUpdate")</h3>
+            <p class="upm-section-description">
+                <%- formats.format("$needUpdateDescriptionFormat", environment.getApplicationName(), targetVersion) %>
+            </p>
+            <div class="upm-plugin-list-container"></div>
+        </div>
+    <% } %>
+
+    <% if (updateRequiredAfterProductUpdate && updateRequiredAfterProductUpdate.length) { %>
+        <div id="upm-need-product-update-plugins" class="upm-compatibility-category">
+            <h3><%- formats.format("$needProductUpdateTitleFormat", environment.getApplicationName()) %></h3>
+            <p class="upm-section-description">
+                <%- formats.format("$needProductUpdateDescriptionFormat", environment.getApplicationName(), targetVersion) %>
+            </p>
+            <div class="upm-plugin-list-container"></div>
+        </div>
+    <% } %>
+
+    <% if (compatible && compatible.length) { %>
+        <div id="upm-compatible-plugins" class="upm-compatibility-category">
+            <h3>$i18n.getText("upm.check.compatible")</h3>
+            <p class="upm-section-description">
+                <%- formats.format("$compatibleDescriptionFormat", environment.getApplicationName(), targetVersion) %>
+            </p>
+            <div class="upm-plugin-list-container"></div>
+        </div>
+    <% } %>
+
+    <% if (unknown && unknown.length) { %>
+        <div id="upm-unknown-plugins" class="upm-compatibility-category">
+            <h3>$i18n.getText("upm.check.unknown")</h3>
+            <p class="upm-section-description">
+                <%- formats.format("$unknownDescriptionFormat", environment.getApplicationName(), targetVersion) %>
+            </p>
+            <div class="upm-plugin-list-container"></div>
+        </div>
+    <% } %>
+<% } %>

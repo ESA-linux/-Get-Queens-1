@@ -1,0 +1,32 @@
+## Template parameters:
+## plugin
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.messages.install.nondatacenter.warning.header")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <span>
+            <p>
+                <%= formats.format($js.i18nStringHtml("upm.messages.install.nondatacenter.warning.content.1")) %>
+            </p>
+            <p>
+                <% if (plugin.links['support']) { %>
+                    <%= formats.format(
+                            $js.i18nStringHtml("upm.messages.install.nondatacenter.warning.content.2.with.link"),
+                            plugin.links['support']) %>
+                <% } else { %>
+                    <%= formats.format($js.i18nStringHtml("upm.messages.install.nondatacenter.warning.content.2")) %>
+                <% } %>
+            </p>
+        </span>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.messages.install.nondatacenter.warning.action.install")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.install.nondatacenter.warning.action.cancel")</button>
+        </div>
+    </footer>
+</section>

@@ -1,0 +1,254 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the primary message line at the top of the add-on details.  This is a separate template fragment
+## just because the logic for it is so lengthy.  We only render this fragment if primaryMessageType is non-null.
+##
+## Template parameters:
+## plugin - the plugin representation
+## hostLicenseDescription
+## primaryMessageType - from ManageAddonDetailsView._getPrimaryMessageType
+## pricingDescriptionHtml
+## pricingSummaryHtml
+## update - available update representation if any
+
+<%
+    var descHtml,
+        expiryDate = plugin.licenseDetails &&
+            (plugin.licenseDetails.maintenanceExpiryDateString ||
+             plugin.licenseDetails.expiryDateString ||
+             plugin.licenseDetails.subscriptionEndDateString),
+        isCommunity = environment.getHostLicense() && environment.getHostLicense().licenseType == 'COMMUNITY',
+        optPricingDesc = '',
+        roleNamePlural = plugin.licenseDetails && plugin.licenseDetails.typeI18nPlural,
+        update = plugin.pacResponse && plugin.pacResponse.update,
+        updateVersion = update && update.version,
+        incompatibleUpdate = update && !update.licenseCompatible;
+
+    if (plugin.roleBased) {
+        optPricingDesc = $js.i18nStringHtml("upm.plugin.pricing.below");
+    } else if (pricingSummaryHtml) {
+        optPricingDesc = formats.format($js.i18nStringHtml("upm.plugin.pricing.parens"), pricingSummaryHtml);
+    }
+
+    switch (primaryMessageType) {
+        case 'eval_nearly_expired':
+            if (isCommunity) {
+                descHtml = formats.format($js.i18nStringHtml("upm.plugin.action.eval_nearly_expired.free"),
+                    formats.htmlEncode(expiryDate)
+                );
+            } else if (plugin.roleBased) {
+                descHtml = formats.format($js.i18nStringHtml("upm.plugin.action.eval_nearly_expired.roles"),
+                    formats.htmlEncode(expiryDate),
+                    formats.htmlEncode(plugin.name)
+                );
+            } else {
+                descHtml = formats.format(
+                    $js.i18nStringHtml("upm.plugin.action.eval_nearly_expired"),
+                    formats.htmlEncode(expiryDate),
+                    optPricingDesc
+                );
+            }
+            break;
+
+        case 'eval_recently_expired':
+            if (isCommunity) {
+                descHtml = $js.i18nStringHtml("upm.plugin.action.eval_recently_expired.free");
+            } else {
+                descHtml = formats.format(
+                    $js.i18nStringHtml("upm.plugin.action.eval_recently_expired"),
+                    optPricingDesc
+                );
+            }
+            break;
+
+        case 'get_started':
+            descHtml = $js.i18nStringHtml("upm.plugin.action.get_started");
+            break;
+
+        case 'incompatible_requested_update':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.incompatible_requested_update"),
+                environment.getApplicationName()
+            );
+            break;
+
+        case 'incompatible_with_paid_update':
+            descHtml = formats.format(
+                environment.isDataCenter() ? 
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_with_paid_update.datacenter") :
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_with_paid_update.nondatacenter"),
+                environment.getApplicationName()
+            );
+            break;
+
+        case 'incompatible_with_update':
+            descHtml = formats.format(
+                environment.isDataCenter() && !update.statusDataCenterCompatible ?
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_data_center") :
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_with_update.part1"),
+                environment.getApplicationName(),
+                formats.format(
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_with_update.part2"),
+                    formats.htmlEncode(updateVersion)
+                )
+            );
+            break;
+
+        case 'incompatible_data_center_with_update':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.incompatible_data_center_with_update"),
+                environment.getApplicationName(),
+                formats.htmlEncode(updateVersion)
+            );
+            break;
+
+        case 'incompatible_with_host_application':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.incompatible_with_host_application"),
+                environment.getApplicationName()
+            );
+            break;
+
+        case 'incompatible_without_update':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.incompatible_without_update.part1"),
+                environment.getApplicationName(),
+                (plugin.primaryAction && plugin.primaryAction.actionRequired) ?
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_without_update.part2") : ""
+            );
+            break;
+
+        case 'incompatible_data_center_requested_update':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.incompatible_data_center"),
+                environment.getApplicationName(),
+                $js.i18nStringHtml("upm.plugin.action.incompatible_data_center_requested_update")
+            );
+            break;
+
+        case 'incompatible_data_center_without_update':
+        case 'incompatible_legacy_data_center_compatible':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.incompatible_data_center"),
+                environment.getApplicationName(),
+                (plugin.primaryAction && plugin.primaryAction.actionRequired) ?
+                    $js.i18nStringHtml("upm.plugin.action.incompatible_data_center_without_update") :
+                    ""
+            );
+            break;
+
+        case 'maintenance_nearly_expiring':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.maintenance_nearly_expiring"),
+                optPricingDesc
+            );
+            break;
+
+        case 'maintenance_recently_expired':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.maintenance_recently_expired"),
+                optPricingDesc
+            );
+            break;
+
+        case 'license_nearly_expiring':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.license_nearly_expiring"),
+                optPricingDesc
+            );
+            break;
+
+        case 'license_recently_expired':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.license_recently_expired"),
+                optPricingDesc
+            );
+            break;
+
+        case 'unlicensed_marketplace':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.unlicensed_marketplace"),
+                formats.htmlEncode(plugin.name)
+            );
+            break;
+
+        case 'updatable':
+            if (plugin.atlassianConnect) {
+                descHtml = incompatibleUpdate ? $js.i18nStringHtml("upm.plugin.action.updatable_needs_renew.remotable") :
+                    $js.i18nStringHtml("upm.plugin.action.updatable.remotable");
+            } else {
+                descHtml = formats.format(
+                    incompatibleUpdate ? $js.i18nStringHtml("upm.plugin.action.updatable_needs_renew") :
+                        $js.i18nStringHtml("upm.plugin.action.updatable"),
+                    updateVersion);
+            }
+            break;
+
+        case 'updatable_nondeployable':
+            descHtml = plugin.atlassianConnect ?
+                $js.i18nStringHtml("upm.plugin.action.updatable_nondeployable.remotable") :
+                formats.format($js.i18nStringHtml("upm.plugin.action.updatable_nondeployable"), formats.htmlEncode(updateVersion));
+            /* can a Connect add-on really be non-deployable? */
+            break;
+
+        case 'updatable_to_paid':
+            descHtml = plugin.atlassianConnect ?
+                $js.i18nStringHtml("upm.plugin.action.updatable_to_paid.remotable") :
+                formats.format($js.i18nStringHtml("upm.plugin.action.updatable_to_paid"), formats.htmlEncode(updateVersion));
+            break;
+
+        case 'upgradable':
+            if (plugin.roleBased) {
+                descHtml = formats.format($js.i18nStringHtml("upm.plugin.action.upgradable.roles"),
+                    formats.htmlEncode(roleNamePlural)
+                );
+            } else {
+                var hostLicense = environment.getHostLicense(),
+                    licenseDescsUser = {
+                        limited: $js.i18nStringHtml("upm.plugin.action.license.limited.user"),
+                        unlimited: $js.i18nStringHtml("upm.plugin.action.license.unlimited.user"),
+                        single: $js.i18nStringHtml("upm.plugin.action.license.single.user")
+                    },
+                    licenseDescsAgent = {
+                        limited: $js.i18nStringHtml("upm.plugin.action.license.limited.agent"),
+                        unlimited: $js.i18nStringHtml("upm.plugin.action.license.unlimited.agent"),
+                        single: $js.i18nStringHtml("upm.plugin.action.license.single.agent"),
+                        local: $js.i18nStringHtml("upm.plugin.action.license.local.agent")
+                    },
+                    isAgents = (environment.getApplicationKey() === 'bamboo'),
+                    descs = isAgents ? licenseDescsAgent : licenseDescsUser,
+                    hostLicenseFormat,
+                    hostLicenseDesc;
+                if (hostLicense) {
+                    var users = hostLicense.maximumNumberOfUsers;
+                    if (users === undefined || users === -1) {
+                        hostLicenseFormat = descs.unlimited;
+                    } else if (users === 1) {
+                        hostLicenseFormat = descs.limited;
+                    } else if (users === 0 && isAgents) {
+                        hostLicenseFormat = descs.local;
+                    } else {
+                        hostLicenseFormat = descs.limited;
+                    }
+                    hostLicenseDesc = formats.format(hostLicenseFormat, environment.getApplicationName(), users);
+                }
+                descHtml = formats.format($js.i18nStringHtml("upm.plugin.action.upgradable"),
+                    optPricingDesc,
+                    hostLicenseDesc
+                );
+            }
+            break;
+
+        case 'upgrade_nearly_required':
+            descHtml = formats.format(
+                $js.i18nStringHtml("upm.plugin.action.upgrade_nearly_required"),
+                formats.htmlEncode(roleNamePlural)
+            );
+            break;
+    }
+ %>
+<div class="upm-plugin-action-description">
+    <span class="description-text"><%= descHtml %></span>
+    <% if (pricingDescriptionHtml && (primaryMessageType != 'eval_nearly_expired')) { %>
+        <div class="pricing-details"><%= pricingDescriptionHtml %></div>
+    <% } %>
+</div>

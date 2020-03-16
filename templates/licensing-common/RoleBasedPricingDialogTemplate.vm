@@ -1,0 +1,88 @@
+## Template parameters:
+## plugin
+## tiers - pricing tiers to show (slightly transformed from the pricing item representation - see RoleBasePricingDialog)
+## roleNamePlural
+## allowFreeTrial
+## action (optional) - one of the AddonActions keys 
+## morePricingOverUnitCount
+
+#set($contactUsHtml = $i18n.getText("upm.plugin.pricing.roles.contact.us"))
+
+<section role="dialog" id="upm-rbp-pricing-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.plugin.pricing.roles.pricing.details")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <% if (allowFreeTrial) { %>
+            <div class="rbp-pricing-free-trial rbp-pricing-dialog-message aui-message info">
+                <span class="aui-icon icon-info"></span>
+                <div>
+                    <%= formats.format($js.i18nStringHtml("upm.plugin.action.license.role.dialog.free.trial"), formats.htmlEncode(roleNamePlural)) %>
+                </div>
+            </div>
+        <% } %>
+        <% if (action === 'UPGRADE') { %>
+            <div class="rbp-pricing-upgrade rbp-pricing-dialog-message aui-message info">
+                <span class="aui-icon icon-info"></span>
+                <div>
+                    <%- formats.format($js.i18nStringHtml("upm.plugin.action.license.role.dialog.upgrade"),
+                            environment.getApplicationName(), plugin.name) %>
+                </div>
+            </div>
+        <% } %>
+        <div>
+            <% var canSelectTiers = !!action; %>
+            <table class="rbp-pricing-list aui <% if (canSelectTiers) { %>aui-table-interactive<% } %>">
+                <tbody>
+                    <% for (var i = 0; i < tiers.length; i++) { %>
+                        <%
+                            var pricing = tiers[i];
+                        %>
+                        <tr>
+                            <td class="rbp-selection">
+                                <% if (canSelectTiers) { %>
+                                    <input class="radio" type="radio" name="rbp-pricing-element"
+                                           value="<%- pricing.unitCount %>"
+                                           <% if (i === 0) { %> checked <% } %> >
+                                <% } %>
+                            </td>
+                            <td class="rbp-unitCount">
+                                <%- formats.format($js.i18nStringHtml("upm.plugin.pricing.roles"), pricing.unitCount, roleNamePlural) %>
+                            </td>
+                            <td class="rbp-usdAmount">
+                                <%- pricing.description %>
+                            </td>
+                        </tr>
+                    <% } %>
+                    <% if (morePricingOverUnitCount) { %>
+                        <tr>
+                            <td></td>
+                            <td class="rbp-unitCount">
+                                <%- formats.format($js.i18nStringHtml("upm.plugin.pricing.roles.more"), morePricingOverUnitCount, roleNamePlural) %>
+                            </td>
+                            <td class="rbp-usdAmount">
+                                $contactUsHtml
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <% if (action) { %>
+                <button class="aui-button confirm">
+                    <% if (action === 'BUY') { %>
+                        $i18n.getText("upm.plugin.action.buy")
+                    <% } else if (action === 'UPGRADE') { %>
+                        $i18n.getText("upm.plugin.action.upgrade")
+                    <% } %>
+                </button>
+            <% } %>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

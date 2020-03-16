@@ -1,0 +1,36 @@
+## Template parameters:
+## plugin
+
+#set($scopeListIntroHtml = $i18n.getText("upm.messages.remote.update.warning.scope.intro"))
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.messages.remote.update.warning.header")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <p>
+            <span class="connect-update-intro">
+            	<%= formats.format($js.i18nStringHtml("upm.messages.remote.update.warning.intro"),
+            		    formats.htmlEncode(plugin.name), environment.getApplicationName()) %>
+            </span>
+            <span class="connect-update-scope-list-intro">
+            	$scopeListIntroHtml
+            </span>
+        </p>
+        <span class="connect-update-scope-list-holder">
+        	<ul>
+        		<% for (var i = 0; i < plugin.increasedScopes.length; i++) { %>
+        			<li><%- plugin.increasedScopes[i].description %></li>
+        		<% } %>
+        	</ul>
+        </span>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.messages.remote.update.warning.action.accept")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.remote.update.warning.action.reject")</button>
+        </div>
+    </footer>
+</section>

@@ -1,0 +1,73 @@
+## Template parameters:
+## applicationFormat: true if the user is evaluating an application
+## activateFormat: true if the user is activating a Cloud add-on
+## accessTokenFormat: true if the user is generating an access token
+## (if none of the above is true, we assume the user is doing a regular evaluation)
+
+<section role="dialog" id="upm-atlassian-id-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (applicationFormat) { %>
+            <%- formats.format($js.i18nStringHtml("upm.atlassian.id.product.header"), applicationName) %>
+            <% } else { %>
+            $i18n.getText("upm.atlassian.id.title")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <form action="" id="upm-atlassian-id-form" class="aui ajs-dirty-warning-exempt">
+
+            <div class="prompt">
+                <% if (applicationFormat) { %>
+                <%- formats.format($js.i18nStringHtml("upm.atlassian.id.product.message"), applicationName) %>
+                <% } else if (activateFormat) { %>
+                $i18n.getText("upm.purchased.addons.check.description")
+                <% } else if (accessTokenFormat) { %>
+                $i18n.getText("upm.license.token.login")
+                <% } else { %>
+                $i18n.getText("upm.messages.eval.login")
+                <% } %>
+            </div>
+
+            <div class="field-group username-group">
+                <label for="upm-atlassian-id-username">
+                    $i18n.getText('upm.atlassian.id.username')
+                    <span class="aui-icon icon-required">($i18n.getText("upm.atlassian.id.required"))</span>
+                </label>
+                <input class="text medium-field" type="text" id="upm-atlassian-id-username">
+                <div class="error">$i18n.getText('upm.atlassian.id.username.required')</div>
+            </div>
+
+            <div class="field-group password-group">
+                <label for="upm-atlassian-id-password">
+                    $i18n.getText('upm.atlassian.id.password')
+                    <span class="aui-icon icon-required">($i18n.getText("upm.atlassian.id.required"))</span>
+                </label>
+                <input class="password medium-field" type="password" id="upm-atlassian-id-password">
+                <a class="upm-atlassian-id-forgot-password" href="https://id.atlassian.com/id/forgotPassword.action"
+                   target="_new">$i18n.getText('upm.atlassian.id.password.lost')</a>
+                <div class="error">$i18n.getText('upm.atlassian.id.password.required')</div>
+            </div>
+
+            <div class="field-group">
+                <p class="error request-error">
+                    <%- initialError %>
+                </p>
+                <p class="default-error hidden">$i18n.getText('upm.atlassian.id.error.auth')</p>
+            </div>
+
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">
+                <% if (applicationFormat) { %>
+                $i18n.getText("upm.atlassian.id.product.ok")
+                <% } else { %>
+                $i18n.getText("upm.atlassian.id.ok")
+                <% } %>
+            </button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.upload.cancel")</button>
+        </div>
+    </footer>
+</section>

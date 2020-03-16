@@ -1,0 +1,29 @@
+## Template parameters:
+## plugin
+
+<div>
+    <div class="upm-message-container"></div>
+
+    <dl>
+        <dt>$i18n.getText("upm.plugin.version"):</dt>
+        <dd class="upm-plugin-version"><%- plugin.installedVersion || plugin.version %></dd>
+
+        <% if (plugin.installedVersion) { %>
+            <div class="upm-plugin-available-version">
+                <dt>$i18n.getText("upm.plugin.updateVersion"):</dt>
+                <dd class="upm-plugin-available-version"><% if (plugin.version) { %><%- plugin.version %><% } else { %>$i18n.getText("upm.unknown")<% } %></dd>
+            </div>
+        <% } %>
+
+        <dt>$i18n.getText("upm.plugin.developer"):</dt>
+        <dd class="upm-plugin-developer"><%- plugin.vendor && plugin.vendor.name %></dd>
+
+        <dt>$i18n.getText("upm.plugin.key"):</dt>
+        <dd class="upm-plugin-key"><% if (plugin.key) { %><%- plugin.key %><% } else { %>$i18n.getText("upm.unknown")<% } %></dd>
+    </dl>
+    <div class="clearer"></div>
+
+    <input type="hidden" class="upm-plugin-binary" value="<%- plugin.links && plugin.links.binary %>">
+    <input type="hidden" class="upm-plugin-update-descriptor" value="<%- plugin.links && plugin.links['update-descriptor'] %>">
+    <input type="hidden" class="upm-plugin-homepage" value="<%- plugin.links && plugin.links.details %>">
+</div>

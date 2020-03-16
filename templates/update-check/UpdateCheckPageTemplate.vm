@@ -1,0 +1,48 @@
+## Template parameters:
+##
+## availableVersions - application versions we could update to
+
+#set($checkSummaryUpdateAvailableHtml = $i18n.getText("upm.check.summary.update.available"))
+#set($alreadyUpToDateIntroFormat = $esc.javascript($i18n.getText("upm.check.summary.up.to.date")))
+#set($alreadyUpToDateMessageFormat = $esc.javascript($i18n.getText("upm.update.up.to.date")))
+
+<% if (availableVersions.length) { %>
+
+    <div id="upm-compatibility-versions-available">
+        <p>
+            $checkSummaryUpdateAvailableHtml
+        </p>
+
+        <form action="" class="ajs-dirty-warning-exempt aui" id="upm-compatibility-form">
+            <label for="upm-compatibility-version">$i18n.getText("upm.check.checkCompatibility"):</label>
+            <select name="version" class="select medium-field" id="upm-compatibility-version">
+                <option value="" selected="selected">$i18n.getText("upm.check.selectVersion")</option>
+                <% for (var i = 0; i < availableVersions.length; i++) { %>
+                    <option value="<%- availableVersions[i].links.self %>"
+                            <% if (availableVersions[i].recent) { %>class="upm-recent"<% } %>>
+                        <%- availableVersions[i].version %>
+                    </option>
+                <% } %>
+            </select>
+            <button name="submit" class="submit aui-button">$i18n.getText("upm.check.check")</button>
+        </form>
+
+        <div id="upm-compatibility-content"></div>
+    </div>
+
+<% } else { %>
+
+    <div id="upm-compatibility-no-versions">
+        <p>
+            <%- formats.unescapeHtmlEntities(formats.format("$alreadyUpToDateIntroFormat", environment.getApplicationName())) %>
+        </p>            
+
+        <div class="upm-congrats-message upm-congrats-message-product-updates">
+            <h4>$i18n.getText("upm.update.congratulations")</h4>
+            <p>
+                <%- formats.unescapeHtmlEntities(formats.format("$alreadyUpToDateMessageFormat", environment.getApplicationName())) %>
+            </p>
+        </div>
+    </div>
+
+<% } %>

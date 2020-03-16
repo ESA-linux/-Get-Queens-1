@@ -1,0 +1,18 @@
+#parse("templates/mail/text/email-resources.vm")
+#parse("templates/mail/text/email-header.vm")
+
+#emailGreetings($recipient)
+
+#if ($hasScopeIncrease)
+$i18n.getText("upm.email.addon.paidupdate.scope.increase.permission.text", "$pluginName")
+#else
+$i18n.getText("upm.email.addon.paidupdate.permission.text", "$pluginName")
+#end
+
+$managePluginLink
+
+$i18n.getText("upm.email.addon.paidupdate.review.text", "#getAppDisplay($instanceName)")
+
+#emailClosing()
+
+#parse("templates/mail/text/email-footer.vm")

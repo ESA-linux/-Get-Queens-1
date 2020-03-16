@@ -1,0 +1,2 @@
+UPM.define("MarketplaceMostRequestedResultsView",["underscore","MarketplaceSearchResultsView","MarketplaceMostRequestedAddonView","MarketplaceEmptyMostRequestedResultsView","SearchResultsRenderingStrategy"],function(B,A,D,C){return A.extend({itemView:D,emptyView:C})
+});

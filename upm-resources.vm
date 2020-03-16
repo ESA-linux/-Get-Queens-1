@@ -1,0 +1,52 @@
+
+#set($upmPacAvailabilityCheckingHtml = $i18n.getText("upm.pac.availability.checking", "$pacWebsiteUrl"))
+
+#set($noProductVersionUnknownMarketplaceWithHtml = $i18n.getText("upm.plugins.noProductVersion.unknown.marketplace", "$applicationProperties.getDisplayName()"))
+#set($noProductVersionUnknownNotMarketplaceWithHtml = $i18n.getText("upm.plugins.noProductVersion.unknown.notmarketplace", "$applicationProperties.getDisplayName()"))
+#set($noProductVersionP1WithHtml = $i18n.getText("upm.plugins.noProductVersion.dev.p1", "$applicationProperties.getDisplayName()"))
+#if($permissionEnforcer.systemAdmin)
+#set($upmPacAvailabilityDisabledHtml = $i18n.getText("upm.pac.availability.disabled.sysadmin", "$applicationProperties.getDisplayName()", "$applicationProperties.getVersion()"))
+#set($upmPacAvailabilityErrorHtml = $i18n.getText("upm.pac.availability.error.sysadmin", "$pacWebsiteUrl"))
+#set($noProductVersionP2WithHtml = $i18n.getText("upm.plugins.noProductVersion.dev.p2.sysadmin", "$applicationProperties.getDisplayName()"))
+#else
+#set($upmPacAvailabilityDisabledHtml = $i18n.getText("upm.pac.availability.disabled.nonsysadmin", "$applicationProperties.getDisplayName()", "$applicationProperties.getVersion()"))
+#set($upmPacAvailabilityErrorHtml = $i18n.getText("upm.pac.availability.error.nonsysadmin", "$pacWebsiteUrl"))
+#set($noProductVersionP2WithHtml = $i18n.getText("upm.plugins.noProductVersion.dev.p2.user", "$applicationProperties.getDisplayName()"))
+#end
+
+#set($upmVersionTextWithHtml = $i18n.getText("upm.version", "$upmVersion"))
+#set($baseUrlInvalidHtml = $i18n.getText("upm.baseurl.invalid"))
+
+<input type="hidden" id="upm-product-build-number" value="$applicationProperties.getBuildNumber()">
+<input type="hidden" id="upm-product-application-name" value="$applicationProperties.getDisplayName()">
+<input type="hidden" id="upm-product-application-version" value="$applicationProperties.getVersion()">
+<input type="hidden" id="upm-product-server-id" value="$licenseHandler.getServerId()">
+<input type="hidden" id="upm-mpac-website-url" value="$pacWebsiteUrl">
+
+<!-- strings which get converted to AJS.params['paramName']; for simple i18n strings, see UpmStringsTemplate -->
+
+<fieldset class="parameters hidden">
+
+    <!-- #hiddenParam( "paramName" "value" ) -->
+    #hiddenParam( "upmAppName" "$applicationProperties.getDisplayName()" )
+    #hiddenParam( "upmCurrentUsername" "$userManager.getRemoteUser().getUsername()" )
+    #hiddenParam( "upmCurrentUserKey" "$userManager.getRemoteUserKey()" )
+    #hiddenParam( "upmBaseUrl" "$applicationProperties.getBaseUrl()" )
+    #hiddenParam( "upm.mac.baseurl" "$macBaseurl" )
+    #hiddenParam( "isOnDemand" "$isOnDemand" )
+    #hiddenParam( "isApplicationApiSupported" "$isApplicationApiSupported" )
+    #hiddenParam( "upmLicensedHostUsers" "$licensedHostUsers" )
+    #hiddenParam( "isPlatformFreeTier" "$isPlatformFreeTier" )
+    #if ($hostDataCenter) #hiddenParam( "isHostDataCenter" $hostDataCenter ) #end
+    #if ($userManager.getRemoteUser())
+        #hiddenParam( "upmCurrentUserEmail"  "$userManager.getRemoteUser().getEmail()" )
+        #hiddenParam( "upmCurrentUserFullName"  "$userManager.getRemoteUser().getFullName()" )
+    #end
+    #resourcePathParam( "upmResourcePath" "fakedata" "" )
+
+    <!-- Resource URIs -->
+    #foreach( $entry in $linkBuilder.buildPermissionedUris().entrySet() )
+        <input type="hidden" value="$entry.getValue()" name="$entry.getKey()" id="$entry.getKey()">
+    #end
+    
+</fieldset>

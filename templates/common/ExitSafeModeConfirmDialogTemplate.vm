@@ -1,0 +1,36 @@
+## Template parameters:
+## keepState
+
+#set($keepStateMessageHtml = $i18n.getText("upm.manage.safeMode.exit.confirm"))
+#set($restoreStateMessageHtml = $i18n.getText("upm.manage.safeMode.restore.confirm"))
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (keepState) { %>
+                $i18n.getText("upm.manage.safeMode.exit.confirm.title")
+            <% } else { %>
+                $i18n.getText("upm.manage.safeMode.restore.confirm.title")
+            <% } %>            
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <% if (keepState) { %>
+            $keepStateMessageHtml
+        <% } else { %>
+            $restoreStateMessageHtml
+        <% } %>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">
+                <% if (keepState) { %>
+                    $i18n.getText("upm.manage.safeMode.exit.confirm.action")
+                <% } else { %>
+                    $i18n.getText("upm.manage.safeMode.restore.confirm.action")
+                <% } %>
+            </button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.confirm.cancel")</button>
+        </div>
+    </footer>
+</section>

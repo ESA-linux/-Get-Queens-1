@@ -1,0 +1,11 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Template parameters:
+## plugin - the plugin representation
+
+#set($defaultIconPath = $webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources", "images/plugin-icon-default.png"))
+
+<% if (plugin.links['plugin-icon']) { %>
+    <img src="<%- plugin.links['plugin-icon'] %>" width="16">
+<% } else { %>
+    <img src="$defaultIconPath" width="16">
+<% } %>

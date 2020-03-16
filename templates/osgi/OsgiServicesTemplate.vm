@@ -1,0 +1,28 @@
+## Template parameters:
+##
+## services
+## type - "registered" or "in-use"
+
+#set($entryCountSingularFormat = $esc.javascript($i18n.getText("upm.osgi.count.entry")))
+#set($entryCountPluralFormat = $esc.javascript($i18n.getText("upm.osgi.count.entries")))
+#set($serviceIdFormat = $esc.javascript($i18n.getText("upm.osgi.service")))
+#set($providedByFormat = $esc.javascript($i18n.getText("upm.osgi.provided.by")))
+#set($usedByFormat = $esc.javascript($i18n.getText("upm.osgi.used.by")))
+
+<div class="upm-plugin-modules upm-osgi-services-<%- type %>">
+    <span><a class="upm-module-toggle" href="#"><span class="upm-toggle-icon"></span><% if (type === 'registered') { %>$i18n.getText("upm.osgi.services.registered")<% } else { %>$i18n.getText("upm.osgi.services.inUse")<% } %></a> - <span class="upm-count-osgi-services"><%- formats.formatSingularOrPlural("$entryCountSingularFormat", "$entryCountPluralFormat", services.length) %></span></span>
+    <div class="upm-module-container">
+    	<% for (var i = 0; i < services.length; i++) { %>
+    		<% var service = services[i]; %>
+		    <div class="upm-module">
+		        <h5 class="upm-module-name"><%- formats.format("$serviceIdFormat", service.id) %></h5>
+		        <p class="upm-module-key"><%- service.objectClasses.join(', ') %></p>
+		        <div class="clearer"></div>
+		        <% if (service.referencesHtml) { %>
+		        	<p class="upm-module-description"><%= formats.format((type === 'registered') ? "$usedByFormat" : "$providedByFormat", service.referencesHtml) %></p>
+		        	<div class="clearer"></div>
+		        <% } %>
+		    </div>
+    	<% } %>
+    </div>
+</div>

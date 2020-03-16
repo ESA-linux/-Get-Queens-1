@@ -1,0 +1,25 @@
+## Template parameters:
+## title
+## contentHtml
+## progressHtml
+
+<section role="dialog" id="upm-progress-popup" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <%- title %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <div id="upm-progress">
+            <img class="upm-progress-spinner" src="$webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources", "images/in-progress.gif")" alt="$i18n.getText("upm.progress.inProgress")" width="32" height="32">
+            <div class="upm-progress-text">
+                <%= formats.sanitizeHtml(contentHtml) %>
+            </div>
+            <div class="upm-progress-bar-container">
+                <div class="upm-progress-bar"><div class="upm-progress-amount"></div></div>
+                <div class="upm-progress-bar-text"><%= formats.sanitizeHtml(progressHtml) %></div>
+            </div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+</section>

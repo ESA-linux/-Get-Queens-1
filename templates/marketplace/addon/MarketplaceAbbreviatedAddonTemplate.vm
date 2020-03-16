@@ -1,0 +1,40 @@
+## Template parameters:
+
+## plugin - the plugin representation
+
+#set($logoSize = 72)
+
+<div
+    #parse("templates/marketplace/addon/AddonAttributesFragment.vm")
+>
+    <div class="upm-plugin-row">
+        <div class="upm-plugin-header">
+            <span class="upm-plugin-logo-container">
+                #parse("templates/common/AddonLogoFragment.vm")
+            </span>
+            <div class="upm-section upm-wide">
+                <h4 class="upm-plugin-name">
+                    <a class="upm-plugin-name-link" href="<%- plugin.links.singlePluginViewLink %>">
+                        #parse("templates/common/AddonNameFragment.vm")
+                    </a>
+                </h4>
+                <div>
+                    #parse("templates/marketplace/addon/AddonVendorFragment.vm")
+                    &#8226;
+                    #parse("templates/marketplace/addon/AddonSupportLabelFragment.vm")
+                </div>
+                #parse("templates/marketplace/addon/AddonCategoriesFragment.vm")
+            </div>
+            <div class="upm-plugin-actions"></div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+    <input type="hidden" class="upm-plugin-key" name="plugin-key" value="<%- plugin.key %>">
+    <input type="hidden" class="upm-plugin-link-self" value="">
+    <input type="hidden" class="upm-plugin-link-modify" value="">
+    <input type="hidden" class="upm-plugin-link-delete" value="">
+    <input type="hidden" class="upm-plugin-link-update-details" value="">
+    <div class="upm-plugin-loading-container">
+        <span class="upm-plugin-loading-text">$i18n.getText("upm.plugin.loading")</span>
+    </div>
+</div>

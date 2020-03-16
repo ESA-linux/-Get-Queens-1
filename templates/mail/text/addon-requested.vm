@@ -1,0 +1,23 @@
+#parse("templates/mail/text/email-resources.vm")
+#parse("templates/mail/text/email-header.vm")
+
+#emailGreetings($recipient)
+
+
+$i18n.getText("upm.email.addon.requested.install.text", "#emailUserDisplay($sender)", "$pluginName", "#getAppDisplay($instanceName)")
+
+$singlePluginViewLink
+
+#if($requestMessage.isDefined())
+$i18n.getText("upm.email.addon.requested.they.said")
+
+"$requestMessage.get()"
+#end
+#if($isPaidViaAtlassian)
+
+$i18n.getText("upm.email.addon.requested.try.for.30.days", "#getAppDisplay($instanceName)")
+#end
+
+#emailClosing()
+
+#parse("templates/mail/text/email-footer.vm")

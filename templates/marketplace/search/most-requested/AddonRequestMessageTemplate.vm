@@ -1,0 +1,29 @@
+## Template parameters:
+##
+## request - the request
+## formats - the UpmFormats object
+
+<div>
+    <div class="plugin-request-message">
+        <div class="request-user">
+        	<span class="request-header">$i18n.getText('upm.requests.message.user'): </span>
+        	<span class="request-value">
+        		<% if (request.user.userProfileUri) { %>
+        			<a href="<%- request.user.userProfileUri %>"><%- request.user.displayName || request.user.userKey %></a>
+        		<% } else { %>
+        			<%- request.user.displayName || request.user.userKey %>
+        		<% } %>
+        	</span>
+        </div>
+        <div class="request-timestamp">
+        	<span class="request-header">$i18n.getText('upm.requests.message.timestamp'): </span>
+        	<span class="request-value"><%- formats.prettyDate(request.timestamp) %></span>
+        </div>
+        <% if (request.message) { %>
+	        <div class="request-message">
+	        	<span class="request-header">$i18n.getText('upm.requests.message.message'): </span>
+	        	<span class="request-value"><%- request.message %></span>
+	        </div>
+	    <% } %>
+    </div>
+</div>

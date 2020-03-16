@@ -1,0 +1,14 @@
+## Template parameters: properties of UpmMessageModel
+
+<div class="aui-message shadowed<% if (closeable) {%> closeable<% } %> <%= type %>">
+    <% if (title) { %>
+    	<p class="title"><%= title %></p>
+    <% } %>
+    <span class="aui-icon aui-icon-small icon-<%= type %>"></span>
+    <% if (message) {%>
+        <div class="upm-message-text"><%= message %></div>
+    <% } %>
+    <% if (closeable) { %>
+        <span class="aui-icon icon-close" role="button" tabindex="0"></span>
+    <% } %>
+</div>

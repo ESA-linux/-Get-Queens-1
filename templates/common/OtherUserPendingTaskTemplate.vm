@@ -1,0 +1,15 @@
+## Template parameters:
+## taskDesc
+## taskUserKey
+## taskStartTime
+
+#set($taskDetailFormat = $esc.javascript($i18n.getText("upm.pendingTasks.task.detail")))
+
+<div>
+    <strong>$i18n.getText("upm.pendingTasks.message")</strong>
+    <ul>
+        <li>
+            <%- formats.format("$taskDetailFormat", taskDesc, taskUserKey, formats.prettyDate(taskStartTime)) %>
+        </li>
+    </ul>
+</div>

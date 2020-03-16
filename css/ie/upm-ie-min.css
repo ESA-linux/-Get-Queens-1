@@ -1,0 +1,47 @@
+#upm-container button,#upm-container .upm-plugin-list .upm-plugin .upm-details button{font-size:.95em;padding:0;}
+#upm-container button{height:1.95em;padding:.25em .5em .2em .5em;}
+#upm-tabs{*height:1.6em;}
+.upm-confluence #upm-tabs{*height:1.7em;}
+.confluence #upm-tabs{height:1.7em;_height:1.9em;}
+.upm-panel{*overflow:hidden;*zoom:1;}
+h4.upm-plugin-name{*margin-top:.1em;}
+.upm-plugin-summary{*margin-top:.1em;}
+.upm-plugin-list .upm-plugin{*zoom:1;}
+.upm-plugin-list .upm-plugin-row{*zoom:1;}
+#upm-panel-osgi .upm-plugin-list .upm-plugin-row p{display:none;}
+.upm-plugin-list .upm-plugin h4{*zoom:1;}
+.upm-plugin .upm-details{*zoom:1;}
+.upm-plugin .upm-plugin-support .top-vendor{background-image:url(images/top-vendor-badge.png);}
+#upm-container button{*font-size:1em;}
+.upm-plugin-list .disabled .upm-plugin-row{_background-color:#eaeaea;_color:#999;}
+.disabled .upm-plugin-modules .upm-module-actions{_display:inline;}
+.upm-module button.upm-module-disable{_display:inline;}
+.upm-plugin-modules .upm-module-disabled button.upm-module-enable{_display:inline;}
+.upm-module{*zoom:1;}
+.upm-module-actions{margin:-0.2em 0 -0.3em 0;}
+.upm-module-state{margin:-0.2em 0 -0.3em 0;}
+.upm-module button.upm-module-enable,.upm-module button.upm-module-disable{margin-bottom:-0.2em;}
+#upm-audit-log th{*position:relative;}
+a#upm-audit-log-refresh{*position:absolute;*right:.5em;*top:.5em;}
+#upm-panel-install{*overflow:visible;}
+#upm-container .hover{cursor:auto;}
+.upm-plugin-list .hover .upm-plugin-row{background-color:#eaeaea;cursor:pointer;}
+.upm-plugin-list .expanded .upm-plugin-row{background-color:#eaf1fd;}
+.upm-module-container .hover{background:#fafafa;}
+.upm-plugin-modules .hover button.upm-module-disable{display:inline;}
+.upm-plugin-modules .upm-module-disabled.hover button.upm-module-enable{display:inline;}
+.upm-module.hover .upm-module-actions.upm-module-cannot-disable button{display:none;}
+.upm-module.hover .upm-module-actions.upm-module-cannot-disable p{display:inline;}
+.upm-module.hover .upm-module-state{display:none;}
+.msie #jira .upm-plugin-actions .aui-dd-parent .aui-shadow{display:none;}
+#upm-manage-user-installed-plugins{*clear:both;*margin-top:-1em;}
+#upm-safe-mode-on{*margin-right:14em;}
+#upm-update-all-container{*margin-right:10.5em;*margin-top:-0.5em;}
+.upm-expand-collapse-all{*top:-2.5em;}
+.upm-plugin-version{*margin-left:5px;}
+.upm-info{padding-bottom:10px;}
+#upm-container.upm-bamboo{min-height:800px;}
+.upm-settings-row .description{margin-top:1px;}
+.upm-dialog-most-requested-addons .upm-plugin-row .upm-plugin-actions{width:15%;}
+.upm-dialog-most-requested-addons .upm-plugin-header .upm-section.upm-wide{width:65%;}
+#upm-install-search-box{float:left;height:24px;}

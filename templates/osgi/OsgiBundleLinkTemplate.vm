@@ -1,0 +1,4 @@
+## Template parameters:
+## bundle - the bundle representation
+
+<a class="upm-osgi-bundle-xref" href="#osgi" data-key="<%- bundle.symbolicName %>"><%- bundle.name || bundle.symbolicName %></a>

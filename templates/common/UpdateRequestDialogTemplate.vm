@@ -1,0 +1,41 @@
+## Template parameters:
+## pluginName - displayable name of plugin
+## dataCenterIncompatible
+
+<section role="dialog" id="upm-plugin-update-request-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.plugin.update.request.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <form id="upm-plugin-update-request-dialog-container" class="aui ajs-dirty-warning-exempt">
+            <fieldset>
+                <p class="description plugin-update-request-text">
+                    <%- formats.format(
+                            dataCenterIncompatible ?
+                                $js.i18nStringHtml("upm.plugin.update.request.description.datacenter") :
+                                $js.i18nStringHtml("upm.plugin.update.request.description"),
+                            pluginName, environment.getApplicationName(), environment.getApplicationVersion()) %>
+                </p>
+                <p>
+                    $i18n.getText("upm.plugin.update.request.message")
+                </p>
+                <textarea rows="3" cols="50" id="text-message" name="text-message" class="textarea long-field"></textarea>
+                <div>
+                    <legend><span></span></legend>
+                    <div>
+                        <input type="checkbox" id="upm-contact-details-share" checked>
+                        <label for="upm-contact-details-share">$i18n.getText("upm.feedback.share.description")</label>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button confirm">$i18n.getText("upm.plugin.update.request.send")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.plugin.update.request.cancel")</button>
+        </div>
+    </footer>
+</section>

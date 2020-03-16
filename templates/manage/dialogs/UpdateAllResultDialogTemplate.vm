@@ -1,0 +1,103 @@
+## Template parameters:
+## successCount
+## totalCount
+## actionItems
+## requiresRestartItems
+
+<section role="dialog" id="upm-update-all-results" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (successCount === 0) { %>
+                $i18n.getText("upm.messages.updateAll.failures.heading")
+            <% } else { %>
+                $i18n.getText("upm.messages.updateAll.success.heading")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <div id="upm-update-all-result-dialog-container">
+            <div class="intro">
+                <div class="message">
+                    <% if (successCount === 0) { %>
+                        <%= formats.format($js.i18nStringHtml("upm.messages.updateAll.failures.all"), totalCount) %>
+                    <% } else if (!actionItems.length) { %>
+                        <%= formats.format((successCount === 1) ?
+                                $js.i18nStringHtml("upm.messages.updateAll.finishedCount.one") :
+                                $js.i18nStringHtml("upm.messages.updateAll.finishedCount"),
+                                successCount, totalCount) %>
+                    <% } else { %>
+                        <%= formats.format(
+                                (successCount === 1) ? $js.i18nStringHtml("upm.messages.updateAll.finishedCount.one.nextsteps") :
+                                    ((actionItems.length === 1) ? $js.i18nStringHtml("upm.messages.updateAll.finishedCount.nextsteps.one") :
+                                        $js.i18nStringHtml("upm.messages.updateAll.finishedCount.nextsteps")),
+                                successCount, totalCount, actionItems.length) %>
+                    <% } %>
+                </div>
+            </div>
+            <% if (actionItems.length) { %>
+                <div class="extra-actions">
+                    <% for (var i = 0; i < actionItems.length; i++) { %>
+                        <% var item = actionItems[i]; %>
+                        <div class="extra-action" data-key="<%- item.key %>">
+                            <div class="checkmark"></div>
+                            <div class="message">
+                                <%- formats.format(
+                                        (item.actions[0].key === 'GET_STARTED') ?
+                                            $js.i18nStringHtml("upm.messages.updateAll.extraAction.nextsteps") :
+                                            $js.i18nStringHtml("upm.messages.updateAll.extraAction.licensing.required"),
+                                        item.name, item.version) %>
+                            </div>
+                            <div class="upm-plugin-actions upm-toolbar">
+                                <% for (var j = 0; j < item.actions.length; j++) { %>
+                                    <%
+                                        var action = item.actions[j],
+                                            isPrimary = (action.key === 'BUY'),
+                                            buttonLabels = {
+                                                'TRY': $js.i18nStringHtml("upm.plugin.action.try"),
+                                                'BUY': $js.i18nStringHtml("upm.plugin.action.buy"),
+                                                'UPGRADE': $js.i18nStringHtml("upm.plugin.action.upgrade"),
+                                                'RENEW': $js.i18nStringHtml("upm.plugin.action.renew"),
+                                                'GET_STARTED': $js.i18nStringHtml("upm.messages.update.success.nextstep.button")
+                                            },
+                                            buttonLabel = buttonLabels[action.key];
+                                    %>
+                                    <div class="toolbar-group">
+                                        <a href="#" target="_blank"
+                                           class="aui-button <% if (action.key === 'BUY') { %>aui-button-primary<% } %>"
+                                           data-action="<%- action.key %>"
+                                           ><%- buttonLabel %></a>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <div class="divider"></div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+            <div class="extra-messages">
+                <% if (successCount > 0 && successCount < totalCount) { %>
+                    <% var failureCount = totalCount - successCount; %>
+                    <div>
+                        <%= formats.format((failureCount === 1) ?
+                                $js.i18nStringHtml("upm.messages.updateAll.failures.one") :
+                                $js.i18nStringHtml("upm.messages.updateAll.failures"),
+                                failureCount) %>
+                    </div>
+                <% } %>
+                <% for (var i = 0; i < requiresRestartItems.length; i++) { %>
+                    <div>
+                        <%= formats.format($js.i18nStringHtml("upm.messages.updateAll.requiresRestart"),
+                                formats.htmlEncode(requiresRestartItems[i].name),
+                                formats.htmlEncode(requiresRestartItems[i].version),
+                                environment.getApplicationName()) %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

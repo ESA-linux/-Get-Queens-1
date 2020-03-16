@@ -1,0 +1,23 @@
+<section role="dialog" id="upm-newsletter-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.dac.newsletter.signup.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <form class="aui">
+            <h3>$i18n.getText("upm.dac.newsletter.signup.description")</h3>
+            <fieldset class="field-group">
+                <label for="newsletter-email">$i18n.getText("upm.dac.newsletter.signup.email")</label>
+                <input id="newsletter-email" name="newsletter-email" class="newsletter-email text" type="text"
+                       value="<%- environment.getCurrentUserEmail() %>">
+            </fieldset>
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button confirm">$i18n.getText("upm.dac.newsletter.signup.confirm")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.settingsPanel.cancel")</button>
+        </div>
+    </footer>
+</section>

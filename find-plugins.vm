@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>$i18n.getText("upm.find.title")</title>
+    <meta name="decorator" content="atl.admin">
+    <meta name="admin.active.section" content="admin_plugins_menu/upm_section"/>
+    <meta name="admin.active.tab" content="upm-marketplace-link"/>
+    #parse("upm-macros.vm")
+    #baseWebResources("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-marketplace")
+    <content tag="selectedWebItem">confluence-upm-marketplace-menu</content>
+</head>
+<body>
+    #set($pageTitle = $i18n.getText("upm.marketplace.title", "$applicationProperties.getDisplayName()"))
+    #set($marketplaceDescriptionWithHtml = $i18n.getText("upm.find.description", "$applicationProperties.getDisplayName()"))
+    #set($upmContainerClasses = "upm-marketplace")
+    #set($userFacing = true)
+
+    #parse("upm-resources.vm")
+    #parse("find-plugins-contents.vm")
+</body>
+</html>

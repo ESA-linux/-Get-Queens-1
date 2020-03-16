@@ -1,0 +1,58 @@
+## Template parameters:
+
+## enabled - true if the add-on is enabled
+## license - the license details
+## isRemoteAgents - true if the edition type is "remote agent"
+## isRoleBased - true if it's a role-based license
+## roleLabel - singular or plural role label, only needed if it's a role-based license
+
+<% if (license.error) { %>
+    <% 
+        var errorFormat, errorFormats;
+        if (license.error === 'EDITION_MISMATCH') {
+            errorFormat = isRemoteAgents ?
+                $js.i18nStringHtml("upm.plugin.license.status.edition_mismatch.remote.agents") :
+                $js.i18nStringHtml("upm.plugin.license.status.edition_mismatch.users")
+        } else {
+            errorFormats = {
+                "expired": $js.i18nStringHtml("upm.plugin.license.status.expired"),
+                "role_exceeded": $js.i18nStringHtml("upm.plugin.license.status.role_exceeded"),
+                "role_undefined": $js.i18nStringHtml("upm.plugin.license.status.role_undefined"),
+                "type_mismatch": $js.i18nStringHtml("upm.plugin.license.status.type_mismatch"),
+                "user_mismatch": $js.i18nStringHtml("upm.plugin.license.status.user_mismatch"),
+                "version_mismatch": $js.i18nStringHtml("upm.plugin.license.status.version_mismatch"),
+            };
+            errorFormat = errorFormats[license.error.toLowerCase()] ||
+                $js.i18nStringHtml("upm.plugin.license.status.unknown");
+        }
+    %>
+    <% if (license.error === 'ROLE_UNDEFINED' && !enabled) { %>
+        $i18n.getText("upm.plugin.license.status.unknown")
+    <% } else if (isRoleBased) { %>
+        <%= formats.format(errorFormat,
+                           license.roleManagementUri,
+                           license.currentRoleCount,
+                           license.maximumNumberOfUsers,
+                           formats.htmlEncode(roleLabel)) %>
+    <% } else { %>
+        <%= formats.format(errorFormat) %>
+    <% } %>
+<% } else { %>
+    <% if (isRoleBased) { %>
+        <%
+            var statusFormat;
+            if (license.maximumNumberOfUsers === undefined) {
+                statusFormat = $js.i18nStringHtml("upm.plugin.license.status.valid.rolecount.unlimited");
+            } else {
+                statusFormat = $js.i18nStringHtml("upm.plugin.license.status.valid.rolecount");
+            }
+        %>
+        <%= formats.format(statusFormat,
+                           license.roleManagementUri,
+                           license.currentRoleCount,
+                           license.maximumNumberOfUsers,
+                           formats.htmlEncode(roleLabel)) %>
+    <% } else { %>
+        $i18n.getText("upm.plugin.license.status.valid")
+    <% } %>
+<% } %>

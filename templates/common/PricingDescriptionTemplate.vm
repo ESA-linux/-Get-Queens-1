@@ -1,0 +1,51 @@
+## Template parameters:
+## pricing - the pricing item representation
+## renewal - true to use renewal amount
+## roleInfo - pricing role properties if this is role-based pricing
+## rolePerUser - true if this is per-user role-based pricing
+## truncated - true to use an abbreviated format
+## actionText - true to include a link for more role-based details
+## dataCenter - true if app has data center pricing
+
+<%
+    var saleType, amount;
+    if (dataCenter && pricing.monthsValid === 12) {
+        saleType = 'annual';
+    } else {
+        saleType = 'default';
+    }
+    amount = renewal ? pricing.renewalAmount : pricing.amount;
+%>
+<% if (roleInfo && !truncated) { %>
+    <%
+        var singular = roleInfo.singularName.toLowerCase(),
+            plural = roleInfo.pluralName.toLowerCase(),
+            plurality = (pricing.unitCount === 1) ? singular : plural;
+    %>
+    <% if (saleType === 'monthly') { %>
+        <% if (rolePerUser) { %>
+            <%= formats.format($js.i18nStringHtml("upm.plugin.pricing.monthly.role.per"),
+                    amount, singular, pricing.unitCount, formats.htmlEncode(plural)) %>
+        <% } else { %>
+            <%= formats.format($js.i18nStringHtml("upm.plugin.pricing.monthly.role.start"),
+                    amount, pricing.unitCount, formats.htmlEncode(plurality)) %>
+        <% } %>
+    <% } else if (saleType === 'annual') { %>
+        <%= formats.format($js.i18nStringHtml("upm.plugin.pricing.annual.role.pack"),
+                amount, pricing.unitCount, formats.htmlEncode(plurality)) %>
+    <% } else { %>
+        <%= formats.format(actionText ?
+                    $js.i18nStringHtml("upm.plugin.pricing.default.role.action") :
+                    $js.i18nStringHtml("upm.plugin.pricing.default.role"),
+                amount, pricing.unitCount, formats.htmlEncode(plurality)) %>
+    <% } %>
+<% } else { %>
+    <%
+        var nonRoleFormats = {
+                default: $js.i18nStringHtml("upm.plugin.pricing.default"),
+                monthly: $js.i18nStringHtml("upm.plugin.pricing.monthly"),
+                annual: $js.i18nStringHtml("upm.plugin.pricing.annual")
+            };
+    %>
+    <%= formats.format(nonRoleFormats[saleType], amount) %>
+<% } %>

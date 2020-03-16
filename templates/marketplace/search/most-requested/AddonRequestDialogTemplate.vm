@@ -1,0 +1,47 @@
+## Template parameters:
+## plugin - the plugin representation
+## existingMessage - previous request message being updated, if any
+## isUpdate - true if we are updating a previous request
+
+<section role="dialog" id="upm-plugin-status-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (isUpdate) { %>
+                $i18n.getText("upm.messages.request.update.heading")
+            <% } else { %>
+                $i18n.getText("upm.messages.request.heading")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        #parse("templates/common/AddonBrandingFragment.vm")
+        <div class="plugin-request-form message">
+            <% if (isUpdate) { %>
+                <div class="upm-dialog-update-request hidden">
+                    <p class="body-header">$i18n.getText("upm.messages.request.update.body")</p>
+                    <p class="body-subtext">$i18n.getText("upm.messages.request.update.body.subtext")</p>
+                </div>
+            <% } else { %>
+                <div class="upm-dialog-new-request">
+                    <p class="body-header">$i18n.getText("upm.messages.request.body")</p>
+                    <p class="body-subtext">$i18n.getText("upm.messages.request.body.subtext")</p>
+                </div>
+            <% } %>
+            <form class="aui ajs-dirty-warning-exempt">
+                <textarea rows="3" id="pluginRequestMessage" name="pluginRequestMessage" class="textarea long-field"><%- existingMessage %></textarea>
+            </form>
+        </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button confirm">
+                <% if (isUpdate) { %>
+                    $i18n.getText("upm.messages.request.update.button")
+                <% } else { %>
+                    $i18n.getText("upm.messages.request.button")
+                <% } %>
+            </button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</div>

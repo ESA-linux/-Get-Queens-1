@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.upm</groupId>
+        <artifactId>licensing-parent</artifactId>
+        <version>3.0.2</version>
+    </parent>
+    <name>Universal Plugin Manager - Licensing API</name>
+    <artifactId>licensing-api</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.upm</groupId>
+            <artifactId>upm-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.event</groupId>
+            <artifactId>atlassian-event</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>copy-doclava-artifact</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.atlassian.devrel</groupId>
+                                    <artifactId>doclava-theme</artifactId>
+                                    <version>${doclava.theme.version}</version>
+                                    <outputDirectory>${doclava.theme.dir}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <docletArtifact>
+                        <groupId>com.google.doclava</groupId>
+                        <artifactId>doclava</artifactId>
+                        <version>1.0.6-atlassian-3</version>
+                    </docletArtifact>
+                    <doclet>com.google.doclava.Doclava</doclet>
+                    <useStandardDocletOptions>false</useStandardDocletOptions>
+                    <bootclasspath>${sun.boot.class.path}</bootclasspath>
+                    <additionalparam>
+                        -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
+                        -federationxml JDK ${doclava.theme.dir}/openjdk-6.xml
+                        -federate upm-api https://developer.atlassian.com/static/javadoc/upm/api/2.0/reference
+                        -hdf project.name "${project.name}"
+                        -d ${project.build.directory}/apidocs
+                        -templatedir ${doclava.theme.dir}
+                    </additionalparam>
+                    <maxmemory>1024m</maxmemory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- UPM-4735: publish this artifact's sources to the public repo so that vendors can access it too -->
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-source-routes-plugin</artifactId>
+                <configuration>
+                    <distributionManagement>
+                        <repository>
+                            <id>atlassian-m2-repository</id>
+                            <name>Atlassian Public Repository</name>
+                            <url>https://packages.atlassian.com/maven/public</url>
+                        </repository>
+                        <snapshotRepository>
+                            <id>atlassian-m2-snapshot-repository</id>
+                            <name>Atlassian Public Snapshot Repository</name>
+                            <url>https://packages.atlassian.com/maven/public-snapshot</url>
+                        </snapshotRepository>
+                    </distributionManagement>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

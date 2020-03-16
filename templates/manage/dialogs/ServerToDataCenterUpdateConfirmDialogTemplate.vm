@@ -1,0 +1,26 @@
+## Template parameters:
+## plugin - the addon model
+## expiryDateString - expiry date of app if user continues with the update.
+
+<section role="dialog" id="upm-server-to-dc-update-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.messages.update.server.to.datacenter.confirm.header")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <span>
+            <p>
+                <%= formats.format(
+                $js.i18nStringHtml("upm.messages.update.server.to.datacenter.confirm.content.1"),
+                        formats.htmlEncode(plugin.name || plugin.key), expiryDateString) %>
+            </p>
+        </span>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">$i18n.getText("upm.messages.update.server.to.datacenter.confirm.action.accept")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.update.server.to.datacenter.confirm.action.reject")</button>
+        </div>
+    </footer>
+</section>

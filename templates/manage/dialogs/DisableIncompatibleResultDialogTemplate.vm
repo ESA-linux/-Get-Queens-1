@@ -1,0 +1,51 @@
+## Template parameters:
+## successCount
+## totalCount
+
+<section role="dialog" id="upm-disable-all-results" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (successCount === 0) { %>
+                $i18n.getText("upm.messages.disableAll.failures.heading")
+            <% } else { %>
+                $i18n.getText("upm.messages.disableAll.success.heading")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <div id="upm-disable-all-result-dialog-container">
+            <div class="intro">
+                <div class="message">
+                    <% if (successCount === 0) { %>
+                        <% if (totalCount === 1) { %>
+                            $i18n.getText("upm.messages.disableAll.failures.single")
+                        <% } else { %>
+                            <%= formats.format($js.i18nStringHtml("upm.messages.disableAll.failures.all"), totalCount) %>
+                        <% } %>
+                    <% } else if (successCount === 1) { %>
+                        <%= formats.format((totalCount === 1) ?
+                                $js.i18nStringHtml("upm.messages.disableAll.finishedCount.single") :
+                                $js.i18nStringHtml("upm.messages.disableAll.finishedCount.one"),
+                                totalCount) %>
+                    <% } else { %>
+                        <%= formats.format($js.i18nStringHtml("upm.messages.disableAll.finishedCount"), successCount, totalCount) %>
+                    <% } %>
+                </div>
+            </div>
+            <% if ((successCount > 0) && (successCount < totalCount)) { %>
+                <% var failureCount = totalCount - successCount; %>
+                <div class="extra-messages">
+                    <%= formats.format((failureCount === 1) ?
+                            $js.i18nStringHtml("upm.messages.disableAll.failures.one") :
+                            $js.i18nStringHtml("upm.messages.disableAll.failures"),
+                            failureCount) %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

@@ -1,0 +1,43 @@
+## Template parameters:
+## plugin - the plugin representation
+## propertiesBeforeLicenseUpdate - the plugin representation before the license was changed
+## isNewlyCreatedLicense - true if the plugin has just been purchased or a trial was started
+
+<%
+    var license = plugin.licenseDetails,
+        links = plugin.links,
+        pacResponse = plugin.pacResponse,
+        isEnabled = plugin.enabled,
+        wasEnabled = propertiesBeforeLicenseUpdate ? propertiesBeforeLicenseUpdate.enabled : true,
+        oldLicenseDetails = propertiesBeforeLicenseUpdate && propertiesBeforeLicenseUpdate.licenseDetails;
+%>
+
+<% if (wasEnabled && !isEnabled) { %>
+    $i18n.getText("upm.plugin.license.success.disabled")
+<% } else if (!isEnabled && license && license.valid) { %>
+    $i18n.getText("upm.plugin.license.success.plugin.can.be.enabled")
+<% } else if (license && !license.valid) { %>
+    <% if (links.upgrade) { %>
+        $i18n.getText("upm.plugin.license.success.invalid.requires.upgrade")
+    <% } else if (links.renew || links['renew-requires-contact']) { %>
+        $i18n.getText("upm.plugin.license.success.invalid.requires.renewal")
+    <% } else if (links['new']) { %>
+        $i18n.getText("upm.plugin.license.success.invalid.requires.purchase")
+    <% } else if (license.error === 'ROLE_UNDEFINED') { %>
+        <% /* no message in this case - it will have already been displayed by ManageAddonDetailsView */ %>
+    <% } else { %>
+        <% /* this case shouldn't really happen as all errors should result in one of the above cases.
+              but in case it does, let's provide a generic error message with a suggestion to go to MAC. */ %>
+        $i18n.getText("upm.plugin.license.success.invalid.requires.mac")
+    <% } %>
+<% } else if (pacResponse && pacResponse.update && !pacResponse.update.licenseCompatible) { %>
+    <% /* no message in this case - it will have already been displayed by ManageAddonDetailsView */ %>
+<% } else if (isNewlyCreatedLicense && license && license.evaluation) { %>
+    <%- formats.format($js.i18nStringHtml("upm.plugin.license.success.new.evaluation"), plugin.name) %>
+<% } else if (isNewlyCreatedLicense && (!license || !license.evaluation)) { %>
+    <%- formats.format($js.i18nStringHtml("upm.plugin.license.success.new.purchase"), plugin.name) %>
+<% } else if (!license) { %>
+    $i18n.getText("upm.plugin.license.success.removed")
+<% } else { %>
+    $i18n.getText("upm.plugin.license.success")
+<% } %>

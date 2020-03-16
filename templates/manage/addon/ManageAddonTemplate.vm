@@ -1,0 +1,37 @@
+## Template parameters:
+## plugin - the plugin representation
+## isUpdatable
+## lozengeType
+## lozengeClass
+
+#set($defaultIconPath = $webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources", "images/plugin-icon-default.png"))
+
+<div class="upm-plugin
+       <% if (plugin.atlassianConnect) { %> upm-remotable <% } %>
+       <% if (plugin.restartState) { %> installed-but-requires-restart <% } %>
+       <% if (!plugin.enabled) { %> disabled <% } %>
+       <% if (plugin.userInstalled) { %> user-installed <% } else { %> upm-system <% } %>
+       <% if (!plugin.enabled) { %> upm-static <% } %>
+       "
+     data-key="<%- plugin.key %>"
+     data-updatable="<% isUpdatable %>"
+>
+    <div class="upm-plugin-row">
+        <span class="expander"></span>
+        <span class="upm-plugin-icon-container">
+            <img src="<%- plugin.links['plugin-icon'] || "$defaultIconPath" %>"
+                 alt="" class="upm-plugin-icon" width="16">
+        </span>
+        <h4 class="upm-plugin-name"><%- plugin.name %></h4>
+        <% if (lozengeType) { %>
+            #parse("templates/manage/addon/AddonLozengeFragment.vm")
+        <% } %>
+        <div class="upm-plugin-actions"></div>
+        <span class="upm-requires-restart-icon" title="$i18n.getText("upm.requiresRestart.altText")"></span>
+        <div class="clearer"></div>
+    </div>
+    <div class="upm-details"></div>
+    <div class="upm-plugin-loading-container">
+        <span class="upm-plugin-loading-text">$i18n.getText("upm.plugin.loading")</span>
+    </div>
+</div>

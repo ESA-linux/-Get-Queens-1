@@ -1,0 +1,17 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the category lozenges for an addon
+
+## Template parameters:
+## plugin - plugin representation which has a "categories" property
+
+<div class="upm-plugin-categories">
+	<% if (plugin.categories && plugin.categories.length) { %>
+		<% for (var i = 0; i < plugin.categories.length; i++) { %>
+			<a class="category-link"
+			   data-category="<%- plugin.categories[i].name %>"
+			   href="<%- plugin.categories[i].links.self %>"><span class="aui-lozenge aui-lozenge-complete aui-lozenge-subtle"><%- plugin.categories[i].name %></span></a>
+		<% } %>
+	<% } else { %>
+        $i18n.getText("upm.plugin.no.categories")
+	<% } %>
+</div>

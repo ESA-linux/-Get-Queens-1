@@ -1,0 +1,23 @@
+## Template parameters:
+## plugin - the plugin representation
+## license - the new license representation
+
+<section role="dialog" id="upm-info-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            $i18n.getText("upm.plugin.action.license.followup.title")
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <%= formats.format($js.i18nStringHtml("upm.plugin.action.license.followup.message"),
+                           plugin.links['renew-requires-contact'],
+                           formats.htmlEncode(plugin.vendor.name),
+                           formats.htmlEncode(plugin.name),
+                           formats.htmlEncode(license.licenseType.toLowerCase())) %>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

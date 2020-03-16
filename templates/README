@@ -1,0 +1,146 @@
+
+This file explains how Velocity templates and Underscore templates are used in UPM.
+
+
+1. Velocity page templates
+
+The top-level .vm files under src/main/resources/ (e.g. manage-plugins.vm) provide the
+initial HTML content for UPM pages, rendered by Velocity via Atlassian Template Renderer.
+PluginManagerHandler sets several context variables for all of these templates, such as
+$upmVersion and $isOnDemand.
+
+These files do not need to be mentioned in atlassian-plugin.xml.
+
+Several objects are available in all UPM Velocity templates as Velocity variables, such as
+$esc (an instance of Velocity's EscapeTool class).  To see what else is available, look for
+the <template-context-item> elements in atlassian-plugin.xml (and see also
+https://developer.atlassian.com/display/DOCS/Atlassian+Template+Renderer).
+
+
+2. Velocity-to-Javascript templates
+
+The .vm files in subdirectories under templates/ are used by Javascript code, as follows:
+
+- A file called "templates/FooTemplate.vm" is referenced in a web resource in atlassian-plugin.xml:
+    <resource type="download" name="templates/FooTemplate.js" location="templates/FooTemplate.vm"/>
+
+- Note that the logical resource name ends in .js even though the real filename uses .vm.
+This works because the resource also defines this transformer:
+    <transformation extension="vm">
+        <transformer key="javascriptTemplateWebResourceTransformer" />
+    </transformation>
+
+- At page load time, the template is first rendered via Velocity-- which handles any "#"
+  directives and "$" variable/method expansions (such as $i18n.getText())-- and then the output
+  from Velocity is run through templates/underscoreTemplate.vm, which creates a Javascript module
+  named "FooTemplate" that parses the Velocity output as an Underscore template
+  (http://underscorejs.org/#template).  This transformation adds some overhead, but since these
+  files are batched along with all other Javascript resources, the Velocity transformation only
+  happens once and subsequent page loads are only doing the Underscore-parsing part.
+
+- The Javascript module that wishes to use this template just imports the FooTemplate module.
+  An Underscore template is a function that takes named parameters in an object and returns a
+  string, so if your template contains a variable placeholder like "<%- x %>", you would get the
+  HTML output from it like this:
+    UPM.define("MyModule", [ FooTemplate ], function(fooTemplate) {
+      // ...
+      someHtml = fooTemplate({ x: theValueForX });
+    });
+
+- If you look in underscoreTemplate.vm you'll see that it provides some default named parameters
+  in addition to any that you explicitly pass into the template.  For instance, "formats" is the
+  UpmFormats module, so you can always use expressions like "<%- formats.formatNumberWithCommas(n) %>".
+
+
+3. Velocity variables vs. Underscore variables
+
+Velocity variables, which start with "$", are rendered by the back end before the template becomes
+available to Javascript code.  Thus, they can only refer to things that are part of the overall
+application state - and since these templates are batched and cached, they should be things that
+are invariant across the lifetime of the app instance.  Also, since the Velocity rendering happens
+as part of a web resource request, it is locale-specific-- so you can and should use $i18n.getText()
+for all i18n-able content.
+
+Underscore variables (anything referenced within <% ... %>, <%= ... %>, or <%- ... %>) are passed
+in from the Javascript code (or pre-populated by underscoreTemplate.vm as described above).  Although
+globals are also available since it's just Javascript, avoid them (e.g. instead of "AJS.isOnDemand",
+use "environment.isOnDemand()") since they make the code harder to maintain and harder to unit-test.
+
+You cannot use an Underscore variable within a Velocity expression.  For instance, if you have an
+i18n string that has a placeholder parameter, and the value for that parameter is in an Underscore
+variable called "x", this will NOT work:
+
+    $i18n.getText("my.message.key", x)
+
+Instead, use Velocity to get the i18n string format, and then do the parameter substitution in
+Javascript within an Underscore tag.  Note that you will need to perform Javascript string escaping
+on the format string in case it contains quotes:
+
+    #set($myMessageFormat = $esc.javascript($i18n.getText("my.message.key")))
+    Here's my message: <%- formats.format("$myMessageFormat", x) %>
+
+There is a shortcut for the above, provided by the special helper object $js (defined in
+UnderscoreTemplateRenderer):
+
+    Here's my message: <%- formats.format($js.i18nStringHtml("my.message.key"), x) %>
+
+$js.i18nStringHtml simply does the $i18n.getText() call, Javascript-escapes the string, and then
+adds double quotes around it.  The method name ends in "Html" so that Velocity will not do
+unwanted additional escaping; the string may or may not contain HTML.
+
+
+4. HTML escaping and XSS vulnerability
+
+It's not hard to do escaping correctly, but there are a few wrinkles since we're using two
+different template engines together.
+
+- Velocity will escape the value of any variable or method that does not end in "Html", if you
+  embed it directly.  For instance, if your i18n string contains HTML markup, trying to embed
+  it this way will result in the markup being escaped and visible:
+
+    Here's a message: $i18n.getText("my.message.key")
+
+  Instead, assign your i18n HTML string to a variable whose name ends in "Html":
+
+    #set($myMessageHtml = $i18n.getText("my.message.key"))
+    Here's a message: $myMessageHtml
+
+- Underscore escapes any value in "<%- %>".  If and only if you want to preserve HTML markup,
+  use "<%= %>" instead.  If you're going to pass an HTML string parameter into a template, it's
+  good to name it with "Html" for clarity even though Underscore doesn't care about that.
+
+    This value is escaped: <%- plugin.name %>
+    This isn't: <%= myParameter %>
+
+- If you're expanding a format string which contains markup, but its parameters are not HTML
+  strings, you need to escape the parameters explicitly:
+
+    Here's my message: <%= formats.format($js.i18nStringHtml("my.message.key"), formats.htmlEncode(x)) %>
+
+
+5. Using sub-templates
+
+If the same markup/logic appears repeatedly in many templates, it's good to break it out into
+another template.  Unfortunately, this is a bit clunkier than it would be in other template
+engines.  There are two ways:
+
+- Use a Velocity #parse directive; the file path is relative to src/main/resources:
+
+    #parse("templates/MyTemplateFragment.vm")
+
+  This is exactly equivalent to just copying the content of that file and pasting it in at that
+  location.  Any Underscore parameters that the sub-template refers to must already have been
+  set by whoever called the main template.  The main template can set Velocity variables that
+  the sub-template can use, as a very limited form of parameter passing, but those can't include
+  any content that comes from the Javascript caller.
+
+  Since these fragment files are not loaded individually by the front end, you do not need to
+  add resource entries for them in atlassian-plugin.xml.
+
+- Pre-render the sub-template in your JS code and pass it in as a parameter:
+
+    var myFragmentHtml = fragmentTemplate({ foo: bar });
+    var mainTemplateHtml = mainTemplate({ fragmentHtml: myFragmentHtml });
+
+  In this case, the sub-template is just another Velocity-to-Underscore template, so it does
+  need to be mentioned in atlassian-plugin.xml and included in your module dependencies.

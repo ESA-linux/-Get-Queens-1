@@ -1,0 +1,76 @@
+## Template parameters:
+
+## license - the license details
+## isActive - true if the license is active
+## isRemoteAgents - true if the edition type is "remote agent"
+## isRoleBased - true if it's a role-based license
+## canBeEnterprise - true if the application supports enterprise pricing
+## countType - must be "unlimited", "single", "local", or "limited"
+## expiryDate - either license.maintenanceExpiryDateString or license.subscriptionEndDateString
+
+#set($licenseSuffixExpiresFormat = $esc.javascript($i18n.getText("upm.plugin.license.info.text.suffix.expires")))
+#set($licenseSuffixSubscriptionTrialEndsFormat = $esc.javascript($i18n.getText("upm.plugin.license.info.text.suffix.subscription.trial.ends")))
+#set($unlicensedResumableFormat = $esc.javascript($i18n.getText("upm.plugin.license.info.text.unlicensed.resumable")))
+
+#set($licenseUnlimitedCountHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.unlimited.count')))
+#set($licenseUnlimitedCountNonEnterpriseHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.unlimited.count.nonenterprise')))
+#set($licenseUnlimitedCountEnterpriseHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.unlimited.count.enterprise')))
+#set($licenseUnlimitedRemoteAgentsHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.unlimited.remote.agents')))
+#set($licenseSingleCountHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.single.count')))
+#set($licenseSingleCountNonEnterpriseHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.single.count.nonenterprise')))
+#set($licenseSingleRemoteAgentHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.single.remote.agent')))
+#set($licenseLocalAgentsOnlyHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.local.agents.only')))
+#set($licenseLimitedCountHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.limited.count')))
+#set($licenseLimitedCountNonEnterpriseHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.limited.count.nonenterprise')))
+#set($licenseLimitedCountEnterpriseHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.limited.count.enterprise')))
+#set($licenseLimitedRemoteAgentsHtml = $esc.javascript($i18n.getText('upm.plugin.license.info.text.limited.remote.agents')))
+
+<% if (!isActive) { %>
+    <% if (license && license.subscriptionTrialResumable) { %>
+        <%- formats.format("$unlicensedResumableFormat", license.subscriptionEndDateString) %>
+    <% } else { %>
+        $i18n.getText("upm.plugin.license.info.text.unlicensed")
+    <% } %>
+<% } else { %>
+    <%
+        var licenseDescFormat,
+            expiresFormatted;
+
+        if (countType === 'unlimited') {
+            if (canBeEnterprise) {
+               licenseDescFormat = license.dataCenter ? "$licenseUnlimitedCountEnterpriseHtml" : "$licenseUnlimitedCountNonEnterpriseHtml";
+            } else {
+               licenseDescFormat = isRemoteAgents ? "$licenseUnlimitedRemoteAgentsHtml" : "$licenseUnlimitedCountHtml";
+            }
+        } else if (countType === 'single') {
+            if (canBeEnterprise) {
+                licenseDescFormat = "$licenseSingleCountNonEnterpriseHtml";
+            } else {
+                licenseDescFormat = isRemoteAgents ? "$licenseSingleRemoteAgentHtml" : "$licenseSingleCountHtml";
+            }
+        } else if (countType === 'local') {
+            licenseDescFormat = "$licenseLocalAgentsOnlyHtml";
+        } else {
+            if (canBeEnterprise) {
+               licenseDescFormat = license.dataCenter ? "$licenseLimitedCountEnterpriseHtml" : "$licenseLimitedCountNonEnterpriseHtml";
+            } else {
+               licenseDescFormat = isRemoteAgents ? "$licenseLimitedRemoteAgentsHtml" : "$licenseLimitedCountHtml";
+            }
+        }
+
+        if (license.maintenanceExpiryDateString) {
+            expiresFormatted = formats.format("$licenseSuffixExpiresFormat", expiryDate);
+        } else if (license.subscription && license.subscriptionEndDateString) {
+            expiresFormatted = formats.format(
+                license.evaluation ? "$licenseSuffixSubscriptionTrialEndsFormat" : "$licenseSuffixExpiresFormat",
+                expiryDate
+            );
+        }
+    %>
+    <% if (license.evaluation) { %>$i18n.getText("upm.plugin.license.status.evaluation") <% } %><%=
+       formats.format(licenseDescFormat,
+                       license.licenseTypeDescriptionKey.replace(/\_/g, ' ').toLowerCase(),
+                       expiresFormatted,
+                       license.maximumNumberOfUsers,
+                       formats.htmlEncode(license.typeI18nSingular)) %>
+<% } %>

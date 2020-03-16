@@ -1,0 +1,5 @@
+
+--
+
+$i18n.getText("upm.email.text.footer.notification.line1", "$applicationProperties.getDisplayName()")
+$i18n.getText("upm.email.text.footer.notification.line2", "$applicationProperties.getDisplayName()", "$userSettingsLink")

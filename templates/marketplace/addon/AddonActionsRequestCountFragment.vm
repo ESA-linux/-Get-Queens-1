@@ -1,0 +1,15 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the optional request count lozenge in the actions area
+
+## Template parameters:
+## plugin
+## showRequestCount
+
+#set($requestCountSingularFormat = $esc.javascript($i18n.getText("upm.requests.count.singular")))
+#set($requestCountPluralFormat = $esc.javascript($i18n.getText("upm.requests.count.plural")))
+
+<% if (showRequestCount && plugin.requests && plugin.requests.length) { %>
+    <span class="request-count-message aui-lozenge aui-lozenge-complete aui-lozenge-subtle">
+        <%- formats.formatSingularOrPlural("$requestCountSingularFormat", "$requestCountPluralFormat", plugin.requests.length) %>
+    </span>
+<% } %>

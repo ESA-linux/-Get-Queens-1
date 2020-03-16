@@ -1,0 +1,71 @@
+## Template parameters:
+## isGlobal - true if this is the global settings dialog, false if it is user settings
+## settings - array of settings representations from the back end
+
+#set($requestsDisabledDescriptionHtml = $esc.javascript($i18n.getText("upm.settingsPanel.description.requestsDisabled")))
+
+<section role="dialog" id="<% if (isGlobal) { %>upm-settings-dialog<% } else { %>upm-user-settings-dialog<% } %>" class="aui-layer aui-dialog2 aui-dialog2-large" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (isGlobal) { %>
+                $i18n.getText("upm.settingsPanel.title")
+            <% } else { %>
+                $i18n.getText("upm.userSettingsPanel.title")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <%
+            var titles = {
+                    autoUpdateEnabled: "$esc.javascript($i18n.getText("upm.settingsPanel.title.autoUpdateEnabled"))",
+                    emailDisabled: "$esc.javascript($i18n.getText("upm.settingsPanel.title.emailDisabled"))",
+                    pacDisabled: "$esc.javascript($i18n.getText("upm.settingsPanel.title.pacDisabled"))",
+                    requestsDisabled: "$esc.javascript($i18n.getText("upm.settingsPanel.title.requestsDisabled"))"
+                },
+                userTitles = {
+                    emailDisabled: "$esc.javascript($i18n.getText("upm.userSettingsPanel.emailNotificationsTitle"))"
+                },
+                descriptions = {
+                    autoUpdateEnabled: "$esc.javascript($i18n.getText("upm.settingsPanel.description.autoUpdateEnabled"))",
+                    emailDisabled: "$esc.javascript($i18n.getText("upm.settingsPanel.description.emailDisabled"))",
+                    pacDisabled: "$esc.javascript($i18n.getText("upm.settingsPanel.description.pacDisabled"))",
+                    requestsDisabled: formats.format("$requestsDisabledDescriptionHtml", "$uriBuilder.buildUpmViewPluginRequestsUri()")
+                        /* TODO: provide a way to get the "view requests" URI from UpmEnvironment; embedding it via a Velocity variable
+                           is deprecated because it will break future implementations of CDN resource caching. */
+                },
+                userDescriptions = {
+                    emailDisabled: "$esc.javascript($i18n.getText("upm.userSettingsPanel.emailNotifications"))",
+                },
+                readOnlyTooltips = {
+                };
+        %>
+        <% for (var i = 0; i < settings.length; i++) { %>
+            <%
+                var key = settings[i].key,
+                    title = isGlobal ? titles[key] : userTitles[key],
+                    tooltip = settings[i].readOnly && readOnlyTooltips[key],
+                    descriptionHtml = isGlobal ? descriptions[key] : userDescriptions[key];
+            %>
+            <div class="upm-settings-row">
+                <div class="checkmarks">
+                    <input type="checkbox" id="upm-checkbox-<%- key %>"
+                           <% if (settings[i].value !== settings[i].defaultCheckedValue) { %> checked <% } %>
+                           /* Note that defaultCheckedValue does not mean what it sounds like; if it's true, it means that
+                              the property's value is the opposite of the checkbox (e.g. if the "Connect to the Atlassian
+                              Marketplace" checkbox is checked, then the pacDisabled setting is false). */
+                           <% if (tooltip) { %> title="<%- tooltip %>" <% } %> >
+                </div>
+                <div class="description">
+                    <h5><label for="upm-checkbox-<%- key %>"><%- title %></label></h5>
+                    <span class="checkbox-description"><%= descriptionHtml %></span>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button confirm">$i18n.getText("upm.settingsPanel.apply")</button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.settingsPanel.cancel")</button>
+        </div>
+    </footer>
+</section>

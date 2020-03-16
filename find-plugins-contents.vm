@@ -1,0 +1,134 @@
+#* @vtlvariable name="uriBuilder" type="com.atlassian.upm.rest.UpmUriBuilder" *#
+#* @vtlvariable name="sysPersisted" type="com.atlassian.upm.SysPersisted" *#
+    <div id="upm-container" class="upm-$applicationProperties.getDisplayName().toLowerCase() $upmContainerClasses">
+
+        #if ($applicationProperties.getDisplayName().toLowerCase() != "confluence")
+        <h2>
+            <span id="upm-title">$pageTitle</span>
+        </h2>
+        #end
+        <p class="upm-description">
+            $marketplaceDescriptionWithHtml
+            #if($permissionEnforcer.admin)
+            <a href="$applicationProperties.getBaseUrl()/plugins/servlet/upm">$i18n.getText("upm.goto.manage")</a>
+            #end
+        </p>
+
+        #upmProductVersionWarnings(true)
+        
+        #upmPendingTaskStatus
+
+        #upmSafeModeStatus
+
+        #upmMpacAvailabilityStatus
+
+        <div id="upm-requests-disabled" class="aui-message info hidden">
+            <p>
+                $i18n.getText("upm.requests.disabled.sysadmin")
+            </p>
+        </div>
+
+        #upmBaseUrlStatus
+
+        <div id="upm-messages"></div>
+
+        <div id="upm-content">
+
+            <!-- INSTALL TAB -->
+            #if($tabVisibility.installVisible)
+            <div id="upm-panel-install" class="upm-panel upm-selected">
+
+                <div class="find-addons hidden">
+                    <div id="carousel"></div>
+
+                    <div id="upm-find-more" class="hidden">
+                        <h3>$i18n.getText("upm.find.more")</h3>
+                        <div id="upm-find-more-plugins">
+                        </div>
+                    </div>
+
+                    <form id="upm-install-search-form" class="ajs-dirty-warning-exempt" action="">
+                        <input id="upm-install-search-box" class="upm-textbox upm-searchbox" name="q" placeholder="$i18n.getText("upm.install.search")">
+                        <div class="fancy-select filter">
+                            <select style="display:none" name="filter">
+                                <option value="featured">$i18n.getText("upm.install.featured.dropdown")</option>
+                                <option value="highest-rated">$i18n.getText("upm.install.highest-rated.dropdown")</option>
+                                <option value="top-grossing">$i18n.getText("upm.install.top.grossing.dropdown")</option>
+                                <option value="popular">$i18n.getText("upm.install.popular.dropdown")</option>
+                                <option value="trending">$i18n.getText("upm.install.trending.dropdown")</option>
+                                <option value="atlassian">$i18n.getText("upm.install.by.atlassian.dropdown")</option>
+                                <option value="recent">$i18n.getText("upm.install.recently.updated.dropdown")</option>
+                                #if (!$sysPersisted.isPluginRequestFunctionalityDisabled())
+                                    <option value="most-requested">$i18n.getText("upm.install.requested.addons.dropdown")</option>
+                                #end
+                                <option value="top-vendor">$i18n.getText("upm.install.top.vendor.dropdown")</option>
+                            </select>
+                            <ol class="options"></ol>
+                            <div class="selected-value">
+                                <p>$i18n.getText("upm.install.featured.dropdown")</p>
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+
+                        <div class="fancy-select category">
+                            <select style="display:none" name="category" data-url="$uriBuilder.buildCategoriesUri()" data-default="$i18n.getText("upm.install.all.categories.dropdown")"></select>
+                            <ol class="options"></ol>
+                            <div class="selected-value">
+                                <p>$i18n.getText("upm.install.all.categories.dropdown")</p>
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+
+                        <div class="fancy-select cost">
+                            <select style="display:none" name="cost">
+                                <option value="">$i18n.getText("upm.install.paid.or.free.dropdown")</option>
+                                <option value="free">$i18n.getText("upm.install.all.free.dropdown")</option>
+                                <option value="paid">$i18n.getText("upm.install.all.paid.dropdown")</option>
+                                <option value="marketplace">$i18n.getText("upm.install.paid.via.atlassian.dropdown")</option>
+                            </select>
+                            <ol class="options"></ol>
+                            <div class="selected-value">
+                                <p>$i18n.getText("upm.install.paid.or.free.dropdown")</p>
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="upm-find-addons-container upm-plugin-list-container">
+                        <div class="upm-plugin-list expandable install"></div>
+                        <a class="upm-plugins-see-more" href="#">
+                            <span>$i18n.getText("upm.plugins.loadMore")</span>
+                        </a>
+                        <div class="mask"></div>
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+
+                <div class="single-addon hidden">
+                    <a href="$applicationProperties.getBaseUrl()/plugins/servlet/upm/marketplace" class="return">&laquo; $i18n.getText("upm.goBack.all.apps")</a>
+                    <div class="upm-find-addons-container upm-plugin-list-container">
+                        <div class="upm-plugin-list install"></div>
+                        <div class="mask"></div>
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+            #end
+        </div>
+
+        <ul id="upm-link-bar">
+            #if (! $userFacing)
+                <li id="link-bar-audit-log"><a class="link-bar-item audit-log-link" href='$uriBuilder.buildUpmAuditLogUri("find")'>$i18n.getText("upm.log.title")</a></li>
+            #end
+            <li id="link-bar-update-check" class="hidden"><a class="link-bar-item update-check-link" href='$uriBuilder.buildUpmUpdateCheckUri("find")'>$i18n.getText("upm.updateCheck.title", "$applicationProperties.getDisplayName()")</a></li>
+            <li id="link-bar-settings" class="hidden"><a class="link-bar-item settings-panel-link">$i18n.getText("upm.settingsPanel.title")</a></li>
+            <li id="link-bar-user-settings" class="hidden"><a class="link-bar-item user-settings-panel-link">$i18n.getText("upm.userSettingsPanel.title")</a></li>
+        </ul>
+
+        <div id="upm-footer">
+            <p>$upmVersionTextWithHtml</p>
+        </div>
+
+        <iframe id="upm-upload-target" name="upm-upload-target" src=""></iframe>
+
+    </div>

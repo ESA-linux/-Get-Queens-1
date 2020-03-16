@@ -1,0 +1,40 @@
+## Template parameters:
+## changes - array of changes requiring restart
+
+#set($requiresRestartMessageFormat = $esc.javascript($i18n.getText("upm.requiresRestart.message")))
+
+<%
+    var actionTitles = {
+            install: "$esc.javascript($i18n.getText("upm.requiresRestart.install"))",
+            remove: "$esc.javascript($i18n.getText("upm.requiresRestart.remove"))",
+            update: "$esc.javascript($i18n.getText("upm.requiresRestart.update"))"
+        },
+        cancelMessages = {
+            install: "$esc.javascript($i18n.getText("upm.messages.requiresRestart.cancel.install"))",
+            remove: "$esc.javascript($i18n.getText("upm.messages.requiresRestart.cancel.remove"))",
+            update: "$esc.javascript($i18n.getText("upm.messages.requiresRestart.cancel.update"))"
+        };
+%>
+
+<div class="aui-message info changes-requiring-restart">
+    <strong><%- formats.format("$requiresRestartMessageFormat", environment.getApplicationName()) %></strong>
+    <a href="#" id="upm-requires-restart-show"
+       data-show-label="$i18n.getText("upm.requiresRestart.show")"
+       data-hide-label="$i18n.getText("upm.requiresRestart.hide")">
+        $i18n.getText("upm.requiresRestart.show")
+    </a>
+    <ul id="upm-requires-restart-list">
+        <% for (var i = 0; i < changes.length; i++) { %>
+            <% 
+                /* back end currently returns 'upgrade' when it means 'update' */
+                var actionType = (changes[i].action === 'upgrade') ? 'update' : changes[i].action;
+            %>
+            <li data-key="<%- changes[i].key %>" data-cancel-message="<%- formats.format(cancelMessages[actionType], changes[i].name) %>">
+                <span class="upm-requires-restart-item">
+                    <%- formats.format(actionTitles[actionType], changes[i].name) %>
+                </span>
+                <a href="#" class="upm-requires-restart-cancel" title="$i18n.getText("upm.requiresRestart.cancel")">[x]</a>
+            </li>
+        <% } %>
+    </ul>
+</div>

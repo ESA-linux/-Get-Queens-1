@@ -1,0 +1,33 @@
+## Template parameters:
+## trial - true if this is a trial unsubscription
+
+<section role="dialog" id="upm-confirm-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <% if (trial) { %>
+                $i18n.getText("upm.plugin.action.license.trial.unsubscription.confirmation.title")
+            <% } else { %>
+                $i18n.getText("upm.plugin.action.license.unsubscription.confirmation.title")
+            <% } %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <% if (trial) { %>
+            $i18n.getText("upm.plugin.action.license.trial.unsubscription.confirmation.message")
+        <% } else { %>
+            $i18n.getText("upm.plugin.action.license.unsubscription.confirmation.message")
+        <% } %>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-primary confirm">
+                <% if (trial) { %>
+                    $i18n.getText("upm.plugin.action.license.trial.unsubscription.confirmation.action")
+                <% } else { %>
+                    $i18n.getText("upm.plugin.action.license.unsubscription.confirmation.action")
+                <% } %>
+            </button>
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.confirm.cancel")</button>
+        </div>
+    </footer>
+</section>

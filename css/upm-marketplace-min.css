@@ -1,0 +1,12 @@
+.upm-plugin-list-container{clear:both;min-height:400px;}
+#upm-panel-install .upm-install-type,#upm-install-container-most-requested{display:block;}
+#upm-container .upm-plugin-list-container .mask,#upm-container .upm-plugin-list-container .slow{display:none;}
+#upm-container.loading .upm-plugin-list-container .mask,#upm-container.loading.slow .upm-plugin-list-container .spinner{display:block;height:100%;left:0;position:absolute;top:0;width:100%;}
+#upm-container.loading .upm-plugin-list-container .mask{background-color:#FFF;opacity:.7;filter:alpha(opacity=75);-khtml-opacity:.75;-moz-opacity:.75;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";}
+#upm-container.loading .upm-plugin-list-container .spinner{display:block;background:url(images/loading-32.gif);background-position:top center;background-repeat:no-repeat;margin-top:30px;opacity:0;transition:opacity 1s ease-in;filter:alpha(opacity=0);-khtml-opacity:0;-moz-opacity:0;-moz-transition:opacity 1s ease-in;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";-ms-transition:opacity 1s ease-in;-o-transition:opacity 1s ease-in;-webkit-transition:opacity 1s ease-in;}
+#upm-container.loading.slow .upm-plugin-list-container .spinner{opacity:1;filter:alpha(opacity=1);-khtml-opacity:1;-moz-opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";}
+.upm-marketplace .fancy-select{border:none;margin:0 8px 0 0;}
+.fancy-select .selected-value{margin-top:0;}
+.upm-textbox{font-size:1em;}
+#upm-container .pricing-tier-display .loading,#upm-container .aui-button .loading{display:inline-block;height:12px;min-height:20px;vertical-align:middle;width:25px;}
+#upm-container .aui-button .loading{float:left;min-height:30px;}

@@ -1,0 +1,35 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders an add-on's status lozenge on the Manage page
+
+## Template parameters:
+## lozengeType
+## lozengeClass
+
+<%
+    var lozengeTitles = {
+            "eval_nearly_expired": $js.i18nStringHtml("upm.plugin.lozenge.message.eval_nearly_expired"),
+            "eval_recently_expired": $js.i18nStringHtml("upm.plugin.lozenge.message.eval_recently_expired"),
+            "incompatible_requested_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_requested_update"),
+            "incompatible_with_host_application": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_with_host_application"),
+            "incompatible_with_paid_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_with_paid_update"),
+            "incompatible_with_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_with_update"),
+            "incompatible_without_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_without_update"),
+            "license_recently_expired": $js.i18nStringHtml("upm.plugin.lozenge.message.license_recently_expired"),
+            "license_nearly_expiring": $js.i18nStringHtml("upm.plugin.lozenge.message.license_nearly_expiring"),
+            "maintenance_nearly_expiring": $js.i18nStringHtml("upm.plugin.lozenge.message.maintenance_nearly_expiring"),
+            "maintenance_recently_expired": $js.i18nStringHtml("upm.plugin.lozenge.message.maintenance_recently_expired"),
+            "updatable": $js.i18nStringHtml("upm.plugin.lozenge.message.updatable"),
+            "updatable_nondeployable": $js.i18nStringHtml("upm.plugin.lozenge.message.updatable_nondeployable"),
+            "updatable_to_paid": $js.i18nStringHtml("upm.plugin.lozenge.message.updatable_to_paid"),
+            "upgradable": $js.i18nStringHtml("upm.plugin.lozenge.message.upgradable"),
+            "upgrade_nearly_required": $js.i18nStringHtml("upm.plugin.lozenge.message.upgrade_nearly_required"),
+            "incompatible_data_center_without_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_data_center_without_update"),
+            "incompatible_data_center_requested_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_data_center_requested_update"),
+            "incompatible_data_center_with_update": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_data_center_with_update"),
+            "incompatible_legacy_data_center_compatible": $js.i18nStringHtml("upm.plugin.lozenge.message.incompatible_legacy_data_center_compatible")
+        },
+        lozengeTitle = lozengeTitles[lozengeType];
+%>
+<div class="upm-plugin-notice">
+    <span class="aui-lozenge <%- lozengeClass %>"><%- lozengeTitle %></span>
+</div>

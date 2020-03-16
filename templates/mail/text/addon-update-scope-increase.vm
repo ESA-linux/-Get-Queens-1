@@ -1,0 +1,15 @@
+#parse("templates/mail/text/email-resources.vm")
+#parse("templates/mail/text/email-header.vm")
+
+#emailGreetings($recipient)
+
+
+$i18n.getText("upm.email.addon.update.permission.text", "$pluginName")
+
+$managePluginLink
+
+$i18n.getText("upm.email.addon.update.review.text", "#getAppDisplay($instanceName)")
+
+#emailClosing()
+
+#parse("templates/mail/text/email-footer.vm")

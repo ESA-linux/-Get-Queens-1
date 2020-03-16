@@ -1,0 +1,13 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the optional billing notification info box, which can appear in the plugin detail area
+## in either Manage Add-ons or Find New Add-ons.
+## Template parameters:
+## plugin - the plugin representation
+
+<% if (plugin.billingNotifications && plugin.billingNotifications.length) { %>
+    <div class="aui-message <%= plugin.billingNotifications[0].type %>">
+        <div class="upm-message-text">
+            <%= plugin.billingNotifications[0].messageHtml %>
+        </div>
+    </div>
+<% } %>

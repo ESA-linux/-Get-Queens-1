@@ -1,0 +1,59 @@
+## Template parameters:
+## bundle - the bundle representation
+## parsedHeaders
+## servicesRegisteredHtml
+## servicesInUseHtml
+
+#set($entryCountSingularFormat = $esc.javascript($i18n.getText("upm.osgi.count.entry")))
+#set($entryCountPluralFormat = $esc.javascript($i18n.getText("upm.osgi.count.entries")))
+#set($providedByFormat = $esc.javascript($i18n.getText("upm.osgi.provided.by")))
+#set($usedByFormat = $esc.javascript($i18n.getText("upm.osgi.used.by")))
+
+<div>
+    <div class="upm-message-container"></div>
+
+    <dl class="upm-osgi-bundle-metadata">
+        <dt>$i18n.getText("upm.osgi.bundle.location")</dt>
+        <dd><% if (bundle.location) { %><%- bundle.location %><% } else { %>$i18n.getText("upm.unknown")<% } %></dd>
+    </dl>
+    <div class="clearer"></div>
+    <dl class="upm-osgi-bundle-unparsed-headers">
+        <% if (bundle.unparsedHeaders) { %>
+            <% for (var uph in bundle.unparsedHeaders) { %>
+                <dt><%- uph %></dt>
+                <dd><%- bundle.unparsedHeaders[uph] %></dd>
+            <% } %>
+        <% } %>
+    </dl>
+    <div class="clearer"></div>
+    <div class="upm-osgi-bundle-parsed-headers">
+        <% if (parsedHeaders) { %>
+            <% for (var phi = 0; phi < parsedHeaders.length; phi++) { %>
+                <% var ph = parsedHeaders[phi]; %>
+                <div class="upm-plugin-modules">
+                    <span><a class="upm-module-toggle" href="#"><span class="upm-toggle-icon"></span><span class="upm-osgi-parsed-header-name"><%- ph.name %></span></a> -
+                    <span class="upm-count-osgi-parsed-header-entries"><%- formats.formatSingularOrPlural("$entryCountSingularFormat", "$entryCountPluralFormat", ph.clauses.length) %></span></span>
+                    <div class="upm-module-container">
+                        <% for (var ci = 0; ci < ph.clauses.length; ci++) { %>
+                            <% var phc = ph.clauses[ci]; %>
+                            <div class="upm-module">
+                                <h5 class="upm-module-name"><%- phc.path %></h5>
+                                <p class="upm-module-key"><%- phc.paramsSummary %></p>
+                                <div class="clearer"></div>
+                                <% if (phc.referencesHtml) { %>
+                                    <p class="upm-module-description">
+                                        <%= formats.format((phc.referenceType === 'import') ? "$providedByFormat" : "$usedByFormat", phc.referencesHtml) %>
+                                    </p>
+                                <% } %>
+                                <div class="clearer"></div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <%= servicesRegisteredHtml %>
+    <%= servicesInUseHtml %>
+    <div class="clearer"></div>
+</div>

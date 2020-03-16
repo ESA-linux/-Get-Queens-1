@@ -1,0 +1,76 @@
+## Template parameters:
+##
+## action - one of the constants from AddonActions
+## isButton - true to render as a button, false to render as a link
+## isPrimary - true if this is the primary action (will be rendered as a button, all others will be links)
+## disabledReason - if provided, means the button should be disabled and is used as a key to determine the tooltip text
+
+## RENEW and RENEW_CONTACT are mutual exclusive. It is safe to use the same "Renew" buttob label.
+
+<%
+    var isCommunityLicense = environment.getHostLicense() && (environment.getHostLicense().licenseType === 'COMMUNITY');
+    var buttonLabels = {
+        BUY: isCommunityLicense ? $js.i18nStringHtml("upm.plugin.action.install-license") :
+            $js.i18nStringHtml("upm.plugin.action.buy"),
+        CHECK_LICENSE: $js.i18nStringHtml("upm.plugin.action.check-license"),
+        CONFIGURE: $js.i18nStringHtml("upm.plugin.action.configure"),
+        CROSSGRADE: $js.i18nStringHtml("upm.plugin.action.crossgrade"),
+        DISABLE: $js.i18nStringHtml("upm.plugin.action.disable"),
+        DISMISS_REQUEST: $js.i18nStringHtml("upm.plugin.action.request.dismiss"),
+        DOWNLOAD: $js.i18nStringHtml("upm.plugin.action.download"),
+        ENABLE: $js.i18nStringHtml("upm.plugin.action.enable"),
+        GET_STARTED: $js.i18nStringHtml("upm.messages.install.success.nextstep.button"),
+        INSTALL: $js.i18nStringHtml("upm.plugin.action.install"),
+        MAKE_REQUEST: plugin.currentUserRequest ? $js.i18nStringHtml("upm.plugin.action.request.update") : $js.i18nStringHtml("upm.plugin.action.request"),
+        MANAGE: $js.i18nStringHtml("upm.plugin.action.manage"),
+        RENEW: $js.i18nStringHtml("upm.plugin.action.renew"),
+        RENEW_CONTACT: $js.i18nStringHtml("upm.plugin.action.renew"),  /* same label as Renew */
+        REQUEST_UPDATE: $js.i18nStringHtml("upm.plugin.action.request-update"),
+        SUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.subscribe"),
+        TRIAL_RESUME: $js.i18nStringHtml("upm.plugin.action.trial-resume"),
+        TRIAL_SUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.trial-subscribe"),
+        TRIAL_UNSUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.trial-unsubscribe"),
+        TRY: $js.i18nStringHtml("upm.plugin.action.try"),
+        UNINSTALL: $js.i18nStringHtml("upm.plugin.action.uninstall"),
+        UNSUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.unsubscribe"),
+        UPDATE: plugin.updatableToPaid ? $js.i18nStringHtml("upm.plugin.action.paid.update") : $js.i18nStringHtml("upm.plugin.action.update"),
+        UPGRADE: $js.i18nStringHtml("upm.plugin.action.upgrade")
+    };
+
+    ## Use different tooltip messages for data center and server license RENEW actions.
+    const renew_title = environment.isDataCenter() ? $js.i18nStringHtml("upm.plugin.action.renew.datacenter.title") :
+        $js.i18nStringHtml("upm.plugin.action.renew.title");
+    var buttonTitles = {
+        BUY: isCommunityLicense ? $js.i18nStringHtml("upm.plugin.action.install-license.title") :
+            $js.i18nStringHtml("upm.plugin.action.buy.title"),
+        CHECK_LICENSE: $js.i18nStringHtml("upm.plugin.action.check-license.title"),
+        CROSSGRADE: renew_title,
+        RENEW: renew_title,
+        RENEW_CONTACT: renew_title,  /* same label as Renew */
+        SUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.subscribe.title"),
+        TRIAL_RESUME: $js.i18nStringHtml("upm.plugin.action.trial-resume.title"),
+        TRIAL_SUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.trial-subscribe.title"),
+        TRIAL_UNSUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.trial-unsubscribe.title"),
+        TRY: $js.i18nStringHtml("upm.plugin.action.try.title"),
+        UNSUBSCRIBE: $js.i18nStringHtml("upm.plugin.action.unsubscribe.title"),
+        UPGRADE: formats.format($js.i18nStringHtml("upm.plugin.action.upgrade.title"), environment.getApplicationName())
+    };
+    var disabledTooltips = {  /* note, these constants are provided by _shouldDisabledActionBeShown in the view class */
+        "bad-license-cannot-configure": $js.i18nStringHtml("upm.plugin.license.noconfigure"),
+        "subscribed-cannot-uninstall": $js.i18nStringHtml("upm.messages.license.subscribed.cannot.uninstall")
+    };
+    var tooltip = disabledReason ? disabledTooltips[disabledReason] : buttonTitles[action.key];
+%>
+<div class="toolbar-group">
+    <span class="loading invisible"></span>
+    <a href="#"
+       class="aui-button
+              <% if (!isButton) { %>aui-button-link<% } %>
+              <% if (isPrimary) { %>aui-button-primary<% } %>
+              <% if (disabledReason) { %>disabled<% } %>
+              "
+       <% if (disabledReason) { %> aria-disabled="true" <% } %>
+       data-action="<%- action.key %>"
+       title="<%- tooltip %>"
+       ><%- buttonLabels[action.key] %></a>
+</div>

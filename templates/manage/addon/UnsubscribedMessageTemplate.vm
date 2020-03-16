@@ -1,0 +1,29 @@
+## Template parameters:
+## active - true if the current billing cycle has not ended yet
+## plugin - the plugin representation
+## trial - true if this was a trial that has ended
+
+#set($notRenewedInactiveHtml = $i18n.getText("upm.messages.license.not.renewed.inactive"))
+
+<% if (trial) { %>
+    $i18n.getText("upm.messages.license.trial.unsubscribed")
+<% } else { %>
+    <div>
+        <% if (active) { %>
+            <% if (plugin.licenseDetails.subscriptionEndDateString) { %>
+                <%= formats.format($js.i18nStringHtml("upm.messages.license.not.renewed.active.until.date"),
+                    plugin.licenseDetails.subscriptionEndDateString) %>
+            <% } else { %>
+                $i18n.getText("upm.messages.license.not.renewed.active")
+            <% } %>
+        <% } else { %>
+            $notRenewedInactiveHtml
+        <% } %>
+    </div>
+    <% if (plugin.links.delete) { %>
+        <p>
+            <%= formats.format($js.i18nStringHtml("upm.messages.license.unsubscribed.uninstallation"),
+                    environment.getApplicationName()) %>
+        </p>
+    <% } %>
+<% } %>

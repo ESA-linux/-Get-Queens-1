@@ -1,0 +1,38 @@
+## Template parameters:
+## pluginName - displayable name of plugin
+## binaryUrl (optional)
+## homepageUrl (optional)
+
+<section role="dialog" id="upm-download-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">
+            <%- formats.format($js.i18nStringHtml("upm.nondeployable.header"), pluginName) %>
+        </h2>
+    </header>
+    <div class="aui-dialog2-content">
+        <span class="upm-nondeployable-instruction">
+            <%- formats.format($js.i18nStringHtml("upm.nondeployable.instruction"), pluginName) %>
+        </span>
+        <ul class="upm-nondeployable-ul">
+            <% if (homepageUrl) { %>
+                <li>
+                    <a href="<%- homepageUrl %>" class="upm-nondeployable-homepage-link" target="_blank">
+                        <%- formats.format($js.i18nStringHtml("upm.nondeployable.homepage"), pluginName) %>
+                    </a>
+                </li>
+            <% } %>
+            <% if (binaryUrl) { %>
+                <li>
+                    <a href="<%- binaryUrl %>" class="upm-nondeployable-download-link" target="_blank">
+                        <%- formats.format($js.i18nStringHtml("upm.nondeployable.download"), pluginName) %>
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link cancel">$i18n.getText("upm.messages.close")</button>
+        </div>
+    </footer>
+</section>

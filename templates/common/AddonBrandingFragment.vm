@@ -1,0 +1,25 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Template parameters:
+## plugin - the plugin representation which has a "logo" property
+
+#set($versionFormat = $esc.javascript($i18n.getText("upm.messages.version.short")))
+#set($vendorFormat = $esc.javascript($i18n.getText("upm.plugin.developer.by")))
+
+#set($logoSize = 72)
+
+<% if (plugin) { %>
+	<div class="branding">
+		<div class="logo">
+			#parse("templates/common/AddonLogoFragment.vm")
+		</div>
+		<div class="plugin-name-version">
+			<span class="plugin-name"><%- plugin.name %></span>
+			<span class="plugin-version"><% if (plugin.version && !plugin.atlassianConnect) { %><%- formats.format("$versionFormat", plugin.version) %><% } %></span>
+		</div>
+		<div class="plugin-vendor">
+			<% if (plugin.vendor && plugin.vendor.name) { %>
+				<%- formats.format("$vendorFormat", plugin.vendor.name) %>
+			<% } %>
+		</div>
+	</div>
+<% } %>

@@ -1,0 +1,105 @@
+## Template parameters:
+## taskType - "disable", "updateall", etc.
+## taskStage - identifies a stage within a task ("downloading", etc.)
+## status - TaskStatus object with type-dependent properties
+##
+## The output of this template is parsed into <header>, <main>, and <footer> elements to populate
+## progress dialog title, main task description, and progress messages respectively.
+
+<%
+    var typeAndStage = (typeof taskStage !== "undefined" && taskStage) ? (taskType + '.' + taskStage) : taskType;
+    var stepNumber = status && ((status.numberComplete || 0) + 1);
+    var stepCount = status && status.totalItems;
+    var stepName = status && (status.name || status.filename || status.source);
+    var stepVersion = status && status.version;
+%>
+
+<header>
+    <%
+        /* the keys in this object, and in the other maps below, can be either for taskType alone,
+           or "taskType.taskStage" if you need to be more specific */
+        var titles = {
+                checkLicense: "$esc.javascript($i18n.getText("upm.check.license.progress.title"))",
+                disable: "$esc.javascript($i18n.getText("upm.progress.disable.title"))",
+                disableall: [
+                    "$esc.javascript($i18n.getText("upm.progress.disableall.title.singular"))",
+                    "$esc.javascript($i18n.getText("upm.progress.disableall.title.plural"))"
+                ],
+                embeddedlicense: "$esc.javascript($i18n.getText("upm.progress.embeddedlicense.title"))",
+                enable: "$esc.javascript($i18n.getText("upm.progress.enable.title"))",
+                eval: "$esc.javascript($i18n.getText("upm.progress.eval.title"))",
+                install: "$esc.javascript($i18n.getText("upm.progress.install.title"))",
+                "ondemand.addon.activate": "$esc.javascript($i18n.getText("upm.progress.ondemand.addon.activate.title"))",
+                "ondemand.addon.deactivate": "$esc.javascript($i18n.getText("upm.progress.ondemand.addon.deactivate.title"))",
+                purchases: "$esc.javascript($i18n.getText("upm.messages.purchases.heading"))",
+                "safeMode.enable": "$esc.javascript($i18n.getText("upm.progress.safeMode.enable.title"))",
+                "safeMode.keepState": "$esc.javascript($i18n.getText("upm.progress.safeMode.keepState.title"))",
+                "safeMode.restore": "$esc.javascript($i18n.getText("upm.progress.safeMode.restore.title"))",
+                uninstall: "$esc.javascript($i18n.getText("upm.progress.uninstall.title"))",
+                update: "$esc.javascript($i18n.getText("upm.progress.update.title"))",
+                updateall: [
+                    "$esc.javascript($i18n.getText("upm.progress.updateall.title.singular"))",
+                    "$esc.javascript($i18n.getText("upm.progress.updateall.title.plural"))"
+                ],
+                "updateall.finding": $js.i18nStringHtml("upm.progress.updateall.finding.title"),
+                upload: "$esc.javascript($i18n.getText("upm.progress.upload.title"))",
+            };
+    %>
+    <% if (titles[typeAndStage] || titles[taskType]) { %>
+        <%- formats.format(titles[typeAndStage] || titles[taskType], stepCount) %>
+    <% } else { %>
+        $i18n.getText("upm.progress.generic.title")
+    <% } %>
+</header>
+<main>
+    <%
+        var descFormats = {
+                cancellable: "$esc.javascript($i18n.getText("upm.progress.cancellable.blocking"))",
+                checkLicense: "$esc.javascript($i18n.getText("upm.check.license.progress.message"))",
+                disable: "$esc.javascript($i18n.getText("upm.progress.disable"))",
+                disableall: "$esc.javascript($i18n.getText("upm.progress.disableall.description"))",
+                "disableall.err": "$esc.javascript($i18n.getText("upm.progress.disableall.err"))",
+                "embeddedlicense.complete": "$esc.javascript($i18n.getText("upm.progress.embeddedlicense.complete"))",
+                "embeddedlicense.installing":  "$esc.javascript($i18n.getText("upm.progress.embeddedlicense.installing"))",
+                enable: "$esc.javascript($i18n.getText("upm.progress.enable"))",
+                eval: "$esc.javascript($i18n.getText("upm.progress.eval"))",
+                "eval.requesting": "$esc.javascript($i18n.getText("upm.progress.eval.requesting"))",
+                "eval.storing": "$esc.javascript($i18n.getText("upm.progress.eval.storing"))",
+                install: "$esc.javascript($i18n.getText("upm.progress.install"))",
+                "ondemand.addon.activate": "$esc.javascript($i18n.getText("upm.progress.ondemand.addon.activate"))",
+                "ondemand.addon.deactivate": "$esc.javascript($i18n.getText("upm.progress.ondemand.addon.deactivate"))",
+                pending: "$esc.javascript($i18n.getText("upm.progress.pending"))",
+                purchases: "$esc.javascript($i18n.getText("upm.messages.purchases.progress.message"))",
+                selfupdate: "$esc.javascript($i18n.getText("upm.update.self.update.working"))",
+                uninstall: "$esc.javascript($i18n.getText("upm.progress.uninstall"))",
+                update: "$esc.javascript($i18n.getText("upm.progress.update"))",
+                "updateall.downloading": "$esc.javascript($i18n.getText("upm.progress.updateall.downloading.description"))",
+                "updateall.err": "$esc.javascript($i18n.getText("upm.progress.updateall.err"))",
+                "updateall.finding": "$esc.javascript($i18n.getText("upm.progress.updateall.finding"))",
+                "updateall.updating": "$esc.javascript($i18n.getText("upm.progress.updateall.updating.description"))",
+                upload: "$esc.javascript($i18n.getText("upm.progress.upload"))"
+            },
+            descFormat = descFormats[typeAndStage] || descFormats[taskType];
+    %>
+    <% if (descFormat) { %>
+        <%- formats.format(descFormat, stepName, stepVersion, environment.getApplicationName()) %>
+    <% } %>
+</main>
+<footer>
+    <%
+        var progressFormats = {
+                "disableall.disabling": "$esc.javascript($i18n.getText("upm.progress.disableall.progress"))",
+                "embeddedlicense.complete": "$esc.javascript($i18n.getText("upm.progress.embeddedlicense.complete.progress"))",
+                "embeddedlicense.installing":  "$esc.javascript($i18n.getText("upm.progress.embeddedlicense.installing.progress"))",
+                "install.downloading": "$esc.javascript($i18n.getText("upm.progress.install.downloading.progress"))",
+                "install.installing": "$esc.javascript($i18n.getText("upm.progress.install.installing.progress"))",
+                "install.complete": "$esc.javascript($i18n.getText("upm.progress.install.complete.progress"))",
+                "updateall.downloading": "$esc.javascript($i18n.getText("upm.progress.updateall.downloading.progress"))",
+                "updateall.updating": "$esc.javascript($i18n.getText("upm.progress.updateall.updating.progress"))"
+            },
+            progressFormat = progressFormats[typeAndStage] || progressFormats[taskType];
+    %>
+    <% if (progressFormat) { %>
+        <%- formats.format(progressFormat, stepNumber, stepCount) %>
+    <% } %>
+</footer>

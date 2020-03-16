@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>$i18n.getText("upm.updateCheck.title", $applicationProperties.getDisplayName())</title>
+    <meta name="decorator" content="atl.admin">
+    <meta name="admin.active.section" content="admin_plugins_menu/upm_section"/>
+    <meta name="admin.active.tab" content="upm-update-check-link"/>
+    #parse("upm-macros.vm")
+    #baseWebResources("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-update-check-page")
+    <content tag="selectedWebItem">confluence-upm-update-check-menu</content>
+</head>
+<body>
+    #parse("upm-resources.vm")
+
+    <div id="upm-container" class="upm-$applicationProperties.getDisplayName().toLowerCase() upm-update-check">
+
+        <a class="back-breadcrumb" alt=""></a>
+
+        #if ($applicationProperties.getDisplayName().toLowerCase() != "confluence")
+        <h2>
+            <span id="update-check-title">$i18n.getText("upm.updateCheck.title", $applicationProperties.getDisplayName())</span>
+        </h2>
+        #end
+
+        #upmPendingTaskStatus
+        
+        #upmSafeModeStatus
+
+        #upmMpacAvailabilityStatus
+
+        <div id="upm-messages"></div>
+
+        <div id="upm-content">
+            <div id="upm-panel-compatibility" class="upm-panel upm-selected">
+
+                <p>
+                    $i18n.getText("upm.check.summary", "$applicationProperties.getDisplayName()")
+                </p>
+
+                #upmProductVersionWarnings(false)
+
+                <div id="upm-update-check-content"></div>
+        </div>
+        
+        <div id="upm-footer">
+            <p>$upmVersionTextWithHtml</p>
+        </div>
+    </div>
+</body>
+</html>

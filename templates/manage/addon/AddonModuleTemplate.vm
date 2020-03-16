@@ -1,0 +1,38 @@
+## Template parameters:
+## module
+
+<div class="upm-module <% if (!module.enabled) { %>disabled<% } %>"
+     data-key="<%- module.completeKey %>">
+    <% if (!module.enabled) { %>
+        <div class="upm-module-state">
+            <p>$i18n.getText("upm.plugin.module.disabled")</p>
+        </div>
+    <% } %>
+    <% if (module.links.modify && module.recognisableType && !module.optional) { %>
+        <div class="upm-module-actions">
+            <div class="upm-plugin-actions aui-toolbar">
+                <div class="toolbar-group">
+                    <% if (module.enabled) { %>
+                        <a class="aui-button upm-module-disable" href="#">$i18n.getText("upm.plugin.action.disable")</a>
+                    <% } else { %>
+                        <a class="aui-button upm-module-enable" href="#">$i18n.getText("upm.plugin.action.enable")</a>
+                    <% } %>
+                </div>
+            </div>
+            <p>$i18n.getText("upm.plugin.module.cannot.disable")</p>
+        </div>
+    <% } else { %>
+        <div class="upm-module-actions upm-module-cannot-disable"></div>
+    <% } %>
+    <% if (module.name) { %>
+        <h5 class="upm-module-name"><%- module.name %></h5>
+        <p class="upm-module-key">(<%- module.key %>)</p>
+    <% } else { %>
+        <h5 class="upm-module-name"><%- module.key %></h5>
+    <% } %>
+    <div class="clearer"></div>
+    <% if (module.description) { %>
+        <p class="upm-module-description"><%- module.description %></p>
+    <% } %>
+    <div class="clearer"></div>
+</div>

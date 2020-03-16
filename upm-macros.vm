@@ -1,0 +1,88 @@
+
+#macro( baseWebResources $pageResourceName )
+    #if($auiCapabilities.isDialog2Available())
+        $webResourceManager.requireResource("com.atlassian.auiplugin:dialog2")
+    #end
+    $webResourceManager.requireResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources")
+    $webResourceManager.requireResource($pageResourceName)
+#end
+
+#macro( hiddenParam $paramId $value )
+<input type="hidden" id="$paramId" name="$paramId" value="$value">
+#end
+
+#macro( i18nParam $paramId $stringKey )
+    #if($stringKey)
+        #hiddenParam( $paramId $i18n.getText("$stringKey") )
+    #else
+        #hiddenParam( $paramId $i18n.getText("$paramId") )
+    #end
+#end
+
+#macro( i18nParamWithAppName $paramId $stringKey )
+    #if($stringKey)
+        #hiddenParam( $paramId $i18n.getText("$stringKey", $applicationProperties.getDisplayName()) )
+    #else
+        #hiddenParam( $paramId $i18n.getText("$paramId", $applicationProperties.getDisplayName()) )
+    #end
+#end
+
+#macro( resourcePathParam $paramId $resourceName $subpath )
+<input type="hidden" id="$paramId" name="$paramId" value="$webResourceManager.getStaticPluginResource("com.atlassian.upm.atlassian-universal-plugin-manager-plugin:$resourceName", "$subpath")">
+#end
+
+#macro( upmBaseUrlStatus )
+    <div id="upm-base-url-invalid" class="aui-message warning hidden">
+        <span class="aui-icon icon-warning"></span>
+        <div>
+            $baseUrlInvalidHtml
+        </div>
+    </div>
+#end
+
+#macro( upmMpacAvailabilityStatus )
+    <div id="upm-pac-checking-availability" class="aui-message info hidden">
+        <span class="aui-icon icon-info"></span>
+        <p>
+            $upmPacAvailabilityCheckingHtml
+        </p>
+    </div>
+
+    <div id="upm-pac-unavailable" class="aui-message info hidden">
+        <span class="aui-icon icon-info"></span>
+        <p>
+            $upmPacAvailabilityErrorHtml
+        </p>
+    </div>
+
+    <div id="upm-pac-disabled" class="aui-message info hidden closeable">
+        <span class="aui-icon icon-info"></span>
+        <p>
+            $upmPacAvailabilityDisabledHtml
+        </p>
+    </div>
+#end
+
+#macro( upmPendingTaskStatus )
+    <div id="upm-pending-tasks"></div>
+#end
+
+#macro( upmProductVersionWarnings $isMarketplacePage)
+<div class="upm-development-product-version aui-message warning">
+    <span class="aui-icon icon-warning"></span>
+    <div>$noProductVersionP1WithHtml</div>
+    <div>$noProductVersionP2WithHtml</div>
+</div>
+<div class="upm-unknown-product-version aui-message warning">
+    <span class="aui-icon icon-warning"></span>
+    #if($isMarketplacePage)
+        <div>$noProductVersionUnknownMarketplaceWithHtml</div>
+    #else
+        <div>$noProductVersionUnknownNotMarketplaceWithHtml</div>
+    #end
+</div>
+#end
+
+#macro( upmSafeModeStatus )
+    <div id="upm-safe-mode-off"></div>
+#end

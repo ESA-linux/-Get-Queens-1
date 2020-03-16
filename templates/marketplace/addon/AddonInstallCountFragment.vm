@@ -1,0 +1,28 @@
+## Fragment used only in #parse statements - does not need to be referenced in atlassian-plugin.xml
+## Renders the install/download count element
+
+## Template parameters:
+## plugin - the plugin representation
+
+#set($installCountSingularFormat = $esc.javascript($i18n.getText("upm.plugin.installations.singular")))
+#set($installCountPluralFormat = $esc.javascript($i18n.getText("upm.plugin.installations.plural")))
+#set($downloadCountSingularFormat = $esc.javascript($i18n.getText("upm.plugin.downloads.singular")))
+#set($downloadCountPluralFormat = $esc.javascript($i18n.getText("upm.plugin.downloads.plural")))
+#set($preinstalledTooltipFormat = $esc.javascript($i18n.getText("upm.plugin.installations.preinstalled.tooltip")))
+
+<% if (plugin.preinstalled) { %>
+	<div class="upm-plugin-installation-count"
+	     title="<%- formats.format("$preinstalledTooltipFormat", environment.getApplicationName()) %>">
+	    $i18n.getText("upm.plugin.installations.preinstalled")
+	</div>
+<% } else if (plugin.installationCount || (plugin.atlassianConnect || plugin.installationCount === 0)) { %>
+	<div class="upm-plugin-installation-count">
+		<%- formats.format(plugin.installationCount === 1 ? "$installCountSingularFormat" : "$installCountPluralFormat",
+					       formats.formatNumberWithCommas(plugin.installationCount)) %>
+	</div>
+<% } else { %>
+	<div class="upm-plugin-installation-count">
+		<%- formats.format(plugin.downloadCount === 1 ? "$downloadCountSingularFormat" : "$downloadCountPluralFormat",
+					       formats.formatNumberWithCommas(plugin.downloadCount)) %>
+	</div>
+<% } %>
