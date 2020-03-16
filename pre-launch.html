@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:fb="https://www.facebook.com/2008/fbml" xmlns:addthis="https://www.addthis.com/help/api-spec" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"NRJS-9fc477378ec1de7b381",applicationID:"460531441"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+	
+<title>Landing &#8211; Transcendence Summit</title>
+<meta name='robots' content='noindex,nofollow' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//summit.gaia.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//s7.addthis.com' />
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link href='https://cdn.jsdelivr.net' crossorigin='anonymous' rel='preconnect' />
+<link href='https://use.fontawesome.com' crossorigin='anonymous' rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Transcendence Summit &raquo; Feed" href="https://summit.gaia.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Transcendence Summit &raquo; Comments Feed" href="https://summit.gaia.com/comments/feed/" />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://summit.gaia.com/wp-includes/css/dist/block-library/style.min.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-bootstrap-starter-bootstrap-css-css'  href='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-bootstrap-starter-fontawesome-cdn-css'  href='https://use.fontawesome.com/releases/v5.10.2/css/all.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-bootstrap-starter-style-css'  href='https://summit.gaia.com/wp-content/themes/wp-bootstrap-starter/style.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-bootstrap-starter-gaia-css'  href='https://summit.gaia.com/wp-content/themes/wp-bootstrap-starter/inc/assets/css/presets/theme-option/gaia.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-bootstrap-starter-avenir-css'  href='https://summit.gaia.com/wp-content/themes/wp-bootstrap-starter/inc/assets/css/presets/typography/avenir.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='slidebars-css'  href='https://summit.gaia.com/wp-content/plugins/off-canvas-sidebars/slidebars/slidebars.css?ver=2.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='off-canvas-sidebars-css'  href='https://summit.gaia.com/wp-content/plugins/off-canvas-sidebars/css/off-canvas-sidebars.css?ver=0.5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='addthis_all_pages-css'  href='https://summit.gaia.com/wp-content/plugins/addthis-all/frontend/build/addthis_wordpress_public.min.css?ver=5.3.2' type='text/css' media='all' />
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://summit.gaia.com/custom-includes/js/jquery.cookie.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://summit.gaia.com/custom-includes/js/jquery.beforeready.min.js?ver=1.0.0'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://summit.gaia.com/wp-content/themes/wp-bootstrap-starter/inc/assets/js/html5.js?ver=3.7.0'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='https://summit.gaia.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://summit.gaia.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://summit.gaia.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.3.2" />
+<link rel="canonical" href="https://summit.gaia.com/transcendence-summit/pre-launch/" />
+<link rel='shortlink' href='https://summit.gaia.com/?p=20' />
+<link rel="alternate" type="application/json+oembed" href="https://summit.gaia.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsummit.gaia.com%2Ftranscendence-summit%2Fpre-launch%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://summit.gaia.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsummit.gaia.com%2Ftranscendence-summit%2Fpre-launch%2F&#038;format=xml" />
+
+<script type='text/javascript' src='//summit.gaia.com/wp-content/uploads/custom-css-js/1667.js?v=2795'></script>
+
+<script type='text/javascript' src='//summit.gaia.com/wp-content/uploads/custom-css-js/1629.js?v=2528'></script>
+
+<link rel='stylesheet' id='1191-css'  href='//summit.gaia.com/wp-content/uploads/custom-css-js/1191.css?v=6129' type='text/css' media='all' />
+<meta content="website" property="og:type"/>
+<meta content="Gaia" property="og:site_name"/>
+<!-- <meta content="175431905984077" property="fb:app_id"/> -->
+<meta content="Save your spot today and get instant access to the first 12-minutes of episode 1." property="og:description"/>
+<meta content="Save your spot today and get instant access to the first 12-minutes of episode 1." name="description" >
+<meta content="https://summit.gaia.com/wp-content/uploads/2020/02/meta-transcendence.jpg" property="og:image"/>
+<meta content="[FREE ONLINE SCREENING] TRANSCENDENCE - March 16 - 26" property="og:title"/>
+<meta content="https://summit.gaia.com/transcendence-summit/pre-launch" property="og:url"/>
+
+<link rel="stylesheet" href="/custom-includes/css/gaia-fonts.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css"  href="/custom-includes/css/slick.css" type="text/css" media="all">
+
+<script src="https://use.fontawesome.com/cd4c38faf1.js" async></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Roboto:300,400,500,700,900|Playfair+Display:400i" rel="stylesheet">
+
+<script src="https://cdn.optimizely.com/js/401751626.js" async></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-56R2PJ');</script>
+<!-- End Google Tag Manager -->
+<style>
+.addthis-smartlayers-mobile {
+  display: none !important;
+}
+</style>
+<link rel="pingback" href="https://summit.gaia.com/xmlrpc.php">    <style type="text/css">
+        #page-sub-header { background: #0a0a0a; }
+    </style>
+    <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><style type="text/css">.ocs-trigger {cursor: pointer;}</style>	<style type="text/css">
+			.site-title,
+		.site-description {
+			position: absolute;
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+		</style>
+	</head>
+
+<body class="page-template page-template-blank-page page-template-blank-page-php page page-id-20 page-child parent-pageid-1314 theme-preset-active">
+	
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56R2PJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+    
+    <section id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+            
+<article id="post-20" class="post-20 page type-page status-publish hentry">
+	<div class="entry-content">
+		<div class="at-above-post-page addthis_tool" data-url="https://summit.gaia.com/transcendence-summit/pre-launch/"></div><script>if (typeof window.atnt !== 'undefined') { window.atnt(); }</script><script>if (typeof window.atnt !== 'undefined') { window.atnt(); }</script>
+<div class="wp-block-group landingPageWrapper"><div class="wp-block-group__inner-container">
+<div class="pageNavWrapper buttonNav col-12">
+	<div class="row">
+		<div class="nav--cdt col-12 col-md-5">
+		   <span class="cdt--wrap small">
+				<span class="ce-text">FREE SCREENING <span class="d-none d-sm-inline-block">AVAILABLE</span> IN</span>
+				<span class="ce-digits">
+					<span class="ce-days-wrapper"><span class="ce-days"></span><span class="ce-days-label"></span></span>
+					<span class="ce-hours-wrapper"><span class="ce-hours"></span><span class="ce-hours-label"></span></span>
+					<span class="ce-minutes-wrapper"><span class="ce-minutes"></span><span class="ce-minutes-label"></span></span>
+				</span>
+			</span>
+		</div>
+			
+		<div class="wp-block-image gaiaLogoInHeader col-md-2 col-6">
+<!--			<figure class="aligncenter size-large is-resized">
+				<img src="https://summit.gaia.com/custom-includes/svg/fmtv-gaia-logo.svg" alt="" width="300" height="47"/> 
+			</figure> -->
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 216.6 34" viewBox="0 0 216.6 34"><g fill="#fff"><path d="m151.3 10.4c0 1.8 1.4 3.1 3.3 3.1s3.2-1.2 3.2-3c0-.8-.3-1.5-.7-2.1-1.1-1.4-2.5-2.4-4.1-3-1.9-.8-4-1-6.1-.8-.4 0-.8.1-1.1.1-7.6.9-13 5.7-13 13.7 0 8.7 7.6 12.4 15.2 12.4 3.3 0 7.9-.9 9.6-1.8v-11.3h-10.4v.8l3.5.6v9.8c-.5 0-1 .1-1.4.1-5.9 0-8.1-5.6-8.1-11.5 0-4.7 1.9-8.6 4.5-10.4.9-.6 1.9-.9 2.9-1 1.3-.1 2.7 0 3.9.5.3.1.6.2.8.4.3.2.6.3.8.5-1.5 0-2.8 1.3-2.8 2.9zm35.7-1.3c2.2 0 3.9-1.5 3.9-3.5s-1.7-3.5-3.9-3.5-3.8 1.5-3.8 3.5c.1 2 1.6 3.5 3.8 3.5zm-9.1 18.9v-11.1c0-4.2-2.8-6.6-7.8-6.6-1 0-6.1.2-8.5 3.2-.4.6-.7 1.3-.7 2 0 1.7 1.2 2.8 3 2.8s3.1-1.2 3.1-2.9c0-1.5-1.2-2.7-2.7-2.8 1-.4 2.1-.6 3.2-.6h.3c2.1.1 3.4 1.5 3.4 4v3.7h-1.7c-6.1 0-9.9 2.2-9.9 5.9 0 3.4 2.7 5 5.5 5 3.2 0 5.8-2.7 6.2-3.1l1 2.8h7.9v-1.1zm-8.2-1.2c-1.5 0-3-.7-3-2.5 0-2.6 2.2-2.9 3.5-2.9h1.1v5.2c-.5.1-1 .2-1.6.2zm20.4-16.5h-2.8l-6.9 2v1h3.2v15.5l-2.2.5v.9h11v-.9l-2.3-.6zm23.4 18.9-2.4-1.2v-11.1c0-4.2-2.8-6.6-7.8-6.6-1 0-6.1.2-8.5 3.2-.4.6-.7 1.3-.7 2 0 1.7 1.2 2.8 3 2.8s3.1-1.2 3.1-2.9c0-1.5-1.2-2.7-2.7-2.8 1-.4 2.1-.6 3.2-.6h.3c2.1.1 3.4 1.5 3.4 4v3.7h-1.7c-6.1 0-9.9 2.2-9.9 5.9 0 3.4 2.7 5 5.5 5 3.2 0 5.8-2.7 6.2-3.1l1 2.8h7.9zm-10.6-2.4c-1.5 0-3-.7-3-2.5 0-2.6 2.2-2.9 3.5-2.9h1.1v5.2c-.5.1-1 .2-1.6.2z"></path><path d="m1.8 24v-11c0-2.3-.1-5-.1-6.1h7.3c2.3 0 4.6-.1 5.7-.1v4.3c-1.1-.1-3.4-.1-5.7-.1h-2.2v5.9h2c2.2 0 4-.1 5-.1v4.2c-1-.1-2.8-.1-5-.1h-2v3.1c0 2.3.1 5 .1 6.1h-5.2c.1-1.1.1-3.8.1-6.1z"></path><path d="m41.7 24.3c.3 2.5.7 4.3 1.1 5.8h-5.5c0-1-.1-2.3-.4-4.1l-1-8.4-6.1 12.6h-1.3l-6.1-12.7-1.2 8.6c-.2 1.5-.4 2.9-.5 3.9h-5c.3-1.1.7-3.7 1.1-6.1l2.9-17.5h1.3l8.4 16.4 8.6-16.4h1.3z"></path><path d="m56.9 6.9c2.3 0 5-.1 6-.1v4.3c-1-.1-3.7-.1-6-.1h-1.5v4.3 8.7c0 2.3.1 5 .2 6.1h-5.2c.1-1.1.1-3.8.1-6.1v-8.7c0-1.4 0-3.1-.1-4.3h-1.5c-2.3 0-4.9.1-6 .1v-4.3c1 .1 3.7.1 6 .1z"></path><path d="m75.6 21.6 4.6-10.8c.6-1.3 1.2-2.8 1.5-3.9h5.1c-.8 1.4-1.8 3.3-2.6 5.1l-8.5 18.6h-.7l-8.6-18.6c-.8-1.8-1.8-3.8-2.6-5.1h5.5c.3 1.1.9 2.5 1.5 3.8z"></path><path d="m107.6.4h1.3v32.9h-1.3z"></path></g></svg>
+		</div>
+
+
+		<div class="col-md-5 col-6 button--wrap">
+			<a href="#trailer" class="d-none d-sm-block btn-trailer">TRAILER <i class="fa fa-play-circle"></i></a>
+			<div class="wp-block-button aligncenter js-button-open-form large-cta" data-target="cta"><a class="wp-block-button__link ">SAVE MY FREE SPOT</a></div>
+		</div>
+	</div>	
+</div>
+
+
+<div class="wp-block-cover has-background-dim has-background-dim-30 section--header summitBgImage">
+<div class="wp-block-cover__inner-container">
+<div class="wp-block-group container">
+<div class="wp-block-group__inner-container">
+<div class="wp-block-image transLogo">
+<figure class="aligncenter size-large is-resized"><img src="https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-1024x147.png" alt="TRANSCENDENCE - Live Life Beyond the Ordinary" class="wp-image-112" width="768" height="110" srcset="https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-1024x147.png 1024w, https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-300x43.png 300w, https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-768x110.png 768w, https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence.png 1200w" sizes="(max-width: 768px) 100vw, 768px" /></figure>
+</div>
+<h3 class="has-text-align-center landing-h2">
+Radically transform your life &amp; health in this groundbreaking new docu-series.<span class="d-block d-md-inline d-lg-block">
+Free worldwide online screening <span class="nowrap">March 16 &#8211; 26, 2020.</span></span></h3>
+<div data-target="cta" class="wp-block-button aligncenter js-button-open-form large-cta"><a class="wp-block-button__link">SAVE MY FREE SPOT</a></div>
+</div>
+</div>
+<div class="wp-block-group featuring--wrap">
+<div class="wp-block-group__inner-container">
+<p class="has-text-align-center">Featuring</p>
+
+<div class="wp-block-group section--featuring">
+<div class="wp-block-group__inner-container">
+<div class="wp-block-columns group--featuring--slider">
+<div class="wp-block-column is-vertically-aligned-center">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/wark.png" alt="Chris Wark" class="wp-image-120"><figcaption>CHRIS WARK</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/marie-forleo.png" alt="Marie Forleo" class="wp-image-88">
+
+<figcaption>MARIE FORLEO</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column is-vertically-aligned-center">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/novak-djokovic.png" alt="Novak Djokovic" class="wp-image-100">
+
+<figcaption>NOVAK DJOKOVIC</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/wim.png" alt="Wim Hoff" class="wp-image-123">
+
+<figcaption>WIM HOF</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/libby-weaver.png" alt="Libby Weaver" class="wp-image-85">
+
+<figcaption>LIBBY WEAVER</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/jim-kwik.png" alt="Jim Wik" class="wp-image-74">
+
+<figcaption>JIM KWIK</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/koya-webb.png" alt="Koya Webb" class="wp-image-82">
+
+<figcaption>KOYA WEBB</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/mark-hyman.png" alt="Mark Hyman" class="wp-image-91">
+
+<figcaption>MARK HYMAN</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/gabrielle-bernstein.png" alt="Gabrielle Bernstein" class="wp-image-37">
+
+<figcaption>GABRIELLE BERNSTEIN</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/rich-roll.png" alt="Rich Roll" class="wp-image-105">
+
+<figcaption>RICH ROLL</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/josh-axe.png" alt="Josh Axe" class="wp-image-80">
+
+<figcaption>JOSH AXE</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/john-robbins.png" alt="John Robbins" class="wp-image-77">
+
+<figcaption>JOHN ROBBINS</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/davis.png" alt="William Davis" class="wp-image-24">
+
+<figcaption>WILLIAM DAVIS</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/jon.png" alt="Jon Gabriel" class="wp-image-79">
+
+<figcaption>JON GABRIEL</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/karnazes.png" alt="Dean Karnazes" class="wp-image-81">
+
+<figcaption>DEAN KARNAZES</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/dispenza-2.png" alt="Joe Dispenza" class="wp-image-25">
+
+<figcaption>JOE DISPENZA</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/burchard.png" alt="Brendon Burchard" class="wp-image-23">
+
+<figcaption>BRENDON BURCHARD</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/seanstephenson.png" alt="Sean Stephenson" class="wp-image-113">
+
+<figcaption>SEAN STEPHENSON</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/stig-2.png" alt="Stig Severinsen" class="wp-image-115">
+
+<figcaption>STIG SEVERINSEN</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/lakhiani.png" alt="Vishen Lakhiani" class="wp-image-83">
+
+<figcaption>VISHEN LAKHIANI</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/lewis-howes.png" alt="Lewis Howes" class="wp-image-84">
+
+<figcaption>LEWIS HOWES</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/lipton-2.png" alt="Bruce Lipton" class="wp-image-86">
+
+<figcaption>BRUCE LIPTON</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/mckernan.png" alt="Philip McKernan" class="wp-image-92">
+
+<figcaption>PHILIP MCKERNAN</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/obryan.png" alt="Tom O'Bryan" class="wp-image-102">
+
+<figcaption>TOM O&#8217;BRYAN</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/ramsey.png" alt="Ocean Ramsey" class="wp-image-104">
+
+<figcaption>OCEAN RAMSEY</figcaption></figure>
+</div>
+</div>
+<div class="wp-block-column">
+<div class="wp-block-image">
+<figure class="size-large"><img data-lazy="/wp-content/uploads/2020/01/vani.png" alt="Vani Hari" class="wp-image-119">
+
+<figcaption>VANI HARI</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="wp-block-group has-background section--header--share" style="background-color:#000000"><div class="wp-block-group__inner-container">
+<div class="wp-block-group container"><div class="wp-block-group__inner-container">
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox" style="margin: 0 auto;"></div>
+</div></div>
+</div></div>
+</div></div>
+
+
+
+<div class="wp-block-group section--trailer container bg-circle-image"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column trailer-container" style="flex-basis:100%">
+<div style="position: relative;" class="embeddedPlayerWrapper" id="trailer">
+  <video-js data-video-id="6133644876001" data-account="1263232739001" data-player="B1lW9lqUw" data-embed="default" controls="" autoplay="" data-application-id="" class="vjs-fluid vjs-trailer"></video-js>
+</div>
+</div>
+</div>
+
+
+
+<div class="wp-block-group landing-intro"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<p>TRANSCENDENCE is a new docu-series that explores the current state of our physical, emotional, and mental health in a captivating new way.</p>
+
+
+
+<p>Drawing on research and interviews by some of the world&#8217;s most recognized celebrities, doctors, and thought leaders including Novak Djokovic, Jim Kwik, Mark Hyman, Libby Weaver, Bruce Lipton, Wim Hof, Gabrielle Bernstein, Joe Dispenza, and Marie Forleo to name a few, this inspirational FMTV original series is set to challenge the way you view your health and ultimately question how you can live a better life.</p>
+
+
+
+<p>Spanning over five fascinating episodes that individually tackle some of the biggest challenges of our time, TRANSCENDENCE takes the viewer on a journey into the &#8216;self&#8217; like no other docu-series before it.</p>
+</div>
+
+
+
+<div class="wp-block-column">
+<p>TRANSCENDENCE will show you how to:</p>
+
+
+
+<ul class="check-list"><li>Optimize your diet to heal your gut and autoimmune conditions naturally.</li><li>Control stress, fear, and anxiety in your life with simple daily habits.</li><li>Overcome self doubt &amp; limiting beliefs that are holding you back in life.</li><li>Discover your true passion &amp; connect with your life&#8217;s purpose.</li><li>Uncover what you are truly capable of mentally, physically, and spiritually.</li><li>Reprogram your mind &amp; body to live a healthier and happier life.</li></ul>
+</div>
+</div>
+</div></div>
+</div></div>
+
+
+
+<div class="wp-block-group section--quote"><div class="wp-block-group__inner-container">
+<div class="wp-block-cover aligncenter has-background-dim-30 has-background-dim quotebg" style="background-image:url(/wp-content/uploads/2020/01/jim-quote-bg.jpg)"><div class="wp-block-cover__inner-container">
+<blockquote class="wp-block-quote has-text-align-center is-style-large ep3quote"><p>&#8220;All great things begin on the inside. You have greatness inside of you. Now is the time to unlock it.&#8221;</p><cite>Jim Kwik &#8211; TRANSCENDENCE, Episode 3</cite></blockquote>
+</div></div>
+</div></div>
+
+
+
+<div class="wp-block-group has-background section--episodes" style="background-color:#efefef"><div class="wp-block-group__inner-container">
+<p></p>
+
+
+
+<p></p>
+
+
+
+<p></p>
+
+
+
+<div class="wp-block-group container"><div class="wp-block-group__inner-container">
+<p class="has-text-color has-text-align-center seriesStats"><strong>1 Film
+<span class="pipeSeparator">|</span>
+5 Episodes
+<span class="pipeSeparator">|</span>
+26 Experts</strong></p>
+
+
+
+<h3 class="has-text-align-center hidden-xs">Episodes</h3>
+
+
+
+<div class="wp-block-columns group--episodes--columns">
+<div class="wp-block-column episode--wrap">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-cover aligncenter has-background-dim episodeBlockThumb ep1" style="background-image:url(/wp-content/uploads/2020/01/episode-header-thumb-1.jpg);min-height:200px"><div class="wp-block-cover__inner-container">
+<h6 class="has-text-color has-text-align-center" style="color:#ffb79f">EPISODE 1</h6>
+
+
+
+<h3 class="has-text-align-center">What&#8217;s in Our Food?</h3>
+</div></div>
+
+
+
+<p class="has-text-align-center">Could the first step to changing your life be as simple as changing what you put in your mouth? Optimize your diet to fuel your body, heal your gut and autoimmune conditions, and reach your true physical and mental potential.</p>
+</div></div>
+</div>
+
+
+
+<div class="wp-block-column episode--wrap">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-cover has-background-dim episodeBlockThumb ep2" style="background-image:url(/wp-content/uploads/2020/01/episode-header-thumb-2.jpg);min-height:200px"><div class="wp-block-cover__inner-container">
+<h6 class="has-text-color has-text-align-center" style="color:#ffb79f">EPISODE 2</h6>
+
+
+
+<h3 class="has-text-align-center">Overcoming Fear &amp; Stress</h3>
+</div></div>
+
+
+
+<p class="has-text-align-center">Discover why living in a state of constant stress and overwhelm could be suppressing your immune system and altering your physiology. Learn how to control stress, fear, and anxieties in your life with simple daily habits.</p>
+</div></div>
+</div>
+
+
+
+<div class="wp-block-column episode--wrap">
+<div class="wp-block-group episode--wrap"><div class="wp-block-group__inner-container">
+<div class="wp-block-cover has-background-dim episodeBlockThumb ep3" style="background-image:url(/wp-content/uploads/2020/01/episode-header-thumb-3.jpg);background-position:50% 50%;min-height:200px"><div class="wp-block-cover__inner-container">
+<h6 class="has-text-color has-text-align-center" style="color:#ffb79f">EPISODE 3</h6>
+
+
+
+<h3 class="has-text-align-center">Beyond Belief</h3>
+</div></div>
+
+
+
+<p class="has-text-align-center">What you think, you become. Learn how to reprogram your mind with effective and practical strategies to overcome your limitations and change the impossible to possible.</p>
+</div></div>
+</div>
+
+
+
+<div class="wp-block-column episode--wrap">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-cover has-background-dim episodeBlockThumb ep4" style="background-image:url(/wp-content/uploads/2020/01/episode-header-thumb-4.jpg);min-height:200px"><div class="wp-block-cover__inner-container">
+<h6 class="has-text-color has-text-align-center" style="color:#ffb79f">EPISODE 4</h6>
+
+
+
+<h3 class="has-text-align-center">Whose Goals Are We Chasing?</h3>
+</div></div>
+
+
+
+<p class="has-text-align-center">Happiness is not a result of an achievement or a goal met. Happiness is what propels you to achieve your goals. But before you start, ask yourself, whose goals are you really chasing?</p>
+</div></div>
+</div>
+
+
+
+<div class="wp-block-column episode--wrap">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-cover has-background-dim episodeBlockThumb ep5" style="background-image:url(/wp-content/uploads/2020/01/episode-header-thumb-5.jpg);min-height:200px"><div class="wp-block-cover__inner-container">
+<h6 class="has-text-color has-text-align-center" style="color:#ffb79f">EPISODE 5</h6>
+
+
+
+<h3 class="has-text-align-center">The Art of Fulfillment</h3>
+</div></div>
+
+
+
+<p class="has-text-align-center">Learn the secret art of fulfillment and how to discover your true purpose and passion in life. Make a promise to yourself to start living a life that&#8217;s extraordinary to you and excel at what you love doing.</p>
+</div></div>
+</div>
+</div>
+</div></div>
+</div></div>
+
+
+
+<div class="wp-block-group section--gallery"><div class="wp-block-group__inner-container">
+<section id="gallery">
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="grid">
+                <div class="grid-sizer"><img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%"></div>
+                <div class="grid-bg     novak       grid-item grid-item--width2 grid-item--height2">
+                	<div>
+                		<p><span>NOVAK DJOKOVIC</span>       <small>17x Grand Slam Tennis Champion</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-novak2.jpg"></div>
+                </div>
+                <div class="grid-bg     wark        grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>CHRIS WARK</span>           <small>Author of &#8216;Chris Beat Cancer&#8217;</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-wark.jpg"></div>
+                </div>
+                <div class="grid-bg     dean        grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>DEAN KARNAZES</span>        <small>Ultra Distance Athlete</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-dean-karnazes.jpg"></div>
+                </div>
+
+                <div class="grid-bg     gabriel     grid-item">                                     
+                	<div>
+                		<p><span>JON GABRIEL</span>          <small>Weight Loss Expert &amp; Author of The Gabriel Method</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-gabriel.jpg"></div>
+                </div>
+                <div class="grid-bg     gabrielle   grid-item grid-item--width2 grid-item--height2">
+                	<div>
+                		<p><span>GABRIELLE BERNSTEIN</span>  <small>Motivational Speaker, Life Coach, &amp; Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-gabrielle.jpg"></div>
+                </div>
+                <div class="grid-bg     burchard    grid-item">                                     
+                	<div>
+                		<p><span>BRENDON BURCHARD</span>     <small>NY Times Best-Selling Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-burchard.jpg"></div>
+                </div>
+                <div class="grid-bg     dispenza    grid-item">                                     
+                	<div>
+                		<p><span>JOE DISPENZA</span>         <small>Scientist, Teacher, Lecturer, &amp; Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-dispenza.jpg"></div>
+                </div>
+                <div class="grid-bg     stephenson  grid-item">                                     
+                	<div>
+                		<p><span>SEAN STEPHENSON<br>1979 &#8211; 2019</span>      <small>Therapist, Self-Help Author, &amp; Motivational Speaker</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-stephenson.jpg"></div>
+                </div>
+
+                <div class="grid-bg     roll        grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>RICH ROLL</span>            <small>Vegan Ultra-Athlete</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-roll.jpg"></div>
+                </div>
+                <div class="grid-bg     kwik        grid-item grid-item--width2 grid-item--height2">
+                	<div>
+                		<p><span>JIM KWIK</span>             <small>World Expert In Accelerated Learning</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-jim.jpg"></div>
+                </div>
+                <div class="grid-bg     hof         grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>WIM HOF</span>              <small>Extreme Athlete &amp; World Record Holder</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-hof.jpg"></div>
+                </div>
+
+                <div class="grid-bg     webb        grid-item">                                     
+                	<div>
+                		<p><span>KOYA WEBB</span>            <small>Holistic Health Coach &amp; Yoga Instructor</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-webb.jpg"></div>
+                </div>
+                <div class="grid-bg     philip      grid-item">                                     
+                	<div>
+                		<p><span>PHILIP MCKERNAN</span>      <small>Author, Filmmaker, &amp; Keynote Speaker</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-philip.jpg"></div>
+                </div>
+                <div class="grid-bg     ramsey      grid-item">                                     
+                	<div>
+                		<p><span>OCEAN RAMSEY</span>         <small>Competitive Freediver &amp; Shark Conservationist</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-ramsey.jpg"></div>
+                </div>
+                <div class="grid-bg     howes       grid-item">                                     
+                	<div>
+                		<p><span>LEWIS HOWES</span>          <small>Author, Entrepreneur, &amp; Former Arena League Football Player</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-howes.jpg"></div>
+                </div>
+
+                <div class="grid-bg     axe         grid-item grid-item--width2 grid-item--height2">
+                	<div>
+                		<p><span>JOSH AXE</span>             <small>Doctor of Natural Medicine &amp; Clinical Nutritionist</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-axe.jpg"></div>
+                </div>
+                <div class="grid-bg     forleo      grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>MARIE FORLEO</span>         <small>Author, Life Coach, &amp; Host of Marie TV</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-forleo.jpg"></div>
+                </div>
+                <div class="grid-bg     hari        grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>VANI HARI</span>            <small>Activist &amp; NY Times Best-Selling Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-hari.jpg"></div>
+                </div>
+
+                <div class="grid-bg     lakhiani    grid-item">                                     
+                	<div>
+                		<p><span>VISHEN LAKHIANI</span>      <small>Founder &amp; CEO of Mindvalley</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-lakhiani.jpg"></div>
+                </div>
+                <div class="grid-bg     william     grid-item grid-item--width2 grid-item--height1">
+                	<div>
+                		<p><span>WILLIAM DAVIS</span>        <small>Cardiologist &amp; NY Times Best-Selling Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-william.jpg"></div>
+                </div>
+                <div class="grid-bg     lipton      grid-item">                                     
+                	<div>
+                		<p><span>BRUCE LIPTON</span>         <small>Stem Cell Biologist &amp; Best-Selling Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-lipton.jpg"></div>
+                </div>
+
+                <div class="grid-bg     hyman       grid-item">                                     
+                	<div>
+                		<p><span>MARK HYMAN</span>           <small>10x NY Times Best-Selling Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-hyman.jpg"></div>
+                </div>
+                <div class="grid-bg     libby       grid-item grid-item--width2 grid-item--height2">
+                	<div>
+                		<p><span>LIBBY WEAVER</span>         <small>Nutritional Biochemist &amp; Best-Selling Author</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-libby.jpg"></div>
+                </div>
+                <div class="grid-bg     john        grid-item">                                     
+                	<div>
+                		<p><span>JOHN ROBBINS</span>         <small>Best-Selling Author of &#8216;Diet For A New America&#8217;</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-john-robbins2.jpg"></div>
+                </div>
+                <div class="grid-bg     tom         grid-item">                                     
+                	<div>
+                		<p><span>TOM O&#8217;BRYAN</span>          <small>Metabolic &amp; Autoimmune Specialist</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-tom-obryan.jpg"></div>
+                </div>
+                <div class="grid-bg     stig        grid-item">                                     
+                	<div>
+                		<p><span>STIG SEVERINSEN</span>      <small>4x Freediving World Champion</small></p>
+                	</div>
+                	<img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/grid-size3.png" alt="" class="" width="100%">
+                	<div class="bg lazyload" data-src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/gallery-stig.jpg"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+</div></div>
+
+
+
+<div class="wp-block-group has-background section--jnl" style="background-color:#efefef"><div class="wp-block-group__inner-container">
+<div class="wp-block-group container"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column yourHostText" style="flex-basis:66.66%">
+<h3><strong>One Film. Five Episodes of Accelerated Growth &amp; Learning.</strong></h3>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<p>Welcome to the online screening of TRANSCENDENCE on Gaia. This online event is a global experience delving into the mind, body, and depths of our selves.</p>
+
+
+
+<p>You’ll learn from the personal experiences of those who have been in the darkest trenches, healed from trauma, and recovered from great adversity to shine a light on our lives. We want to help you on your journey, by stepping into your calling, following your passions and living the ultimate life of your dreams.</p>
+</div>
+
+
+
+<div class="wp-block-column">
+<p>When you reach the end of episode five, you will have the tools to face your fears, to live a truly fulfilling life, overcome the limiting beliefs that have been holding you back, and grow your business, family, or career. This life-changing series will help you to play a bigger and bolder game and excel at what you LOVE doing!</p>
+
+
+
+<div class="wp-block-group group--signature"><div class="wp-block-group__inner-container">
+<div class="wp-block-group flexWrap"><div class="wp-block-group__inner-container">
+<figure class="wp-block-image size-large is-style-circle-mask yourHost-sm"><img src="https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2.jpg" alt="James &amp; Laurentine" class="wp-image-288" srcset="https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2.jpg 680w, https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2-300x300.jpg 300w, https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2-150x150.jpg 150w" sizes="(max-width: 680px) 100vw, 680px" /></figure>
+
+
+
+<div class="wp-block-group signatureWrapper"><div class="wp-block-group__inner-container">
+<figure class="wp-block-image size-large is-resized"><img src="https://summit.gaia.com/wp-content/uploads/2020/01/signature.png" alt="James &amp; Laurentine" class="wp-image-148" width="287" height="42" srcset="https://summit.gaia.com/wp-content/uploads/2020/01/signature.png 382w, https://summit.gaia.com/wp-content/uploads/2020/01/signature-300x44.png 300w" sizes="(max-width: 287px) 100vw, 287px" /></figure>
+
+
+
+<p><strong>James &amp; Laurentine</strong><br>Producers of&nbsp;<em>TRANSCENDENCE</em>.</p>
+</div></div>
+</div></div>
+</div></div>
+</div>
+</div>
+</div>
+
+
+
+<div class="wp-block-column yourHostsContainer" style="flex-basis:33.33%">
+<figure class="wp-block-image size-large yourHosts"><img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/your-hosts-take2.jpg" alt="" class="wp-image-288" srcset="https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2.jpg 680w, https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2-300x300.jpg 300w, https://summit.gaia.com/wp-content/uploads/2020/01/your-hosts-take2-150x150.jpg 150w" sizes="(max-width: 680px) 100vw, 680px" /></figure>
+</div>
+</div>
+</div></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container"><div class="wp-block-cover has-background-dim-30 has-background-dim summitBgImage lastBgBlock">
+<div class="wp-block-group container" style="z-index: 1; color: #fff;">
+<div class="wp-block-group__inner-container">
+<div class="wp-block-image transLogo" style="margin-top: 0;">
+<figure class="aligncenter size-large is-resized"><img src="https://dev-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/01/rotator-transcendence-1024x147.png" alt="TRANSCENDENCE - Live Life Beyond the Ordinary" class="wp-image-112" width="768" height="110" srcset="https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-1024x147.png 1024w, https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-300x43.png 300w, https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence-768x110.png 768w, https://summit.gaia.com/wp-content/uploads/2020/01/rotator-transcendence.png 1200w" sizes="(max-width: 768px) 100vw, 768px" /></figure>
+</div>
+<h3 class="has-text-align-center landing-h2">
+Radically transform your life &amp; health in this groundbreaking new docu-series.<span class="d-block d-md-inline d-lg-block">
+Free worldwide online screening <span class="nowrap">March 16 &#8211; 26, 2020.</span></span></h3>
+<div class="wp-block-button aligncenter js-button-open-form large-cta" data-target="cta">
+				<a class="wp-block-button__link">SAVE MY <span class="hidden-xs">FREE</span> SPOT</a></div>
+</div>
+</div>
+</div></div></div>
+
+
+
+<div class="wp-block-group section--modal-form modal"><div class="wp-block-group__inner-container">
+<form class="js-form transcendenceForm gaia_form emarsys-form lead-gen__form" _lpchecked="1">
+    <span class="close" data-dismiss="modal">CLOSE <i class="fa fa-close"></i></span>
+    <input type="hidden" name="FORM_NAME" value="transcendence_1_summit_prospect">
+    <input type="hidden" name="SITE_SEGMENT" value="TR">
+
+    <div class="row">
+        <div class="col-12">
+            <p style="color: #fff; line-height: 1.4em;">Enter your name &amp; email to save your spot to the free screening of Transcendence &#8211; Live Life Beyond the Ordinary.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6" style="margin-bottom: 10px;">
+            <input type="text" class="first-name form-control" name="FIRST_NAME" placeholder="First Name" required="">
+        </div>
+
+        <div class="col-xs-12 col-sm-6" style="margin-bottom: 10px;">
+            <input type="email" class="form-control email" maxlength="75" name="EMAIL_ADDRESS_" placeholder="Email Address" required="">
+        </div>
+        <div class="col-12" style="text-align: center;">
+            <div class="checkbox">
+                <input type="checkbox" id="email-opt-in" required="">
+                <label for="email-opt-in">Yes, sign me up to receive event updates and newsletters from Gaia. We respect your <a href="https://www.gaia.com/terms-privacy" target="_blank" rel="noopener noreferrer">email privacy</a> and you can unsubscribe anytime.</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <input type="submit" class="wp-block-button__link" value="SAVE MY FREE SPOT">
+        </div>
+        <div class="col-12">
+            <div class="message"></div>
+        </div>
+    </div>
+</form>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="hidden-xs" id="sidebar">
+    <div class="side-pdf">
+        <img alt="Healthy Habits Manifesto" src="https://summit.gaia.com/wp-content/uploads/2020/02/iphone-bonus.png">
+        <div class="free-pdf"><span>FREE</span> <span>BONUS</span></div>
+    </div>
+    <p>Save your spot today and get instant access to the first 12-minutes of episode 1.</p>
+    <a data-target="side" class="wp-block-button__link js-optin-toggle js-button-open-form" href="#">WATCH NOW</a> <span class="js-toggle-off" data-target="#sidebar">Hide</span>
+</div>
+
+
+
+<div class="" id="footerbar" style="">
+<span class="js-toggle-off" data-target="#footerbar">HIDE</span>
+    <div class="row" style="max-width: 460px; margin: 0 auto;">
+        <div class="col" style="position: relative;">
+            <img alt="Healthy Habits Manifesto" src="https://summit.gaia.com/wp-content/uploads/2020/02/iphone-bonus.png" style="position: absolute; bottom: 5px; left: 5px; width: 100px;"></div>
+        <div class="col-9" style="text-align: left;">
+            <p>Save your spot today and get instant access to the first 12-minutes of <span class="nowrap">episode 1.</span></p>
+            <a class="wp-block-button__link js-button-open-form" href="" data-target="side" style="font-size: 14px; color: #fff; margin-bottom: 10px; position: relative; z-index: 9; text-decoration: none;">WATCH NOW</a>
+        </div>
+    </div>
+</div>
+</div></div>
+
+
+
+<div class="wp-block-group section--exit-form modal"><div class="wp-block-group__inner-container">
+<div class="wp-block-group section--exit-form--wrap"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<form class="js-form  gaia_form emarsys-form lead-gen__form" _lpchecked="1">
+    <span class="close" data-dismiss="modal">CLOSE <i class="fa fa-close"></i></span>
+    <input type="hidden" name="FORM_NAME" value="TRANSCENDENCE_1_SUMMIT_PROSPECT">
+    <input type="hidden" name="SITE_SEGMENT" value="TR">
+
+    <div class="row">
+        <div class="col-12">
+<h3 style="color: #fff;">Wait! You nearly left without this&#8230;
+
+</h3>
+            <p style="color: #fff;">Save your spot today and get instant access to the first 12-minutes of episode 1 for a special sneak peek.
+</p>
+        </div>
+        <div class="col-12" style="margin-bottom: 10px;">
+            <input type="text" class="first-name form-control" name="FIRST_NAME" placeholder="First Name" required="">
+        </div>
+
+        <div class="col-12" style="margin-bottom: 10px;">
+            <input type="email" class="form-control email" maxlength="75" name="EMAIL_ADDRESS_" placeholder="Email Address" required="">
+        </div>
+        <div class="col-12">
+            <input type="submit" class="wp-block-button__link" value="SAVE MY FREE SPOT">
+        </div>
+<div class="col-12" style="">
+            <div class="checkbox">
+                <input type="checkbox" id="email-opt-in2" required="">
+                <label for="email-opt-in2">Yes, sign me up to receive event updates and newsletters from Gaia. We respect your <a href="https://www.gaia.com/terms-privacy" target="_blank" rel="noopener noreferrer">email privacy</a> and you can unsubscribe anytime.</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="message"></div>
+        </div>
+    </div>
+</form>
+</div>
+
+
+
+<div class="wp-block-column">
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://live-transcendence-summit.pantheonsite.io/wp-content/uploads/2020/02/iPad-bonus.png" alt="Bonus" class="wp-image-437" width="300" height="378"/></figure></div>
+</div>
+</div>
+</div></div>
+</div></div>
+<!-- AddThis Advanced Settings above via filter on the_content --><!-- AddThis Advanced Settings below via filter on the_content --><script>if (typeof window.atnt !== 'undefined') { window.atnt(); }</script><!-- AddThis Advanced Settings generic via filter on the_content --><!-- AddThis Share Buttons above via filter on the_content --><!-- AddThis Share Buttons below via filter on the_content --><div class="at-below-post-page addthis_tool" data-url="https://summit.gaia.com/transcendence-summit/pre-launch/"></div><script>if (typeof window.atnt !== 'undefined') { window.atnt(); }</script><!-- AddThis Share Buttons generic via filter on the_content --><!-- AddThis Related Posts generic via filter on the_content -->	</div><!-- .entry-content -->
+</article><!-- #post-## -->
+        </main><!-- #main -->
+    </section><!-- #primary -->
+
+</div><!-- #page -->
+
+<!-- start gaia footer -->
+
+<link rel="stylesheet" href="/custom-includes/css/gaia-footer.css" type="text/css"><footer class="footer-webapp"><div class="layer blocks"><div class="footer-webapp__nav"><div class="container"><div class="row"><div class="footer-webapp__nav-column col-12 col-md-4"><ul class="d-flex flex-column nav-footer-ul"><li class="footer__menu-title"><a href="#"><h6 class="footer-webapp__title">Gaia</h6></a></li><li class="footer-webapp__link"><a href="https://www.gaia.com/lp/about" target="_self">About Gaia</a></li><li class="footer-webapp__link"><a href="https://gaiasupportcenter.zendesk.com/hc/en-us/articles/223618027-Which-devices-can-I-use-to-stream-Gaia-" target="_self">Devices</a></li><li class="footer-webapp__link"><a href="https://www.gaia.com/terms-privacy#community-posting-guidelines" target="_self">Community Guidelines</a></li><li class="footer-webapp__link"><a href="https://www.gaia.com/terms-privacy" target="_self">Terms of Use and Privacy</a></li><li class="footer-webapp__link"><a href="https://www.gaia.com/terms-privacy#anti-spam-policy" target="_self">Spam Policy</a></li></ul></div><div class="footer-webapp__nav-column col-12 col-md-4"><ul class="d-flex flex-column nav-footer-ul"><li class="footer__menu-title"><a href="#"><h6 class="footer-webapp__title">Community</h6></a></li><li class="footer-webapp__link"><a href="https://gaiasupportcenter.zendesk.com/hc/en-us" target="_self">Help Center</a></li><li class="footer-webapp__link"><a href="https://www.gaia.com/lp/careers/" target="_self">Careers</a></li><li class="footer-webapp__link"><a href="https://www.gaia.com/lp/write-for-gaia/" target="_self">Write for Gaia</a></li></ul></div><div class="footer-webapp__nav-column col-12 col-md-4"><ul class="d-flex flex-column nav-footer-ul"><li class="footer__menu-title"><a href="#"><h6 class="footer-webapp__title">More from Gaia</h6></a></li><li class="footer-webapp__link"><a href="http://ir.gaia.com/" target="_self">Investor Relations</a></li></ul></div></div></div></div></div><div class="layer blocks"><div class="footer-webapp__icons"><div class="container icons-container"><div class="row"><div class="icons-container__social-icons col-12 col-md-6"><h6 class="icons-container__title">Connect With Us</h6><div class="icons-container__social facebook"><a target="_blank" href="http://www.facebook.com/gaia"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-facebook-white.svg"></a></div><div class="icons-container__social twitter"><a target="_blank" href="https://twitter.com/yourmothergaia"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-twitter-white.svg"></a></div><div class="icons-container__social instagram"><a target="_blank" href="http://www.instagram.com/wearegaia"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-instagram-white.svg"></a></div><div class="icons-container__social youtube"><a target="_blank" href="https://www.youtube.com/user/gaiamtv"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-youtube-white.svg"></a></div><div class="icons-container__social pinterest"><a target="_blank" href="https://www.pinterest.com/wearegaia/"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-pinterest-white.svg"></a></div></div><div class="icons-container__app-icons app-links col-12 col-md-6"><h6 class="icons-container__title">Gaia Apps</h6><div class="icons-container__app ios"><a href="https://itunes.apple.com/us/app/gaia-conscious-yoga-meditation-and-spirituality/id821068605?mt=8" target="_blank"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-ios-black.svg"></a></div><div class="icons-container__app android"><a href="https://play.google.com/store/apps/details?id=com.gaiamtv&amp;hl=en" target="_blank"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-android-black.svg"></a></div><div class="icons-container__app chromecast"><a href="https://play.google.com/store/apps/details?id=com.gaiamtv&amp;hl=en" target="_blank"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-chromcast-black.svg"></a></div><div class="icons-container__app roku"><a href="https://channelstore.roku.com/details/9354/gaia" target="_blank"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-roku-black.svg"></a></div><div class="icons-container__app amazon"><a href="https://www.amazon.com/Gaia-Fire-TV-Meditation-Spirituality/dp/B01N9SQC83/ref=sr_1_1?s=mobile-apps&amp;ie=UTF8&amp;qid=1487105671&amp;sr=1-1&amp;keywords=gaia" target="_blank"><img class="icons-footer aligncenter" src="https://www.gaia.com/wp-content/themes/gaia-marketing-layer/assets/images/apps/icon-amazon-firetv-black.svg"></a></div></div></div></div></div></div></footer>
+
+<!-- end gaia footer -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" defer></script>
+<script src="//players.brightcove.net/1263232739001/B1lW9lqUw_default/index.min.js" defer></script>
+<script src="/custom-includes/js/jquery.counteverest.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" defer>
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ouibounce/0.0.12/ouibounce.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.cssanimateauto@0.4.0/src/jquery.cssAnimateAuto.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js" defer></script>
+
+
+<!-- Start of gaiasupportcenter Zendesk Widget script -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=8cc6f1da-d2b2-4f14-a8ba-9c4ee2616d00" async></script>
+<!-- End of gaiasupportcenter Zendesk Widget script -->
+
+<script type="text/javascript">
+if (location.pathname != _LAUNCH_SUBDIRECTORY + _SALES_PAGE_URL && location.pathname != _LAUNCH_SUBDIRECTORY + _SALES_PAGE_LC_URL) {
+    var addthis_url = "https://summit.gaia.com/transcendence-summit/pre-launch",
+          addthis_title = "[FREE ONLINE SCREENING] TRANSCENDENCE - March 16 - 26",
+          addthis_desc = "Save your spot today and get instant access to the first 12-minutes of episode 1.",
+          addthis_media = "https://summit.gaia.com/wp-content/uploads/2020/02/meta-transcendence.jpg";
+} else {
+    var addthis_url = "https://summit.gaia.com/transcendence-summit/masterclass-sales",
+          addthis_title = "Unlock Access to All 5 Episodes & the Masterclass on Gaia",
+          addthis_desc = 'Unlock full access to the TRANSCENDENCE docu-series & Masterclass on Gaia. Plus continue your health journey with the "Netflix® for health & wellness".',
+          addthis_media = "https://summit.gaia.com/wp-content/uploads/2020/02/meta-transcendence.jpg";
+}
+var addthis_share = {
+   url: addthis_url,
+   title: addthis_title,
+   description: addthis_desc,
+   media: addthis_media
+}
+</script>
+<script data-cfasync="false" type="text/javascript">if (window.addthis_product === undefined) { window.addthis_product = "wpwt"; } if (window.wp_product_version === undefined) { window.wp_product_version = "wpwt-3.2.6"; } if (window.addthis_share === undefined) { window.addthis_share = {}; } if (window.addthis_config === undefined) { window.addthis_config = {"data_track_clickback":true,"ui_atversion":"300"}; } if (window.addthis_plugin_info === undefined) { window.addthis_plugin_info = {"info_status":"enabled","cms_name":"WordPress","plugin_name":"Website Tools by AddThis","plugin_version":"3.2.6","plugin_mode":"AddThis","anonymous_profile_id":"wp-6198374c1b6fb5b0ee726dfa63302e73","page_info":{"template":"pages","post_type":""},"sharing_enabled_on_post_via_metabox":false}; } 
+                    (function() {
+                      var new_tools_timeout = false;
+
+                      var refresh_tools = function() {
+                        new_tools_timeout = false;
+                        addthis.layers.refresh();
+                      };
+
+                      var first_load_check = function () {
+                        if (typeof window.addthis !== 'undefined') {
+                          window.clearInterval(first_load_interval_id);
+                          if (typeof window.addthis_layers !== 'undefined' && Object.getOwnPropertyNames(window.addthis_layers).length > 0) {
+                            window.addthis.layers(window.addthis_layers);
+                          }
+                          if (Array.isArray(window.addthis_layers_tools)) {
+                            for (i = 0; i < window.addthis_layers_tools.length; i++) {
+                              window.addthis.layers(window.addthis_layers_tools[i]);
+                            }
+                          }
+
+                          window.atnt = function() {
+                            if (new_tools_timeout !== false) {
+                              window.clearTimeout(new_tools_timeout);
+                            }
+                            new_tools_timeout = window.setTimeout(refresh_tools, 15);
+                          };
+                        }
+                      };
+
+                      var first_load_interval_id = window.setInterval(first_load_check, 1000);
+                    }());
+                </script><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.15.0/dist/umd/popper.min.js?ver=5.3.2'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js?ver=5.3.2'></script>
+<script type='text/javascript' src='https://summit.gaia.com/wp-content/themes/wp-bootstrap-starter/inc/assets/js/theme-script.min.js?ver=5.3.2'></script>
+<script type='text/javascript' src='https://summit.gaia.com/wp-content/themes/wp-bootstrap-starter/inc/assets/js/skip-link-focus-fix.min.js?ver=20151215'></script>
+<script type='text/javascript' src='https://summit.gaia.com/wp-content/plugins/off-canvas-sidebars/slidebars/slidebars.js?ver=2.0.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ocsOffCanvasSidebars = {"site_close":"1","link_close":"1","disable_over":"0","hide_control_classes":"","scroll_lock":"","legacy_css":"","css_prefix":"ocs","sidebars":[],"_debug":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://summit.gaia.com/wp-content/plugins/off-canvas-sidebars/js/off-canvas-sidebars.js?ver=0.5.4'></script>
+<script type='text/javascript' src='https://s7.addthis.com/js/300/addthis_widget.js?ver=5.3.2#pubid=ra-5e323724a6c395a4'></script>
+<script type='text/javascript' src='https://summit.gaia.com/wp-includes/js/wp-embed.min.js?ver=5.3.2'></script>
+
+<script type='text/javascript' src='//summit.gaia.com/wp-content/uploads/custom-css-js/1189.js?v=9185'></script>
+
+
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"NRJS-9fc477378ec1de7b381","applicationID":"460531441","transactionName":"ZwNRYEYFVxBSBkJaXV5JcldADVYNHAdaUlxbS0NVUwE=","queueTime":0,"applicationTime":160,"atts":"S0RSFg4fRB4=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
