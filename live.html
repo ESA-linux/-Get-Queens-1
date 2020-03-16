@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link href="/2020/assets/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="/2020/assets/css/jquery-ui-1.9.0.custom.css" rel="stylesheet" media="screen" />
+    <link href="/2020/assets/css/custom.css" rel="stylesheet" media="screen" />
+    <link href="/2020/assets/img/favicon.ico" rel="shortcut icon">
+
+	<script>
+	  /**
+		@licstart  The following is the entire license notice for the
+		JavaScript code in this page.
+
+		Copyright (C) 2020 Free Software Foundation, Inc
+
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		See the License for the specific language governing permissions and
+		limitations under the License.
+
+		@licend  The above is the entire license notice
+		for the JavaScript code in this page.
+	  */
+	  </script>
+
+
+<title>LibrePlanet 2020 ~ Live</title>
+
+  </head>
+  <body>
+
+    <!-- Place banner here -->
+<div class="lp-archived">
+  <b><p><a href="https://www.fsf.org/blogs/community/libreplanet-2020-in-person-component-canceled-but-well-see-you-online">LibrePlanet 2020 is moving online due to concerns over the ongoing COVID-19 outbreak. All formal and "extracurricular" in-person events associated with LibrePlanet 2020 have been canceled.</a></p><p>Please show your support to the FSF through a <a href="https://fsf.org/donate">donation</a>.</p></b>
+</div>
+    <!-- Place modal window here -->
+
+    <div id="wrapper"> <!-- start of wrapper -->
+      <div class="lp-banner hidden-xs"> <!--start of lp banner -->
+		<div class="container"> <!-- start of container -->
+		  <div class="row">
+			<div class="lp-head"> <!-- start of lp header -->
+			  <div class="lp-logo col-sm-3 col-xs-5">
+				<a href="/2020/">
+				  <img src="/2020/assets/img/logo.svg"
+					   class="img-responsive"
+					   alt="[ LibrePlanet 2020 ]" />
+				</a>
+			  </div>
+			  <div class="lp-date-place col-sm-5 col-xs-2">
+                            <!-- Heads up! When updating this date and place information,
+                                 remember to update it in the small
+                                 screen navbar too (see below) -->
+		      <p><br><strong>Online<br />
+			      March 14-15, 2020</strong></p>
+			  </div>
+                          <!-- #top-right-desktop start -->
+                          <!-- <div class="register-block col-sm-offset-2 col-sm-4"> -->
+<!--     <a class="btn btn-register btn-lg btn-block register-now" -->
+<!--        href="https://my.fsf.org/civicrm/event/info?id=87&reset=1"> -->
+<!--         Register now -->
+<!--     </a> -->
+<!--     <p class="text-muted text-center"> -->
+<!--         gratis for FSF associate members and students! -->
+<!--     </p> -->
+<!-- </div> -->
+
+                          <!-- #top-right-desktop end -->
+                          <!-- #top-right-desktop start -->
+                          <!-- start of signup form-->
+<div id="lp-signup-block" class="col-sm-4 col-xs-12">
+  <form class="lp-signup"
+        action="https://my.fsf.org/civicrm/profile/create?gid=507&amp;reset=1"
+        method="post" name="Edit" id="Edit">
+    <div>
+      <input name="postURL" type="hidden"
+             value="https://libreplanet.org/2020/confirmation.html" />
+      <input name="cancelURL" type="hidden"
+             value="https://my.fsf.org/civicrm/profile?reset=1&amp;gid=507" />
+      <input name="add_to_group" type="hidden" value="619" />
+      <input name="_qf_default" type="hidden" value="Edit:cancel" />
+    </div>
+
+    <div id="crm-container" lang="en" xml:lang="en">
+      <br />
+      <div id="editrow-email-Primary"
+           class="form-group">
+        <label class="sr-only" for="email-Primary">
+          Add your email to receive updates
+        </label>
+        <div class="input-group">
+          <input class="form-control"
+                 name="email-Primary"
+                 id="email-Primary"
+                 type="email"
+                 placeholder="Add your email to receive updates" required>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default"
+                    accesskey="S" name="_qf_Edit_next" value="Save"
+                    id="_qf_Edit_next">
+              Submit
+            </button>
+          </span>
+        </div>
+      </div>
+      <div id="editrow-group">
+        <div class="checkbox">
+          <input type="hidden" name="group[25]" value="" />
+          <label class="lp-label-news">
+            <input id="group_25"
+                   name="group[25]" type="checkbox" value="1"
+                   class="checkbox" />
+			<span class="text-muted">Also join the FSF's newsletter</span>
+          </label>
+          <p class="help-block">
+	    &middot;
+            <a href="https://my.fsf.org/donate/privacypolicy.html">
+              Read our privacy policy.
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> <!-- end of signup form -->
+
+                          <!-- #top-right-desktop end -->
+			</div><!-- end of lp header -->
+
+		  </div>
+		</div> <!-- end of header container -->
+      </div> <!-- end of lp banner -->
+
+      <!-- start nav for small screens -->
+      <nav class="navbar navbar-default visible-xs">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#lp-navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/2020/">
+              <img src="/2020/assets/img/logo.svg"
+                   style="max-width: 100px"
+                   class="img-responsive"
+                   alt="[ LibrePlanet 2020 ]" />
+            </a>
+            <p class="navbar-text">
+               <!-- Heads up! When updating date place, remember to
+               update it in the lp banner too (see above) -->
+	        Boston area<br />March 14-15, 2020
+	    </p>
+          </div>
+
+          <div class="collapse navbar-collapse" id="lp-navbar-collapse">
+
+            <ul class="nav navbar-nav">
+              <li><a href="/2020/live">Watch Live!</a></li>
+<!-- <li class="livestream-link"><a href="/2020/live">Live Video Recordings <span class="glyphicon glyphicon-globe"></span></a></li> -->
+<li><a href="/2020/program">Schedule</a></li>
+<li><a href="/2020/speakers">Bios & Talks</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav">
+              <li><a href="/2020/getting-around">Lodging & Travel</a></li>
+<li><a href="/2020/safe-space-policy/">Safe Space Policy</a></li>
+<li><a href="https://libreplanet.org/2020/sponsors">Sponsors and Exhibitors</a></li>
+<li><a href="https://libreplanet.org/2020/volunteer/">Volunteer</a></li>
+<li><a href="https://media.libreplanet.org/u/libreplanet/tag/libreplanet-2019-video//">2019 Session Videos</a></li>
+<li><a href="https://lists.gnu.org/mailman/listinfo/libreplanet-discuss">Join the discussion list</a></li>
+
+
+            </ul>
+          </div><!-- navbar-collapse end -->
+        </div><!-- navbar container-fluid end -->
+      </nav>
+      <!-- end nav for small screens -->
+
+<div class="container"> <!-- start of container -->
+    <div class="row">
+	<div id="lp-nav" class="col-sm-3"> <!-- start of sidebar column -->
+	    
+		<p class="text-center lp-home">
+		    <a class="text-muted" href="/2020/">
+			<span class="glyphicon glyphicon-chevron-left"></span> Home
+		    </a>
+		</p>
+	    
+
+
+	    <ul class="nav nav-pills nav-stacked hidden-xs">
+                <li><a href="/2020/live">Watch Live!</a></li>
+<!-- <li class="livestream-link"><a href="/2020/live">Live Video Recordings <span class="glyphicon glyphicon-globe"></span></a></li> -->
+<li><a href="/2020/program">Schedule</a></li>
+<li><a href="/2020/speakers">Bios & Talks</a></li>
+
+	    </ul>
+
+	    <ul class="nav nav-pills nav-stacked hidden-xs">
+                <li><a href="/2020/getting-around">Lodging & Travel</a></li>
+<li><a href="/2020/safe-space-policy/">Safe Space Policy</a></li>
+<li><a href="https://libreplanet.org/2020/sponsors">Sponsors and Exhibitors</a></li>
+<li><a href="https://libreplanet.org/2020/volunteer/">Volunteer</a></li>
+<li><a href="https://media.libreplanet.org/u/libreplanet/tag/libreplanet-2019-video//">2019 Session Videos</a></li>
+<li><a href="https://lists.gnu.org/mailman/listinfo/libreplanet-discuss">Join the discussion list</a></li>
+
+
+	    </ul>
+
+	    <ul class="nav nav-pills nav-stacked">
+		<li class="fsf-donate">
+		    <a href="https://my.fsf.org/civicrm/contribute/transact?reset=1&id=60"></span>
+			<span class="glyphicon glyphicon-heart"></span>
+            Help Sponsor an Attendee
+            </a>
+            <a href="https://crm.fsf.org/join">
+			<span class="glyphicon glyphicon-heart"></span>
+			Become an FSF Associate Member
+		    </a>
+        </li>
+	    </ul>
+
+            <!-- Replace 'include' -> '#include' when recent updates is non-empty -->
+            <ul  class="list-group margin-top">
+    <li class="list-group-item">
+	<strong>Recent Updates</strong>
+    <ul>
+      <li><strong>03/14/2020</strong> <a href="https://www.fsf.org/blogs/community/libreplanet-2020-online-second-day-of-the-conference-closes-on-a-high-note">LibrePlanet 2020 online second day of the conference ends on a high note</a>  
+      <li><strong>03/14/2020</strong> <a href="https://www.fsf.org/blogs/community/libreplanet-day-1-can-free-software-carry-an-entire-online-conference-yes-it-can">LibrePlanet day 1: Can free software carry an entire online conference? Yes, it can!</a>
+	  <li><strong>03/09/2020</strong> <a href="https://www.fsf.org/blogs/community/everything-you-need-to-know-about-libreplanet-2020-now-fully-online">LibrePlanet 2020: All you need to know!</a></li>
+      <li><strong>03/09/2020</strong> <a href="https://www.fsf.org/blogs/community/libreplanet-2020-in-person-component-canceled-but-well-see-you-online">LibrePlanet 2020: In-person component canceled, but we'll see you online</a></li>
+	  <li><strong>03/06/2020</strong> <a href="https://www.fsf.org/blogs/community/celebrating-women-in-free-software-for-international-women2019s-day">Celebrating women in free software for International Women's Day</a></li>
+      <li><strong>03/05/2020:</strong> <a href="https://www.fsf.org/blogs/community/update-on-covid-19-and-libreplanet-2020">Update on COVID-19 and LibrePlanet</a></li>
+	  <li><strong>03/04/2020:</strong> <a href="https://www.fsf.org/news/young-hackers-to-deliver-opening-keynote-for-libreplanet-conference">Young hackers to deliver opening keynote for LibrePlanet conference</a></li>
+	  <li><strong>02/28/2020:</strong> <a href="https://www.fsf.org/news/environmental-activist-shannon-dosemagen-joins-fsf-conference-keynote-lineup">Environmental activist Shannon Dosemagen joins FSF conference keynote lineup</a></li>
+	  <li><strong>02/21/2020:</strong> <a href="https://www.fsf.org/blogs/community/hot-off-the-presses-a-sneak-peek-at-the-libreplanet-2020-schedule">Hot off the presses: a sneak peek at the LibrePlanet 2020 schedule</a></li>
+	  <li><strong>02/14/2020:</strong> <a href="https://www.fsf.org/blogs/community/register-today-for-libreplanet-or-organize-your-own-satellite-instance">Register today for LibrePlanet -- or organize your own satellite instance</a></li>
+	  <li><strong>01/28/2020:</strong> <a href="https://www.fsf.org/blogs/community/libreplanet-2020-needs-you-volunteer-today">LibrePlanet 2020 needs you: Volunteer today!</a></li>
+	  <li><strong>01/27/2020:</strong> <a href="https://www.fsf.org/blogs/community/libreplanet-2020-well-see-you-at-the-back-bay-events-center-in-boston-ma">LibrePlanet 2020: We'll see you at the Back Bay Events Center in Boston, MA!</a></li>
+	  <li><strong>01/15/2020:</strong> <a href="https://www.fsf.org/news/first-libreplanet-2020-keynote-announcement-internet-archive-founder-brewster-kahle">First LibrePlanet 2020 keynote announcement: Internet Archive founder Brewster Kahle</a></li>
+	  <li><strong>01/08/2020:</strong> <a href="https://www.fsf.org/blogs/community/bring-the-planet-to-libreplanet-by-sponsoring-an-attendee">Bring the planet to LibrePlanet by sponsoring an attendee</a></li>
+		<li><strong>11/05/2019:</strong> <a href="https://www.fsf.org/blogs/community/register-now-for-libreplanet-2020-free-the-future-in-boston-area-ma">Register now for LibrePlanet 2020: "Free the Future", in Boston area, MA</a></li>
+	  </ul>
+</ul>
+
+
+	</div> <!-- end of sidebar column -->
+	<div id="lp-content" class="col-sm-9"> <!-- start of content column -->
+
+
+<h1>LibrePlanet 2020 - Live</h1>
+
+<div class="row margin-top">
+  <div class="col-sm-8"> <!-- start of main content -->
+
+    <!--
+    <h2 style="margin-bottom: 10px;">Partner:</h2>
+    <div class="hover_img" style="margin-bottom: 40px;">
+      <img src="https://static.fsf.org/nosvn/libreplanet/sponsor-logos/pia.svg"  alt="The Private Internet Access logo." height="75%" width="75%">
+      <div class="right_text">
+        <p><strong><a href="https://www.privateinternetaccess.com/">Private Internet Access</a>, protecting your privacy online</strong></p>
+      </div>
+    </div>
+    -->
+
+    <p>The conference is live!</p>
+    <p>Please note that all online participants in LibrePlanet 2020 interactions are expected to abide by the conference's <a href="https://libreplanet.org/2020/safe-space-policy/">safe space policy</a>.</p>    
+    <p>  <div class="panel-body">
+	    </div></p>
+
+    <!-- The Conference is not running at this time -->
+
+    <noscript>
+      <p>
+        Our conference streaming web interface requires JavaScript, but
+        all of our streams are readily available on
+        <a href="http://live.fsf.org">
+          live.fsf.org
+        </a>
+        and can be played with the video client of your
+        choice, such as VLC or mplayer.
+      </p>
+      <p>
+	You can watch the streams directly by using vlc or some other media players with the following URLs:<br><br>
+
+	https://live.fsf.org/stream-room-grand.webm <br>
+	https://live.fsf.org/stream-room-freedom.webm <br>
+	https://live.fsf.org/stream-room-patriot.webm <br><br>
+
+	or using something like this on a terminal:
+<pre>
+mpv https://live.fsf.org/stream-room-grand.webm
+mplayer https://live.fsf.org/stream-room-freedom.webm
+ffplay https://live.fsf.org/stream-room-patriot.webm
+</pre>
+      </p>
+    </noscript>
+
+    <div id="stream"></div>
+
+    <iframe src="https://irc0d.libreplanet.org/irc/irc.freenode.net/?theme=mini&amp;#libreplanet"
+            class="irc-client">
+    </iframe>
+
+    <div style="margin-top: 20px">
+        <p>To join other channels, such as <strong>#libreplanet_room_grand</strong>, copy and paste this text into the IRC client above after you connect to IRC: <strong>/join #libreplanet_room_grand</strong></p>
+    </div>
+
+    <!-- end -->
+
+  </div> <!-- end of main content -->
+
+  <div class="col-sm-4"> <!-- start of right sidebar column -->
+    <div class="panel panel-default"> <!-- start support bar -->
+  <div class="panel-heading">
+	<h3 class="panel-title">Support the FSF!</h3>
+  </div>
+  <div class="panel-body">
+	<p>Hard-working FSF hackers are running our
+	  advanced, fully free software streaming system for LibrePlanet 2020. We
+	  appreciate your support to help cover labor and equipment.</p>
+
+	<p><a href="https://my.fsf.org/associate/support_freedom/join_fsf" style="border-bottom: none !important;">
+		<img class="fsf-donate-button" src="https://static.fsf.org/nosvn/join.en.red.png"
+			 alt="[ Join FSF ]" >
+	</a></p>
+
+	<p><a href="https://my.fsf.org/civicrm/contribute/transact?reset=1&amp;id=14" style="border-bottom: none !important;">
+		<img class="fsf-donate-button" src="//static.fsf.org/nosvn/donate.en.png"
+			 alt="[ Donate to the FSF ]" >
+	</a></p>
+  </div>
+</div>
+<!-- end support bar -->
+
+<!-- start fsf shop box -->
+<div class="panel panel-default"> <!-- start librejs box -->
+  <div class="panel-heading">
+    <h3 class="panel-title">Visit the FSF Shop!</h3>
+  </div>
+  <div class="panel-body">
+	<center><a href="https://shop.fsf.org/tshirts-hoodies/libreplanet-2020-t-shirt"><img src="https://static.fsf.org/nosvn/libreplanet/2020/assets/tiny_shirt.png"></a></center>
+	<p>LibrePlanet 2020 is online this year, but that doesn't mean that you have to miss out on the <a href="https://shop.fsf.org/tshirts-hoodies/libreplanet-2020-t-shirt">annual conference T-shirt</a> or any of the other GNU and FSF gear! Let the world know you were "here" by picking up this year's T-shirt in the FSF shop.</p>
+    </div>
+</div>
+<!-- end fsf shop box -->
+
+<!-- start LP20 signup -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<h3 class="panel-title">Stay in the loop</h3>
+  </div>
+  <div class="panel-body">
+	<p>Sign up to receive updates about LibrePlanet.</p>
+	<form action="https://my.fsf.org/civicrm/profile/create?gid=507&amp;reset=1"
+          class="" method="post" name="Edit" id="Edit-live-sidebar" >
+
+      <div>
+		<input name="entryURL" type="hidden"
+	           value="https://my.fsf.org/civicrm/profile/create?gid=507&amp;reset=1/update?action=update&amp;amp;id=507&amp;amp;reset=1&amp;amp;context=field"
+	           />
+		<input name="postURL" type="hidden" value="https://libreplanet.org/2020/confirmation.html" />
+		<input name="cancelURL" type="hidden"
+	           value="https://my.fsf.org/civicrm/profile?reset=1&amp;gid=507" />
+		<input name="add_to_group" type="hidden" value="619" />
+		<input name="_qf_default" type="hidden" value="Edit:cancel" />
+      </div>
+
+      <div class="crm-profile-name-interested_in_libreplanet_507">
+
+		<div id="crm-container-live-sidebar" class="crm-container crm-public" lang="en"
+			 xml:lang="en">
+
+	      <div id="editrow-email-Primary-live-sidebar" class="form-group">
+			<label for="email-Primary">
+			  Email <span class="field-required">*</span>
+			</label>
+			<input  name="email-Primary" type="email" id="email-Primary-live-sidebar"
+					class="form-control" />
+	      </div>
+
+	      <div id="editrow-group" class="form-group">
+		<div class="checkbox">
+		  <input type="hidden" name="group[25]" value="" />
+		  <input id="group_25-live-sidebar"
+			 style="margin-left: 0 !important"
+			 name="group[25]" type="checkbox" value="1"
+			 checked="checked" />
+		  <label for="group_25" class="control-label">Follow the FSF by email!</label>
+		</div>
+	      </div>
+
+	      <div class="form-group">
+			<input class="btn btn-default btn-block"
+			       accesskey="S" name="_qf_Edit_next" value="Submit" type="submit"
+			       id="_qf_Edit_next-live-sidebar" />
+		  </div>
+
+		</div>
+	  </div>
+    </form>
+	<p class="text-center"> <a class="alt-a" href="https://my.fsf.org/donate/privacypolicy.html">Privacy policy</a></p>
+  </div>
+</div>
+<!-- end LP20 signup -->
+
+<div class="panel panel-default"> <!-- start librejs box -->
+  <div class="panel-heading">
+    <h3 class="panel-title">Free JavaScript</h3>
+  </div>
+  <div class="panel-body">
+    <p>We've modified our streaming software and Web IRC client to include computer- and human-readable license tags, so that the <a href="https://www.gnu.org/software/librejs/">LibreJS browser extension</a> can verify that all JavaScript is free.</p>
+    <p>We hold all FSF Web sites to this standard and help others do the same though our <a href="https://www.fsf.org/campaigns/freejs/">Free JavaScript campaign.</a></p>
+    </div>
+  </div> <!-- end librejs box -->
+
+
+
+  </div> <!-- end of right sidebar column -->
+</div>
+
+</div><!-- end of content column -->
+</div>
+</div> <!-- end of container -->
+</div> <!-- end of wrapper -->
+
+<div id="footer">
+  <div class="container">
+    <p class="text-muted">
+<!--      LibrePlanet is produced in partnership by the <a href="https://www.fsf.org">Free Software Foundation</a> and the <a href="http://sipb.mit.edu/"> Student Information Processing Board (SIPB)</a> at MIT.</p> -->
+<p class="text-muted">
+      Except where otherwise noted, this site and its images, logos and and other media are licensed under
+      <a rel="license"
+	 href="http://creativecommons.org/licenses/by-sa/4.0/">
+	Creative Commons Attribution-ShareAlike 4.0</a>.
+      Copyright &copy; 2014-2020 Free Software Foundation. It was built using
+      <a href="https://github.com/twbs/bootstrap/tree/v3.3.5">Bootstrap 3.3.5</a>,
+      which is licensed under <a href="http://www.gnu.org/licenses/license-list.html#Expat">
+	Expat</a>. The JavaScript is free software with
+     <a href="/2020/js-labels" rel="jslicense">licensing information</a> documented by <a href="https://www.fsf.org/campaigns/freejs">Web labels</a>.
+    </p>
+
+    <p class="text-muted">
+      Kiwi IRC is licensed under the&nbsp;
+      <a rel="license"
+         href="https://www.gnu.org/licenses/agpl-3.0.html">
+        GNU Affero General Public License version 3
+      </a>.&nbsp;
+      <a href="https://vcs.fsf.org/?p=KiwiIRC.git;a=snapshot;h=46b871fe407632f5651fd7c8ff6faeebb58cc029;sf=tgz">
+        Complete source code
+      </a>
+    </p>
+
+
+  </div>
+</div>
+
+<script type="text/javascript"
+		src="/2020/assets/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript"
+        src="/2020/assets/js/piwik.js"></script>
+<script type="text/javascript"
+	src="/2020/assets/js/bootstrap-3.3.5.min.js"></script>
+<script>
+$(document).ready(logoTextStack);
+
+$(window).resize(logoTextStack);
+
+function logoTextStack() {
+    screenSize = $(window).width();
+    if(screenSize <= 551) {
+        $(".lp-logo").removeClass("col-xs-5");
+        $(".lp-date-place").removeClass("col-xs-2");
+    }else if(!$(".lp-logo").hasClass("col-xs-5")) {
+	$(".lp-logo").addClass("col-xs-5");
+        $(".lp-date-place").addClass("col-xs-2");
+    }
+}
+</script>
+<script>
+ $(document).ready(place_signup);
+ $(window).resize(place_signup);
+
+ function place_signup() {
+     screen_width = $(window).width();
+
+     if(screen_width <= 767) {
+         $('.register-block').prependTo('#lp-content')
+                             .removeClass('col-sm-offset-2 col-sm-4');
+         $('#lp-signup-block').insertBefore('#lp-content');
+     }else {
+         $('.register-block').appendTo('.lp-head')
+                             .addClass('col-sm-offset-2 col-sm-4');
+         $('#lp-signup-block').appendTo('.lp-head');
+     }
+ }
+</script>
+<script>
+ $(document).ready(lp_sidebar_place);
+ $(window).resize(lp_sidebar_place);
+
+ function lp_sidebar_place() {
+     screen_size = $(window).width();
+
+     if(screenSize <= 767) {
+         $("#lp-nav").insertAfter("#lp-content");
+     } else {
+         $("#lp-nav").insertBefore("#lp-content");
+     }
+ }
+</script>
+
+<script type="text/javascript" src="/2020/assets/js/mithril.min.js"></script>
+<script type="text/javascript" src="/2020/assets/js/stream.js"></script>
+<script type="text/javascript">
+$("#p-sessions").addClass("active").text("Sessions");
+</script>
+<script type="text/javascript">
+ $(".livestream-link").addClass("active");
+</script>
+
+</body>
+</html>
+
