@@ -1,0 +1,109 @@
+8080: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+-AMB-RI-EL-: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+-Get-Queens-1: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Alexa-LED-Animation-Files-for-AVS-2: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Alexa-LED-Animation-Files-for-AVS: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+.git-2-mirror: Fetch received nothing.
+
+-Get-Queens: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+-Get-Queens: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (2)
+
+aledlexa-led-animation-files-2: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+bitbucket: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+-Get-Queens: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (3)
+
+-Get-Queens: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (4)
+
+aledlexa-led-animation-files: Fetch received nothing.
+
+Alexa-LED-Animation-Files-for-AVS: Fetch received nothing.
+
+-AMB-RI-EL-: Fetch received nothing.
+
+-Get-Queens-1: Fetch received nothing.
+
+Alexa-LED-Animation-Files-for-AVS-2: Fetch received nothing.
+
+The operation couldn’t be completed. (Git error -7.)
+-Get-Queens: No more authentication methods.
+
+Interpreting last error as: SSH connection rejected. Make sure SSH key is valid on bitbucket.org.
+bitbucket: Fetch received nothing.
+
+aledlexa-led-animation-files-2: Fetch received nothing.
+
+community: Fetch received nothing.
+
+fire: Fetch received nothing.
+
+get-queens-2-2: Fetch received nothing.
+
+failed to connect to 192.168.201.40: The operation couldn’t be completed. Connection refused: 
+azure-repos-vscode-clones-: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Alexa-LED-Animation-Files-for-AVS-3: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+excalidraw: Fetch received nothing.
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+GCDWebServer: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+mslearn-build-a-web-app-with-mean-on-a-linux-vm: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+Downloads: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (2)
+
+webdaw: Fetch received nothing.
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (3)
+
+azure-repos-vscode-clones-: Fetch received nothing.
+
+bootstrap: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02 (4)
+
+get-queens-2: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+bootstrap: No more authentication methods.
+
+The operation couldn’t be completed. (Git error -7.)
+Interpreting last error as: SSH connection rejected. Make sure SSH key is valid on bitbucket.org.
+Alexa-LED-Animation-Files-for-AVS-3: Fetch received nothing.
+
+Downloads: Fetch received nothing.
+
+mslearn-build-a-web-app-with-mean-on-a-linux-vm: Fetch received nothing.
+
+GCDWebServer: Fetch received nothing.
+
+ServiceWorker-b8573c6d93642c47ad9984ba6c5388089a0b5313: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+get-queens: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+starsfield: Doing password authentication for ESA-Security-Group
+
+ServiceWorker-b8573c6d93642c47ad9984ba6c5388089a0b5313: Fetch received nothing.
+
+starsfield: Doing password authentication for ESA-Security-Group (2. time)
+
+get-queens: Fetch received nothing.
+
+get-queens-2: Using SSH key ssh-rsa 4096 7a:68:af:25:1f:41:df:3d:e8:a4:ff:45:1f:75:5f:02
+
+starsfield: Doing password authentication for ESA-Security-Group (3. time)
+
+starsfield: Doing password authentication for ESA-Security-Group (4. time)
+
+get-queens-2: Fetch received nothing.
+
+user rejected certificate for github.com
+Interpreting last error as: No way to authenticate with github.com
